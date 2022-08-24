@@ -1,4 +1,5 @@
 import io.restassured.response.ValidatableResponse;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import registretion.Register;
@@ -32,5 +33,8 @@ public class AuthTest {
                 .post(APIV2.REGISTER.getApi())
                 .then().log().all()
                 .extract().as(SuccessReg.class);
+
+//        Assertions.assertEquals(id, successReg.getId());
+//        Assertions.assertEquals(token, successReg.getToken());
     }
 }

@@ -2,17 +2,18 @@ package registretion;
 
 public class Register {
     public Register(String bundle, String appVersion, String email, String pass, String appKey) {
+        this.Params.get
     }
 
     public class App {
         private String bundle_id;
         private String version;
 
-        private String getBundle_id() {
+        public String getBundle_id() {
             return bundle_id;
         }
 
-        private String getVersion() {
+        public String getVersion() {
             return version;
         }
     }
