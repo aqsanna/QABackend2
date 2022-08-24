@@ -1,9 +1,8 @@
-import io.restassured.response.ValidatableResponse;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import registretion.Register;
-import registretion.SuccessReg;
+import requests.AuthInfo;
+import responses.SuccessLogin;
 import spec.Specifications;
 import storage.APIV2;
 import storage.USER;
@@ -13,28 +12,23 @@ import static io.restassured.RestAssured.given;
 public class AuthTest {
     @Test
     @DisplayName("Check success user login")
-    public void UserLoginV2Test() {
+    public void authorize() {
         Specifications.installSpecification(Specifications.requestSpec(APIV2.LOGIN.getApi()), Specifications.responseOK200());
-    }
 
-    @Test
-    @DisplayName("authorized")
-    public void authorize(){
-        Specifications.installSpecification(Specifications.requestSpec(APIV2.LOGIN.getApi()), Specifications.responseOK200());
-        Register user = new Register(
+        AuthInfo user = new AuthInfo(
                 USER.APP_VERSION.getUserData(),
                 USER.BUNDLE_ID.getUserData(),
                 USER.EMAIL.getUserData(),
                 USER.PASSWORD.getUserData(),
                 USER.APPLICATION_KEY.getUserData());
-        SuccessReg successReg = given()
+
+        SuccessLogin successLogin = given()
                 .body(user)
                 .when()
                 .post(APIV2.REGISTER.getApi())
                 .then().log().all()
-                .extract().as(SuccessReg.class);
+                .extract().as(SuccessLogin.class);
 
-//        Assertions.assertEquals(id, successReg.getId());
-//        Assertions.assertEquals(token, successReg.getToken());
+        Assertions.assertEquals(user.getEmail(), successLogin.getUserEmail());
     }
 }

@@ -33,7 +33,7 @@ public class Specifications {
         RestAssured.responseSpecification = response;
     }
 
-    public static ValidatableResponse post(String domain, String endpoint, String body){
+    public static ValidatableResponse post(String domain, String endpoint, String body) {
         return RestAssured
                 .given()
                 .spec(requestSpec(domain))

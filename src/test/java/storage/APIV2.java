@@ -6,7 +6,6 @@ public enum APIV2 {
     REGISTER("https://stage-old.local.express/rest/v1/auth/login");
 
 
-
     private String api;
 
     APIV2(String api) {
