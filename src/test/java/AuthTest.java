@@ -1,9 +1,13 @@
 import io.restassured.response.ValidatableResponse;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import registretion.Registretion;
+import registretion.Register;
+import registretion.SuccessReg;
 import spec.Specifications;
 import storage.APIV2;
+import storage.USER;
+
+import static io.restassured.RestAssured.given;
 
 public class AuthTest {
     @Test
@@ -15,9 +19,18 @@ public class AuthTest {
     @Test
     @DisplayName("authorized")
     public void authorize(){
-        Specifications.installSpecification(Specifications.requestSpec("https://dev.local.express/" + APIV2.LOGIN.getApi()), Specifications.responseOK200());
-        Registretion user = new Registretion(USER.);
-        ValidatableResponse r = Specifications.post( APIV2.DOMAIN_DEV.getApi(), "", body);
-        r.extract().response().prettyPrint();
+        Specifications.installSpecification(Specifications.requestSpec(APIV2.LOGIN.getApi()), Specifications.responseOK200());
+        Register user = new Register(
+                USER.APP_VERSION.getUserData(),
+                USER.BUNDLE_ID.getUserData(),
+                USER.EMAIL.getUserData(),
+                USER.PASSWORD.getUserData(),
+                USER.APPLICATION_KEY.getUserData());
+        SuccessReg successReg = given()
+                .body(user)
+                .when()
+                .post(APIV2.REGISTER.getApi())
+                .then().log().all()
+                .extract().as(SuccessReg.class);
     }
 }
