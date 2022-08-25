@@ -32,40 +32,7 @@ public class AuthInfo {
         return applicationKey;
     }
 
-    public static class App{
-        @SerializedName("BUNDLE_ID")
-        @Expose
-        private String bundleID;
-        private String version;
 
-        public String getBundleId() {
-            return bundleID;
-        }
-
-        public String getVersion() {
-            return version;
-        }
-    }
-
-    public static class Device{
-        private String version;
-        private String os;
-        @SerializedName("push_token")
-        @Expose
-        private String pushToken;
-
-        public String getVersion() {
-            return version;
-        }
-
-        public String getOs() {
-            return os;
-        }
-
-        public String getPushToken() {
-            return pushToken;
-        }
-    }
 
     public AuthInfo(App app, String email, String password, Device device, String applicationKey) {
         this.app = app;
@@ -74,4 +41,5 @@ public class AuthInfo {
         this.device = device;
         this.applicationKey = applicationKey;
     }
+
 }

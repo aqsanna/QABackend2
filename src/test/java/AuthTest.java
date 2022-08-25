@@ -2,6 +2,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import requests.AuthInfo;
+import requests.App;
+import requests.Device;
 import responses.SuccessLogin;
 import spec.Specifications;
 import storage.APIV2;
@@ -15,11 +17,22 @@ public class AuthTest {
     public void authorize() {
         Specifications.installSpecification(Specifications.requestSpec(APIV2.LOGIN.getApi()), Specifications.responseOK200());
 
-        AuthInfo user = new AuthInfo(
-                USER.APP_VERSION.getUserData(),
+        App app = new App(
                 USER.BUNDLE_ID.getUserData(),
+                USER.APP_VERSION.getUserData()
+        );
+        Device device = new Device(
+                USER.DEVICE_VERSION.getUserData(),
+                USER.OS.getUserData(),
+                USER.PUSH_TOKEN.getUserData()
+        );
+
+
+        AuthInfo user = new AuthInfo(
+                app,
                 USER.EMAIL.getUserData(),
                 USER.PASSWORD.getUserData(),
+                device,
                 USER.APPLICATION_KEY.getUserData());
 
         SuccessLogin successLogin = given()
