@@ -42,5 +42,7 @@ public class AuthTest {
         Assertions.assertEquals("success", successLogin.getResult());
         Assertions.assertEquals("info@local.express", successLogin.getData().getUserEmail());
         Assertions.assertEquals("13546", successLogin.getData().getUserId());
+        Assertions.assertTrue(successLogin.getError().isEmpty());
+        Assertions.assertNotNull(successLogin.getData().getToken());
     }
 }
