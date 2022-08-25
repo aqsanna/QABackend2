@@ -3,75 +3,157 @@ package requests;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class AuthInfo {
-    private App app;
-    private String email;
-    private String password;
-    private Device device;
-    @SerializedName("APPLICATION_KEY")
+import java.io.Serial;
+import java.io.Serializable;
+
+public class AuthInfo implements Serializable {
+
+    @Serial
+    private final static long serialVersionUID = 4850255736179712594L;
+    @SerializedName("params")
     @Expose
-    private String applicationKey;
+    public Params params;
 
-    public App getApp() {
-        return app;
+    public AuthInfo() {
     }
 
-    public String getEmail() {
-        return email;
+    public AuthInfo(Params params) {
+        super();
+        this.params = params;
     }
 
-    public String getPassword() {
-        return password;
+    public AuthInfo withParams(Params params) {
+        this.params = params;
+        return this;
     }
 
-    public Device getDevice() {
-        return device;
-    }
+    public static class Params implements Serializable {
 
-    public String getApplicationKey() {
-        return applicationKey;
-    }
-
-    public static class App{
-        @SerializedName("BUNDLE_ID")
+        @Serial
+        private final static long serialVersionUID = -1195708863342171343L;
+        @SerializedName("app")
         @Expose
-        private String bundleID;
-        private String version;
-
-        public String getBundleId() {
-            return bundleID;
-        }
-
-        public String getVersion() {
-            return version;
-        }
-    }
-
-    public static class Device{
-        private String version;
-        private String os;
-        @SerializedName("push_token")
+        public App app;
+        @SerializedName("email")
         @Expose
-        private String pushToken;
+        public String email;
+        @SerializedName("password")
+        @Expose
+        public String password;
+        @SerializedName("device")
+        @Expose
+        public Device device;
+        @SerializedName("application_key")
+        @Expose
+        public String applicationKey;
 
-        public String getVersion() {
-            return version;
+        public Params() {
         }
 
-        public String getOs() {
-            return os;
+        public Params(App app, String email, String password, Device device, String applicationKey) {
+            super();
+            this.app = app;
+            this.email = email;
+            this.password = password;
+            this.device = device;
+            this.applicationKey = applicationKey;
         }
 
-        public String getPushToken() {
-            return pushToken;
+        public Params withApp(App app) {
+            this.app = app;
+            return this;
         }
-    }
 
-    public AuthInfo(App app, String email, String password, Device device, String applicationKey) {
-        this.app = app;
-        this.email = email;
-        this.password = password;
-        this.device = device;
-        this.applicationKey = applicationKey;
+        public Params withEmail(String email) {
+            this.email = email;
+            return this;
+        }
+
+        public Params withPassword(String password) {
+            this.password = password;
+            return this;
+        }
+
+        public Params withDevice(Device device) {
+            this.device = device;
+            return this;
+        }
+
+        public Params withApplicationKey(String applicationKey) {
+            this.applicationKey = applicationKey;
+            return this;
+        }
+
+        public static class Device implements Serializable {
+
+            @Serial
+            private final static long serialVersionUID = 6061346270223219326L;
+            @SerializedName("version")
+            @Expose
+            public String version;
+            @SerializedName("os")
+            @Expose
+            public String os;
+            @SerializedName("push_token")
+            @Expose
+            public String pushToken;
+
+            public Device() {
+            }
+
+            public Device(String version, String os, String pushToken) {
+                super();
+                this.version = version;
+                this.os = os;
+                this.pushToken = pushToken;
+            }
+
+            public Device withVersion(String version) {
+                this.version = version;
+                return this;
+            }
+
+            public Device withOs(String os) {
+                this.os = os;
+                return this;
+            }
+
+            public Device withPushToken(String pushToken) {
+                this.pushToken = pushToken;
+                return this;
+            }
+
+        }
+
+        public static class App implements Serializable {
+
+            @Serial
+            private final static long serialVersionUID = -3129480098619973051L;
+            @SerializedName("bundle_id")
+            @Expose
+            public String bundleId;
+            @SerializedName("version")
+            @Expose
+            public String version;
+
+            public App() {
+            }
+
+            public App(String bundleId, String version) {
+                super();
+                this.bundleId = bundleId;
+                this.version = version;
+            }
+
+            public App withBundleId(String bundleId) {
+                this.bundleId = bundleId;
+                return this;
+            }
+
+            public App withVersion(String version) {
+                this.version = version;
+                return this;
+            }
+        }
     }
 }
