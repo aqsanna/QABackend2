@@ -1,9 +1,11 @@
 package storage;
 
 public enum APIV2 {
-    DOMAIN_DEV("https://stage-old.local.express/api"),
-    LOGIN("https://stage-old.local.express/api/rest/v1/auth/login"),
-    REGISTER("https://stage-old.local.express/rest/v1/auth/login");
+    STAGE("https://stage-old.local.express/"),
+    STORE("rest/v1/partner/stores"),
+    LOGIN("api/rest/v1/auth/login"),
+    REGISTER("rest/v1/auth/login"),
+    CLOUDPRINT("https://api.localexpress.io/rest/v2/cloud-printer/kiosk/3915408");
 
 
     private String api;
