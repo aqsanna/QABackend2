@@ -32,14 +32,4 @@ public class Specifications {
         RestAssured.requestSpecification = request;
         RestAssured.responseSpecification = response;
     }
-
-    public static ValidatableResponse post(String domain, String endpoint, String body) {
-        return RestAssured
-                .given()
-                .spec(requestSpec(domain))
-                .body(body)
-                .when()
-                .post(endpoint)
-                .then();
-    }
 }
