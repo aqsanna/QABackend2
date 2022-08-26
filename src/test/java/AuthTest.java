@@ -3,9 +3,9 @@ import io.restassured.http.ContentType;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import requests.AuthInfo;
 import responses.userLogin.SuccessLogin;
 import spec.Specifications;
-import steps.data.users.UserInfoProvider;
 import storage.APIV2;
 import storage.USER;
 
@@ -15,12 +15,13 @@ public class AuthTest {
     Gson gson = new Gson();
     UserInfoProvider userInfoProvider = new UserInfoProvider();
 
+    SuccessLogin successLogin;
     @Test
     @DisplayName("Check success user login")
     public void successLoginTest() {
         Specifications.installSpecification(Specifications.requestSpec(APIV2.LOGIN.getApi()), Specifications.responseOK200());
 
-        SuccessLogin successLogin = given()
+         this.successLogin = given()
                 .when()
                 .contentType(ContentType.JSON)
                 .body(gson.toJson(userInfoProvider.getUser(USER.EMAIL_INFO)))
