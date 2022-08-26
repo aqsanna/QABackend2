@@ -25,25 +25,25 @@ public class StoreObject {
     public String collectingFlow;
 
     public class Address{
-        @SerializedName("firstLine")
-        public String first_line;
+        @SerializedName("firs_line")
+        public String firstLine;
         @SerializedName("location")
         public Location location;
 
-        public String getFirst_line() {
-            return first_line;
+        public String getFirstLine() {
+            return firstLine;
         }
 
         public Location getLocation() {
             return location;
         }
 
-        public Address setFirst_line(String first_line) {
-            this.first_line = first_line;
+        public Address withFirstLine(String firstLine) {
+            this.firstLine = firstLine;
             return this;
         }
 
-        public Address setLocation(Location location) {
+        public Address withLocation(Location location) {
             this.location = location;
             return this;
         }
@@ -63,12 +63,12 @@ public class StoreObject {
                 return lng;
             }
 
-            public Location setLat(String lat) {
+            public Location withLat(String lat) {
                 this.lat = lat;
                 return this;
             }
 
-            public Location setLng(String lng) {
+            public Location withLng(String lng) {
                 this.lng = lng;
                 return this;
             }
@@ -89,12 +89,12 @@ public class StoreObject {
             return symbol;
         }
 
-        public Currency setCode(String code) {
+        public Currency withCode(String code) {
             this.code = code;
             return this;
         }
 
-        public Currency setSymbol(String symbol) {
+        public Currency withSymbol(String symbol) {
             this.symbol = symbol;
             return this;
         }
