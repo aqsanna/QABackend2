@@ -52,7 +52,6 @@ public class PartnerStoresTest{
                 .extract().as(PartnerStores.class);
 
         ArrayList<StoreObject> storeList = partnerStores.getData();
-
         for (int i = 0; i < storeList.size(); i++) {
             boolean idIsInteger;
             try{
@@ -63,13 +62,13 @@ public class PartnerStoresTest{
             catch (NumberFormatException ex){
                 idIsInteger = false;
             }
-            Assertions.assertTrue(idIsInteger);
-            Assertions.assertFalse(storeList.get(i).getTitle().isEmpty());
-            Assertions.assertFalse(storeList.get(i).getAddress().getFirstLine().isEmpty());
-            Assertions.assertFalse(storeList.get(i).getAddress().getLocation().getLat().isEmpty());
-            Assertions.assertFalse(storeList.get(i).getAddress().getLocation().getLng().isEmpty());
+            Assertions.assertTrue(idIsInteger,"Incorrect store_id: " + storeList.get(i).getId());
+            Assertions.assertFalse(storeList.get(i).getTitle().isEmpty(),"Store name is empty, store_id: " + storeList.get(i).getId());
+            Assertions.assertFalse(storeList.get(i).getAddress().getFirstLine().isEmpty(),"Store address is empty, store_id: " + storeList.get(i).getId());
+            Assertions.assertFalse(storeList.get(i).getAddress().getLocation().getLat().isEmpty(),"Store address lat is empty, store_id: " + storeList.get(i).getId());
+            Assertions.assertFalse(storeList.get(i).getAddress().getLocation().getLng().isEmpty(),"Store address lng is empty, store_id: " + storeList.get(i).getId());
         }
-        Assertions.assertEquals("success", partnerStores.getResult());
-        Assertions.assertTrue(partnerStores.getError().isEmpty());
+        Assertions.assertEquals("success", partnerStores.getResult(), "Request is failed");
+        Assertions.assertTrue(partnerStores.getError().isEmpty(),"Error message ");
     }
 }
