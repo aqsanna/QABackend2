@@ -1,9 +1,9 @@
+import com.google.gson.Gson;
+import io.restassured.http.ContentType;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import requests.AuthInfo;
-import requests.App;
-import requests.Device;
 import responses.SuccessLogin;
 import spec.Specifications;
 import storage.APIV2;
@@ -14,34 +14,35 @@ import static io.restassured.RestAssured.given;
 public class AuthTest {
     @Test
     @DisplayName("Check success user login")
-    public void authorize() {
+    public void successLoginTest() {
         Specifications.installSpecification(Specifications.requestSpec(APIV2.LOGIN.getApi()), Specifications.responseOK200());
+        Gson gson = new Gson();
 
-        App app = new App(
-                USER.BUNDLE_ID.getUserData(),
-                USER.APP_VERSION.getUserData()
-        );
-        Device device = new Device(
-                USER.DEVICE_VERSION.getUserData(),
-                USER.OS.getUserData(),
-                USER.PUSH_TOKEN.getUserData()
-        );
-
-
-        AuthInfo user = new AuthInfo(
-                app,
-                USER.EMAIL.getUserData(),
-                USER.PASSWORD.getUserData(),
-                device,
-                USER.APPLICATION_KEY.getUserData());
+        AuthInfo authInfo = new AuthInfo(
+                new AuthInfo.Params(
+                        new AuthInfo.Params.App()
+                                .withBundleId(USER.BUNDLE_ID.getUserData())
+                                .withVersion(USER.APP_VERSION.getUserData())
+                        , USER.EMAIL.getUserData()
+                        , USER.PASSWORD.getUserData(),
+                        new AuthInfo.Params.Device()
+                                .withVersion(USER.DEVICE_VERSION.getUserData())
+                                .withOs(USER.OS.getUserData())
+                                .withPushToken(USER.PUSH_TOKEN.getUserData()),
+                        USER.APPLICATION_KEY.getUserData()));
 
         SuccessLogin successLogin = given()
-                .body(user)
                 .when()
-                .post(APIV2.REGISTER.getApi())
+                .contentType(ContentType.JSON)
+                .body(gson.toJson(authInfo))
+                .post(APIV2.STAGE.getApi() + APIV2.REGISTER.getApi())
                 .then().log().all()
                 .extract().as(SuccessLogin.class);
 
-        Assertions.assertEquals(user.getEmail(), successLogin.getUserEmail());
+        Assertions.assertEquals("success", successLogin.getResult());
+        Assertions.assertEquals("info@local.express", successLogin.getData().getUserEmail());
+        Assertions.assertEquals("13546", successLogin.getData().getUserId());
+        Assertions.assertTrue(successLogin.getError().isEmpty());
+        Assertions.assertNotNull(successLogin.getData().getToken());
     }
 }

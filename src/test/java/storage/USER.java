@@ -1,7 +1,5 @@
 package storage;
 
-import requests.AuthInfo;
-
 public enum USER {
     EMAIL("info@local.express"),
     BAD_EMAIL("sydney@fife"),

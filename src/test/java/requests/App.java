@@ -1,11 +1,9 @@
 package requests;
 
-import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class App {
     @SerializedName("BUNDLE_ID")
-    @Expose
     private String bundleID;
     private String version;
 
@@ -17,9 +15,18 @@ public class App {
         return version;
     }
 
+
     public App(String bundleID, String version) {
         this.bundleID = bundleID;
         this.version = version;
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "bundle_id='" + bundleID + '\'' +
+                ", version='" + version + '\'' +
+                '}';
     }
 }
 
