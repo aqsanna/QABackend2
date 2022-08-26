@@ -1,7 +1,10 @@
 package storage;
 
 public enum APIV2 {
-    LOGIN("/rest/v1/auth/login");
+    STAGE("https://stage-old.local.express/"),
+    LOGIN("api/rest/v1/auth/login"),
+    REGISTER("rest/v1/auth/login");
+
 
     private String api;
 
