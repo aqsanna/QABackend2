@@ -21,7 +21,7 @@ public class AuthTest {
     public void successLoginTest() {
         Specifications.installSpecification(Specifications.requestSpec(APIV2.LOGIN.getApi()), Specifications.responseOK200());
 
-         this.successLogin = given()
+        SuccessLogin successLogin = given()
                 .when()
                 .contentType(ContentType.JSON)
                 .body(gson.toJson(userInfoProvider.getUser(USER.EMAIL_INFO)))
