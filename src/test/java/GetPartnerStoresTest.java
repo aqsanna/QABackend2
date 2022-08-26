@@ -1,3 +1,4 @@
+import Utile.StoreObject;
 import io.restassured.RestAssured;
 import io.restassured.http.Header;
 import org.junit.jupiter.api.Assertions;
@@ -5,6 +6,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import responses.userLogin.PartnerStores;
 import storage.APIV2;
+
+import java.util.ArrayList;
 
 public class GetPartnerStoresTest extends AuthTest{
     @Test
