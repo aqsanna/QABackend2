@@ -8,8 +8,8 @@ public enum APIV1 {
     STORE("rest/v1/partner/stores"),
     LOGIN("api/rest/v1/auth/login"),
     REGISTER("rest/v1/auth/login"),
-    CLOUDPRINT("https://api.localexpress.io/rest/v2/cloud-printer/kiosk/3915408");
-
+    CLOUDPRINT("https://api.localexpress.io/rest/v2/cloud-printer/kiosk/3915408"),
+    STORES_LIST("rest/v1/partner/stores");
 
     private final String api;
 
