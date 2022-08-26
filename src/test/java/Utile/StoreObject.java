@@ -25,7 +25,7 @@ public class StoreObject {
     public String collectingFlow;
 
     public class Address{
-        @SerializedName("firs_line")
+        @SerializedName("first_line")
         public String firstLine;
         @SerializedName("location")
         public Location location;
