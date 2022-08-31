@@ -1,7 +1,7 @@
 package storage;
 
 public enum USER {
-    EMAIL("info@local.express"),
+    EMAIL_INFO("info@local.express"),
     BAD_EMAIL("sydney@fife"),
     BUNDLE_ID("com.worldappsystem.LEPartners"),
     APP_VERSION("5.7.2"),
