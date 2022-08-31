@@ -1,6 +1,5 @@
 package requests;
 
-import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
@@ -8,7 +7,6 @@ import java.io.Serializable;
 public class AuthInfo implements Serializable {
 
     @SerializedName("params")
-    @Expose
     public Params params;
 
     public AuthInfo() {
@@ -27,19 +25,14 @@ public class AuthInfo implements Serializable {
     public static class Params implements Serializable {
 
         @SerializedName("app")
-        @Expose
         public App app;
         @SerializedName("email")
-        @Expose
         public String email;
         @SerializedName("password")
-        @Expose
         public String password;
         @SerializedName("device")
-        @Expose
         public Device device;
         @SerializedName("application_key")
-        @Expose
         public String applicationKey;
 
         public Params() {
@@ -82,13 +75,10 @@ public class AuthInfo implements Serializable {
         public static class Device implements Serializable {
 
             @SerializedName("version")
-            @Expose
             public String version;
             @SerializedName("os")
-            @Expose
             public String os;
             @SerializedName("push_token")
-            @Expose
             public String pushToken;
 
             public Device() {
@@ -121,10 +111,8 @@ public class AuthInfo implements Serializable {
         public static class App implements Serializable {
 
             @SerializedName("bundle_id")
-            @Expose
             public String bundleId;
             @SerializedName("version")
-            @Expose
             public String version;
 
             public App() {
