@@ -7,6 +7,7 @@ import responses.userLogin.SuccessLogin;
 import spec.Specifications;
 import steps.data.users.UserInfoProvider;
 import storage.APIV2;
+import storage.USER;
 
 import static io.restassured.RestAssured.given;
 
@@ -22,7 +23,7 @@ public class AuthTest {
         SuccessLogin successLogin = given()
                 .when()
                 .contentType(ContentType.JSON)
-                .body(gson.toJson(userInfoProvider.getInfoUser()))
+                .body(gson.toJson(userInfoProvider.getUser(USER.EMAIL_INFO)))
                 .post(APIV2.STAGE.getApi() + APIV2.REGISTER.getApi())
                 .then().log().all()
                 .extract().as(SuccessLogin.class);
