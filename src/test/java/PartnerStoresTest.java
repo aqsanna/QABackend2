@@ -1,15 +1,15 @@
-import Utile.StoreObject;
+import Utile.Store;
 import com.google.gson.Gson;
-import io.qameta.allure.internal.shadowed.jackson.annotation.JsonTypeInfo;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.http.Header;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import requests.AuthInfo;
-import responses.userLogin.PartnerStores;
+import responses.partner.stores.PartnerStores;
 import responses.userLogin.SuccessLogin;
+import spec.Specifications;
+import steps.data.users.UserInfoProvider;
 import storage.APIV2;
 import storage.USER;
 
@@ -18,32 +18,23 @@ import java.util.ArrayList;
 import static io.restassured.RestAssured.given;
 
 public class PartnerStoresTest{
+    UserInfoProvider userInfoProvider = new UserInfoProvider();
+    Gson gson = new Gson();
     @Test
     @DisplayName("Check partner stores list")
-    public void getStoresList(){
+    public void storesListTest(){
 
-        Gson gson = new Gson();
 
-        AuthInfo authInfo = new AuthInfo(
-                new AuthInfo.Params(
-                        new AuthInfo.Params.App()
-                                .withBundleId(USER.BUNDLE_ID.getUserData())
-                                .withVersion(USER.APP_VERSION.getUserData())
-                        , USER.EMAIL.getUserData()
-                        , USER.PASSWORD.getUserData(),
-                        new AuthInfo.Params.Device()
-                                .withVersion(USER.DEVICE_VERSION.getUserData())
-                                .withOs(USER.OS.getUserData())
-                                .withPushToken(USER.PUSH_TOKEN.getUserData()),
-                        USER.APPLICATION_KEY.getUserData()));
+        Specifications.installSpecification(Specifications.requestSpec(APIV2.LOGIN.getApi()), Specifications.responseOK200());
 
         SuccessLogin successLogin = given()
                 .when()
                 .contentType(ContentType.JSON)
-                .body(gson.toJson(authInfo))
+                .body(gson.toJson(userInfoProvider.getUser(USER.EMAIL_INFO)))
                 .post(APIV2.STAGE.getApi() + APIV2.REGISTER.getApi())
                 .then().log().all()
                 .extract().as(SuccessLogin.class);
+
 
         PartnerStores partnerStores = RestAssured.given()
                 .header(new Header("Authorization", "Bearer " + successLogin.getData().getToken()))
@@ -51,24 +42,20 @@ public class PartnerStoresTest{
                 .then().log().all()
                 .extract().as(PartnerStores.class);
 
-        ArrayList<StoreObject> storeList = partnerStores.getData();
-        for (int i = 0; i < storeList.size(); i++) {
-            boolean idIsInteger;
-            try{
-                int id = Integer.parseInt(storeList.get(i).getId());
-                idIsInteger = true;
-                // output = 25
-            }
-            catch (NumberFormatException ex){
-                idIsInteger = false;
-            }
-            Assertions.assertTrue(idIsInteger,"Incorrect store_id: " + storeList.get(i).getId());
-            Assertions.assertFalse(storeList.get(i).getTitle().isEmpty(),"Store name is empty, store_id: " + storeList.get(i).getId());
-            Assertions.assertFalse(storeList.get(i).getAddress().getFirstLine().isEmpty(),"Store address is empty, store_id: " + storeList.get(i).getId());
-            Assertions.assertFalse(storeList.get(i).getAddress().getLocation().getLat().isEmpty(),"Store address lat is empty, store_id: " + storeList.get(i).getId());
-            Assertions.assertFalse(storeList.get(i).getAddress().getLocation().getLng().isEmpty(),"Store address lng is empty, store_id: " + storeList.get(i).getId());
-        }
         Assertions.assertEquals("success", partnerStores.getResult(), "Request is failed");
         Assertions.assertTrue(partnerStores.getError().isEmpty(),"Error message ");
+
+        for (Store store: partnerStores.getData()) {
+            try{
+                int id = Integer.parseInt(store.getId());
+            }
+            catch (NumberFormatException ex){
+                Assertions.fail("Incorrect order_id: " + store.getId());
+            }
+            Assertions.assertFalse(store.getTitle().isEmpty(),"Store name is empty, store_id: " + store.getId());
+            Assertions.assertFalse(store.getAddress().getFirstLine().isEmpty(),"Store address is empty, store_id: " + store.getId());
+            Assertions.assertFalse(store.getAddress().getLocation().getLat().isEmpty(),"Store address lat is empty, store_id: " + store.getId());
+            Assertions.assertFalse(store.getAddress().getLocation().getLng().isEmpty(),"Store address lng is empty, store_id: " + store.getId());
+        }
     }
 }
