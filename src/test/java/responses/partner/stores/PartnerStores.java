@@ -1,6 +1,6 @@
-package responses.userLogin;
+package responses.partner.stores;
 
-import Utile.StoreObject;
+import Utile.Store;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
@@ -13,7 +13,7 @@ public class PartnerStores {
     @SerializedName("error")
     private String error;
     @SerializedName("data")
-    private ArrayList<StoreObject> data;
+    private ArrayList<Store> data;
 
     public Integer getCode() {
         return code;
@@ -42,11 +42,11 @@ public class PartnerStores {
         return this;
     }
 
-    public ArrayList<StoreObject> getData() {
+    public ArrayList<Store> getData() {
         return data;
     }
 
-    public PartnerStores withData(ArrayList<StoreObject> data) {
+    public PartnerStores withData(ArrayList<Store> data) {
         this.data = data;
         return this;
     }

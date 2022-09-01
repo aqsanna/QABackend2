@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import requests.AuthInfo;
 import responses.userLogin.SuccessLogin;
 import spec.Specifications;
+import steps.data.users.UserInfoProvider;
 import storage.APIV2;
 import storage.USER;
 
