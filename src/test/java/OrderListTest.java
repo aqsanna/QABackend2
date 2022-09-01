@@ -63,8 +63,8 @@ public class OrderListTest {
                         Assertions.assertFalse(order.getDropoff().getPerson().getFirstName().isEmpty(), "The order " + order.getId() + " first name is empty");
                         Assertions.assertFalse(order.getDropoff().getPerson().getPhone().isEmpty(), "The order " + order.getId() + " phone is empty");
                         Assertions.assertTrue(order.getPayment().getTotal() > 0 , "The order " + order.getId() + " total price is " + order.getPayment().getTotal());
-                        for (int k = 0; k < order.getTransactions().size(); k++) {
-                            Assertions.assertFalse(order.getTransactions().get(k).getTransactionID().isEmpty(), "The order " + order.getId() + " transactionID is empty. Type is " + order.getTransactions().get(k).getType() + " id : " + order.getTransactions().get(k).getId());
+                        for (Order.Transaction transaction: order.getTransactions()) {
+                            Assertions.assertFalse(transaction.getTransactionID().isEmpty(), "The order " + order.getId() + " transactionID is empty. Type is " + transaction.getType() + " id : " + transaction.getId());
                         }
                     }
                     page += orderCount;
