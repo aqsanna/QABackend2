@@ -6,13 +6,12 @@ import utils.StoreInfo;
 import java.util.ArrayList;
 
 public class GetStore {
-
     @SerializedName("code")
     private Integer code;
     @SerializedName("result")
-    private  String result;
+    private String result;
     @SerializedName("error")
-    private  String error;
+    private String error;
     @SerializedName("data")
     private ArrayList<StoreInfo> data;
 
@@ -23,16 +22,13 @@ public class GetStore {
         this.code = code;
         return this;
     }
-
     public String getResults() {
         return result;
     }
-
     public GetStore setResults(String result) {
         this.result = result;
         return this;
     }
-
     public String getError() {
         return error;
     }
@@ -40,7 +36,6 @@ public class GetStore {
         this.error = error;
         return this;
     }
-
     public ArrayList<StoreInfo> getData() {
         return data;
     }

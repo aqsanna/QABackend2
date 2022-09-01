@@ -8,7 +8,7 @@ public enum APIV2 {
     CLOUDPRINT("https://api.localexpress.io/rest/v2/cloud-printer/kiosk/3915408");
 
 
-    private String api;
+    private final String api;
 
     APIV2(String api) {
         this.api = api;

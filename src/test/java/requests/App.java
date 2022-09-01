@@ -4,8 +4,13 @@ import com.google.gson.annotations.SerializedName;
 
 public class App {
     @SerializedName("BUNDLE_ID")
-    private String bundleID;
-    private String version;
+    private final String bundleID;
+    private final String version;
+
+    public App(String bundleID, String version) {
+        this.bundleID = bundleID;
+        this.version = version;
+    }
 
     public String getBundleId() {
         return bundleID;
@@ -13,12 +18,6 @@ public class App {
 
     public String getVersion() {
         return version;
-    }
-
-
-    public App(String bundleID, String version) {
-        this.bundleID = bundleID;
-        this.version = version;
     }
 
     @Override

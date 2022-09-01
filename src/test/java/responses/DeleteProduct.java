@@ -4,13 +4,13 @@ import com.google.gson.annotations.SerializedName;
 
 public class DeleteProduct {
     @SerializedName("code")
-    private  Integer code;
+    private Integer code;
     @SerializedName("result")
-    private  String result;
+    private String result;
     @SerializedName("error")
-    private  String error;
+    private String error;
     @SerializedName("data")
-    private  boolean data;
+    private boolean data;
 
     public Integer getCode() {
         return code;

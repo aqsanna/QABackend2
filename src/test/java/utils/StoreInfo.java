@@ -1,7 +1,6 @@
 package utils;
 
 import com.google.gson.annotations.SerializedName;
-import responses.GetStore;
 
 import java.util.ArrayList;
 
@@ -24,82 +23,6 @@ public class StoreInfo {
     public ArrayList<String> accessRoles;
     @SerializedName("collecting_flow")
     public String collectingFlow;
-
-    public class Address{
-        @SerializedName("first_line")
-        public String first_line;
-        @SerializedName("location")
-        public Location location;
-
-        public String getFirst_line() {
-            return first_line;
-        }
-
-        public Location getLocation() {
-            return location;
-        }
-
-        public Address setFirst_line(String first_line) {
-            this.first_line = first_line;
-            return this;
-        }
-
-        public Address setLocation(Location location) {
-            this.location = location;
-            return this;
-        }
-
-        public class Location{
-            @SerializedName("lat")
-            public String lat;
-
-            public String getLat() {
-                return lat;
-            }
-
-            @SerializedName("lng")
-            public String lng;
-
-            public String getLng() {
-                return lng;
-            }
-
-            public Location setLat(String lat) {
-                this.lat = lat;
-                return this;
-            }
-
-            public Location setLng(String lng) {
-                this.lng = lng;
-                return this;
-            }
-        }
-    }
-
-    public class Currency{
-        @SerializedName("code")
-        public String code;
-        @SerializedName("symbol")
-        public String symbol;
-
-        public String getCode() {
-            return code;
-        }
-
-        public String getSymbol() {
-            return symbol;
-        }
-
-        public Currency setCode(String code) {
-            this.code = code;
-            return this;
-        }
-
-        public Currency setSymbol(String symbol) {
-            this.symbol = symbol;
-            return this;
-        }
-    }
 
     public String getId() {
         return id;
@@ -180,5 +103,80 @@ public class StoreInfo {
     public StoreInfo withCollectingFlow(String collectingFlow) {
         this.collectingFlow = collectingFlow;
         return this;
+    }
+
+    public class Address {
+        @SerializedName("first_line")
+        public String first_line;
+        @SerializedName("location")
+        public Location location;
+
+        public String getFirst_line() {
+            return first_line;
+        }
+
+        public Address setFirst_line(String first_line) {
+            this.first_line = first_line;
+            return this;
+        }
+
+        public Location getLocation() {
+            return location;
+        }
+
+        public Address setLocation(Location location) {
+            this.location = location;
+            return this;
+        }
+
+        public class Location {
+            @SerializedName("lat")
+            public String lat;
+            @SerializedName("lng")
+            public String lng;
+
+            public String getLat() {
+                return lat;
+            }
+
+            public Location setLat(String lat) {
+                this.lat = lat;
+                return this;
+            }
+
+            public String getLng() {
+                return lng;
+            }
+
+            public Location setLng(String lng) {
+                this.lng = lng;
+                return this;
+            }
+        }
+    }
+
+    public class Currency {
+        @SerializedName("code")
+        public String code;
+        @SerializedName("symbol")
+        public String symbol;
+
+        public String getCode() {
+            return code;
+        }
+
+        public Currency setCode(String code) {
+            this.code = code;
+            return this;
+        }
+
+        public String getSymbol() {
+            return symbol;
+        }
+
+        public Currency setSymbol(String symbol) {
+            this.symbol = symbol;
+            return this;
+        }
     }
 }
