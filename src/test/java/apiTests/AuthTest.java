@@ -1,3 +1,5 @@
+package apiTests;
+
 import com.google.gson.Gson;
 import io.restassured.http.ContentType;
 import org.junit.jupiter.api.Assertions;
@@ -13,7 +15,6 @@ import static io.restassured.RestAssured.given;
 
 public class AuthTest {
     Gson gson = new Gson();
-    UserInfoProvider userInfoProvider = new UserInfoProvider();
 
     @Test
     @DisplayName("Check success user login")
@@ -23,8 +24,8 @@ public class AuthTest {
         SuccessLogin successLogin = given()
                 .when()
                 .contentType(ContentType.JSON)
-                .body(gson.toJson(userInfoProvider.getUser(USER.EMAIL_INFO)))
-                .post(APIV1.STAGE.getApi() + APIV1.REGISTER.getApi())
+                .body(gson.toJson(UserInfoProvider.getUser(USER.EMAIL_INFO)))
+                .post(APIV2.STAGE.getApi() + APIV2.REGISTER.getApi())
                 .then().log().all()
                 .extract().as(SuccessLogin.class);
 
