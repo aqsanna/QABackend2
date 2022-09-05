@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 import io.restassured.http.ContentType;
 import requests.AuthInfo;
 import responses.userLogin.SuccessLogin;
-import storage.APIV2;
+import storage.APIV1;
 import storage.USER;
 
 import static io.restassured.RestAssured.given;
@@ -39,7 +39,7 @@ public class UserInfoProvider {
                 .when()
                 .contentType(ContentType.JSON)
                 .body(gson.toJson(authInfo))
-                .post(APIV2.STAGE.getApi() + APIV2.REGISTER.getApi())
+                .post(APIV1.STAGE.getApi() + APIV1.REGISTER.getApi())
                 .then().log().all()
                 .extract().as(SuccessLogin.class);
         return login.getData().getToken();

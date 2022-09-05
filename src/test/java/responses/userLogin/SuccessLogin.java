@@ -1,9 +1,11 @@
 package responses.userLogin;
 
 import com.google.gson.annotations.SerializedName;
+import lombok.Getter;
 
 import java.util.List;
 
+@Getter
 public class SuccessLogin {
 
     @SerializedName("code")
@@ -15,17 +17,9 @@ public class SuccessLogin {
     @SerializedName("data")
     private Data data;
 
-    public Integer getCode() {
-        return code;
-    }
-
     public SuccessLogin withCode(Integer code) {
         this.code = code;
         return this;
-    }
-
-    public String getResult() {
-        return result;
     }
 
     public SuccessLogin withResult(String result) {
@@ -33,17 +27,9 @@ public class SuccessLogin {
         return this;
     }
 
-    public String getError() {
-        return error;
-    }
-
     public SuccessLogin withError(String error) {
         this.error = error;
         return this;
-    }
-
-    public Data getData() {
-        return data;
     }
 
     public SuccessLogin withData(Data data) {
@@ -51,6 +37,7 @@ public class SuccessLogin {
         return this;
     }
 
+    @Getter
     public static class Data {
 
         @SerializedName("token")
@@ -75,17 +62,9 @@ public class SuccessLogin {
             return this;
         }
 
-        public List<String> getRoles() {
-            return roles;
-        }
-
         public Data withRoles(List<String> roles) {
             this.roles = roles;
             return this;
-        }
-
-        public String getUserId() {
-            return userId;
         }
 
         public Data withUserId(String userId) {
@@ -93,26 +72,14 @@ public class SuccessLogin {
             return this;
         }
 
-        public String getUserEmail() {
-            return userEmail;
-        }
-
         public Data withUserEmail(String userEmail) {
             this.userEmail = userEmail;
             return this;
         }
 
-        public Integer getKeepAliveTime() {
-            return keepAliveTime;
-        }
-
         public Data withKeepAliveTime(Integer keepAliveTime) {
             this.keepAliveTime = keepAliveTime;
             return this;
-        }
-
-        public String getRegistrationDate() {
-            return registrationDate;
         }
 
         public Data withRegistrationDate(String registrationDate) {

@@ -1,6 +1,9 @@
 package storage;
 
-public enum APIV2 {
+import lombok.Getter;
+
+@Getter
+public enum APIV1 {
     STAGE("https://stage-old.local.express/"),
     STORE("rest/v1/partner/stores"),
     LOGIN("api/rest/v1/auth/login"),
@@ -10,12 +13,8 @@ public enum APIV2 {
 
     private final String api;
 
-    APIV2(String api) {
+    APIV1(String api) {
         this.api = api;
-    }
-
-    public String getApi() {
-        return api;
     }
 
     @Override

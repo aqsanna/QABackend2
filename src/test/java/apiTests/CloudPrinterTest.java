@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import responses.CloudPrinter;
-import storage.APIV2;
+import storage.APIV1;
 
 public class CloudPrinterTest {
     @Test
@@ -13,7 +13,7 @@ public class CloudPrinterTest {
     public void successCloudPrinterTest() {
 
         CloudPrinter cloudPrinter = RestAssured.given()
-                .get(APIV2.CLOUDPRINT.getApi())
+                .get(APIV1.CLOUDPRINT.getApi())
                 .then().log().all()
                 .extract().as(CloudPrinter.class);
 
