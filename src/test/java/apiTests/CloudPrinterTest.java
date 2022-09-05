@@ -10,18 +10,15 @@ import storage.APIV2;
 public class CloudPrinterTest {
     @Test
     @DisplayName("Check cloud printer")
-    public void getCloudPrinter() {
+    public void successCloudPrinterTest() {
 
         CloudPrinter cloudPrinter = RestAssured.given()
                 .get(APIV2.CLOUDPRINT.getApi())
                 .then().log().all()
                 .extract().as(CloudPrinter.class);
 
-        Assertions.assertEquals("Ok", cloudPrinter.getMessage());
-        Assertions.assertEquals("OK", cloudPrinter.getCode());
-        Assertions.assertFalse(cloudPrinter.getData().isEmpty());
-
-
+        Assertions.assertEquals("Ok", cloudPrinter.getMessage(), "Message status not OK");
+        Assertions.assertEquals("OK", cloudPrinter.getCode(), "Status not OK");
+        Assertions.assertFalse(cloudPrinter.getData().isEmpty(), "data  is empty");
     }
-
 }

@@ -5,23 +5,29 @@ import io.restassured.http.Header;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import responses.GetStore;
+import responses.Store;
+import spec.Specifications;
 import steps.data.users.UserInfoProvider;
 import storage.APIV2;
 import utils.StoreInfo;
+
 import java.util.ArrayList;
-public class GetStoreTest {
+
+public class StoreTest {
     @Test
     @DisplayName("Check success partner store list")
-    public void getStoreTest() {
-        GetStore getStore = RestAssured.given()
+    public void StoreListTest() {
+        Store store = RestAssured.given()
                 .header(new Header("Authorization", "Bearer " + UserInfoProvider.getToken()))
                 .get(APIV2.STAGE.getApi() + APIV2.STORE.getApi())
                 .then().log().all()
-                .extract().as(GetStore.class);
+                .extract().as(Store.class);
 
-        Assertions.assertEquals("success", getStore.getResults());
-        ArrayList<StoreInfo> storeInfo = getStore.getData();
+        Assertions.assertEquals("success", store.getResults());
+        Assertions.assertEquals("", store.getError());
+        Assertions.assertEquals(200, store.getCode());
+
+        ArrayList<StoreInfo> storeInfo = store.getData();
         for (StoreInfo data : storeInfo) {
             Assertions.assertFalse(data.title.isEmpty(), "title  is empty");
             Assertions.assertNotNull(data.address.first_line, "address is not find " + data.id);

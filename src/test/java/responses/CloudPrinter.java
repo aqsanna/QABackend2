@@ -1,4 +1,5 @@
 package responses;
+
 import com.google.gson.annotations.SerializedName;
 
 public class CloudPrinter {
@@ -12,9 +13,11 @@ public class CloudPrinter {
     public String getMessage() {
         return message;
     }
+
     public String getCode() {
         return code;
     }
+
     public String getData() {
         return data;
     }
