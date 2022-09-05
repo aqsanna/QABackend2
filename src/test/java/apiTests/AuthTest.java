@@ -5,7 +5,7 @@ import io.restassured.http.ContentType;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import responses.SuccessLogin;
+import responses.userLogin.SuccessLogin;
 import spec.Specifications;
 import steps.data.users.UserInfoProvider;
 import storage.APIV2;

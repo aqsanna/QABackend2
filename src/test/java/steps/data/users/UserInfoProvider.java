@@ -3,7 +3,7 @@ package steps.data.users;
 import com.google.gson.Gson;
 import io.restassured.http.ContentType;
 import requests.AuthInfo;
-import responses.SuccessLogin;
+import responses.userLogin.SuccessLogin;
 import storage.APIV2;
 import storage.USER;
 
