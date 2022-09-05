@@ -1,4 +1,4 @@
-package responses;
+package responses.userLogin;
 
 import com.google.gson.annotations.SerializedName;
 
