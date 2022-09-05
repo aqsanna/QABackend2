@@ -1,7 +1,9 @@
 package responses;
 
 import com.google.gson.annotations.SerializedName;
+import lombok.Getter;
 
+@Getter
 public class CloudPrinter {
     @SerializedName("message")
     private String message;
@@ -9,16 +11,4 @@ public class CloudPrinter {
     private String code;
     @SerializedName("data")
     private String data;
-
-    public String getMessage() {
-        return message;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public String getData() {
-        return data;
-    }
 }
