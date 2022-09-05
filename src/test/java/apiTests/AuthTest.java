@@ -25,7 +25,7 @@ public class AuthTest {
                 .when()
                 .contentType(ContentType.JSON)
                 .body(gson.toJson(UserInfoProvider.getUser(USER.EMAIL_INFO)))
-                .post(APIV2.STAGE.getApi() + APIV2.REGISTER.getApi())
+                .post(APIV1.STAGE.getApi() + APIV1.REGISTER.getApi())
                 .then().log().all()
                 .extract().as(SuccessLogin.class);
 
