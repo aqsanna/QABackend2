@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import responses.Store;
 import steps.data.users.UserInfoProvider;
 import storage.APIV2;
-import utils.StoreInfo;
+import requests.StoreInfo;
 
 import java.util.ArrayList;
 

@@ -1,7 +1,7 @@
 package responses;
 
 import com.google.gson.annotations.SerializedName;
-import utils.StoreInfo;
+import requests.StoreInfo;
 
 import java.util.ArrayList;
 

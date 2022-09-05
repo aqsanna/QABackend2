@@ -1,4 +1,4 @@
-package utils;
+package requests;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -105,7 +105,7 @@ public class StoreInfo {
         return this;
     }
 
-    public class Address {
+    public static class Address {
         @SerializedName("first_line")
         public String first_line;
         @SerializedName("location")
@@ -115,21 +115,11 @@ public class StoreInfo {
             return first_line;
         }
 
-        public Address setFirst_line(String first_line) {
-            this.first_line = first_line;
-            return this;
-        }
-
         public Location getLocation() {
             return location;
         }
 
-        public Address setLocation(Location location) {
-            this.location = location;
-            return this;
-        }
-
-        public class Location {
+        public static class Location {
             @SerializedName("lat")
             public String lat;
             @SerializedName("lng")
@@ -139,23 +129,13 @@ public class StoreInfo {
                 return lat;
             }
 
-            public Location setLat(String lat) {
-                this.lat = lat;
-                return this;
-            }
-
             public String getLng() {
                 return lng;
-            }
-
-            public Location setLng(String lng) {
-                this.lng = lng;
-                return this;
             }
         }
     }
 
-    public class Currency {
+    public static class Currency {
         @SerializedName("code")
         public String code;
         @SerializedName("symbol")
@@ -165,18 +145,8 @@ public class StoreInfo {
             return code;
         }
 
-        public Currency setCode(String code) {
-            this.code = code;
-            return this;
-        }
-
         public String getSymbol() {
             return symbol;
-        }
-
-        public Currency setSymbol(String symbol) {
-            this.symbol = symbol;
-            return this;
         }
     }
 }
