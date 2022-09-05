@@ -1,3 +1,5 @@
+package apiTests;
+
 import com.google.gson.Gson;
 import io.restassured.http.ContentType;
 import org.junit.jupiter.api.Assertions;
@@ -13,7 +15,6 @@ import static io.restassured.RestAssured.given;
 
 public class AuthTest {
     Gson gson = new Gson();
-    //UserInfoProvider userInfoProvider = new UserInfoProvider();
 
     @Test
     @DisplayName("Check success user login")
