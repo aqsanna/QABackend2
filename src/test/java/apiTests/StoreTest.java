@@ -5,10 +5,10 @@ import io.restassured.http.Header;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import requests.StoreInfo;
 import responses.Store;
 import steps.data.users.UserInfoProvider;
 import storage.APIV1;
-import requests.StoreInfo;
 
 import java.util.ArrayList;
 
