@@ -11,15 +11,19 @@ public class DeleteProduct {
     private String error;
     @SerializedName("data")
     private boolean data;
+
     public Integer getCode() {
         return code;
     }
+
     public String getResult() {
         return result;
     }
+
     public String getError() {
         return error;
     }
+
     public boolean isData() {
         return data;
     }

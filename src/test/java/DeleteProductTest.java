@@ -13,7 +13,7 @@ public class DeleteProductTest {
     public void deleteProductTest() {
         DeleteProduct deleteProductTest = RestAssured.given()
                 .header(new Header("Authorization", "Bearer " + UserInfoProvider.getToken()))
-                .delete(APIV2.STAGE.getApi() + APIV2.DELETE_PRODUCT_ID.getApi())
+                .delete(APIV2.STAGE.getApi() + APIV2.DELETE_PRODUCT_ID.getApi() + UserInfoProvider.getProductId())
                 .then().log().all()
                 .extract().as(DeleteProduct.class);
         Assertions.assertEquals("success", deleteProductTest.getResult());
