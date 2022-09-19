@@ -1,7 +1,9 @@
 package requests;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import lombok.With;
+
 import java.io.Serializable;
 
 @With

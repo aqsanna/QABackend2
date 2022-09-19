@@ -1,4 +1,4 @@
-package responses;
+package responses.product;
 
 import com.google.gson.annotations.SerializedName;
 
