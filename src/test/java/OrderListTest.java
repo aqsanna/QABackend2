@@ -62,7 +62,7 @@ public class OrderListTest {
                         Assertions.assertFalse(order.getCreationDate().isEmpty(), "The order " + order.getId() + "creation date is empty");
                         Assertions.assertFalse(order.getDropoff().getPerson().getFirstName().isEmpty(), "The order " + order.getId() + " first name is empty");
                         Assertions.assertFalse(order.getDropoff().getPerson().getPhone().isEmpty(), "The order " + order.getId() + " phone is empty");
-                        Assertions.assertTrue(order.getPayment().getTotal() > 0 , "The order " + order.getId() + " total price is " + order.getPayment().getTotal());
+                        Assertions.assertTrue(order.getPayment().getTotal() >= 0 , "The order " + order.getId() + " total price is " + order.getPayment().getTotal());
                         for (Order.Transaction transaction: order.getTransactions()) {
                             Assertions.assertFalse(transaction.getTransactionID().isEmpty(), "The order " + order.getId() + " transactionID is empty. Type is " + transaction.getType() + " id : " + transaction.getId());
                         }

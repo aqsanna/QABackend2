@@ -516,17 +516,17 @@ public class Order {
     }
     public static class Delivery{
         @SerializedName("driver")
-        public String driver;
+        public Object driver;
         @SerializedName("accepted_at")
         public String acceptedAt;
         @SerializedName("delivered_at")
         public String deliveredAt;
 
-        public String getDriver() {
+        public Object getDriver() {
             return driver;
         }
 
-        public Delivery withDriver(String driver) {
+        public Delivery withDriver(Object driver) {
             this.driver = driver;
             return this;
         }
