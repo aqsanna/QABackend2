@@ -1,10 +1,10 @@
-package responses.deleteProduct;
+package responses.product;
 
 import com.google.gson.annotations.SerializedName;
 import lombok.Getter;
 
 @Getter
-public class DeleteProduct {
+public class SuccessDeleteProduct {
     @SerializedName("code")
     private Integer code;
     @SerializedName("result")

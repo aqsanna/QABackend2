@@ -1,4 +1,4 @@
-package responses.deleteProduct;
+package responses.product;
 
 import com.google.gson.annotations.SerializedName;
 import lombok.Getter;
@@ -22,12 +22,10 @@ public class SuccessCreateProduct {
         this.result = result;
         return this;
     }
-
     public SuccessCreateProduct withError(String error) {
         this.error = error;
         return this;
     }
-
     public SuccessCreateProduct withData(String data) {
         this.data = data;
         return this;

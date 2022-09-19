@@ -6,7 +6,7 @@ import io.restassured.http.ContentType;
 import io.restassured.http.Header;
 import requests.AuthInfo;
 import requests.CreateProduct;
-import responses.deleteProduct.SuccessCreateProduct;
+import responses.product.SuccessCreateProduct;
 import responses.userLogin.SuccessLogin;
 import storage.APIV2;
 import storage.USER;
