@@ -9,8 +9,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import responses.product.SuccessDeleteProduct;
 import responses.product.SuccessCreateProduct;
+import steps.data.users.ProductInfoProvider;
 import steps.data.users.UserInfoProvider;
-import storage.APIV2;
+import storage.APIV1;
 import storage.USER;
 
 public class ProductCreateAndDeleteTest {
@@ -19,13 +20,12 @@ public class ProductCreateAndDeleteTest {
     @Test
     @DisplayName("Check create product")
     public void createProductTest() {
-
         SuccessCreateProduct successCreateProduct = RestAssured.given()
                 .header(new Header("Authorization", "Bearer " + UserInfoProvider.getToken()))
                 .when()
                 .contentType(ContentType.JSON)
-                .body(gson.toJson(UserInfoProvider.getProduct(USER.EMAIL_INFO)))
-                .post(APIV2.STAGE.getApi() + APIV2.CREATEPRODUCT.getApi())
+                .body(gson.toJson(ProductInfoProvider.getProduct(USER.EMAIL_INFO)))
+                .post(APIV1.STAGE.getApi() + APIV1.CREATEPRODUCT.getApi())
                 .then().log().all()
                 .extract().as(SuccessCreateProduct.class);
 
@@ -39,7 +39,7 @@ public class ProductCreateAndDeleteTest {
     public void deleteProductTest() {
         SuccessDeleteProduct deleteProductTest = RestAssured.given()
                 .header(new Header("Authorization", "Bearer " + UserInfoProvider.getToken()))
-                .delete(APIV2.STAGE.getApi() + APIV2.DELETE_PRODUCT_ID.getApi() + UserInfoProvider.getProductId())
+                .delete(APIV1.STAGE.getApi() + APIV1.DELETE_PRODUCT_ID.getApi() + ProductInfoProvider.getProductId())
                 .then().log().all()
                 .extract().as(SuccessDeleteProduct.class);
         Assertions.assertEquals("success", deleteProductTest.getResult());

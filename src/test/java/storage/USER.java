@@ -11,7 +11,7 @@ public enum USER {
     APPLICATION_KEY("partnersapp2031f94af9829c64d321d3a210acaad611f76e072ba21a8a6bebb"),
     NAME("Test-CreateProduct Name"),
     UPC("351578977348"),
-    CATEGORY_ID("108384"),
+    CATEGORY_ID("48343"),
     PRICE("7.3"),
     PRICE_UNITS("each"),
     PASSWORD("123456");
