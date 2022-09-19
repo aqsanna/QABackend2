@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.Optional;
 
 public enum ORDER_STATUS {
-    NEW("new"),
+//    NEW("new"),
     ASSEMBLING("assembling"),
     ASSEMBLED("assembled"),
     DELIVERING("delivering"),
