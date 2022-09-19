@@ -2,9 +2,11 @@ package requests;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import lombok.With;
 
 import java.io.Serializable;
 
+@With
 public class CreateProduct implements Serializable {
     @SerializedName("params")
     @Expose
@@ -17,12 +19,7 @@ public class CreateProduct implements Serializable {
         super();
         this.params = params;
     }
-
-    public CreateProduct withParams(Params params) {
-        this.params = params;
-        return this;
-    }
-
+    @With
     public static class Params implements Serializable {
 
         @SerializedName("name")
@@ -44,7 +41,6 @@ public class CreateProduct implements Serializable {
 
         public Params() {
         }
-
         public Params(String name, String upc, String category_id, Double price, String price_units) {
             super();
             this.name = name;
@@ -52,31 +48,6 @@ public class CreateProduct implements Serializable {
             this.category_id = category_id;
             this.price = price;
             this.price_units = price_units;
-        }
-
-        public Params withName(String name) {
-            this.name = name;
-            return this;
-        }
-
-        public Params withUpc(String upc) {
-            this.upc = upc;
-            return this;
-        }
-
-        public Params withCategoryId(String category_id) {
-            this.category_id = category_id;
-            return this;
-        }
-
-        public Params withPrice(Double price) {
-            this.price = price;
-            return this;
-        }
-
-        public Params withPriceUnits(String price_units) {
-            this.price_units = price_units;
-            return this;
         }
     }
 }

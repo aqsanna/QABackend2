@@ -1,3 +1,5 @@
+package apiTests;
+
 import com.google.gson.Gson;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
@@ -11,7 +13,7 @@ import steps.data.users.UserInfoProvider;
 import storage.APIV2;
 import storage.USER;
 
-public class ProductTest {
+public class ProductCreateAndDeleteTest {
     Gson gson = new Gson();
 
     @Test

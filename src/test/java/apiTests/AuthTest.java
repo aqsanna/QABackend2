@@ -1,3 +1,5 @@
+package apiTests;
+
 import com.google.gson.Gson;
 import io.restassured.http.ContentType;
 import org.junit.jupiter.api.Assertions;

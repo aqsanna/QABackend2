@@ -1,7 +1,9 @@
 package responses.deleteProduct;
 
 import com.google.gson.annotations.SerializedName;
+import lombok.Getter;
 
+@Getter
 public class DeleteProduct {
     @SerializedName("code")
     private Integer code;
@@ -12,19 +14,4 @@ public class DeleteProduct {
     @SerializedName("data")
     private boolean data;
 
-    public Integer getCode() {
-        return code;
-    }
-
-    public String getResult() {
-        return result;
-    }
-
-    public String getError() {
-        return error;
-    }
-
-    public boolean isData() {
-        return data;
-    }
 }
