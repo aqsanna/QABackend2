@@ -27,6 +27,7 @@ public class ProductInfoProvider {
             default -> null;
         };
     }
+
     public static UpdateProduct updProduct(USER email) {
         return switch (email) {
             case EMAIL_INFO -> new UpdateProduct(
@@ -50,11 +51,13 @@ public class ProductInfoProvider {
             default -> null;
         };
     }
+
     public static String random() {
         Random ran = new Random();
         int x = ran.nextInt(999999999);
         return Integer.toString(x);
     }
+
     public static String getProductId() {
         Gson gson = new Gson();
         AuthInfo authInfo = UserInfoProvider.getUser(USER.EMAIL_INFO);

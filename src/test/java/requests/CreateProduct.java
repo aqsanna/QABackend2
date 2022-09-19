@@ -14,10 +14,12 @@ public class CreateProduct implements Serializable {
 
     public CreateProduct() {
     }
+
     public CreateProduct(Params params) {
         super();
         this.params = params;
     }
+
     @With
     public static class Params implements Serializable {
 
@@ -39,6 +41,7 @@ public class CreateProduct implements Serializable {
 
         public Params() {
         }
+
         public Params(String name, String upc, String category_id, Double price, String price_units) {
             super();
             this.name = name;
