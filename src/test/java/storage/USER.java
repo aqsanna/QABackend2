@@ -21,7 +21,7 @@ public enum USER {
     INGREDIENTS("text ingredients"),
     TAG_IDS("144"),
     IS_FOODSTAMP("true"),
-    IS_SHIPPABLE("false"),
+    IS_SHIPPABLE("true"),
     HAS_AVAILABILITY_SCHEDULE("false"),
     PASSWORD("123456");
 
