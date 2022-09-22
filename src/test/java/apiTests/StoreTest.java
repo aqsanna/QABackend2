@@ -23,7 +23,7 @@ public class StoreTest {
                 .then().log().all()
                 .extract().as(Store.class);
 
-        Assertions.assertEquals("success", store.getResults());
+        Assertions.assertEquals("success", store.getResult());
         Assertions.assertEquals("", store.getError());
         Assertions.assertEquals(200, store.getCode());
 
