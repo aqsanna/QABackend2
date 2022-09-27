@@ -53,10 +53,6 @@ public class SuccessLogin {
         @SerializedName("registration_date")
         private String registrationDate;
 
-        public String getToken() {
-            return token;
-        }
-
         public Data withToken(String token) {
             this.token = token;
             return this;
