@@ -2,6 +2,7 @@ package Utile;
 
 import com.google.gson.annotations.SerializedName;
 import groovyjarjarantlr4.v4.runtime.atn.SemanticContext;
+import groovyjarjarantlr4.v4.runtime.misc.Nullable;
 
 import java.util.ArrayList;
 
@@ -31,10 +32,12 @@ public class Order {
     @SerializedName("order_items_count")
     public int orderItemsCount;
     @SerializedName("client_curbside_pickup_info")
-    public Object clientCurbsidePickupInfo;
+    @Nullable
+    public transient ClientCurbsidePickupInfo clientCurbsidePickupInfo;
     @SerializedName("transactions")
     public ArrayList<Transaction> transactions;
     @SerializedName("delivery")
+    @Nullable
     public Delivery delivery;
 
     public String getId() {
@@ -145,11 +148,11 @@ public class Order {
         return this;
     }
 
-    public Object getClientCurbsidePickupInfo() {
+    public ClientCurbsidePickupInfo getClientCurbsidePickupInfo() {
         return clientCurbsidePickupInfo;
     }
 
-    public Order withClientCurbsidePickupInfo(Object clientCurbsidePickupInfo) {
+    public Order withClientCurbsidePickupInfo(ClientCurbsidePickupInfo clientCurbsidePickupInfo) {
         this.clientCurbsidePickupInfo = clientCurbsidePickupInfo;
         return this;
     }
@@ -188,9 +191,10 @@ public class Order {
         @SerializedName("refundable")
         public boolean refundable;
         @SerializedName("transactionID")
+        @Nullable
         public String transactionID;
         @SerializedName("relatedTransactions")
-        public ArrayList<Object> relatedTransactions;
+        public ArrayList<RelatedTransactions> relatedTransactions;
         @SerializedName("refundErrorMessage")
         public String refundErrorMessage;
 
@@ -262,11 +266,11 @@ public class Order {
             return this;
         }
 
-        public ArrayList<Object> getRelatedTransactions() {
+        public ArrayList<RelatedTransactions> getRelatedTransactions() {
             return relatedTransactions;
         }
 
-        public Transaction withRelatedTransactions(ArrayList<Object> relatedTransactions) {
+        public Transaction withRelatedTransactions(ArrayList<RelatedTransactions> relatedTransactions) {
             this.relatedTransactions = relatedTransactions;
             return this;
         }
@@ -280,7 +284,7 @@ public class Order {
             return this;
         }
 
-        public class CardInfo{
+        public static class CardInfo{
             @SerializedName("cardType")
             public String cardType;
             @SerializedName("cardNumber")
@@ -304,7 +308,122 @@ public class Order {
                 return this;
             }
         }
+        public static class RelatedTransactions{
+            @SerializedName("id")
+            public String id;
+            @SerializedName("type")
+            public String type;
+            @SerializedName("icon")
+            public String icon;
+            @SerializedName("cardInfo")
+            @Nullable
+            public Object cardInfo;
+            @SerializedName("description")
+            public ArrayList<String> description;
+            @SerializedName("amount")
+            public String amount;
+            @SerializedName("refund_reason")
+            @Nullable
+            public Object refundReason;
+            @SerializedName("transactionID")
+            public String transactionID;
+            @SerializedName("refundErrorMessage")
+            public String refundErrorMessage;
 
+            public String getId() {
+                return id;
+            }
+
+            public RelatedTransactions withId(String id) {
+                this.id = id;
+                return this;
+            }
+
+            public String getType() {
+                return type;
+            }
+
+            public RelatedTransactions withType(String type) {
+                this.type = type;
+                return this;
+            }
+
+            public String getIcon() {
+                return icon;
+            }
+
+            public RelatedTransactions withIcon(String icon) {
+                this.icon = icon;
+                return this;
+            }
+
+            public Object getCardInfo() {
+                return cardInfo;
+            }
+
+            public RelatedTransactions withCardInfo(Object cardInfo) {
+                this.cardInfo = cardInfo;
+                return this;
+            }
+
+            public ArrayList<String> getDescription() {
+                return description;
+            }
+
+            public RelatedTransactions withDescription(ArrayList<String> description) {
+                this.description = description;
+                return this;
+            }
+
+            public String getAmount() {
+                return amount;
+            }
+
+            public RelatedTransactions withAmount(String amount) {
+                this.amount = amount;
+                return this;
+            }
+
+            public Object getRefundReason() {
+                return refundReason;
+            }
+
+            public RelatedTransactions withRefundReason(Object refundReason) {
+                this.refundReason = refundReason;
+                return this;
+            }
+
+            public String getTransactionID() {
+                return transactionID;
+            }
+
+            public RelatedTransactions withTransactionID(String transactionID) {
+                this.transactionID = transactionID;
+                return this;
+            }
+
+            public String getRefundErrorMessage() {
+                return refundErrorMessage;
+            }
+
+            public RelatedTransactions withRefundErrorMessage(String refundErrorMessage) {
+                this.refundErrorMessage = refundErrorMessage;
+                return this;
+            }
+
+            public static class CardInfo{
+                public String cardNumber;
+
+                public String getCardNumber() {
+                    return cardNumber;
+                }
+
+                public CardInfo withCardNumber(String cardNumber) {
+                    this.cardNumber = cardNumber;
+                    return this;
+                }
+            }
+        }
     }
     public static class Dropoff{
         @SerializedName("period")
@@ -516,17 +635,20 @@ public class Order {
     }
     public static class Delivery{
         @SerializedName("driver")
-        public Object driver;
+        @Nullable
+        public Driver driver;
         @SerializedName("accepted_at")
+        @Nullable
         public String acceptedAt;
         @SerializedName("delivered_at")
+        @Nullable
         public String deliveredAt;
 
-        public Object getDriver() {
+        public Driver getDriver() {
             return driver;
         }
 
-        public Delivery withDriver(Object driver) {
+        public Delivery withDriver(Driver driver) {
             this.driver = driver;
             return this;
         }
@@ -547,6 +669,191 @@ public class Order {
         public Delivery withDeliveredAt(String deliveredAt) {
             this.deliveredAt = deliveredAt;
             return this;
+        }
+
+        public static class Driver {
+            @SerializedName("id")
+            public String id;
+            @SerializedName("first_name")
+            public String firstName;
+            @SerializedName("last_name")
+            public String lastName;
+            @SerializedName("phone")
+            public String phone;
+            @SerializedName("car")
+            @Nullable
+            public Object car;
+
+            public String getId() {
+                return id;
+            }
+
+            public Driver withId(String id) {
+                this.id = id;
+                return this;
+            }
+
+            public String getFirstName() {
+                return firstName;
+            }
+
+            public Driver withFirstName(String firstName) {
+                this.firstName = firstName;
+                return this;
+            }
+
+            public String getLastName() {
+                return lastName;
+            }
+
+            public Driver withLastName(String lastName) {
+                this.lastName = lastName;
+                return this;
+            }
+
+            public String getPhone() {
+                return phone;
+            }
+
+            public Driver withPhone(String phone) {
+                this.phone = phone;
+                return this;
+            }
+
+            public Object getCar() {
+                return car;
+            }
+
+            public Driver withCar(Object car) {
+                this.car = car;
+                return this;
+            }
+        }
+    }
+
+    public static class ClientCurbsidePickupInfo {
+        @SerializedName("notes")
+        @Nullable
+        public String notes;
+        @SerializedName("car_brand")
+        @Nullable
+        public String carBrand;
+        @SerializedName("car_model")
+        @Nullable
+        public String carModel;
+        @SerializedName("notes")
+        @Nullable
+        public String carColor;
+        @SerializedName("plate_number")
+        @Nullable
+        public String plateNumber;
+        @SerializedName("user_car")
+        @Nullable
+        public UserCar userCar;
+
+        public String getNotes() {
+            return notes;
+        }
+
+        public ClientCurbsidePickupInfo withNotes(String notes) {
+            this.notes = notes;
+            return this;
+        }
+
+        public String getCarBrand() {
+            return carBrand;
+        }
+
+        public ClientCurbsidePickupInfo withCarBrand(String carBrand) {
+            this.carBrand = carBrand;
+            return this;
+        }
+
+        public String getCarModel() {
+            return carModel;
+        }
+
+        public ClientCurbsidePickupInfo withCarModel(String carModel) {
+            this.carModel = carModel;
+            return this;
+        }
+
+        public String getCarColor() {
+            return carColor;
+        }
+
+        public ClientCurbsidePickupInfo withCarColor(String carColor) {
+            this.carColor = carColor;
+            return this;
+        }
+
+        public String getPlateNumber() {
+            return plateNumber;
+        }
+
+        public ClientCurbsidePickupInfo withPlate_number(String plateNumber) {
+            this.plateNumber = plateNumber;
+            return this;
+        }
+
+        public UserCar getUserCar() {
+            return userCar;
+        }
+
+        public ClientCurbsidePickupInfo withUserCar(UserCar userCar) {
+            this.userCar = userCar;
+            return this;
+        }
+
+        public static class UserCar{
+            @SerializedName("car_model")
+            @Nullable
+            public String carModel;
+            @SerializedName("car_brand")
+            @Nullable
+            public String carBrand;
+            @SerializedName("car_color")
+            @Nullable
+            public String carColor;
+            @SerializedName("plate_number")
+            @Nullable
+            public String plateNumber;
+
+            public String getCarModel() {
+                return carModel;
+            }
+
+            public UserCar withCarModel(String carModel) {
+                this.carModel = carModel;
+                return this;
+            }
+
+            public String getCarBrand() {
+                return carBrand;
+            }
+
+            public UserCar withCarBrand(String carBrand) {
+                this.carBrand = carBrand;
+                return this;
+            }
+
+            public String getCarColor() {
+                return carColor;
+            }
+
+            public UserCar withCarColor(String carColor) {
+                this.carColor = carColor;
+                return this;
+            }
+
+            public String getPlateNumber() {
+                return plateNumber;
+            }
+
+            public UserCar withPlateNumber(String plateNumber) {
+                this.plateNumber = plateNumber;
+                return this;
+            }
         }
     }
 }
