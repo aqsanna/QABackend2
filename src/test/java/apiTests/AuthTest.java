@@ -5,7 +5,6 @@ import io.restassured.http.ContentType;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import requests.AuthInfo;
 import responses.userLogin.SuccessLogin;
 import spec.Specifications;
 import steps.data.users.UserInfoProvider;
@@ -16,8 +15,6 @@ import static io.restassured.RestAssured.given;
 
 public class AuthTest {
     Gson gson = new Gson();
-
-    SuccessLogin successLogin;
     @Test
     @DisplayName("Check success user login")
     public void successLoginTest() {
