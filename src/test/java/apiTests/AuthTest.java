@@ -6,7 +6,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import responses.userLogin.SuccessLogin;
-import spec.Specifications;
+import specification.RequestSpec;
+import specification.ResponseSpec;
 import steps.data.users.UserInfoProvider;
 import storage.APIV1;
 import storage.USER;
@@ -19,7 +20,7 @@ public class AuthTest {
     @Test
     @DisplayName("Check success user login")
     public void successLoginTest() {
-        Specifications.installSpecification(Specifications.requestSpec(APIV1.LOGIN.getApi()), Specifications.responseOK200());
+        RequestSpec.installSpecification(RequestSpec.requestSpec(APIV1.LOGIN.getApi()), ResponseSpec.responseOK200());
 
         SuccessLogin successLogin = given()
                 .when()

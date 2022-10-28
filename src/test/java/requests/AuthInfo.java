@@ -11,9 +11,6 @@ public class AuthInfo implements Serializable {
     @SerializedName("params")
     public Params params;
 
-    public AuthInfo() {
-    }
-
     public AuthInfo(Params params) {
         super();
         this.params = params;
@@ -32,9 +29,6 @@ public class AuthInfo implements Serializable {
         public Device device;
         @SerializedName("application_key")
         public String applicationKey;
-
-        public Params() {
-        }
 
         public Params(App app, String email, String password, Device device, String applicationKey) {
             super();

@@ -1,6 +1,5 @@
 package apiTests;
 
-import io.restassured.RestAssured;
 import io.restassured.http.Header;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -12,17 +11,19 @@ import storage.APIV1;
 
 import java.util.ArrayList;
 
+import static io.restassured.RestAssured.given;
+
 public class StoreTest {
     @Test
     @DisplayName("Check success partner store list")
     public void StoreListTest() {
-        Store store = RestAssured.given()
+        Store store = given()
                 .header(new Header("Authorization", "Bearer " + UserInfoProvider.getToken()))
                 .get(APIV1.STAGE.getApi() + APIV1.STORE.getApi())
                 .then().log().all()
                 .extract().as(Store.class);
 
-        Assertions.assertEquals("success", store.getResults());
+        Assertions.assertEquals("success", store.getResult());
         Assertions.assertEquals("", store.getError());
         Assertions.assertEquals(200, store.getCode());
 
