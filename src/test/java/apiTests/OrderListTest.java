@@ -1,9 +1,7 @@
 package apiTests;
 
 import Utile.Order;
-import com.google.gson.Gson;
 import io.restassured.RestAssured;
-import io.restassured.http.ContentType;
 import io.restassured.http.Header;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
