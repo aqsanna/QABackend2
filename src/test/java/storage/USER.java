@@ -2,6 +2,7 @@ package storage;
 
 public enum USER {
     EMAIL_INFO("info@local.express"),
+    EMAIL_CLIENT("oqsannas+31102022@localexpress.io"),
     BAD_EMAIL("sydney@fife"),
     BUNDLE_ID("com.worldappsystem.LEPartners"),
     APP_VERSION("5.7.2"),
@@ -9,7 +10,9 @@ public enum USER {
     OS("ios"),
     PUSH_TOKEN("f8EbEjHLT0RGqX1jnJGxRj:APA91bHlnkZAGhcjNzfAuJ-ZB7A8-u3K5-lG-dQXfW3gT8A-d-KTmEap1lNHvd7B1wuhc8vVR0IqIKVH5zH3HfsbvfL5F9SCPnrUJfV24lKWJLz997zZv5ba5ksDhiL0DbuyM_PemsJr"),
     APPLICATION_KEY("partnersapp2031f94af9829c64d321d3a210acaad611f76e072ba21a8a6bebb"),
-    PASSWORD("123456");
+    APPLICATION_CLIENT("yourgrocerystore6aKp9IXiKEIhEByJkMsZ4d65eKi2h8rO56JZYd9RcQKwmWrr"),
+    PASSWORD_CLIENT("Local@123"),
+    PASSWORD("123456Ii");
 
     private final String user;
 

@@ -29,6 +29,24 @@ public class UserInfoProvider {
             default -> null;
         };
     }
+    public static AuthInfo getUserClient(USER email) {
+        return switch (email) {
+            case EMAIL_CLIENT -> new AuthInfo(
+                    new AuthInfo.Params(
+                            new AuthInfo.Params.App()
+                                    .withBundleId(USER.BUNDLE_ID.getUserData())
+                                    .withVersion(USER.APP_VERSION.getUserData())
+                            , USER.EMAIL_CLIENT.getUserData()
+                            , USER.PASSWORD_CLIENT.getUserData(),
+                            new AuthInfo.Params.Device()
+                                    .withVersion(USER.DEVICE_VERSION.getUserData())
+                                    .withOs(USER.OS.getUserData())
+                                    .withPushToken(PUSH_TOKEN.getUserData()),
+                            USER.APPLICATION_CLIENT.getUserData()));
+
+            default -> null;
+        };
+    }
 
     public static String getToken() {
         Gson gson = new Gson();
