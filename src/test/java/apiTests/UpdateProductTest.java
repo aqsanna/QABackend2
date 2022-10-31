@@ -7,7 +7,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import responses.product.SuccessUpdateProduct;
-import spec.Specifications;
+import specification.RequestSpec;
+import specification.ResponseSpec;
 import steps.data.users.ProductInfoProvider;
 import steps.data.users.UserInfoProvider;
 import storage.APIV1;
@@ -21,7 +22,7 @@ public class UpdateProductTest {
     @Test
     @DisplayName("Check success product update")
     public void successUpdateTest() {
-        Specifications.installSpecification(Specifications.requestSpec(APIV1.LOGIN.getApi()), Specifications.responseOK200());
+        RequestSpec.installSpecification(RequestSpec.requestSpec(APIV1.LOGIN.getApi()), ResponseSpec.responseOK200());
         SuccessUpdateProduct successUpdateProduct = given()
                 .header(new Header("Authorization", "Bearer " + UserInfoProvider.getToken()))
                 .when()

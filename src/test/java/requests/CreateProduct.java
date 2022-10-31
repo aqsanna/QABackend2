@@ -12,9 +12,6 @@ public class CreateProduct implements Serializable {
     @Expose
     public Params params;
 
-    public CreateProduct() {
-    }
-
     public CreateProduct(Params params) {
         super();
         this.params = params;
@@ -23,21 +20,13 @@ public class CreateProduct implements Serializable {
     @With
     public static class Params implements Serializable {
 
-        @SerializedName("name")
-        @Expose
         public String name;
-        @SerializedName("upc")
-        @Expose
         public String upc;
         @SerializedName("category_id")
-        @Expose
-        public String category_id;
-        @SerializedName("price")
-        @Expose
+        public String categoryId;
         public Double price;
         @SerializedName("price_units")
-        @Expose
-        public String price_units;
+        public String priceUnits;
 
         public Params() {
         }
@@ -46,9 +35,9 @@ public class CreateProduct implements Serializable {
             super();
             this.name = name;
             this.upc = upc;
-            this.category_id = category_id;
+            this.categoryId = category_id;
             this.price = price;
-            this.price_units = price_units;
+            this.priceUnits = price_units;
         }
     }
 }

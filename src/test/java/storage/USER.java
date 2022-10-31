@@ -23,7 +23,7 @@ public enum USER {
     IS_FOODSTAMP("true"),
     IS_SHIPPABLE("true"),
     HAS_AVAILABILITY_SCHEDULE("false"),
-    PASSWORD("123456");
+    PASSWORD("123456Ii");
 
     private final String user;
 
