@@ -32,7 +32,7 @@ public class AuthClientTest {
 
         Assertions.assertEquals("success", successLoginEmail.getResult());
         Assertions.assertEquals("oqsannas+31102022@localexpress.io", successLoginEmail.getData().getUserEmail());
-        Assertions.assertEquals("390512", successLoginEmail.getData().getUserId());
+        Assertions.assertEquals("65436", successLoginEmail.getData().getUserId());
         Assertions.assertTrue(successLoginEmail.getError().isEmpty());
         Assertions.assertNotNull(successLoginEmail.getData().getToken());
     }
