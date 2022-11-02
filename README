@@ -1,0 +1,11 @@
+**Setting up the environment:**
+
+[Download Oracle Java 17 LTS](https://www.oracle.com/java/technologies/downloads/#java17)
+
+Place in "Library/Java/JavaVirtualMachines/"
+
+Install JAVA_HOME in the terminal: `export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk-17.0.4.1.jdk/Contents/Home`
+
+Install HomeBrew with the command in the terminal: `/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"`
+
+Install Maven 3.8.6 with a command in the terminal: `brew install maven`

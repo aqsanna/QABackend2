@@ -1,9 +1,14 @@
 package storage;
 
+import lombok.Getter;
+
+@Getter
 public enum APIV1 {
     STAGE("https://stage-old.local.express/"),
+    STORE("rest/v1/partner/stores"),
     LOGIN("api/rest/v1/auth/login"),
     REGISTER("rest/v1/auth/login"),
+    CLOUDPRINT("https://api.localexpress.io/rest/v2/cloud-printer/kiosk/3915408"),
     CREATEPRODUCT("rest/v1/partner/stores/87/products"),
     DELETE_PRODUCT_ID("rest/v1/partner/stores/87/products/");
 
@@ -12,10 +17,6 @@ public enum APIV1 {
 
     APIV1(String api) {
         this.api = api;
-    }
-
-    public String getApi() {
-        return api;
     }
 
     @Override

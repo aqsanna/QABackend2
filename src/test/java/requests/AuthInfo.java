@@ -1,49 +1,34 @@
 package requests;
 
-import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import lombok.With;
 
 import java.io.Serializable;
 
+@With
 public class AuthInfo implements Serializable {
 
     @SerializedName("params")
-    @Expose
     public Params params;
-
-    public AuthInfo() {
-    }
 
     public AuthInfo(Params params) {
         super();
         this.params = params;
     }
 
-    public AuthInfo withParams(Params params) {
-        this.params = params;
-        return this;
-    }
-
+    @With
     public static class Params implements Serializable {
 
         @SerializedName("app")
-        @Expose
         public App app;
         @SerializedName("email")
-        @Expose
         public String email;
         @SerializedName("password")
-        @Expose
         public String password;
         @SerializedName("device")
-        @Expose
         public Device device;
         @SerializedName("application_key")
-        @Expose
         public String applicationKey;
-
-        public Params() {
-        }
 
         public Params(App app, String email, String password, Device device, String applicationKey) {
             super();
@@ -54,41 +39,14 @@ public class AuthInfo implements Serializable {
             this.applicationKey = applicationKey;
         }
 
-        public Params withApp(App app) {
-            this.app = app;
-            return this;
-        }
-
-        public Params withEmail(String email) {
-            this.email = email;
-            return this;
-        }
-
-        public Params withPassword(String password) {
-            this.password = password;
-            return this;
-        }
-
-        public Params withDevice(Device device) {
-            this.device = device;
-            return this;
-        }
-
-        public Params withApplicationKey(String applicationKey) {
-            this.applicationKey = applicationKey;
-            return this;
-        }
-
+        @With
         public static class Device implements Serializable {
 
             @SerializedName("version")
-            @Expose
             public String version;
             @SerializedName("os")
-            @Expose
             public String os;
             @SerializedName("push_token")
-            @Expose
             public String pushToken;
 
             public Device() {
@@ -100,31 +58,14 @@ public class AuthInfo implements Serializable {
                 this.os = os;
                 this.pushToken = pushToken;
             }
-
-            public Device withVersion(String version) {
-                this.version = version;
-                return this;
-            }
-
-            public Device withOs(String os) {
-                this.os = os;
-                return this;
-            }
-
-            public Device withPushToken(String pushToken) {
-                this.pushToken = pushToken;
-                return this;
-            }
-
         }
 
+        @With
         public static class App implements Serializable {
 
             @SerializedName("bundle_id")
-            @Expose
             public String bundleId;
             @SerializedName("version")
-            @Expose
             public String version;
 
             public App() {
@@ -134,16 +75,6 @@ public class AuthInfo implements Serializable {
                 super();
                 this.bundleId = bundleId;
                 this.version = version;
-            }
-
-            public App withBundleId(String bundleId) {
-                this.bundleId = bundleId;
-                return this;
-            }
-
-            public App withVersion(String version) {
-                this.version = version;
-                return this;
             }
         }
     }
