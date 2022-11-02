@@ -14,7 +14,7 @@ import steps.data.users.UserInfoProvider;
 import storage.APIV1;
 import storage.USER;
 
-public class ProductCreateAndDeleteTest {
+public class ProductTest {
     Gson gson = new Gson();
 
     @Test

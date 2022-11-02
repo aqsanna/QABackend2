@@ -14,7 +14,7 @@ public enum USER {
     CATEGORY_ID("48343"),
     PRICE("7.3"),
     PRICE_UNITS("each"),
-    PASSWORD("123456");
+    PASSWORD("123456Ii");
 
     private final String user;
 
