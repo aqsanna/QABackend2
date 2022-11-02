@@ -1,6 +1,5 @@
 package requests;
 
-import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import lombok.With;
 
@@ -8,8 +7,6 @@ import java.io.Serializable;
 
 @With
 public class CreateProduct implements Serializable {
-    @SerializedName("params")
-    @Expose
     public Params params;
 
     public CreateProduct(Params params) {
@@ -27,9 +24,6 @@ public class CreateProduct implements Serializable {
         public Double price;
         @SerializedName("price_units")
         public String priceUnits;
-
-        public Params() {
-        }
 
         public Params(String name, String upc, String category_id, Double price, String price_units) {
             super();

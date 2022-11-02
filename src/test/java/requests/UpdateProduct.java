@@ -1,6 +1,5 @@
 package requests;
 
-import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import lombok.With;
 
@@ -8,9 +7,8 @@ import java.io.Serializable;
 
 @With
 public class UpdateProduct implements Serializable {
-    @SerializedName("params")
-    @Expose
     public Params params;
+
     public UpdateProduct(Params params) {
         super();
         this.params = params;
@@ -32,7 +30,7 @@ public class UpdateProduct implements Serializable {
         @SerializedName("quantity_in_pack")
         public Integer quantityInPack;
         @SerializedName("displayed_value_for_price")
-        public Integer displayed_value_for_price;
+        public Integer displayedValueForPrice;
         public String description;
         public String ingredients;
         @SerializedName("tag_ids")
@@ -44,8 +42,6 @@ public class UpdateProduct implements Serializable {
         @SerializedName("has_availability_schedule")
         public Boolean hasAvailabilitysSchedule;
 
-        public Params() {
-        }
 
         public Params(String name, String upc, String category_id, Double price, String price_units, Integer volume, String volume_units, Integer quantity_in_pack,
                       Integer displayed_value_for_price, String description, String ingredients, Integer tag_ids, Boolean is_foodstamp, Boolean is_shippable,
@@ -59,7 +55,7 @@ public class UpdateProduct implements Serializable {
             this.volume = volume;
             this.volumeUnits = volume_units;
             this.quantityInPack = quantity_in_pack;
-            this.displayed_value_for_price = displayed_value_for_price;
+            this.displayedValueForPrice = displayed_value_for_price;
             this.description = description;
             this.ingredients = ingredients;
             this.tagIds = tag_ids;
