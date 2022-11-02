@@ -29,6 +29,7 @@ public class UserInfoProvider {
             default -> null;
         };
     }
+
     public static AuthInfo getUserClient(USER email) {
         return switch (email) {
             case EMAIL_CLIENT -> new AuthInfo(
