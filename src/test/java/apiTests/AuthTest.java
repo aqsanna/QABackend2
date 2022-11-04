@@ -16,6 +16,7 @@ import static io.restassured.RestAssured.given;
 
 public class AuthTest {
     Gson gson = new Gson();
+
     @Test
     @DisplayName("Check success user login")
     public void successLoginTest() {
