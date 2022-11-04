@@ -1,7 +1,6 @@
 package Utile;
 
 import com.google.gson.annotations.SerializedName;
-import groovyjarjarantlr4.v4.runtime.atn.SemanticContext;
 import groovyjarjarantlr4.v4.runtime.misc.Nullable;
 
 import java.util.ArrayList;
@@ -175,7 +174,7 @@ public class Order {
         return this;
     }
 
-    public static class Transaction{
+    public static class Transaction {
         @SerializedName("id")
         public String id;
         @SerializedName("type")
@@ -284,7 +283,7 @@ public class Order {
             return this;
         }
 
-        public static class CardInfo{
+        public static class CardInfo {
             @SerializedName("cardType")
             public String cardType;
             @SerializedName("cardNumber")
@@ -308,7 +307,8 @@ public class Order {
                 return this;
             }
         }
-        public static class RelatedTransactions{
+
+        public static class RelatedTransactions {
             @SerializedName("id")
             public String id;
             @SerializedName("type")
@@ -411,7 +411,7 @@ public class Order {
                 return this;
             }
 
-            public static class CardInfo{
+            public static class CardInfo {
                 public String cardNumber;
 
                 public String getCardNumber() {
@@ -425,7 +425,8 @@ public class Order {
             }
         }
     }
-    public static class Dropoff{
+
+    public static class Dropoff {
         @SerializedName("period")
         public Period period;
         @SerializedName("person")
@@ -448,7 +449,8 @@ public class Order {
             this.person = person;
             return this;
         }
-        public static class Person{
+
+        public static class Person {
             @SerializedName("id")
             public String id;
             @SerializedName("first_name")
@@ -505,7 +507,8 @@ public class Order {
                 return this;
             }
         }
-        public static class Period{
+
+        public static class Period {
             @SerializedName("start")
             public String start;
             @SerializedName("end")
@@ -530,7 +533,8 @@ public class Order {
             }
         }
     }
-    public static class Payment{
+
+    public static class Payment {
         @SerializedName("type")
         public ArrayList<String> type;
         @SerializedName("tip")
@@ -619,7 +623,8 @@ public class Order {
             this.maximumExcessAmountPercent = maximumExcessAmountPercent;
             return this;
         }
-        public static class Bag{
+
+        public static class Bag {
             @SerializedName("qty")
             public int qty;
 
@@ -633,7 +638,8 @@ public class Order {
             }
         }
     }
-    public static class Delivery{
+
+    public static class Delivery {
         @SerializedName("driver")
         @Nullable
         public Driver driver;
@@ -805,7 +811,7 @@ public class Order {
             return this;
         }
 
-        public static class UserCar{
+        public static class UserCar {
             @SerializedName("car_model")
             @Nullable
             public String carModel;

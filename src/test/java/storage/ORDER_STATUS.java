@@ -1,9 +1,5 @@
 package storage;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Optional;
-
 public enum ORDER_STATUS {
     NEW("new"),
     ASSEMBLING("assembling"),
@@ -16,9 +12,11 @@ public enum ORDER_STATUS {
     CHECKED_BY_DRIVER("checked_by_driver"),
     ARRIVED("arrived"),
     SIGNED("signed");
-    private String orderStatus;
+    private final String orderStatus;
 
-    ORDER_STATUS(String orderStatus) {this.orderStatus = orderStatus; }
+    ORDER_STATUS(String orderStatus) {
+        this.orderStatus = orderStatus;
+    }
 
     public String getOrderStatus() {
         return orderStatus;

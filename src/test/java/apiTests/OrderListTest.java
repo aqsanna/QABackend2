@@ -23,7 +23,7 @@ public class OrderListTest {
             int offset = 0;
 
             while (!emptyData) {
-                PartnerOrders orderList = RestAssured.given().header(new Header("Authorization", "Bearer " + userInfoProvider.getToken())).queryParam("filter[status]", ORDER_STATUS.values()[i].getOrderStatus()).queryParam("limit", limit).queryParam("offset", offset).queryParam("sort", "asc").when().get(APIV1.STAGE.getApi() + APIV1.ORDERS.getApi()).then().extract().as(PartnerOrders.class);
+                PartnerOrders orderList = RestAssured.given().header(new Header("Authorization", "Bearer " + UserInfoProvider.getToken())).queryParam("filter[status]", ORDER_STATUS.values()[i].getOrderStatus()).queryParam("limit", limit).queryParam("offset", offset).queryParam("sort", "asc").when().get(APIV1.STAGE.getApi() + APIV1.ORDERS.getApi()).then().extract().as(PartnerOrders.class);
 
                 Assertions.assertEquals("success", orderList.getResult(), "Have a error: " + orderList.getResult());
                 Assertions.assertTrue(orderList.getError().isEmpty(), "Error messages: " + orderList.getError());
