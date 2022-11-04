@@ -28,7 +28,6 @@ public class CreateProduct implements Serializable {
         @Expose
         public String priceUnits;
 
-
         public Params(String name, String upc, String category_id, Double price, String price_units) {
             super();
             this.name = name;

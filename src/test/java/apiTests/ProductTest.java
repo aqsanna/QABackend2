@@ -42,6 +42,7 @@ public class ProductTest {
                 .delete(APIV1.STAGE.getApi() + APIV1.DELETE_PRODUCT_ID.getApi() + ProductInfoProvider.getProductId())
                 .then().log().all()
                 .extract().as(SuccessDeleteProduct.class);
+
         Assertions.assertEquals("success", deleteProductTest.getResult());
         Assertions.assertEquals(200, deleteProductTest.getCode());
         Assertions.assertTrue(deleteProductTest.isData());

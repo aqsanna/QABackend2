@@ -4,7 +4,6 @@ import com.google.gson.Gson;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.http.Header;
-import requests.AuthInfo;
 import requests.CreateProduct;
 import responses.product.SuccessCreateProduct;
 import storage.APIV1;
@@ -35,7 +34,6 @@ public class ProductInfoProvider {
 
     public static String getProductId() {
         Gson gson = new Gson();
-        AuthInfo authInfo = UserInfoProvider.getUser(USER.EMAIL_INFO);
         SuccessCreateProduct successCreateProduct = RestAssured.given()
                 .header(new Header("Authorization", "Bearer " + UserInfoProvider.getToken()))
                 .when()

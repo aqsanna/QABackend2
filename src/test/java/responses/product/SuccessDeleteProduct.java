@@ -13,5 +13,4 @@ public class SuccessDeleteProduct {
     private String error;
     @SerializedName("data")
     private boolean data;
-
 }
