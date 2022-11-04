@@ -1,6 +1,5 @@
 package apiTests;
 
-import Utile.Order;
 import io.restassured.RestAssured;
 import io.restassured.http.Header;
 import org.junit.jupiter.api.Assertions;
@@ -36,7 +35,7 @@ public class OrderTest {
                 Assertions.assertTrue(orderList.getError().isEmpty(), "Error messages: " + orderList.getError());
 
                 if (orderList.getData().size() > 0) {
-                    for (Order order : orderList.getData()) {
+                    for (PartnerOrders.Order order : orderList.getData()) {
 
                         try {
                             int id = Integer.parseInt(order.getId());
@@ -51,7 +50,7 @@ public class OrderTest {
                             Assertions.assertTrue(order.getPayment().getTotal() >= 0, "The order " + order.getId() + " total price is " + order.getPayment().getTotal());
                             Assertions.assertFalse(order.getDropoff().getPerson().getPhone().isEmpty(), "The order " + order.getId() + " phone is empty");
 
-                            for (Order.Transaction transaction : order.getTransactions()) {
+                            for (PartnerOrders.Order.Transaction transaction : order.getTransactions()) {
                                 if (transaction.getTransactionID() != null) {
                                     Assertions.assertFalse(transaction.getTransactionID().isEmpty(), "The order " + order.getId() + " transactionID is empty. Type is " + transaction.getType() + " id : " + transaction.getId());
                                 } else {
@@ -61,7 +60,6 @@ public class OrderTest {
                         } catch (AssertionError e) {
                             System.out.println(e.getMessage());
                         }
-
                     }
                     offset += limit;
                 } else {
