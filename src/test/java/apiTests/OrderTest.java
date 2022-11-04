@@ -11,7 +11,7 @@ import steps.data.users.UserInfoProvider;
 import storage.APIV1;
 import storage.OrderStatus;
 
-public class OrderListTest {
+public class OrderTest {
     UserInfoProvider userInfoProvider = new UserInfoProvider();
     @Test
     @DisplayName("Check partner order list")
