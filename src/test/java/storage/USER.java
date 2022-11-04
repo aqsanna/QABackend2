@@ -5,7 +5,6 @@ public enum USER {
 
     private final String user;
 
-
     USER(String user) {
         this.user = user;
     }
