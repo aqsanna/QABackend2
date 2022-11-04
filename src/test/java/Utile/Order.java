@@ -74,11 +74,6 @@ public class Order {
         this.creationDate = creationDate;
         return this;
     }
-
-    public String getModificationDate() {
-        return modificationDate;
-    }
-
     public Order withModificationDate(String modificationDate) {
         this.modificationDate = modificationDate;
         return this;
@@ -102,26 +97,14 @@ public class Order {
         return this;
     }
 
-    public String getType() {
-        return type;
-    }
-
     public Order withType(String type) {
         this.type = type;
         return this;
     }
 
-    public String getDisplayType() {
-        return displayType;
-    }
-
     public Order withDisplayType(String displayType) {
         this.displayType = displayType;
         return this;
-    }
-
-    public String getDeliveryTariff() {
-        return deliveryTariff;
     }
 
     public Order withDeliveryTariff(String deliveryTariff) {
@@ -138,17 +121,9 @@ public class Order {
         return this;
     }
 
-    public int getOrderItemsCount() {
-        return orderItemsCount;
-    }
-
     public Order withOrderItemsCount(int orderItemsCount) {
         this.orderItemsCount = orderItemsCount;
         return this;
-    }
-
-    public ClientCurbsidePickupInfo getClientCurbsidePickupInfo() {
-        return clientCurbsidePickupInfo;
     }
 
     public Order withClientCurbsidePickupInfo(ClientCurbsidePickupInfo clientCurbsidePickupInfo) {
@@ -163,10 +138,6 @@ public class Order {
     public Order withTransactions(ArrayList<Transaction> transactions) {
         this.transactions = transactions;
         return this;
-    }
-
-    public Delivery getDelivery() {
-        return delivery;
     }
 
     public Order withDelivery(Delivery delivery) {
@@ -215,10 +186,6 @@ public class Order {
             return this;
         }
 
-        public String getIcon() {
-            return icon;
-        }
-
         public Transaction withIcon(String icon) {
             this.icon = icon;
             return this;
@@ -229,17 +196,9 @@ public class Order {
             return this;
         }
 
-        public ArrayList<String> getDescription() {
-            return description;
-        }
-
         public Transaction withDescription(ArrayList<String> description) {
             this.description = description;
             return this;
-        }
-
-        public String getAmount() {
-            return amount;
         }
 
         public Transaction withAmount(String amount) {
@@ -265,17 +224,9 @@ public class Order {
             return this;
         }
 
-        public ArrayList<RelatedTransactions> getRelatedTransactions() {
-            return relatedTransactions;
-        }
-
         public Transaction withRelatedTransactions(ArrayList<RelatedTransactions> relatedTransactions) {
             this.relatedTransactions = relatedTransactions;
             return this;
-        }
-
-        public String getRefundErrorMessage() {
-            return refundErrorMessage;
         }
 
         public Transaction withRefundErrorMessage(String refundErrorMessage) {
@@ -289,17 +240,9 @@ public class Order {
             @SerializedName("cardNumber")
             public String cardNumber;
 
-            public String getCardType() {
-                return cardType;
-            }
-
             public CardInfo withCardType(String cardType) {
                 this.cardType = cardType;
                 return this;
-            }
-
-            public String getCardNumber() {
-                return cardNumber;
             }
 
             public CardInfo withCardNumber(String cardNumber) {
@@ -330,17 +273,9 @@ public class Order {
             @SerializedName("refundErrorMessage")
             public String refundErrorMessage;
 
-            public String getId() {
-                return id;
-            }
-
             public RelatedTransactions withId(String id) {
                 this.id = id;
                 return this;
-            }
-
-            public String getType() {
-                return type;
             }
 
             public RelatedTransactions withType(String type) {
@@ -348,26 +283,15 @@ public class Order {
                 return this;
             }
 
-            public String getIcon() {
-                return icon;
-            }
-
             public RelatedTransactions withIcon(String icon) {
                 this.icon = icon;
                 return this;
             }
 
-            public Object getCardInfo() {
-                return cardInfo;
-            }
 
             public RelatedTransactions withCardInfo(Object cardInfo) {
                 this.cardInfo = cardInfo;
                 return this;
-            }
-
-            public ArrayList<String> getDescription() {
-                return description;
             }
 
             public RelatedTransactions withDescription(ArrayList<String> description) {
@@ -375,17 +299,9 @@ public class Order {
                 return this;
             }
 
-            public String getAmount() {
-                return amount;
-            }
-
             public RelatedTransactions withAmount(String amount) {
                 this.amount = amount;
                 return this;
-            }
-
-            public Object getRefundReason() {
-                return refundReason;
             }
 
             public RelatedTransactions withRefundReason(Object refundReason) {
@@ -393,17 +309,9 @@ public class Order {
                 return this;
             }
 
-            public String getTransactionID() {
-                return transactionID;
-            }
-
             public RelatedTransactions withTransactionID(String transactionID) {
                 this.transactionID = transactionID;
                 return this;
-            }
-
-            public String getRefundErrorMessage() {
-                return refundErrorMessage;
             }
 
             public RelatedTransactions withRefundErrorMessage(String refundErrorMessage) {
@@ -413,10 +321,6 @@ public class Order {
 
             public static class CardInfo {
                 public String cardNumber;
-
-                public String getCardNumber() {
-                    return cardNumber;
-                }
 
                 public CardInfo withCardNumber(String cardNumber) {
                     this.cardNumber = cardNumber;
@@ -431,10 +335,6 @@ public class Order {
         public Period period;
         @SerializedName("person")
         public Person person;
-
-        public Period getPeriod() {
-            return period;
-        }
 
         public Dropoff withPeriod(Period period) {
             this.period = period;
@@ -462,10 +362,6 @@ public class Order {
             @SerializedName("membership_id")
             public String membershipId;
 
-            public String getId() {
-                return id;
-            }
-
             public Person withId(String id) {
                 this.id = id;
                 return this;
@@ -478,10 +374,6 @@ public class Order {
             public Person withFirstName(String firstName) {
                 this.firstName = firstName;
                 return this;
-            }
-
-            public String getLastName() {
-                return lastName;
             }
 
             public Person withLastName(String lastName) {
@@ -498,10 +390,6 @@ public class Order {
                 return this;
             }
 
-            public String getMembershipId() {
-                return membershipId;
-            }
-
             public Person withMembershipId(String membershipId) {
                 this.membershipId = membershipId;
                 return this;
@@ -514,17 +402,9 @@ public class Order {
             @SerializedName("end")
             public String end;
 
-            public String getStart() {
-                return start;
-            }
-
             public Period withStart(String start) {
                 this.start = start;
                 return this;
-            }
-
-            public String getEnd() {
-                return end;
             }
 
             public Period withEnd(String end) {
@@ -552,17 +432,9 @@ public class Order {
         @SerializedName("maximum_excess_amount_percent")
         public int maximumExcessAmountPercent;
 
-        public ArrayList<String> getType() {
-            return type;
-        }
-
         public Payment withType(ArrayList<String> type) {
             this.type = type;
             return this;
-        }
-
-        public float getTip() {
-            return tip;
         }
 
         public Payment withTip(int tip) {
@@ -579,17 +451,9 @@ public class Order {
             return this;
         }
 
-        public String getCurrency() {
-            return currency;
-        }
-
         public Payment withCurrency(String currency) {
             this.currency = currency;
             return this;
-        }
-
-        public String getCurrencySymbol() {
-            return currencySymbol;
         }
 
         public Payment withCurrencySymbol(String currencySymbol) {
@@ -597,26 +461,14 @@ public class Order {
             return this;
         }
 
-        public Bag getBag() {
-            return bag;
-        }
-
         public Payment withBag(Bag bag) {
             this.bag = bag;
             return this;
         }
 
-        public int getAdditionalFreezePercent() {
-            return additionalFreezePercent;
-        }
-
         public Payment withAdditionalFreezePercent(int additionalFreezePercent) {
             this.additionalFreezePercent = additionalFreezePercent;
             return this;
-        }
-
-        public int getMaximumExcessAmountPercent() {
-            return maximumExcessAmountPercent;
         }
 
         public Payment withMaximumExcessAmountPercent(int maximumExcessAmountPercent) {
@@ -627,10 +479,6 @@ public class Order {
         public static class Bag {
             @SerializedName("qty")
             public int qty;
-
-            public int getQty() {
-                return qty;
-            }
 
             public Bag withQty(int qty) {
                 this.qty = qty;
@@ -650,26 +498,14 @@ public class Order {
         @Nullable
         public String deliveredAt;
 
-        public Driver getDriver() {
-            return driver;
-        }
-
         public Delivery withDriver(Driver driver) {
             this.driver = driver;
             return this;
         }
 
-        public String getAcceptedAt() {
-            return acceptedAt;
-        }
-
         public Delivery withAcceptedAt(String acceptedAt) {
             this.acceptedAt = acceptedAt;
             return this;
-        }
-
-        public String getDeliveredAt() {
-            return deliveredAt;
         }
 
         public Delivery withDeliveredAt(String deliveredAt) {
@@ -690,17 +526,9 @@ public class Order {
             @Nullable
             public Object car;
 
-            public String getId() {
-                return id;
-            }
-
             public Driver withId(String id) {
                 this.id = id;
                 return this;
-            }
-
-            public String getFirstName() {
-                return firstName;
             }
 
             public Driver withFirstName(String firstName) {
@@ -708,26 +536,14 @@ public class Order {
                 return this;
             }
 
-            public String getLastName() {
-                return lastName;
-            }
-
             public Driver withLastName(String lastName) {
                 this.lastName = lastName;
                 return this;
             }
 
-            public String getPhone() {
-                return phone;
-            }
-
             public Driver withPhone(String phone) {
                 this.phone = phone;
                 return this;
-            }
-
-            public Object getCar() {
-                return car;
             }
 
             public Driver withCar(Object car) {
@@ -757,17 +573,9 @@ public class Order {
         @Nullable
         public UserCar userCar;
 
-        public String getNotes() {
-            return notes;
-        }
-
         public ClientCurbsidePickupInfo withNotes(String notes) {
             this.notes = notes;
             return this;
-        }
-
-        public String getCarBrand() {
-            return carBrand;
         }
 
         public ClientCurbsidePickupInfo withCarBrand(String carBrand) {
@@ -775,17 +583,9 @@ public class Order {
             return this;
         }
 
-        public String getCarModel() {
-            return carModel;
-        }
-
         public ClientCurbsidePickupInfo withCarModel(String carModel) {
             this.carModel = carModel;
             return this;
-        }
-
-        public String getCarColor() {
-            return carColor;
         }
 
         public ClientCurbsidePickupInfo withCarColor(String carColor) {
@@ -793,17 +593,9 @@ public class Order {
             return this;
         }
 
-        public String getPlateNumber() {
-            return plateNumber;
-        }
-
         public ClientCurbsidePickupInfo withPlate_number(String plateNumber) {
             this.plateNumber = plateNumber;
             return this;
-        }
-
-        public UserCar getUserCar() {
-            return userCar;
         }
 
         public ClientCurbsidePickupInfo withUserCar(UserCar userCar) {
@@ -825,17 +617,9 @@ public class Order {
             @Nullable
             public String plateNumber;
 
-            public String getCarModel() {
-                return carModel;
-            }
-
             public UserCar withCarModel(String carModel) {
                 this.carModel = carModel;
                 return this;
-            }
-
-            public String getCarBrand() {
-                return carBrand;
             }
 
             public UserCar withCarBrand(String carBrand) {
@@ -843,17 +627,9 @@ public class Order {
                 return this;
             }
 
-            public String getCarColor() {
-                return carColor;
-            }
-
             public UserCar withCarColor(String carColor) {
                 this.carColor = carColor;
                 return this;
-            }
-
-            public String getPlateNumber() {
-                return plateNumber;
             }
 
             public UserCar withPlateNumber(String plateNumber) {

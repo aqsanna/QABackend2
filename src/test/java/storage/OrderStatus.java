@@ -1,6 +1,6 @@
 package storage;
 
-public enum ORDER_STATUS {
+public enum OrderStatus {
     NEW("new"),
     ASSEMBLING("assembling"),
     ASSEMBLED("assembled"),
@@ -14,9 +14,7 @@ public enum ORDER_STATUS {
     SIGNED("signed");
     private final String orderStatus;
 
-    ORDER_STATUS(String orderStatus) {
-        this.orderStatus = orderStatus;
-    }
+    OrderStatus(String orderStatus) {this.orderStatus = orderStatus; }
 
     public String getOrderStatus() {
         return orderStatus;

@@ -9,22 +9,29 @@ import org.junit.jupiter.api.Test;
 import responses.partner.orders.PartnerOrders;
 import steps.data.users.UserInfoProvider;
 import storage.APIV1;
-import storage.ORDER_STATUS;
+import storage.OrderStatus;
 
 public class OrderListTest {
     UserInfoProvider userInfoProvider = new UserInfoProvider();
-
     @Test
     @DisplayName("Check partner order list")
-    public void orderListTest() {
-        for (int i = 0; i < ORDER_STATUS.values().length; i++) {
+    public void orderListTest(){
+        for (int i = 0; i < OrderStatus.values().length; i++) {
             boolean emptyData = false;
             int limit = 20;
             int offset = 0;
 
             while (!emptyData) {
-                PartnerOrders orderList = RestAssured.given().header(new Header("Authorization", "Bearer " + UserInfoProvider.getToken())).queryParam("filter[status]", ORDER_STATUS.values()[i].getOrderStatus()).queryParam("limit", limit).queryParam("offset", offset).queryParam("sort", "asc").when().get(APIV1.STAGE.getApi() + APIV1.ORDERS.getApi()).then().extract().as(PartnerOrders.class);
-
+                PartnerOrders orderList = RestAssured.given()
+                        .header(new Header("Authorization", "Bearer " + userInfoProvider.getToken()))
+                        .queryParam("filter[status]", OrderStatus.values()[i].getOrderStatus())
+                        .queryParam("limit", limit)
+                        .queryParam("offset", offset)
+                        .queryParam("sort", "asc")
+                        .when()
+                        .get(APIV1.STAGE.getApi() + APIV1.ORDERS.getApi())
+                        .then()
+                        .extract().as(PartnerOrders.class);
                 Assertions.assertEquals("success", orderList.getResult(), "Have a error: " + orderList.getResult());
                 Assertions.assertTrue(orderList.getError().isEmpty(), "Error messages: " + orderList.getError());
 
@@ -38,7 +45,7 @@ public class OrderListTest {
                         }
 
                         try {
-                            Assertions.assertEquals(ORDER_STATUS.values()[i].getOrderStatus(), order.getStatus(), "The order " + order.getId() + " actual status: " + order.getStatus() + " Expected status: " + ORDER_STATUS.values()[i].getOrderStatus());
+                            Assertions.assertEquals(OrderStatus.values()[i].getOrderStatus(), order.getStatus(), "The order " +order.getId()+ " actual status: " + order.getStatus() + " Expected status: " + OrderStatus.values()[i].getOrderStatus());
                             Assertions.assertFalse(order.getCreationDate().isEmpty(), "The order " + order.getId() + " creation date is empty");
                             Assertions.assertFalse(order.getDropoff().getPerson().getFirstName().isEmpty(), "The order " + order.getId() + " first name is empty");
                             Assertions.assertTrue(order.getPayment().getTotal() >= 0, "The order " + order.getId() + " total price is " + order.getPayment().getTotal());
@@ -54,6 +61,7 @@ public class OrderListTest {
                         } catch (AssertionError e) {
                             System.out.println(e.getMessage());
                         }
+
                     }
                     offset += limit;
                 } else {

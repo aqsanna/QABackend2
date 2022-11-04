@@ -17,10 +17,6 @@ public class PartnerOrders {
     @SerializedName("last_order_date")
     private String lastOrderDate;
 
-    public Integer getCode() {
-        return code;
-    }
-
     public PartnerOrders withCode(Integer code) {
         this.code = code;
         return this;
@@ -52,11 +48,6 @@ public class PartnerOrders {
         this.data = data;
         return this;
     }
-
-    public String getLastOrderDate() {
-        return lastOrderDate;
-    }
-
     public PartnerOrders withLastOrderDate(String lastOrderDate) {
         this.lastOrderDate = lastOrderDate;
         return this;
