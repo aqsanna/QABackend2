@@ -25,7 +25,7 @@ public class ProductTest {
                 .when()
                 .contentType(ContentType.JSON)
                 .body(gson.toJson(ProductInfoProvider.getProduct(USER.EMAIL_INFO)))
-                .post(APIV1.STAGE.getApi() + APIV1.CREATEPRODUCT.getApi())
+                .post(APIV1.STAGE.getApi() + APIV1.CREATE_PRODUCT.getApi())
                 .then().log().all()
                 .extract().as(SuccessCreateProduct.class);
 

@@ -28,7 +28,7 @@ public class UpdateProductTest {
                 .when()
                 .contentType(ContentType.JSON)
                 .body(gson.toJson(ProductInfoProvider.updProduct(USER.EMAIL_INFO)))
-                .put(APIV1.STAGE.getApi() + APIV1.UPDATEPRODUCT.getApi() + ProductInfoProvider.getProductId())
+                .put(APIV1.STAGE.getApi() + APIV1.UPDATE_PRODUCT.getApi() + ProductInfoProvider.getProductId())
                 .then().log().all()
                 .extract().as(SuccessUpdateProduct.class);
 

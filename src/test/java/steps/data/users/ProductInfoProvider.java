@@ -4,7 +4,6 @@ import com.google.gson.Gson;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.http.Header;
-import requests.AuthInfo;
 import requests.CreateProduct;
 import requests.UpdateProduct;
 import responses.product.SuccessCreateProduct;
@@ -65,7 +64,7 @@ public class ProductInfoProvider {
                 .when()
                 .contentType(ContentType.JSON)
                 .body(gson.toJson(getProduct(USER.EMAIL_INFO)))
-                .post(APIV1.STAGE.getApi() + APIV1.CREATEPRODUCT.getApi())
+                .post(APIV1.STAGE.getApi() + APIV1.CREATE_PRODUCT.getApi())
                 .then().log().all()
                 .extract().as(SuccessCreateProduct.class);
         return successCreateProduct.getData();
