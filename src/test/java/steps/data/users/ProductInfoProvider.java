@@ -51,12 +51,6 @@ public class ProductInfoProvider {
         };
     }
 
-    public static String random() {
-        Random ran = new Random();
-        int x = ran.nextInt(999999999);
-        return Integer.toString(x);
-    }
-
     public static String getProductId() {
         Gson gson = new Gson();
         SuccessCreateProduct successCreateProduct = RestAssured.given()
@@ -68,5 +62,11 @@ public class ProductInfoProvider {
                 .then().log().all()
                 .extract().as(SuccessCreateProduct.class);
         return successCreateProduct.getData();
+    }
+
+    public static String random() {
+        Random ran = new Random();
+        int x = ran.nextInt(999999999);
+        return Integer.toString(x);
     }
 }
