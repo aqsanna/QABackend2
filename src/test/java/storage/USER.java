@@ -14,6 +14,16 @@ public enum USER {
     CATEGORY_ID("48343"),
     PRICE("7.3"),
     PRICE_UNITS("each"),
+    VOLUME("20"),
+    VOLUME_UNITS("lb"),
+    QUANTITY_IN_PACK("10"),
+    DISPLAYED_VALUE_FOR_PRICE("8"),
+    DESCRIPTION("test text description"),
+    INGREDIENTS("text ingredients"),
+    TAG_IDS("144"),
+    IS_FOODSTAMP("true"),
+    IS_SHIPPABLE("true"),
+    HAS_AVAILABILITY_SCHEDULE("false"),
     PASSWORD("123456Ii");
 
     private final String user;
