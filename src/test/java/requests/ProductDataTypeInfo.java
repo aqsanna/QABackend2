@@ -6,7 +6,7 @@ import lombok.Getter;
 @Getter
 public class ProductDataTypeInfo {
     @SerializedName("id")
-    public String id;
+    public String Id;
     @SerializedName("name")
     public String name;
 }
