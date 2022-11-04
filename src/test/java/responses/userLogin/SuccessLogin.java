@@ -7,7 +7,6 @@ import java.util.List;
 
 @Getter
 public class SuccessLogin {
-
     @SerializedName("code")
     private Integer code;
     @SerializedName("result")

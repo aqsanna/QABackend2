@@ -51,7 +51,6 @@ public class UserInfoProvider {
 
     public static String getToken() {
         Gson gson = new Gson();
-
         AuthInfo authInfo = UserInfoProvider.getUser(USER.EMAIL_INFO);
 
         SuccessLogin login = given()
