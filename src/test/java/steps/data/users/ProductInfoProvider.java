@@ -60,7 +60,6 @@ public class ProductInfoProvider {
 
     public static String getProductId() {
         Gson gson = new Gson();
-        AuthInfo authInfo = UserInfoProvider.getUser(USER.EMAIL_INFO);
         SuccessCreateProduct successCreateProduct = RestAssured.given()
                 .header(new Header("Authorization", "Bearer " + UserInfoProvider.getToken()))
                 .when()

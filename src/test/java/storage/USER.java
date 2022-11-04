@@ -10,6 +10,10 @@ public enum USER {
     PUSH_TOKEN("f8EbEjHLT0RGqX1jnJGxRj:APA91bHlnkZAGhcjNzfAuJ-ZB7A8-u3K5-lG-dQXfW3gT8A-d-KTmEap1lNHvd7B1wuhc8vVR0IqIKVH5zH3HfsbvfL5F9SCPnrUJfV24lKWJLz997zZv5ba5ksDhiL0DbuyM_PemsJr"),
     APPLICATION_KEY("partnersapp2031f94af9829c64d321d3a210acaad611f76e072ba21a8a6bebb"),
     NAME("Test-CreateProduct Name"),
+    UPC("351578977348"),
+    CATEGORY_ID("48343"),
+    PRICE("7.3"),
+    PRICE_UNITS("each"),
     CATEGORY_ID("48343"),
     PRICE("7.3"),
     PRICE_UNITS("each"),
@@ -26,6 +30,7 @@ public enum USER {
     PASSWORD("123456Ii");
 
     private final String user;
+
 
     USER(String user) {
         this.user = user;
