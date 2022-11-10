@@ -11,7 +11,9 @@ public enum APIV1 {
     CLOUD_PRINT("https://api.localexpress.io/rest/v2/cloud-printer/kiosk/3915408"),
     CREATE_PRODUCT("rest/v1/partner/stores/87/products"),
     DELETE_PRODUCT_ID("rest/v1/partner/stores/87/products/"),
-    UPDATE_PRODUCT("rest/v1/partner/stores/87/products/");
+    UPDATE_PRODUCT("rest/v1/partner/stores/87/products/"),
+    ORDERS("rest/v1/partner/stores/87/orders"),
+    STORES_LIST("rest/v1/partner/stores");
 
     private final String api;
 
