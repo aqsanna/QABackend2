@@ -13,7 +13,7 @@ public class CloudPrinterTest {
     public void successCloudPrinterTest() {
 
         CloudPrinter cloudPrinter = RestAssured.given()
-                .get(APIV1.CLOUDPRINT.getApi())
+                .get(APIV1.CLOUD_PRINT.getApi())
                 .then().log().all()
                 .extract().as(CloudPrinter.class);
 
