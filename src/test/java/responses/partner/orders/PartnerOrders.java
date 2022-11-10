@@ -146,7 +146,7 @@ public class PartnerOrders {
                 public String end;
             }
         }
-        
+
         @Getter
         public static class Payment {
             @SerializedName("type")
