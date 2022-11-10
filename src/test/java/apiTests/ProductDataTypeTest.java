@@ -1,6 +1,5 @@
 package apiTests;
 
-
 import io.restassured.http.Header;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -9,7 +8,7 @@ import requests.ProductDataTypeInfo;
 import responses.ProductDataType;
 import steps.data.users.UserInfoProvider;
 import storage.APIV1;
-import storage.ProductDataTypeEnum;
+import storage.PRODUCTDATATYPEENUM;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +23,7 @@ public class ProductDataTypeTest {
 
         ProductDataType productDataType = given()
                 .header(new Header("Authorization", "Bearer " + UserInfoProvider.getToken()))
-                .get(APIV1.STAGE.getApi() + APIV1.PRODUCTDATATYPE.getApi())
+                .get(APIV1.STAGE.getApi() + APIV1.PRODUCT_DATA_TYPE.getApi())
                 .then().log().all()
                 .extract().as(ProductDataType.class);
 
@@ -32,7 +31,7 @@ public class ProductDataTypeTest {
         Assertions.assertEquals("", productDataType.getError());
         Assertions.assertEquals(200, productDataType.getCode());
 
-        List<String> expectedList = ProductDataTypeEnum.getType();
+        List<String> expectedList = PRODUCTDATATYPEENUM.getType();
         List<String> actualList = new ArrayList<String>();
 
         for (ProductDataTypeInfo data : productDataType.getData()) {
@@ -40,5 +39,6 @@ public class ProductDataTypeTest {
             actualList.add(data.getName());
         }
          Assertions.assertTrue(actualList.containsAll(expectedList), "expected list isn't correct");
+         Assertions.assertEquals(actualList.size(), expectedList.size());
     }
 }

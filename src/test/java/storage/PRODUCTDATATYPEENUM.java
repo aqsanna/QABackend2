@@ -3,26 +3,27 @@ package storage;
 import java.util.ArrayList;
 import java.util.List;
 
-public enum ProductDataTypeEnum {
+public enum PRODUCTDATATYPEENUM {
     ID("name"),
     ID1("category"),
     ID2("price"),
     ID3("displayed_value_for_price"),
     ID4("price_unit"),
-    ID5("images"),
-    ID6("taxes"),
-    ID7("sales"),
-    ID8("tags"),
-    ID9("info"),
-    ID10("barcode"),
-    ID11("upc"),
-    ID12("availability"),
-    ID13("in_stock"),
-    ID14("inventory"),
-    ID15("modifications"),
-    ID16("shipping_data"),
-    ID17("store_product_mapping"),
-    ID18("qty_in_pack"),
+    ID5("volume"),
+    ID6("images"),
+    ID7("taxes"),
+    ID8("sales"),
+    ID9("tags"),
+    ID10("info"),
+    ID11("barcode"),
+    ID12("upc"),
+    ID13("availability"),
+    ID14("in_stock"),
+    ID15("inventory"),
+    ID16("modifications"),
+    ID17("shipping_data"),
+    ID18("store_product_mapping"),
+    ID19("qty_in_pack"),
     NAME("Name"),
     NAME1("Category/Department"),
     NAME2("Price"),
@@ -44,10 +45,8 @@ public enum ProductDataTypeEnum {
     NAME18("Product Mapping"),
     NAME19("Quantity in Pack");
 
-
-
     private final String datatype;
-    ProductDataTypeEnum(String datatype) {
+    PRODUCTDATATYPEENUM(String datatype) {
         this.datatype = datatype;
     }
 
@@ -61,7 +60,7 @@ public enum ProductDataTypeEnum {
     }
     public static List<String> getType(){
         List<String> listType = new ArrayList<String>();
-        for(ProductDataTypeEnum l : ProductDataTypeEnum.values()){
+        for(PRODUCTDATATYPEENUM l : PRODUCTDATATYPEENUM.values()){
             listType.add(l.getProductDataType());
         }
         return listType;
