@@ -12,9 +12,10 @@ import storage.OrderStatus;
 
 public class OrderTest {
     UserInfoProvider userInfoProvider = new UserInfoProvider();
+
     @Test
     @DisplayName("Check partner order list")
-    public void orderListTest(){
+    public void orderListTest() {
         for (int i = 0; i < OrderStatus.values().length; i++) {
             boolean emptyData = false;
             int limit = 20;
@@ -22,7 +23,7 @@ public class OrderTest {
 
             while (!emptyData) {
                 PartnerOrders orderList = RestAssured.given()
-                        .header(new Header("Authorization", "Bearer " + userInfoProvider.getToken()))
+                        .header(new Header("Authorization", "Bearer " + UserInfoProvider.getToken()))
                         .queryParam("filter[status]", OrderStatus.values()[i].getOrderStatus())
                         .queryParam("limit", limit)
                         .queryParam("offset", offset)
@@ -44,7 +45,7 @@ public class OrderTest {
                         }
 
                         try {
-                            Assertions.assertEquals(OrderStatus.values()[i].getOrderStatus(), order.getStatus(), "The order " +order.getId()+ " actual status: " + order.getStatus() + " Expected status: " + OrderStatus.values()[i].getOrderStatus());
+                            Assertions.assertEquals(OrderStatus.values()[i].getOrderStatus(), order.getStatus(), "The order " + order.getId() + " actual status: " + order.getStatus() + " Expected status: " + OrderStatus.values()[i].getOrderStatus());
                             Assertions.assertFalse(order.getCreationDate().isEmpty(), "The order " + order.getId() + " creation date is empty");
                             Assertions.assertFalse(order.getDropoff().getPerson().getFirstName().isEmpty(), "The order " + order.getId() + " first name is empty");
                             Assertions.assertTrue(order.getPayment().getTotal() >= 0, "The order " + order.getId() + " total price is " + order.getPayment().getTotal());

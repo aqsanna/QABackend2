@@ -14,7 +14,9 @@ public enum OrderStatus {
     SIGNED("signed");
     private final String orderStatus;
 
-    OrderStatus(String orderStatus) {this.orderStatus = orderStatus; }
+    OrderStatus(String orderStatus) {
+        this.orderStatus = orderStatus;
+    }
 
     public String getOrderStatus() {
         return orderStatus;

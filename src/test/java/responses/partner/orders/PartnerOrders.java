@@ -5,6 +5,7 @@ import groovyjarjarantlr4.v4.runtime.misc.Nullable;
 import lombok.Getter;
 
 import java.util.ArrayList;
+
 @Getter
 public class PartnerOrders {
     @SerializedName("code")
@@ -17,6 +18,7 @@ public class PartnerOrders {
     private ArrayList<Order> data;
     @SerializedName("last_order_date")
     private String lastOrderDate;
+
     @Getter
     public static class Order {
         @SerializedName("id")
@@ -51,6 +53,7 @@ public class PartnerOrders {
         @SerializedName("delivery")
         @Nullable
         public Delivery delivery;
+
         @Getter
         public static class Transaction {
             @SerializedName("id")
@@ -110,6 +113,7 @@ public class PartnerOrders {
                 }
             }
         }
+
         @Getter
         public static class Dropoff {
             @SerializedName("period")
@@ -120,6 +124,7 @@ public class PartnerOrders {
             public Person getPerson() {
                 return person;
             }
+
             @Getter
             public static class Person {
                 @SerializedName("id")
@@ -141,6 +146,7 @@ public class PartnerOrders {
                 public String end;
             }
         }
+        
         @Getter
         public static class Payment {
             @SerializedName("type")
