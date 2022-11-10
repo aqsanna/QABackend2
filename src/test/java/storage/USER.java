@@ -12,7 +12,22 @@ public enum USER {
     APPLICATION_KEY("partnersapp2031f94af9829c64d321d3a210acaad611f76e072ba21a8a6bebb"),
     APPLICATION_CLIENT("yourgrocerystore6aKp9IXiKEIhEByJkMsZ4d65eKi2h8rO56JZYd9RcQKwmWrr"),
     PASSWORD_CLIENT("Local@123"),
-    PASSWORD("123456Ii");
+    PASSWORD("123456Ii"),
+    NAME("Test-CreateProduct Name"),
+    UPC("351578977348"),
+    CATEGORY_ID("48343"),
+    PRICE("7.3"),
+    PRICE_UNITS("each"),
+    VOLUME("20"),
+    VOLUME_UNITS("lb"),
+    QUANTITY_IN_PACK("10"),
+    DISPLAYED_VALUE_FOR_PRICE("8"),
+    DESCRIPTION("test text description"),
+    INGREDIENTS("text ingredients"),
+    TAG_IDS("144"),
+    IS_FOODSTAMP("true"),
+    IS_SHIPPABLE("true"),
+    HAS_AVAILABILITY_SCHEDULE("false");
 
     private final String user;
 
