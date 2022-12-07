@@ -41,7 +41,7 @@ public class CollectingOrderTest {
         }
 
 
-        System.out.println(orderId);
+        System.out.println(orderId + "as");
         Order order = RestAssured.given()
                 .header(new Header("Authorization", "Bearer " + UserInfoProvider.getToken()))
                 .when()
