@@ -13,7 +13,9 @@ public enum APIV1 {
     DELETE_PRODUCT_ID("rest/v1/partner/stores/87/products/"),
     UPDATE_PRODUCT("rest/v1/partner/stores/87/products/"),
     ORDERS("rest/v1/partner/stores/87/orders"),
-    STORES_LIST("rest/v1/partner/stores");
+    STORES_LIST("rest/v1/partner/stores"),
+    ORDERS_TO("rest/v1/partner/orders/"),
+    CONFIRM("/confirm");
 
     private final String api;
 
