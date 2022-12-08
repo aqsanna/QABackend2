@@ -5,16 +5,16 @@ import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.http.Header;
 import org.junit.jupiter.api.Assertions;
-import requests.AddPack;
-import requests.CollectOrderProduct;
-import requests.OrderConfirm;
-import requests.OrderStart;
+import requests.order.*;
+import responses.pack.AddPackLocation;
 import responses.pack.AddPacksToOrder;
 import responses.partner.orders.Order;
 import responses.partner.orders.PartnerOrders;
 import steps.data.users.UserInfoProvider;
 import storage.APIV1;
 import storage.APIV2;
+
+import java.util.ArrayList;
 
 public class OrderUtils {
     Gson gson = new Gson();
@@ -88,7 +88,7 @@ public class OrderUtils {
         Assertions.assertTrue(order.getError().isEmpty(), "Error messages: " + order.getError());
         return order;
     }
-    public AddPacksToOrder postAddPacksToOrder(String orderId, AddPack data){
+    public AddPacksToOrder postAddPacksToOrder(String orderId, ArrayList<AddPack> data){
         AddPacksToOrder order = RestAssured.given()
                 .header(new Header("Authorization", "Bearer " + UserInfoProvider.getToken()))
                 .when()
@@ -99,5 +99,33 @@ public class OrderUtils {
                 .extract().as(AddPacksToOrder.class);
         Assertions.assertEquals("OK", order.getCode(), "Have a error: " + order.getMessage());
         return order;
+    }
+
+    public Order postFinishOrder(String orderId, OrderConfirm data){
+        Order finishOrder = RestAssured.given()
+                .header(new Header("Authorization", "Bearer " + UserInfoProvider.getToken()))
+                .when()
+                .contentType(ContentType.JSON)
+                .body(gson.toJson(data))
+                .post(APIV1.STAGE.getApi() + APIV1.ORDERS_TO.getApi() + orderId + APIV1.FINISH.getApi())
+                .then()
+                .extract().as(Order.class);
+        Assertions.assertEquals("success", finishOrder.getResult(), "Have a error: " + finishOrder.getResult());
+        Assertions.assertTrue(finishOrder.getError().isEmpty(), "Error messages: " + finishOrder.getError());
+        Assertions.assertEquals(orderId, finishOrder.getData().getId(), "Confirm order: The order ids are not equal");
+        return finishOrder;
+    }
+
+    public AddPackLocation postAddPackLocation(String orderId, ArrayList<PackLocation> data){
+        AddPackLocation location = RestAssured.given()
+                .header(new Header("Authorization", "Bearer " + UserInfoProvider.getToken()))
+                .when()
+                .contentType(ContentType.JSON)
+                .body(gson.toJson(data.toArray()))
+                .post(APIV1.STAGE.getApi() + APIV2.PACK_LOCATION_URL.getApi() + orderId + APIV2.PACK_LOCATION.getApi())
+                .then()
+                .extract().as(AddPackLocation.class);
+        Assertions.assertEquals("OK", location.getCode(), "Have a error: " + location.getMessage());
+        return location;
     }
 }

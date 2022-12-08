@@ -39,7 +39,7 @@ public class UserInfoProvider {
                 .contentType(ContentType.JSON)
                 .body(gson.toJson(authInfo))
                 .post(APIV1.STAGE.getApi() + APIV1.REGISTER.getApi())
-                .then().log().all()
+                .then()
                 .extract().as(SuccessLogin.class);
         return login.getData().getToken();
     }

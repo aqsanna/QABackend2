@@ -1,8 +1,8 @@
 package steps.data.order;
 
-import requests.CollectOrderProduct;
-import requests.OrderConfirm;
-import requests.OrderStart;
+import requests.order.CollectOrderProduct;
+import requests.order.OrderConfirm;
+import requests.order.OrderStart;
 import storage.CollectingOrderValues;
 import storage.USER;
 

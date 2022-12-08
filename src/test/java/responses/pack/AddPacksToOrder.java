@@ -1,6 +1,7 @@
 package responses.pack;
 
 import com.google.gson.annotations.SerializedName;
+import groovyjarjarantlr4.v4.runtime.misc.Nullable;
 import lombok.Getter;
 
 import java.util.ArrayList;
@@ -115,7 +116,7 @@ public class AddPacksToOrder {
         public String customerLastName;
         @SerializedName("customer_notification_methods")
         public ArrayList<String> customerNotificationMethods;
-        @SerializedName("customer_email")
+        @SerializedName("customer_phone_number")
         public String customerPhoneNumber;
         @SerializedName("customer_email")
         public String customerEmail;
@@ -200,6 +201,7 @@ public class AddPacksToOrder {
         @SerializedName("assembledBy")
         public String assembledBy;
         @SerializedName("appliedTaxes")
+        @Nullable
         public ArrayList<AppliedTaxis> appliedTaxes;
         @SerializedName("couponDeduction")
         public String couponDeduction;

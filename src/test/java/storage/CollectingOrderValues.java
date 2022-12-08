@@ -6,6 +6,7 @@ public enum CollectingOrderValues {
     GROUP_BY("departments"),
     ASSEMBLED("assembled");
 
+
     private final String collectingOrderValues;
     CollectingOrderValues(String collectingOrderValues) { this.collectingOrderValues = collectingOrderValues;}
     public String getCollectingOrderValues() {

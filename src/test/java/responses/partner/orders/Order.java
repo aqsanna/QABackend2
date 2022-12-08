@@ -256,7 +256,7 @@ public class Order {
                 @SerializedName("original_qty")
                 public Double originalQty;
                 @SerializedName("qty")
-                public Integer qty;
+                public Float qty;
                 @SerializedName("free_qty")
                 public Double freeQty;
                 @SerializedName("price")

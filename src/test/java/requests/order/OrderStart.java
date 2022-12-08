@@ -1,4 +1,4 @@
-package requests;
+package requests.order;
 
 import com.google.gson.annotations.SerializedName;
 

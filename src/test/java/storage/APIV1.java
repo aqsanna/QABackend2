@@ -17,6 +17,7 @@ public enum APIV1 {
     ORDERS_TO("rest/v1/partner/orders/"),
     CONFIRM("/confirm"),
     ORDER_START("/start"),
+    FINISH("/finish"),
     ORDER_ITEMS("rest/v1/partner/order-items/");
 
 
