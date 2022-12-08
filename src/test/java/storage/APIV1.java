@@ -15,7 +15,10 @@ public enum APIV1 {
     ORDERS("rest/v1/partner/stores/87/orders"),
     STORES_LIST("rest/v1/partner/stores"),
     ORDERS_TO("rest/v1/partner/orders/"),
-    CONFIRM("/confirm");
+    CONFIRM("/confirm"),
+    ORDER_START("/start"),
+    ORDER_ITEMS("rest/v1/partner/order-items/");
+
 
     private final String api;
 

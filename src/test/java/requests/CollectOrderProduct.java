@@ -2,9 +2,7 @@ package requests;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.io.Serializable;
-
-public class OrderConfirm {
+public class CollectOrderProduct {
     @SerializedName("params")
     public Params params;
     @SerializedName("_response")
@@ -12,13 +10,14 @@ public class OrderConfirm {
     @SerializedName("_group_by")
     public String groupBy;
     public static class Params{
-        @SerializedName("preparation_time")
-        public String preparationTime;
-        public Params(String preparationTime) {
-            this.preparationTime = preparationTime;
+        @SerializedName("status")
+        public String status;
+        public Params(String status) {
+            this.status = status;
         }
     }
-    public OrderConfirm(Params params, String response, String groupBy) {
+
+    public CollectOrderProduct(CollectOrderProduct.Params params, String response, String groupBy) {
         this.params = params;
         this.Response = response;
         this.groupBy = groupBy;

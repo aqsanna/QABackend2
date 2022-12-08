@@ -197,15 +197,39 @@ public class Order {
             @SerializedName("delivered_at")
             public Object deliveredAt;
         }
-
+        @Getter
         public static class Wrapping{
             @SerializedName("packs")
-            public ArrayList<Object> packs;
+            public ArrayList<Pack> packs;
             @SerializedName("hasAdvancedCollectingFlow")
             public boolean hasAdvancedCollectingFlow;
             @SerializedName("locations")
             public ArrayList<Object> locations;
+            @Getter
+            public static class Pack{
+                @SerializedName("id")
+                public String id;
+                @SerializedName("pack_id")
+                public String packId;
+                @SerializedName("title")
+                public String title;
+                @SerializedName("type")
+                public String type;
+                @SerializedName("free_qty")
+                public String freeQty;
+                @SerializedName("qty")
+                public String qty;
+                @SerializedName("price")
+                public String price;
+                @SerializedName("upc")
+                public String upc;
+                @SerializedName("status")
+                public String status;
+                @SerializedName("total")
+                public int total;
+            }
         }
+        @Getter
         public static class GroupedItem{
             @SerializedName("group")
             public Group group;
@@ -217,6 +241,7 @@ public class Order {
                 @SerializedName("title")
                 public String title;
             }
+            @Getter
             public static class OrderProduct{
                 @SerializedName("id")
                 public String id;

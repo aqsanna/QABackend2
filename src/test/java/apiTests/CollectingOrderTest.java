@@ -1,69 +1,70 @@
 package apiTests;
 
-import com.google.gson.Gson;
-import io.restassured.RestAssured;
-import io.restassured.http.ContentType;
-import io.restassured.http.Header;
+import Utils.OrderUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import requests.OrderConfirm;
+import responses.pack.AddPacksToOrder;
 import responses.partner.orders.Order;
 import responses.partner.orders.PartnerOrders;
-import steps.data.users.UserInfoProvider;
-import storage.APIV1;
+import steps.data.order.AddPacksToOrderProvider;
+import steps.data.order.CollectingOrderProvider;
 import storage.OrderStatus;
+import storage.USER;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class CollectingOrderTest {
-    Gson gson = new Gson();
-
     @Test
     @DisplayName("Check partner order list")
-    public void collectingOrderTest(){
-        UserInfoProvider userInfoProvider = new UserInfoProvider();
-        PartnerOrders getNewOrders = RestAssured.given()
-                .header(new Header("Authorization", "Bearer " + userInfoProvider.getToken()))
-                .queryParam("filter[status]", OrderStatus.NEW.getOrderStatus())
-                .queryParam("limit", 20)
-                .queryParam("offset", 0)
-                .queryParam("sort", "asc")
-                .when()
-                .get(APIV1.STAGE.getApi() + APIV1.ORDERS.getApi())
-                .then()
-                .extract().as(PartnerOrders.class);
-        Assertions.assertEquals("success", getNewOrders.getResult(), "Have a error: " + getNewOrders.getResult());
-        Assertions.assertTrue(getNewOrders.getError().isEmpty(), "Error messages: " + getNewOrders.getError());
-        String orderId = null;
-        for (PartnerOrders.Order order : getNewOrders.getData()){
-            if(!order.isConfirmed()){
-                orderId = order.getId();
+    public void collectingOrderTest() {
+        OrderUtils orderUtils = new OrderUtils();
+        PartnerOrders getNewOrders = orderUtils.getOrderList(OrderStatus.NEW.getOrderStatus(), 20, 0);
+        PartnerOrders.Order order = getNewOrders.getData().get(0);
+        String orderId = order.getId();
+        Order confirmOrder;
+
+        if (!order.isConfirmed()) {
+            confirmOrder = orderUtils.postConfirmOrder(orderId, CollectingOrderProvider.orderConfirm(USER.EMAIL_INFO));
+            Assertions.assertTrue(confirmOrder.getData().isConfirmed(), "The order" + orderId + "isn't confirmed");
+        }
+
+        Order startOrder = orderUtils.postStartOrder(orderId, CollectingOrderProvider.orderStart(USER.EMAIL_INFO));
+        Assertions.assertEquals("assembling", startOrder.getData().getStatus(), "Order is not started collecting, The order status is" + startOrder.getData().getStatus());
+
+        for (Order.Data.GroupedItem groupedItem : startOrder.getData().getGroupedItems()) {
+            for (Order.Data.GroupedItem.OrderProduct orderProduct : groupedItem.getOrderProducts()) {
+                Order assembledProductOrder = orderUtils.postCollectOrderProduct(orderProduct.getId(), CollectingOrderProvider.collectOrderProduct(USER.EMAIL_INFO));
+                Order.Data.GroupedItem.OrderProduct orderProductItem =
+                        assembledProductOrder.getData().getGroupedItems().stream()
+                                .flatMap(groupedItem1 -> groupedItem1.getOrderProducts()
+                                        .stream().filter(orderProduct1 -> orderProduct1.getId().equals(orderProduct.getId())))
+                                        .findAny()
+                                        .orElse(null);
+                Assertions.assertEquals("assembled", orderProductItem.getStatus(), "The order product is not assembled, Order id: " + orderId + " orderProductId: " + orderProduct.getId());
             }
         }
 
-
-        System.out.println(orderId + "as");
-        Order order = RestAssured.given()
-                .header(new Header("Authorization", "Bearer " + UserInfoProvider.getToken()))
-                .when()
-                .get(APIV1.STAGE.getApi() + APIV1.ORDERS.getApi() + "/" + orderId)
-                .then()
-                .extract().as(Order.class);
-
-        Assertions.assertEquals("success", order.getResult(), "Have a error: " + order.getResult());
-        Assertions.assertTrue(order.getError().isEmpty(), "Error messages: " + order.getError());
-        Assertions.assertEquals(orderId, order.getData().getId(), "Request order Id " + orderId + " is not equal with response order Id " + order.getData().getId());
-        Assertions.assertEquals(order.getData().getStatus().toLowerCase(), OrderStatus.NEW.getOrderStatus().toLowerCase(), "The order status is not NEW");
-
-        Order confirmOrder = RestAssured.given()
-                .header(new Header("Authorization", "Bearer " + UserInfoProvider.getToken()))
-                .when()
-                .contentType(ContentType.JSON)
-                .body(gson.toJson(new OrderConfirm()))
-                .post(APIV1.STAGE.getApi() + APIV1.ORDERS_TO.getApi() + orderId + APIV1.CONFIRM.getApi())
-                .then()
-                .extract().as(Order.class);
-
-        System.out.println(confirmOrder);
+        if (startOrder.getData().getWrapping().isHasAdvancedCollectingFlow()){
+            String packId = startOrder.getData().getWrapping().getPacks().get(0).getId();
+            int price = Integer.parseInt(startOrder.getData().getWrapping().getPacks().get(0).getPrice());
+            for(Order.Data.Wrapping.Pack pack : startOrder.getData().getWrapping().getPacks()){
+                if(Integer.parseInt(pack.getFreeQty()) > 0){
+                    packId = pack.getId();
+                    break;
+                }
+                else if (Integer.parseInt(pack.getPrice()) <= price) {
+                    packId = pack.getId();
+                }
+            }
+            AddPacksToOrder addPacksToOrder = orderUtils.postAddPacksToOrder(orderId, AddPacksToOrderProvider.addPack(USER.EMAIL_INFO, packId, "1"));
+        }
 
     }
+
+
 }
