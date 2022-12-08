@@ -24,6 +24,7 @@ public enum USER {
     IS_FOODSTAMP("true"),
     IS_SHIPPABLE("true"),
     HAS_AVAILABILITY_SCHEDULE("false"),
+    TITLE("testTags"),
     PASSWORD("123456Ii");
 
     private final String user;
