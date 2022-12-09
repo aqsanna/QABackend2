@@ -2,7 +2,8 @@ package steps.data.order;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import requests.order.AddPack;
-import requests.order.PackLocation;
+import requests.order.AddPackLocation;
+import requests.order.PrintPackLocation;
 import storage.USER;
 
 import java.util.ArrayList;
@@ -17,16 +18,19 @@ public class AddPacksToOrderProvider {
             default -> null;
         };
     }
-    public static ArrayList<PackLocation> packLocations(USER email, String id, String packId, String placementId) {
-        PackLocation location = new PackLocation(id, packId, RandomStringUtils.randomAlphanumeric(4), placementId);
-        ArrayList<PackLocation> locationArrayList = new ArrayList<>();
+    public static ArrayList<AddPackLocation> addPackLocations(USER email, String id, String packId, String placementId) {
+        AddPackLocation location = new AddPackLocation(id, packId, RandomStringUtils.randomAlphanumeric(4), placementId);
+        ArrayList<AddPackLocation> locationArrayList = new ArrayList<>();
         locationArrayList.add(location);
-        System.out.println(locationArrayList.get(0).getId());
-        System.out.println(locationArrayList.get(0).getPackId());
-        System.out.println(locationArrayList.get(0).getPlace());
-        System.out.println(locationArrayList.get(0).getPlacementId());
         return  switch (email) {
             case EMAIL_INFO -> locationArrayList;
+            default -> null;
+        };
+    }
+
+    public static PrintPackLocation printPackLocation(USER email, String cloudPrinterId){
+        return switch (email) {
+            case EMAIL_INFO -> new PrintPackLocation(cloudPrinterId);
             default -> null;
         };
     }

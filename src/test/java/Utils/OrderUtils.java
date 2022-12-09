@@ -6,8 +6,8 @@ import io.restassured.http.ContentType;
 import io.restassured.http.Header;
 import org.junit.jupiter.api.Assertions;
 import requests.order.*;
-import responses.pack.AddPackLocation;
-import responses.pack.AddPacksToOrder;
+import responses.pack.PacksToOrder;
+import responses.pack.PackLocation;
 import responses.partner.orders.Order;
 import responses.partner.orders.PartnerOrders;
 import steps.data.users.UserInfoProvider;
@@ -29,7 +29,7 @@ public class OrderUtils {
                 .get(APIV1.STAGE.getApi() + APIV1.ORDERS.getApi())
                 .then()
                 .extract().as(PartnerOrders.class);
-        Assertions.assertEquals("success", orderList.getResult(), "Have a error: " + orderList.getResult());
+        Assertions.assertEquals("success", orderList.getResult(), "Can't get orders list. Have a error: " + orderList.getResult());
         Assertions.assertTrue(orderList.getError().isEmpty(), "Error messages: " + orderList.getError());
         return  orderList;
     }
@@ -40,7 +40,7 @@ public class OrderUtils {
                 .get(APIV1.STAGE.getApi() + APIV1.ORDERS.getApi() + "/" + orderId)
                 .then()
                 .extract().as(Order.class);
-        Assertions.assertEquals("success", order.getResult(), "Have a error: " + order.getResult());
+        Assertions.assertEquals("success", order.getResult(), "Can't get the order" + orderId + ". Have a error: " + order.getResult());
         Assertions.assertTrue(order.getError().isEmpty(), "Error messages: " + order.getError());
         Assertions.assertEquals(orderId, order.getData().getId(), "Get order: The order ids are not equal");
         return order;
@@ -54,7 +54,7 @@ public class OrderUtils {
                 .post(APIV1.STAGE.getApi() + APIV1.ORDERS_TO.getApi() + orderId + APIV1.CONFIRM.getApi())
                 .then()
                 .extract().as(Order.class);
-        Assertions.assertEquals("success", confirmedOrder.getResult(), "Have a error: " + confirmedOrder.getResult());
+        Assertions.assertEquals("success", confirmedOrder.getResult(), "Can't confirm the order" + orderId + ". Have a error: " + confirmedOrder.getResult());
         Assertions.assertTrue(confirmedOrder.getError().isEmpty(), "Error messages: " + confirmedOrder.getError());
         Assertions.assertEquals(orderId, confirmedOrder.getData().getId(), "Confirm order: The order ids are not equal");
         return confirmedOrder;
@@ -69,7 +69,7 @@ public class OrderUtils {
                 .post(APIV1.STAGE.getApi() + APIV1.ORDERS_TO.getApi() + orderId + APIV1.ORDER_START.getApi())
                 .then()
                 .extract().as(Order.class);
-        Assertions.assertEquals("success", startOrder.getResult(), "Have a error: " + startOrder.getResult());
+        Assertions.assertEquals("success", startOrder.getResult(), "Can't start collecting the order" + orderId + ". Have a error: " + startOrder.getResult());
         Assertions.assertTrue(startOrder.getError().isEmpty(), "Error messages: " + startOrder.getError());
         Assertions.assertEquals(orderId, startOrder.getData().getId(), "Start order: The order ids are not equal");
         return startOrder;
@@ -84,19 +84,19 @@ public class OrderUtils {
                 .post(APIV1.STAGE.getApi() + APIV1.ORDER_ITEMS.getApi() + orderProductId)
                 .then()
                 .extract().as(Order.class);
-        Assertions.assertEquals("success", order.getResult(), "Have a error: " + order.getResult());
+        Assertions.assertEquals("success", order.getResult(), "Can't confirm the order product " + orderProductId + ". Have a error: " + order.getResult());
         Assertions.assertTrue(order.getError().isEmpty(), "Error messages: " + order.getError());
         return order;
     }
-    public AddPacksToOrder postAddPacksToOrder(String orderId, ArrayList<AddPack> data){
-        AddPacksToOrder order = RestAssured.given()
+    public PacksToOrder postAddPacksToOrder(String orderId, ArrayList<AddPack> data){
+        PacksToOrder order = RestAssured.given()
                 .header(new Header("Authorization", "Bearer " + UserInfoProvider.getToken()))
                 .when()
                 .contentType(ContentType.JSON)
                 .body(gson.toJson(data))
                 .post(APIV1.STAGE.getApi() + APIV2.ADD_PACKS_URL.getApi() + orderId + APIV2.ADD_PACKS.getApi())
                 .then()
-                .extract().as(AddPacksToOrder.class);
+                .extract().as(PacksToOrder.class);
         Assertions.assertEquals("OK", order.getCode(), "Have a error: " + order.getMessage());
         return order;
     }
@@ -110,22 +110,36 @@ public class OrderUtils {
                 .post(APIV1.STAGE.getApi() + APIV1.ORDERS_TO.getApi() + orderId + APIV1.FINISH.getApi())
                 .then()
                 .extract().as(Order.class);
-        Assertions.assertEquals("success", finishOrder.getResult(), "Have a error: " + finishOrder.getResult());
+        Assertions.assertEquals("success", finishOrder.getResult(), "Can't finish the order " + orderId + ". Have a error: " + finishOrder.getResult());
         Assertions.assertTrue(finishOrder.getError().isEmpty(), "Error messages: " + finishOrder.getError());
         Assertions.assertEquals(orderId, finishOrder.getData().getId(), "Confirm order: The order ids are not equal");
+        Assertions.assertEquals("assembled", finishOrder.getData().getStatus(), "The order " + orderId + " is not changed status to assembled");
         return finishOrder;
     }
 
-    public AddPackLocation postAddPackLocation(String orderId, ArrayList<PackLocation> data){
-        AddPackLocation location = RestAssured.given()
+    public PackLocation postAddPackLocation(String orderId, ArrayList<AddPackLocation> data){
+        PackLocation location = RestAssured.given()
                 .header(new Header("Authorization", "Bearer " + UserInfoProvider.getToken()))
                 .when()
                 .contentType(ContentType.JSON)
-                .body(gson.toJson(data.toArray()))
+                .body(gson.toJson(data))
                 .post(APIV1.STAGE.getApi() + APIV2.PACK_LOCATION_URL.getApi() + orderId + APIV2.PACK_LOCATION.getApi())
                 .then()
-                .extract().as(AddPackLocation.class);
-        Assertions.assertEquals("OK", location.getCode(), "Have a error: " + location.getMessage());
+                .extract().as(PackLocation.class);
+        Assertions.assertEquals("OK", location.getCode(), "Can't add pack location for order " + orderId + ".Have a error: " + location.getMessage());
         return location;
+    }
+
+    public PackLocation postPrintPackLocation(String orderId, PrintPackLocation data){
+        PackLocation printPackLocation = RestAssured.given()
+                .header(new Header("Authorization", "Bearer " + UserInfoProvider.getToken()))
+                .when()
+                .contentType(ContentType.JSON)
+                .body(gson.toJson(data))
+                .post(APIV1.STAGE.getApi() + APIV2.PACK_LOCATION_URL.getApi() + orderId + APIV2.PACK_LOCATION_PRINT.getApi())
+                .then()
+                .extract().as(PackLocation.class);
+        Assertions.assertEquals("OK", printPackLocation.getCode(), "Can't nor print pack location" + orderId + ". Have a error: " + printPackLocation.getMessage());
+        return printPackLocation;
     }
 }

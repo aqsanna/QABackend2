@@ -4,8 +4,8 @@ import Utils.OrderUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import responses.pack.AddPackLocation;
-import responses.pack.AddPacksToOrder;
+import responses.pack.PackLocation;
+import responses.pack.PacksToOrder;
 import responses.partner.orders.Order;
 import responses.partner.orders.PartnerOrders;
 import steps.data.order.AddPacksToOrderProvider;
@@ -14,7 +14,7 @@ import storage.OrderStatus;
 import storage.USER;
 public class CollectingOrderTest {
     @Test
-    @DisplayName("Check partner order list")
+    @DisplayName("Check the order collecting")
     public void collectingOrderTest() {
         OrderUtils orderUtils = new OrderUtils();
         PartnerOrders getNewOrders = orderUtils.getOrderList(OrderStatus.NEW.getOrderStatus(), 20, 0);
@@ -54,11 +54,12 @@ public class CollectingOrderTest {
                     packId = pack.getId();
                 }
             }
-            System.out.println("PackId: " + packId);
-            System.out.println("OrderId: " + orderId);
-            AddPacksToOrder addPacksToOrder = orderUtils.postAddPacksToOrder(orderId, AddPacksToOrderProvider.addPack(USER.EMAIL_INFO, packId, "1"));
-            AddPackLocation addPackLocation = orderUtils.postAddPackLocation(orderId, AddPacksToOrderProvider.packLocations(USER.EMAIL_INFO, null, packId, ""));
+            orderUtils.postAddPacksToOrder(orderId, AddPacksToOrderProvider.addPack(USER.EMAIL_INFO, packId, "1"));
+            orderUtils.postAddPackLocation(orderId, AddPacksToOrderProvider.addPackLocations(USER.EMAIL_INFO, null, packId, ""));
+            orderUtils.postPrintPackLocation(orderId, AddPacksToOrderProvider.printPackLocation(USER.EMAIL_INFO, "2"));
         }
+
+        orderUtils.postFinishOrder(orderId, CollectingOrderProvider.orderConfirm(USER.EMAIL_INFO));
 
     }
 }

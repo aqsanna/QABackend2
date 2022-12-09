@@ -6,7 +6,7 @@ import lombok.Getter;
 
 import java.util.ArrayList;
 @Getter
-public class AddPacksToOrder {
+public class PacksToOrder {
     @SerializedName("message")
     public String message;
     @SerializedName("code")

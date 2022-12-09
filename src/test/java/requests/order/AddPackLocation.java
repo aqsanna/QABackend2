@@ -5,7 +5,7 @@ import groovyjarjarantlr4.v4.runtime.misc.Nullable;
 import lombok.Getter;
 
 @Getter
-public class PackLocation {
+public class AddPackLocation {
     @SerializedName("id")
     @Nullable
     public String id;
@@ -16,7 +16,7 @@ public class PackLocation {
     @SerializedName("placement_id")
     public String placementId;
 
-    public PackLocation(String id, String packId, String place, String placementId) {
+    public AddPackLocation(String id, String packId, String place, String placementId) {
         this.id = id;
         this.packId = packId;
         this.place = place;
