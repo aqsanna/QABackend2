@@ -33,7 +33,7 @@ public class TagsListTest {
         for(TagsInfo data : tagsData){
             Assertions.assertFalse(data.title.isEmpty(), "title  is empty");
             Assertions.assertFalse(data.id.isEmpty(), "id  is empty");
+            Assertions.assertEquals(tagsData.size(), 100);
         }
-
     }
 }

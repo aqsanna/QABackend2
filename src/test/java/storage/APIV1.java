@@ -14,7 +14,7 @@ public enum APIV1 {
     UPDATE_PRODUCT("rest/v1/partner/stores/87/products/"),
     ORDERS("rest/v1/partner/stores/87/orders"),
     STORES_LIST("rest/v1/partner/stores"),
-    TAGSLIST("rest/v1/partner/tags?limit=200&offset=0"),
+    TAGSLIST("rest/v1/partner/tags?limit=100&offset=0"),
     TAGS("rest/v1/partner/tags");
 
 
