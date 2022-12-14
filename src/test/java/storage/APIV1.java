@@ -12,6 +12,8 @@ public enum APIV1 {
     CREATE_PRODUCT("rest/v1/partner/stores/87/products"),
     DELETE_PRODUCT_ID("rest/v1/partner/stores/87/products/"),
     UPDATE_PRODUCT("rest/v1/partner/stores/87/products/"),
+    ORDERS("rest/v1/partner/stores/87/orders"),
+    STORES_LIST("rest/v1/partner/stores");
     PRODUCT_DATA_TYPE("rest/v1/partner/service/available-products-data-types");
 
 
