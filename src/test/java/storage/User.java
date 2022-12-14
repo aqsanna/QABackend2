@@ -1,6 +1,6 @@
 package storage;
 
-public enum USER {
+public enum User {
     EMAIL_INFO("info@local.express"),
     EMAIL_CLIENT("oqsannas+31102022@localexpress.io"),
     BAD_EMAIL("sydney@fife"),
@@ -31,7 +31,7 @@ public enum USER {
 
     private final String user;
 
-    USER(String user) {
+    User(String user) {
         this.user = user;
     }
 
