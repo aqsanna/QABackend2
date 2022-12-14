@@ -36,6 +36,7 @@ public class AuthTest {
         Assertions.assertTrue(successLogin.getError().isEmpty());
         Assertions.assertNotNull(successLogin.getData().getToken());
     }
+
     @Test
     @DisplayName("Check success user login with email")
     public void successLoginEmailTest() {

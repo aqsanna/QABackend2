@@ -13,9 +13,8 @@ public enum APIV1 {
     DELETE_PRODUCT_ID("rest/v1/partner/stores/87/products/"),
     UPDATE_PRODUCT("rest/v1/partner/stores/87/products/"),
     ORDERS("rest/v1/partner/stores/87/orders"),
+    PRODUCT_DATA_TYPE("rest/v1/partner/service/available-products-data-types"),
     STORES_LIST("rest/v1/partner/stores");
-    PRODUCT_DATA_TYPE("rest/v1/partner/service/available-products-data-types");
-
 
     private final String api;
 

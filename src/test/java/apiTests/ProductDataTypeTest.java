@@ -38,7 +38,7 @@ public class ProductDataTypeTest {
             actualList.add(data.getId());
             actualList.add(data.getName());
         }
-         Assertions.assertTrue(actualList.containsAll(expectedList), "expected list isn't correct");
-         Assertions.assertEquals(actualList.size(), expectedList.size());
+        Assertions.assertTrue(actualList.containsAll(expectedList), "expected list isn't correct");
+        Assertions.assertEquals(actualList.size(), expectedList.size());
     }
 }

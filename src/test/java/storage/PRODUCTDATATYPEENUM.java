@@ -46,23 +46,26 @@ public enum PRODUCTDATATYPEENUM {
     NAME19("Quantity in Pack");
 
     private final String datatype;
+
     PRODUCTDATATYPEENUM(String datatype) {
         this.datatype = datatype;
+    }
+
+    public static List<String> getType() {
+        List<String> listType = new ArrayList<String>();
+        for (PRODUCTDATATYPEENUM l : PRODUCTDATATYPEENUM.values()) {
+            listType.add(l.getProductDataType());
+        }
+        return listType;
     }
 
     public String getProductDataType() {
         return datatype;
     }
+
     public String toString() {
         return "ProductDataTypeEnum{" +
                 "ProductDataTypeEnum='" + datatype + '\'' +
                 '}';
-    }
-    public static List<String> getType(){
-        List<String> listType = new ArrayList<String>();
-        for(PRODUCTDATATYPEENUM l : PRODUCTDATATYPEENUM.values()){
-            listType.add(l.getProductDataType());
-        }
-        return listType;
     }
 }
