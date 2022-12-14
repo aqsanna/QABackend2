@@ -3,7 +3,7 @@ package storage;
 import lombok.Getter;
 
 @Getter
-public enum APIV1 {
+public enum ApiV1 {
     STAGE("https://stage-old.local.express/"),
     STORE("rest/v1/partner/stores"),
     LOGIN("api/rest/v1/auth/login"),
@@ -18,7 +18,7 @@ public enum APIV1 {
 
     private final String api;
 
-    APIV1(String api) {
+    ApiV1(String api) {
         this.api = api;
     }
 

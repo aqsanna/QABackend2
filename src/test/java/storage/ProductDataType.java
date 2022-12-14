@@ -3,7 +3,7 @@ package storage;
 import java.util.ArrayList;
 import java.util.List;
 
-public enum PRODUCTDATATYPEENUM {
+public enum ProductDataType {
     ID("name"),
     ID1("category"),
     ID2("price"),
@@ -47,13 +47,13 @@ public enum PRODUCTDATATYPEENUM {
 
     private final String datatype;
 
-    PRODUCTDATATYPEENUM(String datatype) {
+    ProductDataType(String datatype) {
         this.datatype = datatype;
     }
 
     public static List<String> getType() {
         List<String> listType = new ArrayList<String>();
-        for (PRODUCTDATATYPEENUM l : PRODUCTDATATYPEENUM.values()) {
+        for (ProductDataType l : ProductDataType.values()) {
             listType.add(l.getProductDataType());
         }
         return listType;

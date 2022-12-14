@@ -9,8 +9,8 @@ import responses.userLogin.SuccessLogin;
 import specification.RequestSpec;
 import specification.ResponseSpec;
 import steps.data.users.UserInfoProvider;
-import storage.APIV1;
-import storage.USER;
+import storage.ApiV1;
+import storage.User;
 
 import static io.restassured.RestAssured.given;
 
@@ -20,13 +20,13 @@ public class AuthTest {
     @Test
     @DisplayName("Check success user login")
     public void successLoginTest() {
-        RequestSpec.installSpecification(RequestSpec.requestSpec(APIV1.LOGIN.getApi()), ResponseSpec.responseOK200());
+        RequestSpec.installSpecification(RequestSpec.requestSpec(ApiV1.LOGIN.getApi()), ResponseSpec.responseOK200());
 
         SuccessLogin successLogin = given()
                 .when()
                 .contentType(ContentType.JSON)
-                .body(gson.toJson(UserInfoProvider.getUser(USER.EMAIL_INFO)))
-                .post(APIV1.STAGE.getApi() + APIV1.REGISTER.getApi())
+                .body(gson.toJson(UserInfoProvider.getUser(User.EMAIL_INFO)))
+                .post(ApiV1.STAGE.getApi() + ApiV1.REGISTER.getApi())
                 .then().log().all()
                 .extract().as(SuccessLogin.class);
 
@@ -40,13 +40,13 @@ public class AuthTest {
     @Test
     @DisplayName("Check success user login with email")
     public void successLoginEmailTest() {
-        RequestSpec.installSpecification(RequestSpec.requestSpec(APIV1.LOGIN.getApi()), ResponseSpec.responseOK200());
+        RequestSpec.installSpecification(RequestSpec.requestSpec(ApiV1.LOGIN.getApi()), ResponseSpec.responseOK200());
 
         SuccessLogin successLoginEmail = given()
                 .when()
                 .contentType(ContentType.JSON)
-                .body(gson.toJson(UserInfoProvider.getUserClient(USER.EMAIL_CLIENT)))
-                .post(APIV1.STAGE.getApi() + APIV1.REGISTER.getApi())
+                .body(gson.toJson(UserInfoProvider.getUserClient(User.EMAIL_CLIENT)))
+                .post(ApiV1.STAGE.getApi() + ApiV1.REGISTER.getApi())
                 .then().log().all()
                 .extract().as(SuccessLogin.class);
 

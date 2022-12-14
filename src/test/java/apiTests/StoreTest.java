@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import requests.StoreInfo;
 import responses.Store;
 import steps.data.users.UserInfoProvider;
-import storage.APIV1;
+import storage.ApiV1;
 
 import java.util.ArrayList;
 
@@ -19,7 +19,7 @@ public class StoreTest {
     public void StoreListTest() {
         Store store = given()
                 .header(new Header("Authorization", "Bearer " + UserInfoProvider.getToken()))
-                .get(APIV1.STAGE.getApi() + APIV1.STORE.getApi())
+                .get(ApiV1.STAGE.getApi() + ApiV1.STORE.getApi())
                 .then().log().all()
                 .extract().as(Store.class);
 
