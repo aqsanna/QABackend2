@@ -14,7 +14,8 @@ public enum ApiV1 {
     UPDATE_PRODUCT("rest/v1/partner/stores/87/products/"),
     ORDERS("rest/v1/partner/stores/87/orders"),
     PRODUCT_DATA_TYPE("rest/v1/partner/service/available-products-data-types"),
-    STORES_LIST("rest/v1/partner/stores");
+    STORES_LIST("rest/v1/partner/stores"),
+    TAXES_LIST("rest/v1/partner/taxes?limit=-1&offset=0");
 
     private final String api;
 
