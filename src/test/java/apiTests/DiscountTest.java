@@ -8,5 +8,6 @@ public class DiscountTest {
     @Description("Check success partner discount list")
     public void CheckDiscountListTest(){
 
+
     }
 }
