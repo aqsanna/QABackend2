@@ -9,6 +9,6 @@ import java.util.ArrayList;
 public class TagsList {
     private Integer code;
     private String result;
-    private  String error;
+    private String error;
     private ArrayList<TagsInfo> data;
 }

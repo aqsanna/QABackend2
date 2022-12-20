@@ -15,7 +15,8 @@ public enum APIV1 {
     ORDERS("rest/v1/partner/stores/87/orders"),
     STORES_LIST("rest/v1/partner/stores"),
     TAGSLIST("rest/v1/partner/tags?limit=100&offset=0"),
-    TAGS("rest/v1/partner/tags");
+    TAGS("rest/v1/partner/tags"),
+    TAGS_DELETE("rest/v2/tags/");
 
 
 

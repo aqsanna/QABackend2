@@ -9,7 +9,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import requests.TagsInfo;
 import responses.tags.SuccessCreateTags;
+import responses.tags.TagsDelete;
 import responses.tags.TagsList;
+import steps.data.users.ProductInfoProvider;
 import steps.data.users.TagsInfoProvider;
 import steps.data.users.UserInfoProvider;
 import storage.APIV1;
@@ -59,5 +61,18 @@ public class TagsTest {
             Assertions.assertFalse(data.id.isEmpty(), "id  is empty");
             Assertions.assertEquals(tagsData.size(), 100);
         }
+    }
+    @Test
+    @DisplayName("check tags list")
+    public void deleteTags(){
+        Gson gson = new Gson();
+
+        TagsDelete deleteTags = given()
+                .header(new Header("Authorization", "Bearer " + UserInfoProvider.getToken()))
+                .delete(APIV1.STAGE.getApi() + APIV1.TAGS_DELETE.getApi() + TagsInfoProvider.getTagsId())
+                .then().log().all()
+                .extract().as(TagsDelete.class);
+        Assertions.assertEquals("Ok", deleteTags.getMessage());
+        Assertions.assertEquals("OK", deleteTags.getCode());
     }
 }
