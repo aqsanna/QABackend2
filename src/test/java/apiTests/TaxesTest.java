@@ -16,7 +16,7 @@ import static io.restassured.RestAssured.given;
 public class TaxesTest {
     @Test
     @DisplayName("Check success partner taxes list")
-    public void TaxesLustTest() {
+    public void CheckTaxesListTest() {
         Taxes taxes = given()
                 .header(new Header("Authorization", "Bearer " + UserInfoProvider.getToken()))
                 .get(ApiV1.STAGE.getApi() + ApiV1.TAXES_LIST.getApi())
