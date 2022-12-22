@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Assertions;
 import requests.order.*;
 import responses.pack.PacksToOrder;
 import responses.pack.PackLocation;
+import responses.partner.orders.FilteredListOfOrders;
 import responses.partner.orders.Order;
 import responses.partner.orders.PartnerOrders;
 import steps.data.users.UserInfoProvider;
@@ -94,7 +95,7 @@ public class OrderUtils {
                 .when()
                 .contentType(ContentType.JSON)
                 .body(gson.toJson(data))
-                .post(APIV1.STAGE.getApi() + APIV2.ADD_PACKS_URL.getApi() + orderId + APIV2.ADD_PACKS.getApi())
+                .post(APIV1.STAGE.getApi() + APIV2.STORE_ORDER.getApi() + orderId + APIV2.ADD_PACKS.getApi())
                 .then()
                 .extract().as(PacksToOrder.class);
         Assertions.assertEquals("OK", order.getCode(), "Have a error: " + order.getMessage());
@@ -141,5 +142,18 @@ public class OrderUtils {
                 .extract().as(PackLocation.class);
         Assertions.assertEquals("OK", printPackLocation.getCode(), "Can't nor print pack location" + orderId + ". Have a error: " + printPackLocation.getMessage());
         return printPackLocation;
+    }
+
+    public FilteredListOfOrders postFilterOrders(FilterOrders data){
+        FilteredListOfOrders filteredListOfOrders = RestAssured.given()
+                .header(new Header("Authorization", "Bearer " + UserInfoProvider.getToken()))
+                .when()
+                .contentType(ContentType.JSON)
+                .body(gson.toJson(data))
+                .post(APIV1.STAGE.getApi() + APIV2.STORE_ORDER.getApi())
+                .then()
+                .extract().as(FilteredListOfOrders.class);
+        Assertions.assertEquals("OK", filteredListOfOrders.getCode(), "Can't filter orders: " + filteredListOfOrders.getMessage());
+        return filteredListOfOrders;
     }
 }

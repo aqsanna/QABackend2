@@ -1,12 +1,15 @@
 package steps.data.order;
 
 import requests.order.CollectOrderProduct;
+import requests.order.FilterOrders;
 import requests.order.OrderConfirm;
 import requests.order.OrderStart;
 import storage.CollectingOrderValues;
 import storage.USER;
 
-public class CollectingOrderProvider {
+import java.util.ArrayList;
+
+public class OrderProvider {
     public static OrderConfirm orderConfirm(USER email) {
         return switch (email) {
             case EMAIL_INFO -> new OrderConfirm(
@@ -35,6 +38,16 @@ public class CollectingOrderProvider {
                     new CollectOrderProduct.Params(CollectingOrderValues.ASSEMBLED.getCollectingOrderValues()),
                     CollectingOrderValues.RESPONSE.getCollectingOrderValues(),
                     CollectingOrderValues.GROUP_BY.getCollectingOrderValues()
+            );
+            default -> null;
+        };
+    }
+
+    public static FilterOrders filterOrder(USER email, ArrayList<String> orderStatus, ArrayList<String> orderType){
+        return switch (email){
+            case EMAIL_INFO -> new FilterOrders(
+                    new FilterOrders.Filter(orderStatus, orderType),
+                    "basic"
             );
             default -> null;
         };

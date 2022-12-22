@@ -4,12 +4,10 @@ import Utils.OrderUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import responses.pack.PackLocation;
-import responses.pack.PacksToOrder;
 import responses.partner.orders.Order;
 import responses.partner.orders.PartnerOrders;
 import steps.data.order.AddPacksToOrderProvider;
-import steps.data.order.CollectingOrderProvider;
+import steps.data.order.OrderProvider;
 import storage.OrderStatus;
 import storage.USER;
 public class CollectingOrderTest {
@@ -23,16 +21,16 @@ public class CollectingOrderTest {
         Order confirmOrder;
 
         if (!order.isConfirmed()) {
-            confirmOrder = orderUtils.postConfirmOrder(orderId, CollectingOrderProvider.orderConfirm(USER.EMAIL_INFO));
+            confirmOrder = orderUtils.postConfirmOrder(orderId, OrderProvider.orderConfirm(USER.EMAIL_INFO));
             Assertions.assertTrue(confirmOrder.getData().isConfirmed(), "The order" + orderId + "isn't confirmed");
         }
 
-        Order startOrder = orderUtils.postStartOrder(orderId, CollectingOrderProvider.orderStart(USER.EMAIL_INFO));
+        Order startOrder = orderUtils.postStartOrder(orderId, OrderProvider.orderStart(USER.EMAIL_INFO));
         Assertions.assertEquals("assembling", startOrder.getData().getStatus(), "Order is not started collecting, The order status is" + startOrder.getData().getStatus());
 
         for (Order.Data.GroupedItem groupedItem : startOrder.getData().getGroupedItems()) {
             for (Order.Data.GroupedItem.OrderProduct orderProduct : groupedItem.getOrderProducts()) {
-                Order assembledProductOrder = orderUtils.postCollectOrderProduct(orderProduct.getId(), CollectingOrderProvider.collectOrderProduct(USER.EMAIL_INFO));
+                Order assembledProductOrder = orderUtils.postCollectOrderProduct(orderProduct.getId(), OrderProvider.collectOrderProduct(USER.EMAIL_INFO));
                 Order.Data.GroupedItem.OrderProduct orderProductItem = assembledProductOrder.getData().getGroupedItems()
                         .stream().flatMap(groupedItem1 -> groupedItem1.getOrderProducts()
                                 .stream().filter(orderProduct1 -> orderProduct1.getId().equals(orderProduct.getId())))
@@ -58,8 +56,8 @@ public class CollectingOrderTest {
             orderUtils.postAddPackLocation(orderId, AddPacksToOrderProvider.addPackLocations(USER.EMAIL_INFO, null, packId, ""));
             orderUtils.postPrintPackLocation(orderId, AddPacksToOrderProvider.printPackLocation(USER.EMAIL_INFO, "2"));
         }
-
-        orderUtils.postFinishOrder(orderId, CollectingOrderProvider.orderConfirm(USER.EMAIL_INFO));
+        System.out.println(orderId);
+        orderUtils.postFinishOrder(orderId, OrderProvider.orderConfirm(USER.EMAIL_INFO));
 
     }
 }
