@@ -6,7 +6,9 @@ import io.restassured.http.ContentType;
 import io.restassured.http.Header;
 import org.junit.jupiter.api.Assertions;
 import requests.order.*;
+import responses.pack.PacksToOrder;
 import responses.pack.PackLocation;
+import responses.partner.orders.FilteredListOfOrders;
 import responses.pack.PacksToOrder;
 import responses.partner.orders.Order;
 import responses.partner.orders.PartnerOrders;
@@ -98,20 +100,20 @@ public class OrderUtils {
                 .when()
                 .contentType(ContentType.JSON)
                 .body(gson.toJson(data))
-                .post(ApiV1.STAGE.getApi() + ApiV2.ADD_PACKS_URL.getApi() + orderId + ApiV2.ADD_PACKS.getApi())
+                .post(ApiV1.STAGE.getApi() + ApiV2.STORE_ORDER.getApi() + orderId + ApiV2.ADD_PACKS.getApi())
                 .then()
                 .extract().as(PacksToOrder.class);
         Assertions.assertEquals("OK", order.getCode(), "Have a error: " + order.getMessage());
         return order;
     }
 
-    public Order postFinishOrder(String orderId, OrderConfirm data) {
+    public Order postFinishOrder(String orderId, OrderConfirm data){
         Order finishOrder = RestAssured.given()
                 .header(new Header("Authorization", "Bearer " + UserInfoProvider.getToken()))
                 .when()
                 .contentType(ContentType.JSON)
                 .body(gson.toJson(data))
-                .post(ApiV1.STAGE.getApi() + ApiV1.ORDERS_TO.getApi() + orderId + ApiV1.FINISH.getApi())
+                .post(APIV1.STAGE.getApi() + APIV1.ORDERS_TO.getApi() + orderId + APIV1.FINISH.getApi())
                 .then()
                 .extract().as(Order.class);
         Assertions.assertEquals("success", finishOrder.getResult(), "Can't finish the order " + orderId + ". Have a error: " + finishOrder.getResult());
@@ -145,5 +147,18 @@ public class OrderUtils {
                 .extract().as(PackLocation.class);
         Assertions.assertEquals("OK", printPackLocation.getCode(), "Can't nor print pack location" + orderId + ". Have a error: " + printPackLocation.getMessage());
         return printPackLocation;
+    }
+
+    public FilteredListOfOrders postFilterOrders(FilterOrders data){
+        FilteredListOfOrders filteredListOfOrders = RestAssured.given()
+                .header(new Header("Authorization", "Bearer " + UserInfoProvider.getToken()))
+                .when()
+                .contentType(ContentType.JSON)
+                .body(gson.toJson(data))
+                .post(ApiV1.STAGE.getApi() + ApiV2.STORE_ORDER.getApi())
+                .then()
+                .extract().as(FilteredListOfOrders.class);
+        Assertions.assertEquals("OK", filteredListOfOrders.getCode(), "Can't filter orders: " + filteredListOfOrders.getMessage());
+        return filteredListOfOrders;
     }
 }
