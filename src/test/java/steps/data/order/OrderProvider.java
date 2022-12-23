@@ -1,9 +1,6 @@
 package steps.data.order;
 
-import requests.order.CollectOrderProduct;
-import requests.order.FilterOrders;
-import requests.order.OrderConfirm;
-import requests.order.OrderStart;
+import requests.order.*;
 import storage.CollectingOrderValues;
 import storage.User;
 
@@ -51,6 +48,13 @@ public class CollectingOrderProvider {
                     new FilterOrders.Filter(orderStatus, orderType),
                     "basic"
             );
+            default -> null;
+        };
+    }
+
+    public static ChangeOrderStatus changeOrderStatus(USER email, String status){
+        return switch (email){
+            case EMAIL_INFO -> new ChangeOrderStatus(status);
             default -> null;
         };
     }
