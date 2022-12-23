@@ -9,7 +9,10 @@ public enum APIV2 {
     PACK_LOCATION_URL("rest/v2/partner/store/87/order/"),
     PACK_LOCATION("/pack-locations"),
     PACK_LOCATION_PRINT("/pack-locations/print"),
-    CHANGE_STATUS("/change-status");
+    CHANGE_STATUS("/change-status"),
+    ORDER_DETAILS("/details"),
+    PACKAGING("/rest/v2/store/87/packaging"),
+    SHIPPING_PACKAGING_BOX("/shipping-packaging-box");
     private final String api;
 
     APIV2(String api) {

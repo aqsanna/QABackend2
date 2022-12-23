@@ -6,10 +6,12 @@ import io.restassured.http.ContentType;
 import io.restassured.http.Header;
 import org.junit.jupiter.api.Assertions;
 import requests.order.*;
+import responses.pack.PackagingForStore;
 import responses.pack.PacksToOrder;
 import responses.pack.PackLocation;
 import responses.partner.orders.FilteredListOfOrders;
 import responses.partner.orders.Order;
+import responses.partner.orders.OrderV2;
 import responses.partner.orders.PartnerOrders;
 import steps.data.users.UserInfoProvider;
 import storage.APIV1;
@@ -155,5 +157,54 @@ public class OrderUtils {
                 .extract().as(FilteredListOfOrders.class);
         Assertions.assertEquals("OK", filteredListOfOrders.getCode(), "Can't filter orders: " + filteredListOfOrders.getMessage());
         return filteredListOfOrders;
+    }
+    public OrderV2 getOrderDetails(String orderId){
+        OrderV2 order = RestAssured.given()
+                .header(new Header("Authorization", "Bearer " + UserInfoProvider.getToken()))
+                .when()
+                .get(APIV1.STAGE.getApi() + APIV2.STORE_ORDER.getApi() + orderId + APIV2.ORDER_DETAILS.getApi())
+                .then()
+                .extract().as(OrderV2.class);
+        Assertions.assertEquals("OK", order.getCode(), "Can't get the order" + orderId + ". Have a error: " + order.getMessage());
+        Assertions.assertEquals(orderId, order.getData().getId(), "Get order:" + order.getData().getId() + " The order ids are not equal");
+        return order;
+    }
+
+    public OrderV2 postChangeOrderStatus(String orderId, ChangeOrderStatus data){
+        OrderV2 order = RestAssured.given()
+                .header(new Header("Authorization", "Bearer " + UserInfoProvider.getToken()))
+                .when()
+                .contentType(ContentType.JSON)
+                .body(gson.toJson(data))
+                .post(APIV1.STAGE.getApi() + APIV2.STORE_ORDER.getApi() + "/" + orderId + APIV2.CHANGE_STATUS.getApi())
+                .then().log().all()
+                .extract().as(OrderV2.class);
+        Assertions.assertEquals("OK", order.getCode(), "Can't change the order status" + orderId + ". Have a error: " + order.getMessage());
+        Assertions.assertEquals(orderId, order.getData().getId(), "Get order:" + order.getData().getId() + " The order id are not equal");
+        return order;
+    }
+    public PackagingForStore getStorePackaging(){
+        PackagingForStore packaging = RestAssured.given()
+                .header(new Header("Authorization", "Bearer " + UserInfoProvider.getToken()))
+                .when()
+                .get(APIV1.STAGE.getApi() + APIV2.PACKAGING.getApi())
+                .then()
+                .extract().as(PackagingForStore.class);
+        Assertions.assertEquals("OK", packaging.getCode(), "Have a error: " + packaging.getMessage());
+        return packaging;
+    }
+
+    public OrderV2 postProductAddToBox(String orderId, ProductAddBox data){
+        OrderV2 order = RestAssured.given()
+                .header(new Header("Authorization", "Bearer " + UserInfoProvider.getToken()))
+                .when()
+                .contentType(ContentType.JSON)
+                .body(gson.toJson(data))
+                .post(APIV1.STAGE.getApi() + APIV2.STORE_ORDER.getApi() + "/" + orderId + APIV2.SHIPPING_PACKAGING_BOX.getApi())
+                .then().log().all()
+                .extract().as(OrderV2.class);
+        Assertions.assertEquals("OK", order.getCode(), "Can't change the order status" + orderId + ". Have a error: " + order.getMessage());
+        Assertions.assertEquals(orderId, order.getData().getId(), "Get order:" + order.getData().getId() + " The order ids are not equal");
+        return order;
     }
 }

@@ -11,6 +11,7 @@ public enum OrderStatus {
     REACHED_THE_STORE("reached_the_store"),
     CHECKED_BY_DRIVER("checked_by_driver"),
     ARRIVED("arrived"),
+    PACKING("packing"),
     SIGNED("signed");
     private final String orderStatus;
 

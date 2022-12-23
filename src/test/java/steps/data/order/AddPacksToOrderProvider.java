@@ -4,6 +4,7 @@ import org.apache.commons.lang3.RandomStringUtils;
 import requests.order.AddPack;
 import requests.order.AddPackLocation;
 import requests.order.PrintPackLocation;
+import requests.order.ProductAddBox;
 import storage.USER;
 
 import java.util.ArrayList;
@@ -31,6 +32,13 @@ public class AddPacksToOrderProvider {
     public static PrintPackLocation printPackLocation(USER email, String cloudPrinterId){
         return switch (email) {
             case EMAIL_INFO -> new PrintPackLocation(cloudPrinterId);
+            default -> null;
+        };
+    }
+
+    public static ProductAddBox productAddBox(USER email, ArrayList<Integer> orderProductId, Integer storeShippingPackagingBoxId){
+        return switch (email){
+            case EMAIL_INFO -> new ProductAddBox("#ff0102", storeShippingPackagingBoxId, orderProductId);
             default -> null;
         };
     }
