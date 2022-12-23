@@ -1,4 +1,4 @@
-package responses;
+package responses.Taxes;
 
 import lombok.Getter;
 import requests.TaxesInfo;
