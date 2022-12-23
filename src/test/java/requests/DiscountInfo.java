@@ -6,12 +6,12 @@ import lombok.Getter;
 @Getter
 public class DiscountInfo {
 
-    private String id;
-    private String title;
+    public String id;
+    public String title;
     @SerializedName("start_date")
-    private String startDate;
+    public String startDate;
     @SerializedName("end_date")
-    private String endDate;
-    private String type;
-    private String description;
+    public String endDate;
+    public String type;
+    public String description;
 }
