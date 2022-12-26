@@ -4,20 +4,21 @@ import com.google.gson.annotations.SerializedName;
 import lombok.With;
 
 import java.io.Serializable;
+import java.util.List;
 
 @With
-public class TaxesCreateInfo implements Serializable {
+public class TaxesUpdate implements Serializable {
     private String sequence;
     private String applicationKey;
     private String action;
     private Params params;
     private String command;
 
-    public TaxesCreateInfo(){
+    public TaxesUpdate(){
 
     }
 
-    public TaxesCreateInfo(String sequence, String applicationKey, String action, Params params,  String command) {
+    public TaxesUpdate(String sequence, String applicationKey, String action, Params params, String command) {
         super();
         this.sequence = sequence;
         this.applicationKey = applicationKey;
@@ -30,6 +31,7 @@ public class TaxesCreateInfo implements Serializable {
 
     @With
     public static class Params implements Serializable {
+        public String id;
         @SerializedName("is_active")
         public String isActive;
         public String title;
@@ -46,16 +48,21 @@ public class TaxesCreateInfo implements Serializable {
         public String type;
         @SerializedName("apply_to_all_products")
         public String applyToAllProducts;
+        public String taxId;
+        public List<String> select = null;
+        public Integer compact;
         public String token;
         public String language;
         public String contentLang;
 
+
         public Params(){
         }
 
-        public Params(String isActive, String title, String visibleTitle, String storeId, String description, String perUnit,
-                      String isCrv, String value, String type, String applyToAllProducts, String token, String language, String contentLang) {
+        public Params(String id, String isActive, String title, String visibleTitle, String storeId, String description, String perUnit,
+                      String isCrv, String value, String type, String applyToAllProducts, String taxId, List<String> select, Integer compact, String language, String contentLang) {
             super();
+            this.id=id;
             this.isActive = isActive;
             this.title = title;
             this.visibleTitle = visibleTitle;
@@ -66,10 +73,12 @@ public class TaxesCreateInfo implements Serializable {
             this.value = value;
             this.type = type;
             this.applyToAllProducts = applyToAllProducts;
-            this.token = token;
-            this.language = language;
-            this.contentLang = contentLang;
-
+            this.taxId=taxId;
+            this.select=select;
+            this.compact=compact;
+            this.token=token;
+            this.language=language;
+            this.contentLang=contentLang;
         }
     }
 

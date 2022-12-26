@@ -9,7 +9,7 @@ import java.util.List;
 public class SuccessCreateTax {
 
     public String sequence;
-    public String result;
+    public Integer result;
     public Data data;
     public String message;
     public String error;
@@ -19,7 +19,7 @@ public class SuccessCreateTax {
         this.sequence = sequence;
         return this;
     }
-    public SuccessCreateTax withResult(String result) {
+    public SuccessCreateTax withResult(Integer result) {
         this.result = result;
         return this;
     }
