@@ -40,6 +40,7 @@ public class PackagingForStore {
             @SerializedName("for_product")
             public String forProduct;
         }
+        @Getter
         public static class Box{
             @SerializedName("id")
             public int id;

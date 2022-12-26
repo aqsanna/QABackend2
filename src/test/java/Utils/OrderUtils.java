@@ -9,10 +9,7 @@ import requests.order.*;
 import responses.pack.PackagingForStore;
 import responses.pack.PacksToOrder;
 import responses.pack.PackLocation;
-import responses.partner.orders.FilteredListOfOrders;
-import responses.partner.orders.Order;
-import responses.partner.orders.OrderV2;
-import responses.partner.orders.PartnerOrders;
+import responses.partner.orders.*;
 import steps.data.users.UserInfoProvider;
 import storage.APIV1;
 import storage.APIV2;
@@ -158,26 +155,28 @@ public class OrderUtils {
         Assertions.assertEquals("OK", filteredListOfOrders.getCode(), "Can't filter orders: " + filteredListOfOrders.getMessage());
         return filteredListOfOrders;
     }
-    public OrderV2 getOrderDetails(String orderId){
+    public OrderV2 getOrderDetails(String orderId, String expandParams){
         OrderV2 order = RestAssured.given()
                 .header(new Header("Authorization", "Bearer " + UserInfoProvider.getToken()))
+                .queryParam("expand", expandParams)
                 .when()
-                .get(APIV1.STAGE.getApi() + APIV2.STORE_ORDER.getApi() + orderId + APIV2.ORDER_DETAILS.getApi())
-                .then()
+                .get(APIV1.STAGE.getApi() + APIV2.STORE_ORDER.getApi() + "/" + orderId + APIV2.ORDER_DETAILS.getApi())
+                .then().log().all()
                 .extract().as(OrderV2.class);
         Assertions.assertEquals("OK", order.getCode(), "Can't get the order" + orderId + ". Have a error: " + order.getMessage());
         Assertions.assertEquals(orderId, order.getData().getId(), "Get order:" + order.getData().getId() + " The order ids are not equal");
         return order;
     }
 
-    public OrderV2 postChangeOrderStatus(String orderId, ChangeOrderStatus data){
+    public OrderV2 postChangeOrderStatus(String orderId, ChangeOrderStatus data, String expandParams){
         OrderV2 order = RestAssured.given()
                 .header(new Header("Authorization", "Bearer " + UserInfoProvider.getToken()))
+                .queryParam("expand", expandParams)
                 .when()
                 .contentType(ContentType.JSON)
                 .body(gson.toJson(data))
                 .post(APIV1.STAGE.getApi() + APIV2.STORE_ORDER.getApi() + "/" + orderId + APIV2.CHANGE_STATUS.getApi())
-                .then().log().all()
+                .then()
                 .extract().as(OrderV2.class);
         Assertions.assertEquals("OK", order.getCode(), "Can't change the order status" + orderId + ". Have a error: " + order.getMessage());
         Assertions.assertEquals(orderId, order.getData().getId(), "Get order:" + order.getData().getId() + " The order id are not equal");
@@ -194,9 +193,10 @@ public class OrderUtils {
         return packaging;
     }
 
-    public OrderV2 postProductAddToBox(String orderId, ProductAddBox data){
+    public OrderV2 postProductAddToBox(String orderId, ProductAddBox data, String expandParams){
         OrderV2 order = RestAssured.given()
                 .header(new Header("Authorization", "Bearer " + UserInfoProvider.getToken()))
+                .queryParam("expand", expandParams)
                 .when()
                 .contentType(ContentType.JSON)
                 .body(gson.toJson(data))
@@ -207,4 +207,17 @@ public class OrderUtils {
         Assertions.assertEquals(orderId, order.getData().getId(), "Get order:" + order.getData().getId() + " The order ids are not equal");
         return order;
     }
+    public ShippingRates shippingRates(String orderId){
+        ShippingRates shippingRates = RestAssured.given()
+                .header(new Header("Authorization", "Bearer " + UserInfoProvider.getToken()))
+                .when()
+                .contentType(ContentType.JSON)
+                .get(APIV1.STAGE.getApi() + APIV2.STORE_ORDER.getApi() + "/" + orderId + APIV2.SHIPPING_RATES.getApi())
+                .then().log().all()
+                .extract().as(ShippingRates.class);
+        Assertions.assertEquals("OK", shippingRates.getCode(), "Can't change the order status" + orderId + ". Have a error: " + shippingRates.getMessage());
+        Assertions.assertTrue(shippingRates.getData().size() >= 1, "Shipping rates is empty");
+        return shippingRates;
+    }
+
 }
