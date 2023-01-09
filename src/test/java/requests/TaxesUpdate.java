@@ -60,7 +60,8 @@ public class TaxesUpdate implements Serializable {
         }
 
         public Params(String id, String isActive, String title, String visibleTitle, String storeId, String description, String perUnit,
-                      String isCrv, String value, String type, String applyToAllProducts, String taxId, List<String> select, Integer compact, String language, String contentLang) {
+                      String isCrv, String value, String type, String applyToAllProducts, String taxId, List<String> select, Integer compact,
+                      String token, String language, String contentLang) {
             super();
             this.id=id;
             this.isActive = isActive;

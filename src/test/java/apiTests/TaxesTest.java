@@ -53,23 +53,6 @@ public class TaxesTest {
 
     }
 
-    @Test
-    @DisplayName("Check success tax update")
-    public void successUpdateTax() {
-//                SuccessUpdateProduct successUpdateProduct = given()
-//                .header(new Header("Authorization", "Bearer " + UserInfoProvider.getToken()))
-//                .when()
-//                .contentType(ContentType.JSON)
-//                .body(gson.toJson(ProductInfoProvider.updProduct(User.EMAIL_INFO)))
-//                .put(ApiV1.STAGE.getApi() + ApiV1.UPDATE_PRODUCT.getApi() + ProductInfoProvider.getProductId())
-//                .then().log().all()
-//                .extract().as(SuccessUpdateProduct.class);
-//
-//        Assertions.assertEquals("success", successUpdateProduct.getResult());
-//        Assertions.assertEquals(200, successUpdateProduct.getCode());
-//        Assertions.assertFalse(successUpdateProduct.getData().isEmpty(), "data  is empty");
-    }
-
 
     @Test
     @DisplayName("Check success partner taxes list")
