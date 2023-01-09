@@ -25,6 +25,8 @@ public enum USER {
     IS_SHIPPABLE("true"),
     HAS_AVAILABILITY_SCHEDULE("false"),
     TITLE("testTags"),
+    ICON("https://cdn.stage.local.express/img/JyeicWbpavIiO2Ln1Wl2clRw9lbnLldWYneuZ09mb4A0lXaVavE3S2Zh1WBnauU=0nIn.jpg"),
+    PRIORITY("10"),
     PASSWORD("123456Ii");
 
     private final String user;

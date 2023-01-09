@@ -7,10 +7,14 @@ import io.restassured.http.Header;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import requests.EditTags;
 import requests.TagsInfo;
 import responses.tags.SuccessCreateTags;
 import responses.tags.TagsDelete;
+import responses.tags.TagsEdit;
 import responses.tags.TagsList;
+import specification.RequestSpec;
+import specification.ResponseSpec;
 import steps.data.users.ProductInfoProvider;
 import steps.data.users.TagsInfoProvider;
 import steps.data.users.UserInfoProvider;
@@ -41,6 +45,27 @@ public class TagsTest {
         Assertions.assertFalse(successCreateTags.getData().getId().isEmpty(), "is  is empty");
         Assertions.assertFalse(successCreateTags.getData().getTitle().isEmpty(), "title  is empty");
     }
+    @Test
+    @DisplayName("Check edit tags")
+    public void EditTags() {
+        TagsEdit tagsEdit = RestAssured.given()
+                .header(new Header("Authorization", "Bearer " + UserInfoProvider.getToken()))
+                .when()
+                .contentType(ContentType.JSON)
+                .body(gson.toJson(TagsInfoProvider.editTags(USER.EMAIL_INFO)))
+                .put(APIV1.STAGE.getApi() + APIV1.TAGS_EDIT.getApi() + TagsInfoProvider.getTagsId())
+                .then().log().all()
+                .extract().as(TagsEdit.class);
+
+
+        Assertions.assertEquals("OK", tagsEdit.getCode());
+        Assertions.assertEquals("Ok", tagsEdit.getMessage());
+        Assertions.assertFalse(tagsEdit.getData().getId().isEmpty(), "is  is empty");
+        Assertions.assertEquals(tagsEdit.getData().getPartnerId(), "13546");
+        Assertions.assertEquals(tagsEdit.getData().getPriority(), "10");
+        Assertions.assertFalse(tagsEdit.getData().getTitle().isEmpty(), "title  is empty");
+        Assertions.assertTrue(tagsEdit.getData().getIcon().contains("jpg"));
+    }
 
     @Test
     @DisplayName("check tags list")
@@ -49,7 +74,7 @@ public class TagsTest {
 
         TagsList tagsList = given()
                 .header(new Header("Authorization", "Bearer " + UserInfoProvider.getToken()))
-                .get(APIV1.STAGE.getApi() + APIV1.TAGSLIST.getApi())
+                .get(APIV1.STAGE.getApi() + APIV1.TAGS_LIST.getApi())
                 .then().log().all()
                 .extract().as(TagsList.class);
         Assertions.assertEquals("success", tagsList.getResult());

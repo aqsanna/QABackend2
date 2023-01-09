@@ -5,6 +5,7 @@ import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.http.Header;
 import requests.CreateTags;
+import requests.EditTags;
 import responses.product.SuccessCreateProduct;
 import responses.tags.SuccessCreateTags;
 import storage.APIV1;
@@ -16,6 +17,16 @@ public class TagsInfoProvider {
             case EMAIL_INFO -> new CreateTags(
                     new CreateTags.Params(
                             USER.TITLE.getUserData() + ProductInfoProvider.random()));
+            default -> null;
+        };
+    }
+    public static EditTags editTags(USER email){
+        return  switch (email){
+            case EMAIL_INFO -> new EditTags(
+                            USER.ICON.getUserData()
+                            ,USER.TITLE.getUserData() + ProductInfoProvider.random()
+                            , USER.PRIORITY.getUserData());
+
             default -> null;
         };
     }
