@@ -4,7 +4,9 @@ import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.http.Header;
 import requests.TaxesCreateInfo;
+import requests.TaxesUpdate;
 import responses.Taxes.SuccessCreateTax;
+import responses.Taxes.SuccessUpdateTax;
 import responses.product.SuccessCreateProduct;
 import storage.ApiV1;
 import storage.User;
@@ -31,10 +33,37 @@ public class TaxesInfoProvider {
                                     .withValue(User.VALUE.getUserData())
                                     .withType(User.TYPE.getUserData())
                                     .withApplyToAllProducts(User.APPLY_TO_ALL_PRODUCTS.getUserData())
-                                    .withToken(User.TOKEN.getUserData())
+                                    .withToken(UserInfoProvider.getToken())
                                     .withLanguage(User.LANGUAGES.getUserData())
                                     .withContentLang(User.CONTENTLANG.getUserData()),
                              User.COMMOND.getUserData());
+
+            default -> null;
+        };
+
+    }
+    public static TaxesUpdate editTaxes(User email){
+        return switch (email){
+            case EMAIL_INFO -> new TaxesUpdate(
+                    User.SEQUENCE.getUserData(),
+                    User.APPLICATIONKEY.getUserData(),
+                    User.ACTION.getUserData(),
+                    new TaxesUpdate.Params()
+                            .withId(getTaxId())
+                            .withIsActive(User.IS_ACTIVE.getUserData())
+                            .withTitle(User.TITLE.getUserData() + random())
+                            .withVisibleTitle(User.VISIBLE_TITLE.getUserData() + random())
+                            .withStoreId(User.STORE_ID.getUserData())
+                            .withDescription(User.DESCRIPTION.getUserData())
+                            .withPerUnit(User.PER_UNIT.getUserData())
+                            .withIsCrv(User.IS_CRV.getUserData())
+                            .withValue(User.VALUE.getUserData())
+                            .withType(User.TYPE.getUserData())
+                            .withApplyToAllProducts(User.APPLY_TO_ALL_PRODUCTS.getUserData())
+                            .withToken(UserInfoProvider.getToken())
+                            .withLanguage(User.LANGUAGES.getUserData())
+                            .withContentLang(User.CONTENTLANG.getUserData()),
+                    User.COMMOND.getUserData());
 
             default -> null;
         };

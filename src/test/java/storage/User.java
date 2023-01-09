@@ -1,5 +1,7 @@
 package storage;
 
+import steps.data.users.UserInfoProvider;
+
 public enum User {
     EMAIL_INFO("info@local.express"),
     EMAIL_CLIENT("oqsannas+31102022@localexpress.io"),
@@ -39,7 +41,6 @@ public enum User {
     VALUE("2"),
     TYPE("fixed"),
     APPLY_TO_ALL_PRODUCTS("0"),
-    TOKEN("bc6571achxjqr76kia2uq22pqcbe6kcol0hfse0xikf6wcbtl03dj39quuape08e"),
     LANGUAGES("en-US"),
     CONTENTLANG("en-US"),
     COMMOND("POST"),

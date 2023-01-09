@@ -48,9 +48,6 @@ public class TaxesUpdate implements Serializable {
         public String type;
         @SerializedName("apply_to_all_products")
         public String applyToAllProducts;
-        public String taxId;
-        public List<String> select = null;
-        public Integer compact;
         public String token;
         public String language;
         public String contentLang;
@@ -60,8 +57,7 @@ public class TaxesUpdate implements Serializable {
         }
 
         public Params(String id, String isActive, String title, String visibleTitle, String storeId, String description, String perUnit,
-                      String isCrv, String value, String type, String applyToAllProducts, String taxId, List<String> select, Integer compact,
-                      String token, String language, String contentLang) {
+                      String isCrv, String value, String type, String applyToAllProducts,  String token, String language, String contentLang) {
             super();
             this.id=id;
             this.isActive = isActive;
@@ -74,9 +70,6 @@ public class TaxesUpdate implements Serializable {
             this.value = value;
             this.type = type;
             this.applyToAllProducts = applyToAllProducts;
-            this.taxId=taxId;
-            this.select=select;
-            this.compact=compact;
             this.token=token;
             this.language=language;
             this.contentLang=contentLang;

@@ -9,11 +9,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import requests.TaxesInfo;
 import responses.Taxes.SuccessCreateTax;
+import responses.Taxes.SuccessUpdateTax;
 import responses.Taxes.Taxes;
-import responses.product.SuccessUpdateProduct;
-import specification.RequestSpec;
-import specification.ResponseSpec;
-import steps.data.users.ProductInfoProvider;
 import steps.data.users.TaxesInfoProvider;
 import steps.data.users.UserInfoProvider;
 import storage.ApiV1;
@@ -50,6 +47,35 @@ public class TaxesTest {
         Assertions.assertFalse(successCreateTax.getData().getResult().title.isEmpty(), "Title is empty");
         Assertions.assertFalse(successCreateTax.getData().getResult().visibleTitle.isEmpty(), "Visible title is empty");
         Assertions.assertFalse(successCreateTax.getData().getResult().description.isEmpty(), "Description is empty");
+
+    }
+
+
+    @Test
+    @DisplayName("Check edit product")
+    public void EditTaxes(){
+        SuccessUpdateTax successUpdateTax = RestAssured.given()
+                .when()
+                .contentType(ContentType.JSON)
+                .body(gson.toJson(TaxesInfoProvider.getTaxes(User.EMAIL_INFO)))
+                .post(ApiV1.STAGE.getApi() + ApiV1.TAX_CREATE.getApi())
+                .then().log().all()
+                .extract().as(SuccessUpdateTax.class);
+
+        Assertions.assertEquals(1, successUpdateTax.getResult());
+        Assertions.assertEquals("save-tax63a58f9e63ef6", successUpdateTax.getSequence());
+        Assertions.assertEquals("", successUpdateTax.getMessage());
+        Assertions.assertEquals("", successUpdateTax.getError());
+        Assertions.assertNotNull(successUpdateTax.getData().getResult().id, "Id is empty");
+        Assertions.assertNotNull(successUpdateTax.getData().getResult().type, "type is empty");
+        Assertions.assertFalse(successUpdateTax.getData().getResult().storeId.isEmpty(), "Store id is empty");
+        Assertions.assertEquals("2", successUpdateTax.getData().getResult().value);
+        Assertions.assertEquals("0", successUpdateTax.getData().getResult().applyToAllProducts);
+        Assertions.assertEquals("1", successUpdateTax.getData().getResult().perUnit);
+        Assertions.assertEquals("0", successUpdateTax.getData().getResult().isCrv);
+        Assertions.assertFalse(successUpdateTax.getData().getResult().title.isEmpty(), "Title is empty");
+        Assertions.assertFalse(successUpdateTax.getData().getResult().visibleTitle.isEmpty(), "Visible title is empty");
+        Assertions.assertFalse(successUpdateTax.getData().getResult().description.isEmpty(), "Description is empty");
 
     }
 
