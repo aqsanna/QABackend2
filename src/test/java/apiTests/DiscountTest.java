@@ -20,7 +20,6 @@ public class DiscountTest {
     @Test
     @Description("Check success partner discount list")
     public void CheckDiscountListTest() {
-
         String pattern = "yyyy-MM-dd HH:mm:ss";
         SimpleDateFormat format = new SimpleDateFormat(pattern);
 
