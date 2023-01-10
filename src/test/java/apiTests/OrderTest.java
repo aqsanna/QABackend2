@@ -8,7 +8,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import responses.partner.orders.PartnerOrders;
 import steps.data.users.UserInfoProvider;
-import storage.APIV1;
+import storage.ApiV1;
 import storage.OrderStatus;
 
 public class OrderTest {
