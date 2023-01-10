@@ -20,8 +20,8 @@ public enum ApiV1 {
     TAGS_LIST("rest/v1/partner/tags?limit=100&offset=0"),
     TAGS("rest/v1/partner/tags"),
     TAGS_EDIT("rest/v2/tags/"),
-    TAGS_DELETE("rest/v2/tags/");
-
+    TAGS_DELETE("rest/v2/tags/"),
+    DISCCOUNT_LIST("rest/v1/partner/discounts?limit=-1&offset=0");
 
     private final String api;
 
