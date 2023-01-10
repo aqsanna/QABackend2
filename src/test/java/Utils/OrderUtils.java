@@ -187,7 +187,7 @@ public class OrderUtils {
                 .header(new Header("Authorization", "Bearer " + UserInfoProvider.getToken()))
                 .when()
                 .get(APIV1.STAGE.getApi() + APIV2.PACKAGING.getApi())
-                .then()
+                .then().log().all()
                 .extract().as(PackagingForStore.class);
         Assertions.assertEquals("OK", packaging.getCode(), "Have a error: " + packaging.getMessage());
         return packaging;
@@ -201,7 +201,7 @@ public class OrderUtils {
                 .contentType(ContentType.JSON)
                 .body(gson.toJson(data))
                 .post(APIV1.STAGE.getApi() + APIV2.STORE_ORDER.getApi() + "/" + orderId + APIV2.SHIPPING_PACKAGING_BOX.getApi())
-                .then().log().all()
+                .then()
                 .extract().as(OrderV2.class);
         Assertions.assertEquals("OK", order.getCode(), "Can't change the order status" + orderId + ". Have a error: " + order.getMessage());
         Assertions.assertEquals(orderId, order.getData().getId(), "Get order:" + order.getData().getId() + " The order ids are not equal");
