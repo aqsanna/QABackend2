@@ -13,11 +13,11 @@ public class TaxesCreateInfo implements Serializable {
     private Params params;
     private String command;
 
-    public TaxesCreateInfo(){
+    public TaxesCreateInfo() {
 
     }
 
-    public TaxesCreateInfo(String sequence, String applicationKey, String action, Params params,  String command) {
+    public TaxesCreateInfo(String sequence, String applicationKey, String action, Params params, String command) {
         super();
         this.sequence = sequence;
         this.applicationKey = applicationKey;
@@ -50,7 +50,7 @@ public class TaxesCreateInfo implements Serializable {
         public String language;
         public String contentLang;
 
-        public Params(){
+        public Params() {
         }
 
         public Params(String isActive, String title, String visibleTitle, String storeId, String description, String perUnit,

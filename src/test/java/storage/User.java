@@ -1,7 +1,5 @@
 package storage;
 
-import steps.data.users.UserInfoProvider;
-
 public enum User {
     EMAIL_INFO("info@local.express"),
     EMAIL_CLIENT("oqsannas+31102022@localexpress.io"),
@@ -29,6 +27,10 @@ public enum User {
     TAG_IDS("144"),
     IS_FOODSTAMP("true"),
     IS_SHIPPABLE("true"),
+    HAS_AVAILABILITY_SCHEDULE("false"),
+    TITLE_TAG("testTags"),
+    ICON("https://cdn.stage.local.express/img/JyeicWbpavIiO2Ln1Wl2clRw9lbnLldWYneuZ09mb4A0lXaVavE3S2Zh1WBnauU=0nIn.jpg"),
+    PRIORITY("10"),
     SEQUENCE("save-tax63a58f9e63ef6"),
     APPLICATIONKEY("partnerbetatpqseyxgmbcuvyxctwfhibfqyurbglzlvowfjmeztqafrenipFUUU"),
     ACTION("save-tax"),
@@ -43,8 +45,7 @@ public enum User {
     APPLY_TO_ALL_PRODUCTS("0"),
     LANGUAGES("en-US"),
     CONTENTLANG("en-US"),
-    COMMOND("POST"),
-    HAS_AVAILABILITY_SCHEDULE("false");
+    COMMOND("POST");
 
     private final String user;
 
