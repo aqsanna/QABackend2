@@ -26,7 +26,7 @@ public class DiscountTest {
         Discount discount = given()
                 .header(new Header("Authorization", "Bearer " + UserInfoProvider.getToken()))
                 .get(ApiV1.STAGE.getApi() + ApiV1.DISCCOUNT_LIST.getApi())
-                .then().log().all()
+                .then()
                 .extract().as(Discount.class);
 
         Assertions.assertEquals("success", discount.getResult());
@@ -50,7 +50,7 @@ public class DiscountTest {
             Assertions.assertTrue(UserInfoProvider.isNumber(data.id), "id contains char");
             Assertions.assertNotNull(data.title, "title is null");
             Assertions.assertNotNull(data.type, "type is empty");
-            Assertions.assertNotNull(data.description, "type is empty");
+            Assertions.assertNotNull(data.description, "description is empty");
         }
     }
 }
