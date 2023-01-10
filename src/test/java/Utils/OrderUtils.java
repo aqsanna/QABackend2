@@ -125,26 +125,26 @@ public class OrderUtils {
         return finishOrder;
     }
 
-    public PackLocation postAddPackLocation(String orderId, ArrayList<AddPackLocation> data) {
+    public PackLocation postAddPackLocation(String orderId, ArrayList<AddPackLocation> data){
         PackLocation location = RestAssured.given()
                 .header(new Header("Authorization", "Bearer " + UserInfoProvider.getToken()))
                 .when()
                 .contentType(ContentType.JSON)
                 .body(gson.toJson(data))
-                .post(ApiV1.STAGE.getApi() + ApiV2.PACK_LOCATION_URL.getApi() + orderId + ApiV2.PACK_LOCATION.getApi())
+                .post(APIV1.STAGE.getApi() + APIV2.PACK_LOCATION_URL.getApi() + orderId + APIV2.PACK_LOCATION.getApi())
                 .then()
                 .extract().as(PackLocation.class);
         Assertions.assertEquals("OK", location.getCode(), "Can't add pack location for order " + orderId + ".Have a error: " + location.getMessage());
         return location;
     }
 
-    public PackLocation postPrintPackLocation(String orderId, PrintPackLocation data) {
+    public PackLocation postPrintPackLocation(String orderId, PrintPackLocation data){
         PackLocation printPackLocation = RestAssured.given()
                 .header(new Header("Authorization", "Bearer " + UserInfoProvider.getToken()))
                 .when()
                 .contentType(ContentType.JSON)
                 .body(gson.toJson(data))
-                .post(ApiV1.STAGE.getApi() + ApiV2.PACK_LOCATION_URL.getApi() + orderId + ApiV2.PACK_LOCATION_PRINT.getApi())
+                .post(APIV1.STAGE.getApi() + APIV2.PACK_LOCATION_URL.getApi() + orderId + APIV2.PACK_LOCATION_PRINT.getApi())
                 .then()
                 .extract().as(PackLocation.class);
         Assertions.assertEquals("OK", printPackLocation.getCode(), "Can't nor print pack location" + orderId + ". Have a error: " + printPackLocation.getMessage());
@@ -157,7 +157,7 @@ public class OrderUtils {
                 .when()
                 .contentType(ContentType.JSON)
                 .body(gson.toJson(data))
-                .post(ApiV1.STAGE.getApi() + ApiV2.STORE_ORDER.getApi())
+                .post(APIV1.STAGE.getApi() + APIV2.STORE_ORDER.getApi())
                 .then()
                 .extract().as(FilteredListOfOrders.class);
         Assertions.assertEquals("OK", filteredListOfOrders.getCode(), "Can't filter orders: " + filteredListOfOrders.getMessage());
@@ -168,7 +168,7 @@ public class OrderUtils {
                 .header(new Header("Authorization", "Bearer " + UserInfoProvider.getToken()))
                 .queryParam("expand", expandParams)
                 .when()
-                .get(ApiV1.STAGE.getApi() + ApiV2.STORE_ORDER.getApi() + "/" + orderId + ApiV2.ORDER_DETAILS.getApi())
+                .get(APIV1.STAGE.getApi() + APIV2.STORE_ORDER.getApi() + "/" + orderId + APIV2.ORDER_DETAILS.getApi())
                 .then().log().all()
                 .extract().as(OrderV2.class);
         Assertions.assertEquals("OK", order.getCode(), "Can't get the order" + orderId + ". Have a error: " + order.getMessage());
@@ -183,7 +183,7 @@ public class OrderUtils {
                 .when()
                 .contentType(ContentType.JSON)
                 .body(gson.toJson(data))
-                .post(ApiV1.STAGE.getApi() + ApiV2.STORE_ORDER.getApi() + "/" + orderId + ApiV2.CHANGE_STATUS.getApi())
+                .post(APIV1.STAGE.getApi() + APIV2.STORE_ORDER.getApi() + "/" + orderId + APIV2.CHANGE_STATUS.getApi())
                 .then()
                 .extract().as(OrderV2.class);
         Assertions.assertEquals("OK", order.getCode(), "Can't change the order status" + orderId + ". Have a error: " + order.getMessage());
@@ -204,6 +204,7 @@ public class OrderUtils {
     public OrderV2 postProductAddToBox(String orderId, ProductAddBox data, String expandParams){
         OrderV2 order = RestAssured.given()
                 .header(new Header("Authorization", "Bearer " + UserInfoProvider.getToken()))
+                .queryParam("expand", expandParams)
                 .when()
                 .contentType(ContentType.JSON)
                 .body(gson.toJson(data))

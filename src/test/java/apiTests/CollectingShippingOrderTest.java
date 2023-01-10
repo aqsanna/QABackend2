@@ -47,8 +47,14 @@ public class CollectingShippingOrderTest {
 
         if(Objects.equals(order.getData().getProductShippingPackagingBoxes().size(), 0)){
             PackagingForStore packaging = orderUtils.getStorePackaging();
-
-            Integer boxId = packaging.getData().getBoxes().get(0).getId();
+            Assertions.assertTrue(packaging.getData().getBoxes().size() >= 1, "There is no box in the store");
+            PackagingForStore.Data.Box floatyBox = packaging.getData().getBoxes().get(0);
+            for (PackagingForStore.Data.Box box: packaging.getData().getBoxes()) {
+                if(floatyBox.getWeight() < box.getWeight()){
+                    floatyBox = box;
+                }
+            }
+            Integer boxId = floatyBox.getId();
             ArrayList<Integer> productIds = new ArrayList<Integer>();
             ArrayList<OrderV2.Data.Product> products = order.getData().getProducts();
             for (OrderV2.Data.Product product: products) {
