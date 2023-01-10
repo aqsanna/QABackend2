@@ -1,5 +1,6 @@
 package apiTests;
 
+import assertions.AssertionForTaxes;
 import com.google.gson.Gson;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
@@ -22,6 +23,7 @@ import static io.restassured.RestAssured.given;
 
 public class TaxesTest {
     Gson gson = new Gson();
+    AssertionForTaxes assertionForTaxes = new AssertionForTaxes();
     @Test
     @DisplayName("Check create product")
     public void CreateTax(){
@@ -30,26 +32,11 @@ public class TaxesTest {
                 .contentType(ContentType.JSON)
                 .body(gson.toJson(TaxesInfoProvider.getTaxes(User.EMAIL_INFO)))
                 .post(ApiV1.STAGE.getApi() + ApiV1.TAX_CREATE.getApi())
-                .then().log().all()
+                .then()
                 .extract().as(SuccessCreateTax.class);
-
-        Assertions.assertEquals(1, successCreateTax.getResult());
-        Assertions.assertEquals("save-tax63a58f9e63ef6", successCreateTax.getSequence());
-        Assertions.assertEquals("", successCreateTax.getMessage());
-        Assertions.assertEquals("", successCreateTax.getError());
-        Assertions.assertNotNull(successCreateTax.getData().getResult().id, "Id is empty");
-        Assertions.assertNotNull(successCreateTax.getData().getResult().type, "type is empty");
-        Assertions.assertFalse(successCreateTax.getData().getResult().storeId.isEmpty(), "Store id is empty");
-        Assertions.assertEquals("2", successCreateTax.getData().getResult().value);
-        Assertions.assertEquals("0", successCreateTax.getData().getResult().applyToAllProducts);
-        Assertions.assertEquals("1", successCreateTax.getData().getResult().perUnit);
-        Assertions.assertEquals("0", successCreateTax.getData().getResult().isCrv);
-        Assertions.assertFalse(successCreateTax.getData().getResult().title.isEmpty(), "Title is empty");
-        Assertions.assertFalse(successCreateTax.getData().getResult().visibleTitle.isEmpty(), "Visible title is empty");
-        Assertions.assertFalse(successCreateTax.getData().getResult().description.isEmpty(), "Description is empty");
+            assertionForTaxes.assertCreateTaxes(successCreateTax);
 
     }
-
 
     @Test
     @DisplayName("Check edit product")
@@ -59,26 +46,10 @@ public class TaxesTest {
                 .contentType(ContentType.JSON)
                 .body(gson.toJson(TaxesInfoProvider.getTaxes(User.EMAIL_INFO)))
                 .post(ApiV1.STAGE.getApi() + ApiV1.TAX_CREATE.getApi())
-                .then().log().all()
+                .then()
                 .extract().as(SuccessUpdateTax.class);
-
-        Assertions.assertEquals(1, successUpdateTax.getResult());
-        Assertions.assertEquals("save-tax63a58f9e63ef6", successUpdateTax.getSequence());
-        Assertions.assertEquals("", successUpdateTax.getMessage());
-        Assertions.assertEquals("", successUpdateTax.getError());
-        Assertions.assertNotNull(successUpdateTax.getData().getResult().id, "Id is empty");
-        Assertions.assertNotNull(successUpdateTax.getData().getResult().type, "type is empty");
-        Assertions.assertFalse(successUpdateTax.getData().getResult().storeId.isEmpty(), "Store id is empty");
-        Assertions.assertEquals("2", successUpdateTax.getData().getResult().value);
-        Assertions.assertEquals("0", successUpdateTax.getData().getResult().applyToAllProducts);
-        Assertions.assertEquals("1", successUpdateTax.getData().getResult().perUnit);
-        Assertions.assertEquals("0", successUpdateTax.getData().getResult().isCrv);
-        Assertions.assertFalse(successUpdateTax.getData().getResult().title.isEmpty(), "Title is empty");
-        Assertions.assertFalse(successUpdateTax.getData().getResult().visibleTitle.isEmpty(), "Visible title is empty");
-        Assertions.assertFalse(successUpdateTax.getData().getResult().description.isEmpty(), "Description is empty");
-
+        assertionForTaxes.assertUpdateTaxes(successUpdateTax);
     }
-
 
     @Test
     @DisplayName("Check success partner taxes list")
@@ -86,7 +57,7 @@ public class TaxesTest {
         Taxes taxes = given()
                 .header(new Header("Authorization", "Bearer " + UserInfoProvider.getToken()))
                 .get(ApiV1.STAGE.getApi() + ApiV1.TAXES_LIST.getApi())
-                .then().log().all()
+                .then()
                 .extract().as(Taxes.class);
         Assertions.assertEquals("success", taxes.getResult());
         Assertions.assertEquals(200, taxes.getCode());

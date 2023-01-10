@@ -1,13 +1,11 @@
 package steps.data.users;
+
 import com.google.gson.Gson;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
-import io.restassured.http.Header;
 import requests.TaxesCreateInfo;
 import requests.TaxesUpdate;
 import responses.Taxes.SuccessCreateTax;
-import responses.Taxes.SuccessUpdateTax;
-import responses.product.SuccessCreateProduct;
 import storage.ApiV1;
 import storage.User;
 
@@ -76,10 +74,9 @@ public class TaxesInfoProvider {
                 .contentType(ContentType.JSON)
                 .body(gson.toJson(TaxesInfoProvider.getTaxes(User.EMAIL_INFO)))
                 .post(ApiV1.STAGE.getApi() + ApiV1.TAX_CREATE.getApi())
-                .then().log().all()
+                .then()
                 .extract().as(SuccessCreateTax.class);
         return successCreateTax.getData().getResult().id;
 
     }
-
 }
