@@ -8,7 +8,11 @@ public enum CollectingOrderValues {
 
 
     private final String collectingOrderValues;
-    CollectingOrderValues(String collectingOrderValues) { this.collectingOrderValues = collectingOrderValues;}
+
+    CollectingOrderValues(String collectingOrderValues) {
+        this.collectingOrderValues = collectingOrderValues;
+    }
+
     public String getCollectingOrderValues() {
         return collectingOrderValues;
     }

@@ -5,6 +5,7 @@ import groovyjarjarantlr4.v4.runtime.misc.Nullable;
 import lombok.Getter;
 
 import java.util.ArrayList;
+
 @Getter
 public class PacksToOrder {
     @SerializedName("message")
@@ -13,7 +14,8 @@ public class PacksToOrder {
     public String code;
     @SerializedName("data")
     public Data data;
-    public static class Data{
+
+    public static class Data {
         @SerializedName("id")
         public String id;
         @SerializedName("uniqid")
@@ -214,14 +216,14 @@ public class PacksToOrder {
         @SerializedName("preparationTime")
         public int preparationTime;
 
-        public static class AppliedTaxis{
+        public static class AppliedTaxis {
             @SerializedName("title")
             public String title;
             @SerializedName("amount")
             public String amount;
         }
 
-        public static class CreatedBy{
+        public static class CreatedBy {
             @SerializedName("id")
             public Object id;
             @SerializedName("name")

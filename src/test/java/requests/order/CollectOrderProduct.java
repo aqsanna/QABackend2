@@ -9,17 +9,19 @@ public class CollectOrderProduct {
     public String Response;
     @SerializedName("_group_by")
     public String groupBy;
-    public static class Params{
-        @SerializedName("status")
-        public String status;
-        public Params(String status) {
-            this.status = status;
-        }
-    }
 
     public CollectOrderProduct(CollectOrderProduct.Params params, String response, String groupBy) {
         this.params = params;
         this.Response = response;
         this.groupBy = groupBy;
+    }
+
+    public static class Params {
+        @SerializedName("status")
+        public String status;
+
+        public Params(String status) {
+            this.status = status;
+        }
     }
 }

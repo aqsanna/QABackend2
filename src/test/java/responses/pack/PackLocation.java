@@ -5,6 +5,7 @@ import groovyjarjarantlr4.v4.runtime.misc.Nullable;
 import lombok.Getter;
 
 import java.util.ArrayList;
+
 @Getter
 public class PackLocation {
     @SerializedName("message")

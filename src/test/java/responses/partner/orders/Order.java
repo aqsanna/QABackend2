@@ -4,18 +4,20 @@ import com.google.gson.annotations.SerializedName;
 import lombok.Getter;
 
 import java.util.ArrayList;
+
 @Getter
 public class Order {
+    @SerializedName("data")
+    public Data data;
     @SerializedName("code")
     private Integer code;
     @SerializedName("result")
     private String result;
     @SerializedName("error")
     private String error;
-    @SerializedName("data")
-    public Data data;
+
     @Getter
-    public static class Data{
+    public static class Data {
         @SerializedName("id")
         public String id;
         @SerializedName("status")
@@ -64,7 +66,8 @@ public class Order {
         public boolean requiresId;
         @SerializedName("initial_shipping_token")
         public Object initialShippingToken;
-        public static class Dropoff{
+
+        public static class Dropoff {
             @SerializedName("period")
             public Period period;
             @SerializedName("person")
@@ -76,13 +79,14 @@ public class Order {
             @SerializedName("notes")
             public Object notes;
 
-            public static class Period{
+            public static class Period {
                 @SerializedName("start")
                 public String start;
                 @SerializedName("end")
                 public String end;
             }
-            public static class Person{
+
+            public static class Person {
                 @SerializedName("id")
                 public String id;
                 @SerializedName("first_name")
@@ -94,14 +98,16 @@ public class Order {
                 @SerializedName("membership_id")
                 public String membershipId;
             }
-            public static class Address{
+
+            public static class Address {
                 @SerializedName("first_line")
                 public String firstLine;
                 @SerializedName("second_line")
                 public Object secondLine;
                 @SerializedName("location")
                 public Location location;
-                public static class Location{
+
+                public static class Location {
                     @SerializedName("lat")
                     public String lat;
                     @SerializedName("lng")
@@ -109,7 +115,8 @@ public class Order {
                 }
             }
         }
-        public static class Payment{
+
+        public static class Payment {
             @SerializedName("type")
             public ArrayList<String> type;
             @SerializedName("tip")
@@ -137,7 +144,7 @@ public class Order {
             @SerializedName("original_total")
             public Double originalTotal;
 
-            public static class Bag{
+            public static class Bag {
                 @SerializedName("lng")
                 public Integer qty;
                 @SerializedName("price")
@@ -147,13 +154,15 @@ public class Order {
                 @SerializedName("free_qty")
                 public Integer freeQty;
             }
-            public static class Taxis{
+
+            public static class Taxis {
                 @SerializedName("title")
                 public String title;
                 @SerializedName("amount")
                 public Double amount;
             }
-            public static class Fee{
+
+            public static class Fee {
                 @SerializedName("id")
                 public String id;
                 @SerializedName("title")
@@ -162,7 +171,8 @@ public class Order {
                 public Double amount;
             }
         }
-        public static class Transaction{
+
+        public static class Transaction {
             @SerializedName("id")
             public String id;
             @SerializedName("type")
@@ -189,7 +199,7 @@ public class Order {
             public boolean isEbt;
         }
 
-        public static class Delivery{
+        public static class Delivery {
             @SerializedName("driver")
             public Object driver;
             @SerializedName("accepted_at")
@@ -197,16 +207,18 @@ public class Order {
             @SerializedName("delivered_at")
             public Object deliveredAt;
         }
+
         @Getter
-        public static class Wrapping{
+        public static class Wrapping {
             @SerializedName("packs")
             public ArrayList<Pack> packs;
             @SerializedName("hasAdvancedCollectingFlow")
             public boolean hasAdvancedCollectingFlow;
             @SerializedName("locations")
             public ArrayList<Object> locations;
+
             @Getter
-            public static class Pack{
+            public static class Pack {
                 @SerializedName("id")
                 public String id;
                 @SerializedName("pack_id")
@@ -229,20 +241,23 @@ public class Order {
                 public int total;
             }
         }
+
         @Getter
-        public static class GroupedItem{
+        public static class GroupedItem {
             @SerializedName("group")
             public Group group;
             @SerializedName("order_products")
             public ArrayList<OrderProduct> orderProducts;
-            public static class Group{
+
+            public static class Group {
                 @SerializedName("id")
                 public String id;
                 @SerializedName("title")
                 public String title;
             }
+
             @Getter
-            public static class OrderProduct{
+            public static class OrderProduct {
                 @SerializedName("id")
                 public String id;
                 @SerializedName("product")
@@ -274,7 +289,7 @@ public class Order {
                 @SerializedName("in_stock")
                 public Double inStock;
 
-                public static class Product{
+                public static class Product {
                     @SerializedName("id")
                     public String id;
                     @SerializedName("source")
@@ -354,7 +369,7 @@ public class Order {
                     @SerializedName("modification")
                     public Object modification;
 
-                    public static class Image{
+                    public static class Image {
                         @SerializedName("original")
                         public String original;
                         @SerializedName("thumbnail")
@@ -362,7 +377,8 @@ public class Order {
                         @SerializedName("large")
                         public String large;
                     }
-                    public static class NutritionImage{
+
+                    public static class NutritionImage {
                         @SerializedName("original")
                         public String original;
                         @SerializedName("thumbnail")
@@ -370,7 +386,8 @@ public class Order {
                         @SerializedName("large")
                         public String large;
                     }
-                    public static class AdditionalImage{
+
+                    public static class AdditionalImage {
                         @SerializedName("id")
                         public String id;
                         @SerializedName("original")
@@ -380,45 +397,52 @@ public class Order {
                         @SerializedName("large")
                         public String large;
                     }
-                    public static class Category{
+
+                    public static class Category {
                         @SerializedName("id")
                         public String id;
                         @SerializedName("title")
                         public String title;
                         @SerializedName("department")
                         public Department department;
-                        public static class Department{
+
+                        public static class Department {
                             @SerializedName("id")
                             public String id;
                             @SerializedName("title")
                             public String title;
                         }
                     }
-                    public static class Manufacturer{
+
+                    public static class Manufacturer {
                         @SerializedName("id")
                         public String id;
                         @SerializedName("title")
                         public String title;
                     }
-                    public static class Brand{
+
+                    public static class Brand {
                         @SerializedName("id")
                         public String id;
                         @SerializedName("title")
                         public String title;
                     }
-                    public static class Tag{
+
+                    public static class Tag {
                         @SerializedName("id")
                         public String id;
                         @SerializedName("title")
                         public String title;
                     }
-                    public static class Pos{
+
+                    public static class Pos {
                         @SerializedName("id")
                         public Object id;
                         @SerializedName("exclude_from_pos_sync")
                         public boolean excludeFromPosSync;
                     }
-                    public static class Tax{
+
+                    public static class Tax {
                         @SerializedName("id")
                         public String id;
                         @SerializedName("title")
@@ -428,7 +452,8 @@ public class Order {
                         @SerializedName("apply_to_all_products")
                         public boolean applyToAllProducts;
                     }
-                    public static class Discount{
+
+                    public static class Discount {
                         @SerializedName("id")
                         public String id;
                         @SerializedName("title")
@@ -442,12 +467,14 @@ public class Order {
                         @SerializedName("description")
                         public String description;
                     }
-                    public static class Settings{
+
+                    public static class Settings {
                         @SerializedName("quantity")
                         public Quantity quantity;
                         @SerializedName("weight")
                         public Weight weight;
-                        public static class Quantity{
+
+                        public static class Quantity {
                             @SerializedName("initial")
                             public Double initial;
                             @SerializedName("min")
@@ -457,7 +484,8 @@ public class Order {
                             @SerializedName("step")
                             public Double step;
                         }
-                        public static class Weight{
+
+                        public static class Weight {
                             @SerializedName("initial")
                             public Double initial;
                             @SerializedName("min")
@@ -469,13 +497,15 @@ public class Order {
                         }
                     }
                 }
-                public static class Replacement{
+
+                public static class Replacement {
                     @SerializedName("type")
                     public String type;
                     @SerializedName("product")
                     public Object product;
                 }
-                public static class Discount{
+
+                public static class Discount {
                     @SerializedName("id")
                     public String id;
                     @SerializedName("title")

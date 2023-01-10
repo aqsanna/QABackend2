@@ -4,10 +4,10 @@ import requests.order.CollectOrderProduct;
 import requests.order.OrderConfirm;
 import requests.order.OrderStart;
 import storage.CollectingOrderValues;
-import storage.USER;
+import storage.User;
 
 public class CollectingOrderProvider {
-    public static OrderConfirm orderConfirm(USER email) {
+    public static OrderConfirm orderConfirm(User email) {
         return switch (email) {
             case EMAIL_INFO -> new OrderConfirm(
                     new OrderConfirm.Params(CollectingOrderValues.PREPARATION_TIME.getCollectingOrderValues()),
@@ -19,8 +19,8 @@ public class CollectingOrderProvider {
         };
     }
 
-    public static OrderStart orderStart(USER email){
-        return switch (email){
+    public static OrderStart orderStart(User email) {
+        return switch (email) {
             case EMAIL_INFO -> new OrderStart(
                     CollectingOrderValues.RESPONSE.getCollectingOrderValues(),
                     CollectingOrderValues.GROUP_BY.getCollectingOrderValues()
@@ -29,8 +29,8 @@ public class CollectingOrderProvider {
         };
     }
 
-    public static CollectOrderProduct collectOrderProduct(USER email){
-        return switch (email){
+    public static CollectOrderProduct collectOrderProduct(User email) {
+        return switch (email) {
             case EMAIL_INFO -> new CollectOrderProduct(
                     new CollectOrderProduct.Params(CollectingOrderValues.ASSEMBLED.getCollectingOrderValues()),
                     CollectingOrderValues.RESPONSE.getCollectingOrderValues(),

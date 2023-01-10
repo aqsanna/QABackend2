@@ -14,14 +14,12 @@ public enum ApiV1 {
     UPDATE_PRODUCT("rest/v1/partner/stores/87/products/"),
     ORDERS("rest/v1/partner/stores/87/orders"),
     PRODUCT_DATA_TYPE("rest/v1/partner/service/available-products-data-types"),
-    STORES_LIST("rest/v1/partner/stores");
-    STORES_LIST("rest/v1/partner/stores"),
     ORDERS_TO("rest/v1/partner/orders/"),
     CONFIRM("/confirm"),
     ORDER_START("/start"),
     FINISH("/finish"),
-    ORDER_ITEMS("rest/v1/partner/order-items/");
-
+    ORDER_ITEMS("rest/v1/partner/order-items/"),
+    STORES_LIST("rest/v1/partner/stores");
 
     private final String api;
 
