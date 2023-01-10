@@ -44,7 +44,7 @@ public class DiscountTest {
                     Date dateFormatEnd = format.parse(dateEnd);
                     Assertions.assertTrue(true, "Date is not in the correct format");
                 } catch (ParseException e) {
-                    Assertions.assertTrue(false, "Date is not in the correct format");
+                    Assertions.fail( "Date is not in the correct format");
                 }
             }
             Assertions.assertTrue(UserInfoProvider.isNumber(data.id), "id contains char");
