@@ -10,7 +10,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import requests.TaxesInfo;
 import responses.Taxes.SuccessCreateTax;
-import responses.Taxes.SuccessUpdateTax;
 import responses.Taxes.Taxes;
 import steps.data.users.TaxesInfoProvider;
 import steps.data.users.UserInfoProvider;
@@ -34,21 +33,8 @@ public class TaxesTest {
                 .post(ApiV1.STAGE.getApi() + ApiV1.TAX_CREATE.getApi())
                 .then()
                 .extract().as(SuccessCreateTax.class);
-            assertionForTaxes.assertCreateTaxes(successCreateTax);
+            assertionForTaxes.assertTaxes(successCreateTax);
 
-    }
-
-    @Test
-    @DisplayName("Check edit product")
-    public void EditTaxes(){
-        SuccessUpdateTax successUpdateTax = RestAssured.given()
-                .when()
-                .contentType(ContentType.JSON)
-                .body(gson.toJson(TaxesInfoProvider.getTaxes(User.EMAIL_INFO)))
-                .post(ApiV1.STAGE.getApi() + ApiV1.TAX_CREATE.getApi())
-                .then()
-                .extract().as(SuccessUpdateTax.class);
-        assertionForTaxes.assertUpdateTaxes(successUpdateTax);
     }
 
     @Test

@@ -2,11 +2,10 @@ package assertions;
 
 import org.junit.jupiter.api.Assertions;
 import responses.Taxes.SuccessCreateTax;
-import responses.Taxes.SuccessUpdateTax;
 import storage.User;
 
 public class AssertionForTaxes {
-    public void assertCreateTaxes(SuccessCreateTax successCreateTax){
+    public void assertTaxes(SuccessCreateTax successCreateTax){
 
         Assertions.assertEquals(1, successCreateTax.getResult());
         Assertions.assertEquals("save-tax63a58f9e63ef6", successCreateTax.getSequence());
@@ -24,25 +23,4 @@ public class AssertionForTaxes {
         Assertions.assertFalse(successCreateTax.getData().getResult().description.isEmpty(), "Description is empty");
 
     }
-
-    public void assertUpdateTaxes(SuccessUpdateTax successUpdateTax){
-
-        Assertions.assertEquals(1, successUpdateTax.getResult());
-        Assertions.assertEquals("save-tax63a58f9e63ef6", successUpdateTax.getSequence());
-        Assertions.assertEquals("", successUpdateTax.getMessage());
-        Assertions.assertEquals("", successUpdateTax.getError());
-        Assertions.assertNotNull(successUpdateTax.getData().getResult().id, "Id is empty");
-        Assertions.assertNotNull(successUpdateTax.getData().getResult().type, "type is empty");
-        Assertions.assertFalse(successUpdateTax.getData().getResult().storeId.isEmpty(), "Store id is empty");
-        Assertions.assertEquals(User.VALUE.getUserData(), successUpdateTax.getData().getResult().value);
-        Assertions.assertEquals(User.APPLY_TO_ALL_PRODUCTS.getUserData(), successUpdateTax.getData().getResult().applyToAllProducts);
-        Assertions.assertEquals(User.PER_UNIT.getUserData(), successUpdateTax.getData().getResult().perUnit);
-        Assertions.assertEquals(User.IS_CRV.getUserData(), successUpdateTax.getData().getResult().isCrv);
-        Assertions.assertFalse(successUpdateTax.getData().getResult().title.isEmpty(), "Title is empty");
-        Assertions.assertFalse(successUpdateTax.getData().getResult().visibleTitle.isEmpty(), "Visible title is empty");
-        Assertions.assertFalse(successUpdateTax.getData().getResult().description.isEmpty(), "Description is empty");
-
-    }
-
-
 }
