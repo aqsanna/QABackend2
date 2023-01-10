@@ -7,45 +7,45 @@ import io.restassured.http.Header;
 import requests.CreateProduct;
 import requests.UpdateProduct;
 import responses.product.SuccessCreateProduct;
-import storage.APIV1;
-import storage.USER;
+import storage.ApiV1;
+import storage.User;
 
 import java.util.Random;
 
 public class ProductInfoProvider {
-    public static CreateProduct getProduct(USER email) {
+    public static CreateProduct getProduct(User email) {
         return switch (email) {
             case EMAIL_INFO -> new CreateProduct(
                     new CreateProduct.Params(
-                            USER.NAME.getUserData()
+                            User.NAME.getUserData()
                             , random()
-                            , USER.CATEGORY_ID.getUserData()
-                            , Double.parseDouble(USER.PRICE.getUserData())
-                            , USER.PRICE_UNITS.getUserData()));
+                            , User.CATEGORY_ID.getUserData()
+                            , Double.parseDouble(User.PRICE.getUserData())
+                            , User.PRICE_UNITS.getUserData()));
 
             default -> null;
         };
     }
 
-    public static UpdateProduct updProduct(USER email) {
+    public static UpdateProduct updProduct(User email) {
         return switch (email) {
             case EMAIL_INFO -> new UpdateProduct(
                     new UpdateProduct.Params(
-                            USER.NAME.getUserData()
+                            User.NAME.getUserData()
                             , random()
-                            , USER.CATEGORY_ID.getUserData()
-                            , Double.parseDouble(USER.PRICE.getUserData())
-                            , USER.PRICE_UNITS.getUserData()
-                            , Integer.parseInt(USER.VOLUME.getUserData())
-                            , USER.VOLUME_UNITS.getUserData()
-                            , Integer.parseInt(USER.QUANTITY_IN_PACK.getUserData())
-                            , Integer.parseInt(USER.DISPLAYED_VALUE_FOR_PRICE.getUserData())
-                            , USER.DESCRIPTION.getUserData()
-                            , USER.INGREDIENTS.getUserData()
-                            , Integer.parseInt(USER.TAG_IDS.getUserData())
-                            , Boolean.parseBoolean(USER.IS_FOODSTAMP.getUserData())
-                            , Boolean.parseBoolean(USER.IS_SHIPPABLE.getUserData())
-                            , Boolean.parseBoolean(USER.HAS_AVAILABILITY_SCHEDULE.getUserData())));
+                            , User.CATEGORY_ID.getUserData()
+                            , Double.parseDouble(User.PRICE.getUserData())
+                            , User.PRICE_UNITS.getUserData()
+                            , Integer.parseInt(User.VOLUME.getUserData())
+                            , User.VOLUME_UNITS.getUserData()
+                            , Integer.parseInt(User.QUANTITY_IN_PACK.getUserData())
+                            , Integer.parseInt(User.DISPLAYED_VALUE_FOR_PRICE.getUserData())
+                            , User.DESCRIPTION.getUserData()
+                            , User.INGREDIENTS.getUserData()
+                            , Integer.parseInt(User.TAG_IDS.getUserData())
+                            , Boolean.parseBoolean(User.IS_FOODSTAMP.getUserData())
+                            , Boolean.parseBoolean(User.IS_SHIPPABLE.getUserData())
+                            , Boolean.parseBoolean(User.HAS_AVAILABILITY_SCHEDULE.getUserData())));
 
             default -> null;
         };
@@ -57,8 +57,8 @@ public class ProductInfoProvider {
                 .header(new Header("Authorization", "Bearer " + UserInfoProvider.getToken()))
                 .when()
                 .contentType(ContentType.JSON)
-                .body(gson.toJson(getProduct(USER.EMAIL_INFO)))
-                .post(APIV1.STAGE.getApi() + APIV1.CREATE_PRODUCT.getApi())
+                .body(gson.toJson(getProduct(User.EMAIL_INFO)))
+                .post(ApiV1.STAGE.getApi() + ApiV1.CREATE_PRODUCT.getApi())
                 .then().log().all()
                 .extract().as(SuccessCreateProduct.class);
         return successCreateProduct.getData();

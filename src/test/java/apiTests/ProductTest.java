@@ -14,8 +14,8 @@ import specification.RequestSpec;
 import specification.ResponseSpec;
 import steps.data.users.ProductInfoProvider;
 import steps.data.users.UserInfoProvider;
-import storage.APIV1;
-import storage.USER;
+import storage.ApiV1;
+import storage.User;
 
 import static io.restassured.RestAssured.given;
 
@@ -29,8 +29,8 @@ public class ProductTest {
                 .header(new Header("Authorization", "Bearer " + UserInfoProvider.getToken()))
                 .when()
                 .contentType(ContentType.JSON)
-                .body(gson.toJson(ProductInfoProvider.getProduct(USER.EMAIL_INFO)))
-                .post(APIV1.STAGE.getApi() + APIV1.CREATE_PRODUCT.getApi())
+                .body(gson.toJson(ProductInfoProvider.getProduct(User.EMAIL_INFO)))
+                .post(ApiV1.STAGE.getApi() + ApiV1.CREATE_PRODUCT.getApi())
                 .then().log().all()
                 .extract().as(SuccessCreateProduct.class);
 
@@ -44,7 +44,7 @@ public class ProductTest {
     public void deleteProductTest() {
         SuccessDeleteProduct deleteProductTest = RestAssured.given()
                 .header(new Header("Authorization", "Bearer " + UserInfoProvider.getToken()))
-                .delete(APIV1.STAGE.getApi() + APIV1.DELETE_PRODUCT_ID.getApi() + ProductInfoProvider.getProductId())
+                .delete(ApiV1.STAGE.getApi() + ApiV1.DELETE_PRODUCT_ID.getApi() + ProductInfoProvider.getProductId())
                 .then().log().all()
                 .extract().as(SuccessDeleteProduct.class);
 
@@ -56,13 +56,13 @@ public class ProductTest {
     @Test
     @DisplayName("Check success product update")
     public void successUpdateTest() {
-        RequestSpec.installSpecification(RequestSpec.requestSpec(APIV1.LOGIN.getApi()), ResponseSpec.responseOK200());
+        RequestSpec.installSpecification(RequestSpec.requestSpec(ApiV1.LOGIN.getApi()), ResponseSpec.responseOK200());
         SuccessUpdateProduct successUpdateProduct = given()
                 .header(new Header("Authorization", "Bearer " + UserInfoProvider.getToken()))
                 .when()
                 .contentType(ContentType.JSON)
-                .body(gson.toJson(ProductInfoProvider.updProduct(USER.EMAIL_INFO)))
-                .put(APIV1.STAGE.getApi() + APIV1.UPDATE_PRODUCT.getApi() + ProductInfoProvider.getProductId())
+                .body(gson.toJson(ProductInfoProvider.updProduct(User.EMAIL_INFO)))
+                .put(ApiV1.STAGE.getApi() + ApiV1.UPDATE_PRODUCT.getApi() + ProductInfoProvider.getProductId())
                 .then().log().all()
                 .extract().as(SuccessUpdateProduct.class);
 

@@ -3,7 +3,7 @@ package storage;
 import lombok.Getter;
 
 @Getter
-public enum APIV1 {
+public enum ApiV1 {
     STAGE("https://stage-old.local.express/"),
     STORE("rest/v1/partner/stores"),
     LOGIN("api/rest/v1/auth/login"),
@@ -13,6 +13,8 @@ public enum APIV1 {
     DELETE_PRODUCT_ID("rest/v1/partner/stores/87/products/"),
     UPDATE_PRODUCT("rest/v1/partner/stores/87/products/"),
     ORDERS("rest/v1/partner/stores/87/orders"),
+    PRODUCT_DATA_TYPE("rest/v1/partner/service/available-products-data-types"),
+    STORES_LIST("rest/v1/partner/stores");
     STORES_LIST("rest/v1/partner/stores"),
     TAGS_LIST("rest/v1/partner/tags?limit=100&offset=0"),
     TAGS("rest/v1/partner/tags"),
@@ -23,7 +25,7 @@ public enum APIV1 {
 
     private final String api;
 
-    APIV1(String api) {
+    ApiV1(String api) {
         this.api = api;
     }
 

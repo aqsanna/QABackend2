@@ -7,7 +7,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import responses.partner.orders.PartnerOrders;
 import steps.data.users.UserInfoProvider;
-import storage.APIV1;
+import storage.ApiV1;
 import storage.OrderStatus;
 
 public class OrderTest {
@@ -29,7 +29,7 @@ public class OrderTest {
                         .queryParam("offset", offset)
                         .queryParam("sort", "asc")
                         .when()
-                        .get(APIV1.STAGE.getApi() + APIV1.ORDERS.getApi())
+                        .get(ApiV1.STAGE.getApi() + ApiV1.ORDERS.getApi())
                         .then()
                         .extract().as(PartnerOrders.class);
                 Assertions.assertEquals("success", orderList.getResult(), "Have a error: " + orderList.getResult());
