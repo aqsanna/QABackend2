@@ -37,14 +37,14 @@ public class DiscountTest {
         ArrayList<DiscountInfo> discountInfos = discount.getData();
 
         for (DiscountInfo data : discountInfos) {
-            if((data.startDate !=null) || (data.endDate!=null)){
+            if ((data.startDate != null) || (data.endDate != null)) {
                 String dateStart = data.startDate;
                 String dateEnd = data.startDate;
-                try{
+                try {
                     Date dateFormatStart = format.parse(dateStart);
                     Date dateFormatEnd = format.parse(dateEnd);
                     Assertions.assertTrue(true, "Date is not in the correct format");
-                }catch(ParseException e){
+                } catch (ParseException e) {
                     Assertions.assertTrue(false, "Date is not in the correct format");
                 }
             }
