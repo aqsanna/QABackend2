@@ -23,9 +23,10 @@ import static io.restassured.RestAssured.given;
 public class TaxesTest {
     Gson gson = new Gson();
     AssertionForTaxes assertionForTaxes = new AssertionForTaxes();
+
     @Test
     @DisplayName("Check create product")
-    public void CreateTax(){
+    public void CreateTax() {
         SuccessCreateTax successCreateTax = RestAssured.given()
                 .when()
                 .contentType(ContentType.JSON)
@@ -33,7 +34,7 @@ public class TaxesTest {
                 .post(ApiV1.STAGE.getApi() + ApiV1.TAX_CREATE.getApi())
                 .then()
                 .extract().as(SuccessCreateTax.class);
-            assertionForTaxes.assertTaxes(successCreateTax);
+        assertionForTaxes.assertTaxes(successCreateTax);
 
     }
 

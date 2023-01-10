@@ -2,9 +2,9 @@ package responses.Taxes;
 
 import com.google.gson.annotations.SerializedName;
 import lombok.Getter;
-import responses.userLogin.SuccessLogin;
 
 import java.util.List;
+
 @Getter
 public class SuccessCreateTax {
 
@@ -13,28 +13,33 @@ public class SuccessCreateTax {
     public Data data;
     public String message;
     public String error;
-    public List<String> errors=null;
+    public List<String> errors = null;
 
     public SuccessCreateTax withSequence(String sequence) {
         this.sequence = sequence;
         return this;
     }
+
     public SuccessCreateTax withResult(Integer result) {
         this.result = result;
         return this;
     }
+
     public SuccessCreateTax withData(Data data) {
         this.data = data;
         return this;
     }
+
     public SuccessCreateTax withMessage(String message) {
         this.message = message;
         return this;
     }
+
     public SuccessCreateTax withError(String error) {
         this.error = error;
         return this;
     }
+
     public SuccessCreateTax withErrors(List<String> errors) {
         this.errors = errors;
         return this;
@@ -51,6 +56,7 @@ public class SuccessCreateTax {
             this.result = result;
             return this;
         }
+
         public SuccessCreateTax.Data withMessage(String message) {
             this.message = message;
             return this;
@@ -58,7 +64,7 @@ public class SuccessCreateTax {
     }
 
     @Getter
-    public static class Result{
+    public static class Result {
         public String id;
         @SerializedName("store_id")
         public String storeId;

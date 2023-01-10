@@ -5,7 +5,7 @@ import responses.Taxes.SuccessCreateTax;
 import storage.User;
 
 public class AssertionForTaxes {
-    public void assertTaxes(SuccessCreateTax successCreateTax){
+    public void assertTaxes(SuccessCreateTax successCreateTax) {
 
         Assertions.assertEquals(1, successCreateTax.getResult());
         Assertions.assertEquals("save-tax63a58f9e63ef6", successCreateTax.getSequence());
