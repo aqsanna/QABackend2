@@ -27,7 +27,25 @@ public enum User {
     TAG_IDS("144"),
     IS_FOODSTAMP("true"),
     IS_SHIPPABLE("true"),
-    HAS_AVAILABILITY_SCHEDULE("false");
+    HAS_AVAILABILITY_SCHEDULE("false"),
+    TITLE_TAG("testTags"),
+    ICON("https://cdn.stage.local.express/img/JyeicWbpavIiO2Ln1Wl2clRw9lbnLldWYneuZ09mb4A0lXaVavE3S2Zh1WBnauU=0nIn.jpg"),
+    PRIORITY("10"),
+    SEQUENCE("save-tax63a58f9e63ef6"),
+    APPLICATIONKEY("partnerbetatpqseyxgmbcuvyxctwfhibfqyurbglzlvowfjmeztqafrenipFUUU"),
+    ACTION("save-tax"),
+    TITLE("TestTaxName"),
+    VISIBLE_TITLE("TestVT"),
+    IS_ACTIVE("1"),
+    STORE_ID("87"),
+    PER_UNIT("1"),
+    IS_CRV("0"),
+    VALUE("2"),
+    TYPE("fixed"),
+    APPLY_TO_ALL_PRODUCTS("0"),
+    LANGUAGES("en-US"),
+    CONTENTLANG("en-US"),
+    COMMOND("POST");
 
     private final String user;
 
