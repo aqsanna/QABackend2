@@ -15,11 +15,12 @@ public enum ApiV1 {
     ORDERS("rest/v1/partner/stores/87/orders"),
     PRODUCT_DATA_TYPE("rest/v1/partner/service/available-products-data-types"),
     STORES_LIST("rest/v1/partner/stores"),
+    TAX_CREATE("api"),
+    TAXES_LIST("rest/v1/partner/taxes?limit=-1&offset=0"),
     TAGS_LIST("rest/v1/partner/tags?limit=100&offset=0"),
     TAGS("rest/v1/partner/tags"),
     TAGS_EDIT("rest/v2/tags/"),
     TAGS_DELETE("rest/v2/tags/");
-
 
 
     private final String api;
