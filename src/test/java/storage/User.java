@@ -30,8 +30,7 @@ public enum User {
     HAS_AVAILABILITY_SCHEDULE("false"),
     TITLE("testTags"),
     ICON("https://cdn.stage.local.express/img/JyeicWbpavIiO2Ln1Wl2clRw9lbnLldWYneuZ09mb4A0lXaVavE3S2Zh1WBnauU=0nIn.jpg"),
-    PRIORITY("10"),
-    PASSWORD("123456Ii");
+    PRIORITY("10");
 
     private final String user;
 

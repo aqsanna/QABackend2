@@ -14,8 +14,8 @@ import responses.tags.TagsEdit;
 import responses.tags.TagsList;
 import steps.data.users.TagsInfoProvider;
 import steps.data.users.UserInfoProvider;
-import storage.APIV1;
-import storage.USER;
+import storage.ApiV1;
+import storage.User;
 
 import java.util.ArrayList;
 
@@ -31,8 +31,8 @@ public class TagsTest {
                 .header(new Header("Authorization", "Bearer " + UserInfoProvider.getToken()))
                 .when()
                 .contentType(ContentType.JSON)
-                .body(gson.toJson(TagsInfoProvider.getTags(USER.EMAIL_INFO)))
-                .post(APIV1.STAGE.getApi() + APIV1.TAGS.getApi())
+                .body(gson.toJson(TagsInfoProvider.getTags(User.EMAIL_INFO)))
+                .post(ApiV1.STAGE.getApi() + ApiV1.TAGS.getApi())
                 .then().log().all()
                 .extract().as(SuccessCreateTags.class);
 
@@ -49,8 +49,8 @@ public class TagsTest {
                 .header(new Header("Authorization", "Bearer " + UserInfoProvider.getToken()))
                 .when()
                 .contentType(ContentType.JSON)
-                .body(gson.toJson(TagsInfoProvider.editTags(USER.EMAIL_INFO)))
-                .put(APIV1.STAGE.getApi() + APIV1.TAGS_EDIT.getApi() + TagsInfoProvider.getTagsId())
+                .body(gson.toJson(TagsInfoProvider.editTags(User.EMAIL_INFO)))
+                .put(ApiV1.STAGE.getApi() + ApiV1.TAGS_EDIT.getApi() + TagsInfoProvider.getTagsId())
                 .then().log().all()
                 .extract().as(TagsEdit.class);
 
@@ -71,7 +71,7 @@ public class TagsTest {
 
         TagsList tagsList = given()
                 .header(new Header("Authorization", "Bearer " + UserInfoProvider.getToken()))
-                .get(APIV1.STAGE.getApi() + APIV1.TAGS_LIST.getApi())
+                .get(ApiV1.STAGE.getApi() + ApiV1.TAGS_LIST.getApi())
                 .then().log().all()
                 .extract().as(TagsList.class);
         Assertions.assertEquals("success", tagsList.getResult());
@@ -92,7 +92,7 @@ public class TagsTest {
 
         TagsDelete deleteTags = given()
                 .header(new Header("Authorization", "Bearer " + UserInfoProvider.getToken()))
-                .delete(APIV1.STAGE.getApi() + APIV1.TAGS_DELETE.getApi() + TagsInfoProvider.getTagsId())
+                .delete(ApiV1.STAGE.getApi() + ApiV1.TAGS_DELETE.getApi() + TagsInfoProvider.getTagsId())
                 .then().log().all()
                 .extract().as(TagsDelete.class);
         Assertions.assertEquals("Ok", deleteTags.getMessage());

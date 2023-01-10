@@ -7,25 +7,25 @@ import io.restassured.http.Header;
 import requests.CreateTags;
 import requests.EditTags;
 import responses.tags.SuccessCreateTags;
-import storage.APIV1;
-import storage.USER;
+import storage.ApiV1;
+import storage.User;
 
 public class TagsInfoProvider {
-    public static CreateTags getTags(USER email) {
+    public static CreateTags getTags(User email) {
         return switch (email) {
             case EMAIL_INFO -> new CreateTags(
                     new CreateTags.Params(
-                            USER.TITLE.getUserData() + ProductInfoProvider.random()));
+                            User.TITLE.getUserData() + ProductInfoProvider.random()));
             default -> null;
         };
     }
 
-    public static EditTags editTags(USER email) {
+    public static EditTags editTags(User email) {
         return switch (email) {
             case EMAIL_INFO -> new EditTags(
-                    USER.ICON.getUserData()
-                    , USER.TITLE.getUserData() + ProductInfoProvider.random()
-                    , USER.PRIORITY.getUserData());
+                    User.ICON.getUserData()
+                    , User.TITLE.getUserData() + ProductInfoProvider.random()
+                    , User.PRIORITY.getUserData());
 
             default -> null;
         };
@@ -37,8 +37,8 @@ public class TagsInfoProvider {
                 .header(new Header("Authorization", "Bearer " + UserInfoProvider.getToken()))
                 .when()
                 .contentType(ContentType.JSON)
-                .body(gson.toJson(getTags(USER.EMAIL_INFO)))
-                .post(APIV1.STAGE.getApi() + APIV1.TAGS.getApi())
+                .body(gson.toJson(getTags(User.EMAIL_INFO)))
+                .post(ApiV1.STAGE.getApi() + ApiV1.TAGS.getApi())
                 .then().log().all()
                 .extract().as(SuccessCreateTags.class);
         return successCreateTags.getData().getId();
