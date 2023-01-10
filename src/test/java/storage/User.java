@@ -45,10 +45,7 @@ public enum User {
     APPLY_TO_ALL_PRODUCTS("0"),
     LANGUAGES("en-US"),
     CONTENTLANG("en-US"),
-    COMMOND("POST"),
-    HAS_AVAILABILITY_SCHEDULE("false"),
-    ICON("https://cdn.stage.local.express/img/JyeicWbpavIiO2Ln1Wl2clRw9lbnLldWYneuZ09mb4A0lXaVavE3S2Zh1WBnauU=0nIn.jpg"),
-    PRIORITY("10");
+    COMMOND("POST");
 
     private final String user;
 

@@ -31,7 +31,7 @@ public class TagsInfoProvider {
         };
     }
 
-    public static String getTagsId() {
+    public static Integer getTagsId() {
         Gson gson = new Gson();
         SuccessCreateTags successCreateTags = RestAssured.given()
                 .header(new Header("Authorization", "Bearer " + UserInfoProvider.getToken()))
@@ -41,6 +41,6 @@ public class TagsInfoProvider {
                 .post(ApiV1.STAGE.getApi() + ApiV1.TAGS.getApi())
                 .then().log().all()
                 .extract().as(SuccessCreateTags.class);
-        return successCreateTags.getData().getId();
+        return Integer.valueOf(successCreateTags.getData().getId());
     }
 }
