@@ -6,30 +6,31 @@ import io.restassured.http.ContentType;
 import io.restassured.http.Header;
 import requests.CreateTags;
 import requests.EditTags;
-import responses.product.SuccessCreateProduct;
 import responses.tags.SuccessCreateTags;
 import storage.APIV1;
 import storage.USER;
 
 public class TagsInfoProvider {
-    public static CreateTags getTags(USER email){
-        return  switch (email){
+    public static CreateTags getTags(USER email) {
+        return switch (email) {
             case EMAIL_INFO -> new CreateTags(
                     new CreateTags.Params(
                             USER.TITLE.getUserData() + ProductInfoProvider.random()));
             default -> null;
         };
     }
-    public static EditTags editTags(USER email){
-        return  switch (email){
+
+    public static EditTags editTags(USER email) {
+        return switch (email) {
             case EMAIL_INFO -> new EditTags(
-                            USER.ICON.getUserData()
-                            ,USER.TITLE.getUserData() + ProductInfoProvider.random()
-                            , USER.PRIORITY.getUserData());
+                    USER.ICON.getUserData()
+                    , USER.TITLE.getUserData() + ProductInfoProvider.random()
+                    , USER.PRIORITY.getUserData());
 
             default -> null;
         };
     }
+
     public static String getTagsId() {
         Gson gson = new Gson();
         SuccessCreateTags successCreateTags = RestAssured.given()

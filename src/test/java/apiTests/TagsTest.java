@@ -7,15 +7,11 @@ import io.restassured.http.Header;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import requests.EditTags;
 import requests.TagsInfo;
 import responses.tags.SuccessCreateTags;
 import responses.tags.TagsDelete;
 import responses.tags.TagsEdit;
 import responses.tags.TagsList;
-import specification.RequestSpec;
-import specification.ResponseSpec;
-import steps.data.users.ProductInfoProvider;
 import steps.data.users.TagsInfoProvider;
 import steps.data.users.UserInfoProvider;
 import storage.APIV1;
@@ -45,6 +41,7 @@ public class TagsTest {
         Assertions.assertFalse(successCreateTags.getData().getId().isEmpty(), "is  is empty");
         Assertions.assertFalse(successCreateTags.getData().getTitle().isEmpty(), "title  is empty");
     }
+
     @Test
     @DisplayName("Check edit tags")
     public void EditTags() {
@@ -69,7 +66,7 @@ public class TagsTest {
 
     @Test
     @DisplayName("check tags list")
-    public void getTagsListTest(){
+    public void getTagsListTest() {
         Gson gson = new Gson();
 
         TagsList tagsList = given()
@@ -81,15 +78,16 @@ public class TagsTest {
         Assertions.assertEquals("", tagsList.getError());
         Assertions.assertEquals(200, tagsList.getCode());
         ArrayList<TagsInfo> tagsData = tagsList.getData();
-        for(TagsInfo data : tagsData){
+        for (TagsInfo data : tagsData) {
             Assertions.assertFalse(data.title.isEmpty(), "title  is empty");
             Assertions.assertFalse(data.id.isEmpty(), "id  is empty");
             Assertions.assertEquals(tagsData.size(), 100);
         }
     }
+
     @Test
     @DisplayName("check tags list")
-    public void deleteTags(){
+    public void deleteTags() {
         Gson gson = new Gson();
 
         TagsDelete deleteTags = given()
