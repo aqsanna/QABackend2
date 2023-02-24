@@ -24,6 +24,7 @@ public enum ProductDataType {
     ID17("shipping_data"),
     ID18("store_product_mapping"),
     ID19("qty_in_pack"),
+    ID20("is_foodstamp"),
     NAME("Name"),
     NAME1("Category/Department"),
     NAME2("Price"),
@@ -43,7 +44,9 @@ public enum ProductDataType {
     NAME16("Modifications"),
     NAME17("Shipping Data"),
     NAME18("Product Mapping"),
-    NAME19("Quantity in Pack");
+    NAME19("Quantity in Pack"),
+    NAME20("Is Foodstamp");
+
 
     private final String datatype;
 
