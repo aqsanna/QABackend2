@@ -1,13 +1,11 @@
 package apiTests;
 
-import io.restassured.RestAssured;
-import io.restassured.http.Header;
+import Utils.OrderUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import responses.partner.orders.PartnerOrders;
 import steps.data.users.UserInfoProvider;
-import storage.ApiV1;
 import storage.OrderStatus;
 
 public class OrderTest {
@@ -16,24 +14,14 @@ public class OrderTest {
     @Test
     @DisplayName("Check partner order list")
     public void orderListTest() {
+        OrderUtils orderUtils = new OrderUtils();
         for (int i = 0; i < OrderStatus.values().length; i++) {
             boolean emptyData = false;
             int limit = 20;
             int offset = 0;
 
             while (!emptyData) {
-                PartnerOrders orderList = RestAssured.given()
-                        .header(new Header("Authorization", "Bearer " + UserInfoProvider.getToken()))
-                        .queryParam("filter[status]", OrderStatus.values()[i].getOrderStatus())
-                        .queryParam("limit", limit)
-                        .queryParam("offset", offset)
-                        .queryParam("sort", "asc")
-                        .when()
-                        .get(ApiV1.STAGE.getApi() + ApiV1.ORDERS.getApi())
-                        .then()
-                        .extract().as(PartnerOrders.class);
-                Assertions.assertEquals("success", orderList.getResult(), "Have a error: " + orderList.getResult());
-                Assertions.assertTrue(orderList.getError().isEmpty(), "Error messages: " + orderList.getError());
+                PartnerOrders orderList = orderUtils.getOrderList(OrderStatus.values()[i].getOrderStatus(), limit, offset);
 
                 if (orderList.getData().size() > 0) {
                     for (PartnerOrders.Order order : orderList.getData()) {
@@ -69,4 +57,5 @@ public class OrderTest {
             }
         }
     }
+
 }
