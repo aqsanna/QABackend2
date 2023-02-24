@@ -9,11 +9,8 @@ import requests.order.*;
 import responses.pack.PackagingForStore;
 import responses.pack.PacksToOrder;
 import responses.pack.PackLocation;
-import responses.partner.orders.FilteredListOfOrders;
+import responses.partner.orders.*;
 import responses.pack.PacksToOrder;
-import responses.partner.orders.Order;
-import responses.partner.orders.OrderV2;
-import responses.partner.orders.PartnerOrders;
 import steps.data.users.UserInfoProvider;
 import storage.ApiV2;
 import storage.ApiV1;
@@ -115,7 +112,7 @@ public class OrderUtils {
                 .when()
                 .contentType(ContentType.JSON)
                 .body(gson.toJson(data))
-                .post(APIV1.STAGE.getApi() + APIV1.ORDERS_TO.getApi() + orderId + APIV1.FINISH.getApi())
+                .post(ApiV1.STAGE.getApi() + ApiV1.ORDERS_TO.getApi() + orderId + ApiV1.FINISH.getApi())
                 .then()
                 .extract().as(Order.class);
         Assertions.assertEquals("success", finishOrder.getResult(), "Can't finish the order " + orderId + ". Have a error: " + finishOrder.getResult());
@@ -131,7 +128,7 @@ public class OrderUtils {
                 .when()
                 .contentType(ContentType.JSON)
                 .body(gson.toJson(data))
-                .post(APIV1.STAGE.getApi() + APIV2.PACK_LOCATION_URL.getApi() + orderId + APIV2.PACK_LOCATION.getApi())
+                .post(ApiV1.STAGE.getApi() + ApiV2.PACK_LOCATION_URL.getApi() + orderId + ApiV2.PACK_LOCATION.getApi())
                 .then()
                 .extract().as(PackLocation.class);
         Assertions.assertEquals("OK", location.getCode(), "Can't add pack location for order " + orderId + ".Have a error: " + location.getMessage());
@@ -144,7 +141,7 @@ public class OrderUtils {
                 .when()
                 .contentType(ContentType.JSON)
                 .body(gson.toJson(data))
-                .post(APIV1.STAGE.getApi() + APIV2.PACK_LOCATION_URL.getApi() + orderId + APIV2.PACK_LOCATION_PRINT.getApi())
+                .post(ApiV1.STAGE.getApi() + ApiV2.PACK_LOCATION_URL.getApi() + orderId + ApiV2.PACK_LOCATION_PRINT.getApi())
                 .then()
                 .extract().as(PackLocation.class);
         Assertions.assertEquals("OK", printPackLocation.getCode(), "Can't nor print pack location" + orderId + ". Have a error: " + printPackLocation.getMessage());
@@ -157,7 +154,7 @@ public class OrderUtils {
                 .when()
                 .contentType(ContentType.JSON)
                 .body(gson.toJson(data))
-                .post(APIV1.STAGE.getApi() + APIV2.STORE_ORDER.getApi())
+                .post(ApiV1.STAGE.getApi() + ApiV2.STORE_ORDER.getApi())
                 .then()
                 .extract().as(FilteredListOfOrders.class);
         Assertions.assertEquals("OK", filteredListOfOrders.getCode(), "Can't filter orders: " + filteredListOfOrders.getMessage());
@@ -168,7 +165,7 @@ public class OrderUtils {
                 .header(new Header("Authorization", "Bearer " + UserInfoProvider.getToken()))
                 .queryParam("expand", expandParams)
                 .when()
-                .get(APIV1.STAGE.getApi() + APIV2.STORE_ORDER.getApi() + "/" + orderId + APIV2.ORDER_DETAILS.getApi())
+                .get(ApiV1.STAGE.getApi() + ApiV2.STORE_ORDER.getApi() + "/" + orderId + ApiV2.ORDER_DETAILS.getApi())
                 .then().log().all()
                 .extract().as(OrderV2.class);
         Assertions.assertEquals("OK", order.getCode(), "Can't get the order" + orderId + ". Have a error: " + order.getMessage());
@@ -183,7 +180,7 @@ public class OrderUtils {
                 .when()
                 .contentType(ContentType.JSON)
                 .body(gson.toJson(data))
-                .post(APIV1.STAGE.getApi() + APIV2.STORE_ORDER.getApi() + "/" + orderId + APIV2.CHANGE_STATUS.getApi())
+                .post(ApiV1.STAGE.getApi() + ApiV2.STORE_ORDER.getApi() + "/" + orderId + ApiV2.CHANGE_STATUS.getApi())
                 .then()
                 .extract().as(OrderV2.class);
         Assertions.assertEquals("OK", order.getCode(), "Can't change the order status" + orderId + ". Have a error: " + order.getMessage());

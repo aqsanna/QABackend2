@@ -42,7 +42,7 @@ public class CollectingOrderProvider {
         };
     }
 
-    public static FilterOrders filterOrder(USER email, ArrayList<String> orderStatus, ArrayList<String> orderType){
+    public static FilterOrders filterOrder(User email, ArrayList<String> orderStatus, ArrayList<String> orderType){
         return switch (email){
             case EMAIL_INFO -> new FilterOrders(
                     new FilterOrders.Filter(orderStatus, orderType),
@@ -52,7 +52,7 @@ public class CollectingOrderProvider {
         };
     }
 
-    public static ChangeOrderStatus changeOrderStatus(USER email, String status){
+    public static ChangeOrderStatus changeOrderStatus(User email, String status){
         return switch (email){
             case EMAIL_INFO -> new ChangeOrderStatus(status);
             default -> null;
