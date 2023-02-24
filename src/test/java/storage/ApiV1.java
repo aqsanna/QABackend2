@@ -26,6 +26,7 @@ public enum ApiV1 {
     TAGS("rest/v1/partner/tags"),
     TAGS_EDIT("rest/v2/tags/"),
     TAGS_DELETE("rest/v2/tags/"),
+    GIFT_CARD_CREATE("rest/v2/gift-card/create"),
     DISCCOUNT_LIST("rest/v1/partner/discounts?limit=-1&offset=0");
 
     private final String api;
