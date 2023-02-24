@@ -48,6 +48,7 @@ public enum User {
     CURRENCY("usd"),
     PHONE("+12022222222"),
     EXPIRATIONDATE("2025-12-31"),
+    GIFTCARDSTATUS("disable"),
     COMMOND("POST");
 
     private final String user;
