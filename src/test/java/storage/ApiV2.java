@@ -19,7 +19,9 @@ public enum ApiV2 {
     GIFT_CARD("rest/v2/gift-card/"),
     SHIPPING_PACKAGING_BOX("/shipping-packaging-box"),
     SHIPPING_RATES("/shipping-rates"),
-    SHIPPING_LABEL("/shipping-label");
+    SHIPPING_LABEL("/shipping-label"),
+    COMPANY_SETTINGS("rest/v2/partner/settings");
+
     private final String api;
 
     ApiV2(String api) {

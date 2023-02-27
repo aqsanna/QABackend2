@@ -20,8 +20,8 @@ public class GiftCardInfoProvider {
 public static GiftCardCreate createGift(User email){
     return switch (email){
         case EMAIL_INFO -> new GiftCardCreate(
-                User.CURRENCY.getUserData()
-                , User.EXPIRATIONDATE.getUserData()
+                 User.CURRENCY.getUserData()
+                ,User.EXPIRATIONDATE.getUserData()
                 ,random()
                 ,randomString(5)
                 ,User.EMAIL_CLIENT.getUserData()
