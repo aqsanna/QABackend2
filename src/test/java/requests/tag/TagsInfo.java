@@ -1,4 +1,4 @@
-package requests;
+package requests.tag;
 
 import com.google.gson.annotations.SerializedName;
 import lombok.Getter;

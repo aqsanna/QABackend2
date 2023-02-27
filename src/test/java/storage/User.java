@@ -45,6 +45,10 @@ public enum User {
     APPLY_TO_ALL_PRODUCTS("0"),
     LANGUAGES("en-US"),
     CONTENTLANG("en-US"),
+    CURRENCY("usd"),
+    PHONE("+12022222222"),
+    EXPIRATIONDATE("2025-12-31"),
+    GIFTCARDSTATUS("disable"),
     COMMOND("POST");
 
     private final String user;

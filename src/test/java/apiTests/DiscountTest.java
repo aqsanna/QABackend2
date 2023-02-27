@@ -25,7 +25,7 @@ public class DiscountTest {
 
         Discount discount = given()
                 .header(new Header("Authorization", "Bearer " + UserInfoProvider.getToken()))
-                .get(ApiV1.STAGE.getApi() + ApiV1.DISCCOUNT_LIST.getApi())
+                .get(ApiV1.STAGE.getApi() + ApiV1.DISCOUNT_LIST.getApi())
                 .then()
                 .extract().as(Discount.class);
 

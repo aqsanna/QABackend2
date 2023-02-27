@@ -8,7 +8,7 @@ import io.restassured.http.Header;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import requests.TaxesInfo;
+import requests.tax.TaxesInfo;
 import responses.Taxes.SuccessCreateTax;
 import responses.Taxes.Taxes;
 import steps.data.users.TaxesInfoProvider;
@@ -25,7 +25,7 @@ public class TaxesTest {
     AssertionForTaxes assertionForTaxes = new AssertionForTaxes();
 
     @Test
-    @DisplayName("Check create product")
+    @DisplayName("Check create tax")
     public void CreateTax() {
         SuccessCreateTax successCreateTax = RestAssured.given()
                 .when()
