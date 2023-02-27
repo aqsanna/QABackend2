@@ -1,4 +1,4 @@
-package requests;
+package requests.giftCard;
 
 import com.google.gson.annotations.SerializedName;
 import lombok.With;

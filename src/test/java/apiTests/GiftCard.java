@@ -1,14 +1,11 @@
 package apiTests;
 
 import com.google.gson.Gson;
-import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.http.Header;
-import jdk.jfr.Description;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import responses.Store;
 import responses.giftCard.GiftCardDetails;
 import responses.giftCard.GiftCardDisable;
 import responses.giftCard.GiftCardList;
@@ -16,6 +13,7 @@ import responses.giftCard.SuccessCreateGiftCard;
 import steps.data.users.GiftCardInfoProvider;
 import steps.data.users.UserInfoProvider;
 import storage.ApiV1;
+import storage.ApiV2;
 import storage.User;
 
 import java.util.ArrayList;
@@ -23,43 +21,43 @@ import java.util.ArrayList;
 import static io.restassured.RestAssured.given;
 
 public class GiftCard {
-    Gson gson= new Gson();
+    Gson gson = new Gson();
 
     @Test
     @DisplayName("Check create gift-card")
-    public void CreateGiftCard(){
+    public void CreateGiftCard() {
 
         SuccessCreateGiftCard successCreateGiftCard = given()
                 .header(new Header("Authorization", "Bearer " + UserInfoProvider.getToken()))
                 .when()
                 .contentType(ContentType.JSON)
                 .body(gson.toJson(GiftCardInfoProvider.createGift(User.EMAIL_INFO)))
-                .put(ApiV1.STAGE.getApi() + ApiV1.GIFT_CARD_CREATE.getApi())
+                .put(ApiV1.STAGE.getApi() + ApiV2.GIFT_CARD_CREATE.getApi())
                 .then()
                 .extract().as(SuccessCreateGiftCard.class);
 
-        Assertions.assertEquals( "Ok", successCreateGiftCard.getMessage());
-        Assertions.assertEquals( "OK", successCreateGiftCard.getCode());
-        Assertions.assertFalse(  successCreateGiftCard.getData().isEmpty());
+        Assertions.assertEquals("Ok", successCreateGiftCard.getMessage());
+        Assertions.assertEquals("OK", successCreateGiftCard.getCode());
+        Assertions.assertFalse(successCreateGiftCard.getData().isEmpty());
     }
 
     @Test
     @DisplayName("Check list gift-card")
-    public void GiftCardList(){
+    public void GiftCardList() {
 
         GiftCardList giftCardList = given()
                 .header(new Header("Authorization", "Bearer " + UserInfoProvider.getToken()))
                 .when()
                 .contentType(ContentType.JSON)
                 .body((GiftCardInfoProvider.giftCardList(User.EMAIL_INFO)))
-                .post(ApiV1.STAGE.getApi() + ApiV1.GIFT_CARD_LIST.getApi())
+                .post(ApiV1.STAGE.getApi() + ApiV2.GIFT_CARD_LIST.getApi())
                 .then()
                 .extract().as(GiftCardList.class);
         Assertions.assertEquals("Ok", giftCardList.getMessage());
         Assertions.assertEquals("OK", giftCardList.getCode());
 
         ArrayList<GiftCardList.Result> giftList = giftCardList.data.getResult();
-        for(GiftCardList.Result result : giftList ){
+        for (GiftCardList.Result result : giftList) {
             Assertions.assertFalse(result.appId.isEmpty(), "app_id is empty");
             Assertions.assertFalse(result.clientId.isEmpty(), "client_id is empty");
             Assertions.assertFalse(result.createdAt.toString().isEmpty(), "created_at is empty");
@@ -76,13 +74,14 @@ public class GiftCard {
         }
 
     }
+
     @Test
     @DisplayName("Check details gift-card")
-    public void GiftCardDetails(){
+    public void GiftCardDetails() {
 
         GiftCardDetails giftCardDetails = given()
                 .header(new Header("Authorization", "Bearer " + UserInfoProvider.getToken()))
-                .get(ApiV1.STAGE.getApi() + ApiV1.GIFT_CARD.getApi() + GiftCardInfoProvider.getGiftCard())
+                .get(ApiV1.STAGE.getApi() + ApiV2.GIFT_CARD.getApi() + GiftCardInfoProvider.getGiftCard())
                 .then().log().all()
                 .extract().as(GiftCardDetails.class);
         Assertions.assertEquals("Ok", giftCardDetails.getMessage());
@@ -101,7 +100,7 @@ public class GiftCard {
         Assertions.assertFalse(giftCardDetails.data.card.value.toString().isEmpty(), "value is empty");
 
         ArrayList<GiftCardDetails.Transaction> transactions = giftCardDetails.data.getTransactions();
-        for(GiftCardDetails.Transaction tran : transactions){
+        for (GiftCardDetails.Transaction tran : transactions) {
             Assertions.assertFalse(tran.id.isEmpty(), "id is empty");
             Assertions.assertFalse(tran.ownerId.isEmpty(), "ownerId is empty");
             Assertions.assertFalse(tran.cardId.isEmpty(), "cardId is empty");
@@ -110,21 +109,22 @@ public class GiftCard {
             Assertions.assertFalse(tran.date.toString().isEmpty(), "date is empty");
 
         }
-        }
-        @Test
-        @DisplayName("Check disable gift-card")
-        public void GiftCardDisable(){
-            GiftCardDisable giftCardDisable = given()
-                    .header(new Header("Authorization", "Bearer " + UserInfoProvider.getToken()))
-                    .when()
-                    .contentType(ContentType.JSON)
-                    .body(gson.toJson(GiftCardInfoProvider.disableGift(User.EMAIL_INFO)))
-                    .put(ApiV1.STAGE.getApi() + ApiV1.GIFT_CARD.getApi()+ GiftCardInfoProvider.getGiftCard())
-                    .then()
-                    .extract().as(GiftCardDisable.class);
+    }
 
-            Assertions.assertEquals( "Ok", giftCardDisable.getMessage());
-            Assertions.assertEquals( "OK", giftCardDisable.getCode());
-            Assertions.assertTrue(  giftCardDisable.isData());
+    @Test
+    @DisplayName("Check disable gift-card")
+    public void GiftCardDisable() {
+        GiftCardDisable giftCardDisable = given()
+                .header(new Header("Authorization", "Bearer " + UserInfoProvider.getToken()))
+                .when()
+                .contentType(ContentType.JSON)
+                .body(gson.toJson(GiftCardInfoProvider.disableGift(User.EMAIL_INFO)))
+                .put(ApiV1.STAGE.getApi() + ApiV2.GIFT_CARD.getApi() + GiftCardInfoProvider.getGiftCard())
+                .then()
+                .extract().as(GiftCardDisable.class);
+
+        Assertions.assertEquals("Ok", giftCardDisable.getMessage());
+        Assertions.assertEquals("OK", giftCardDisable.getCode());
+        Assertions.assertTrue(giftCardDisable.isData());
     }
 }

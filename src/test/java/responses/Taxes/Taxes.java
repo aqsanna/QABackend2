@@ -1,7 +1,7 @@
 package responses.Taxes;
 
 import lombok.Getter;
-import requests.TaxesInfo;
+import requests.tax.TaxesInfo;
 
 import java.util.ArrayList;
 

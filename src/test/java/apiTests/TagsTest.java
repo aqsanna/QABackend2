@@ -5,13 +5,14 @@ import httpRequest.Request;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import requests.TagsInfo;
+import requests.tag.TagsInfo;
 import responses.tags.SuccessCreateTags;
 import responses.tags.TagsDelete;
 import responses.tags.TagsEdit;
 import responses.tags.TagsList;
 import steps.data.users.TagsInfoProvider;
 import storage.ApiV1;
+import storage.ApiV2;
 import storage.User;
 
 import java.util.ArrayList;
@@ -37,8 +38,8 @@ public class TagsTest {
     public void EditTags() {
 
         Request putRequest = new Request();
-        putRequest.requestPut(ApiV1.STAGE.getApi(), ApiV1.TAGS_EDIT.getApi(), TagsInfoProvider.getTagsId());
-        TagsEdit tagsEdit = putRequest.requestPut(ApiV1.STAGE.getApi(), ApiV1.TAGS_EDIT.getApi(), TagsInfoProvider.getTagsId());
+        putRequest.requestPut(ApiV1.STAGE.getApi(), ApiV2.TAGS_EDIT.getApi(), TagsInfoProvider.getTagsId());
+        TagsEdit tagsEdit = putRequest.requestPut(ApiV1.STAGE.getApi(), ApiV2.TAGS_EDIT.getApi(), TagsInfoProvider.getTagsId());
 
         Assertions.assertEquals("OK", tagsEdit.getCode());
         Assertions.assertEquals("Ok", tagsEdit.getMessage());
@@ -72,8 +73,8 @@ public class TagsTest {
     public void deleteTags() {
         Gson gson = new Gson();
         Request deleteRequest = new Request();
-        deleteRequest.requestDel(ApiV1.STAGE.getApi(), ApiV1.TAGS_DELETE.getApi(), TagsInfoProvider.getTagsId());
-        TagsDelete deleteTags = deleteRequest.requestDel(ApiV1.STAGE.getApi(), ApiV1.TAGS_DELETE.getApi(), TagsInfoProvider.getTagsId());
+        deleteRequest.requestDel(ApiV1.STAGE.getApi(), ApiV2.TAGS_DELETE.getApi(), TagsInfoProvider.getTagsId());
+        TagsDelete deleteTags = deleteRequest.requestDel(ApiV1.STAGE.getApi(), ApiV2.TAGS_DELETE.getApi(), TagsInfoProvider.getTagsId());
         Assertions.assertEquals("Ok", deleteTags.getMessage());
         Assertions.assertEquals("OK", deleteTags.getCode());
     }

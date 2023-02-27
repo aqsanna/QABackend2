@@ -1,7 +1,7 @@
 package responses.tags;
 
 import lombok.Getter;
-import requests.TagsInfo;
+import requests.tag.TagsInfo;
 
 import java.util.ArrayList;
 

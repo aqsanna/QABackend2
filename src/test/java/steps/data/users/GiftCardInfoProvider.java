@@ -1,15 +1,13 @@
 package steps.data.users;
 
-import apiTests.GiftCard;
 import com.google.gson.Gson;
-import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.http.Header;
-import requests.GiftCardCreate;
-import requests.GiftCardDisable;
+import requests.giftCard.GiftCardCreate;
+import requests.giftCard.GiftCardDisable;
 import responses.giftCard.GiftCardList;
-import responses.product.SuccessCreateProduct;
 import storage.ApiV1;
+import storage.ApiV2;
 import storage.User;
 
 import java.util.ArrayList;
@@ -54,7 +52,7 @@ public static GiftCardCreate createGift(User email){
                 .when()
                 .contentType(ContentType.JSON)
                 .body((GiftCardInfoProvider.giftCardList(User.EMAIL_INFO)))
-                .post(ApiV1.STAGE.getApi() + ApiV1.GIFT_CARD_LIST.getApi())
+                .post(ApiV1.STAGE.getApi() + ApiV2.GIFT_CARD_LIST.getApi())
                 .then()
                 .extract().as(GiftCardList.class);
         ArrayList<GiftCardList.Result> giftList = giftCardList.data.getResult();

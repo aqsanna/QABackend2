@@ -1,6 +1,6 @@
 package steps.data.users;
 
-import requests.TaxesCreateInfo;
+import requests.tax.TaxesCreateInfo;
 import storage.User;
 
 import static steps.data.users.ProductInfoProvider.random;

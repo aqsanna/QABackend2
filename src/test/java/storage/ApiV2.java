@@ -12,6 +12,11 @@ public enum ApiV2 {
     CHANGE_STATUS("/change-status"),
     ORDER_DETAILS("/details"),
     PACKAGING("rest/v2/store/87/packaging"),
+    TAGS_EDIT("rest/v2/tags/"),
+    TAGS_DELETE("rest/v2/tags/"),
+    GIFT_CARD_CREATE("rest/v2/gift-card/create"),
+    GIFT_CARD_LIST("rest/v2/gift-card/list?perPage=10&page=0"),
+    GIFT_CARD("rest/v2/gift-card/"),
     SHIPPING_PACKAGING_BOX("/shipping-packaging-box"),
     SHIPPING_RATES("/shipping-rates"),
     SHIPPING_LABEL("/shipping-label");
