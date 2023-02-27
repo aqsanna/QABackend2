@@ -7,6 +7,8 @@ import responses.userLogin.SuccessLogin;
 import storage.ApiV1;
 import storage.User;
 
+import java.util.Random;
+
 import static io.restassured.RestAssured.given;
 import static storage.User.PUSH_TOKEN;
 
@@ -65,5 +67,11 @@ public class UserInfoProvider {
 
     public static boolean isNumber(String id) {
         return id.matches("[0-9]+") && id.length() > 0;
+    }
+
+    public static boolean generateRandomNumber(Integer id) {
+        Random random = new Random();
+        boolean randomNumber = random.nextInt(99) + 1 > 0;
+        return randomNumber;
     }
 }
