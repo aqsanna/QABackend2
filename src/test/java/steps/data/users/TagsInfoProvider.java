@@ -15,7 +15,12 @@ public class TagsInfoProvider {
         return switch (email) {
             case EMAIL_INFO -> new CreateTags(
                     new CreateTags.Params(
-                            User.TITLE_TAG.getUserData() + ProductInfoProvider.random()));
+                            User.TITLE_TAG.getUserData() + ProductInfoProvider.random()
+                                , User.ICON.getUserData()
+                                , User.PRIORITY.getUserData()
+                                ,1
+                                , 1
+                                , 1));
             default -> null;
         };
     }
@@ -25,7 +30,11 @@ public class TagsInfoProvider {
             case EMAIL_INFO -> new EditTags(
                     User.ICON.getUserData()
                     , User.TITLE_TAG.getUserData() + ProductInfoProvider.random()
-                    , User.PRIORITY.getUserData());
+                    , "1"
+                    ,0
+                    ,0
+                    , 0);
+
 
             default -> null;
         };

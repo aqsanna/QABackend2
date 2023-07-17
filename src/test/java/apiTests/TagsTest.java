@@ -45,9 +45,12 @@ public class TagsTest {
         Assertions.assertEquals("Ok", tagsEdit.getMessage());
         Assertions.assertFalse(tagsEdit.getData().getId().isEmpty(), "is  is empty");
         Assertions.assertEquals(tagsEdit.getData().getPartnerId(), "13546");
-        Assertions.assertEquals(tagsEdit.getData().getPriority(), User.PRIORITY.getUserData());
+        Assertions.assertEquals(tagsEdit.getData().getPriority(), "1");
         Assertions.assertFalse(tagsEdit.getData().getTitle().isEmpty(), "title  is empty");
         Assertions.assertTrue(tagsEdit.getData().getIcon().contains("jpg"));
+        Assertions.assertEquals(tagsEdit.getData().getVisible(), 0);
+        Assertions.assertEquals(tagsEdit.getData().getStatus(), 0);
+        Assertions.assertEquals(tagsEdit.getData().getShowIconOnProduct(), 0);
     }
 
     @Test

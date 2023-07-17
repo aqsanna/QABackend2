@@ -60,7 +60,6 @@ public enum User {
     public String getUserData() {
         return user;
     }
-
     @Override
     public String toString() {
         return "USERS{" +

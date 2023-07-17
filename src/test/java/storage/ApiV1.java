@@ -4,7 +4,7 @@ import lombok.Getter;
 
 @Getter
 public enum ApiV1 {
-    STAGE("https://stage-old.local.express/"),
+    STAGE("https://stage.local.express/"),
     STORE("rest/v1/partner/stores"),
     LOGIN("api/rest/v1/auth/login"),
     REGISTER("rest/v1/auth/login"),
