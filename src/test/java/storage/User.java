@@ -49,6 +49,11 @@ public enum User {
     PHONE("+12022222222"),
     EXPIRATIONDATE("2025-12-31"),
     GIFTCARDSTATUS("disable"),
+    STORE("518"),
+    BOXNAME("Boxname"),
+    PACKNAME("Packname"),
+    PICKUPBYDRIVER("true"),
+    ADVENCEDCOLLECTINGFLOW("true"),
     COMMOND("POST");
 
     private final String user;

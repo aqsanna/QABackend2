@@ -4,7 +4,7 @@ import Utils.OrderUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import responses.pack.PackagingForStore;
+import responses.packaging.PackagingForStore;
 import responses.partner.orders.FilteredListOfOrders;
 import responses.partner.orders.OrderV2;
 import responses.partner.orders.ShippingRates;
