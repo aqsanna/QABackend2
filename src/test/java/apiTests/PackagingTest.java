@@ -4,9 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
 import io.restassured.http.ContentType;
 import io.restassured.http.Header;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Order;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import responses.packaging.PackagingErrorMsg;
 import responses.packaging.PackagingForStore;
 import steps.data.users.PackagingProvider;
@@ -18,12 +16,13 @@ import java.util.List;
 
 import static io.restassured.RestAssured.given;
 
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class PackagingTest {
     Gson gson = new Gson();
     AssertionForPackaging assertionForPackaging = new AssertionForPackaging();
 
     @Test
-    @Order(0)
+    @Order(1)
     @SerializedName("Check create Packing")
     public void addPackaging() {
         PackagingForStore createPacking = given()
@@ -44,7 +43,7 @@ public class PackagingTest {
         assertionForPackaging.assertBoxes(createPacking.getData().getBoxes());
     }
     @Test
-    @Order(1)
+    @Order(2)
     @SerializedName("Check update Packing")
     public void updatePackaging() {
         PackagingForStore updatePacking = given()
@@ -65,7 +64,7 @@ public class PackagingTest {
         assertionForPackaging.assertBoxes(updatePacking.getData().getBoxes());
     }
     @Test
-    @Order(5)
+    @Order(3)
     @SerializedName("Check error messages Packing")
     public void errorMessagesPackaging(){
         PackagingErrorMsg errorMsg = given()
@@ -96,7 +95,6 @@ public class PackagingTest {
     }
 
     @Test
-    @Order(2)
     @SerializedName("Check delete Packing")
     public void deletePackaging(){
         PackagingForStore deletePacking = given()
