@@ -9,8 +9,6 @@ public class PackagingDelete {
         public Boolean pickupByDriver;
         @SerializedName("advancedCollectingFlow")
         public Boolean advancedCollectingFlow;
-
-
         public PackagingDelete(Boolean pickupByDriver, Boolean advancedCollectingFlow) {
             this.pickupByDriver = pickupByDriver;
             this.advancedCollectingFlow = advancedCollectingFlow;

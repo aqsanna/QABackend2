@@ -35,7 +35,6 @@ public class PackagingErrorMessages {
 
             public Box() {
             }
-
             public Box(Integer freeVolumeReserve, String specialEntityTypeId, Integer weight) {
                 this.freeVolumeReserve = freeVolumeReserve;
                 this.specialEntityTypeId = specialEntityTypeId;

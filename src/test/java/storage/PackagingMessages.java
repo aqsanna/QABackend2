@@ -2,7 +2,6 @@ package storage;
 
 import java.util.ArrayList;
 import java.util.List;
-
 public enum PackagingMessages {
     FIELD("boxes_0_name"),
     FIELD1("boxes_0_length"),
@@ -18,28 +17,23 @@ public enum PackagingMessages {
     MESSAGE4("Pack name cannot be blank."),
     MESSAGE5("Price cannot be blank."),
     MESSAGE6("Free pack quantity cannot be blank.");
-
     private final String validationError;
-
     PackagingMessages(String validationError) {
         this.validationError=validationError;
     }
-
     public String getValidationError(){
         return  validationError;
     }
     public static List<String> getMessages(){
-        List<String> ListMessaages = new ArrayList<>();
+        List<String> ListMessages = new ArrayList<>();
         for(PackagingMessages l : PackagingMessages.values()){
-            ListMessaages.add(l.getValidationError());
+            ListMessages.add(l.getValidationError());
         }
-        return ListMessaages;
+        return ListMessages;
     }
-
     public String toString() {
         return "PackagingMessagesEnum{" +
                 "PackagingMessagesEnum='" + validationError + '\'' +
                 '}';
     }
-
 }

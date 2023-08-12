@@ -1,9 +1,12 @@
 package responses.tags;
 
+import com.google.gson.annotations.SerializedName;
 import lombok.Getter;
 
 @Getter
 public class TagsDelete {
-    private String message;
-    private String code;
+    @SerializedName("message")
+    public String message;
+    @SerializedName("code")
+    public String code;
 }

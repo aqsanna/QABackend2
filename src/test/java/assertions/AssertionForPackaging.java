@@ -1,9 +1,12 @@
 package assertions;
 
 import org.junit.jupiter.api.Assertions;
+import responses.packaging.PackagingErrorMsg;
 import responses.packaging.PackagingForStore;
+import storage.PackagingMessages;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class AssertionForPackaging {
     public void assertSpecialTypes(ArrayList<PackagingForStore.Data.SpecialType> list) {
@@ -42,5 +45,23 @@ public class AssertionForPackaging {
             Assertions.assertFalse(result.specialEntityTypeId.isEmpty(), "special_entity_type_id is empty");
             Assertions.assertFalse(result.storeId.isEmpty(), "storeId is empty");
         }
+    }
+    public void assertErrorMessages(PackagingErrorMsg errorMsg) {
+        String message ="Please fix the following errors: Box Name cannot be blank., Length cannot be blank., Width cannot be blank., " +
+                "Height cannot be blank., Pack name cannot be blank., Price cannot be blank., Free pack quantity cannot be blank.";
+        String code ="UNPROCESSABLE_ENTITY";
+
+        Assertions.assertEquals(message, errorMsg.getMessage());
+        Assertions.assertEquals(code, errorMsg.getCode());
+
+        List<String> expectedList = PackagingMessages.getMessages();
+        List<String> actualList = new ArrayList<String>();
+
+        for (PackagingErrorMsg.Validation data : errorMsg.getValidation()) {
+            actualList.add(data.getField());
+            actualList.add(data.getMessage());
+        }
+        Assertions.assertTrue(actualList.containsAll(expectedList), "expected list isn't correct");
+        Assertions.assertEquals(actualList.size(), expectedList.size());
     }
 }

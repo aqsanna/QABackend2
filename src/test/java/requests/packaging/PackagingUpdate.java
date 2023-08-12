@@ -49,7 +49,6 @@ public class PackagingUpdate {
 
             public Box() {
             }
-
             public Box(Integer id, String store_id, String name, Integer length, Integer width, Integer height,
                        Integer weight, Integer freeVolumeReserve, String specialEntityTypeId, String storeId) {
                 this.id = id;
@@ -62,14 +61,11 @@ public class PackagingUpdate {
                 this.freeVolumeReserve = freeVolumeReserve;
                 this.specialEntityTypeId = specialEntityTypeId;
                 this.storeId = storeId;
-
             }
-
             public Box build() {
                 return this;
             }
         }
-
         @With
         public static class Pack implements Serializable {
             @SerializedName("id")
@@ -86,9 +82,7 @@ public class PackagingUpdate {
             public String specialEntityTypeId;
             @SerializedName("storeId")
             public String storeId;
-
             public Pack(){
-
             }
             public Pack(Integer id, String name, String price, Integer freeCount, String upc, String specialEntityTypeId, String storeId) {
                 super();
@@ -100,7 +94,6 @@ public class PackagingUpdate {
                 this.specialEntityTypeId = specialEntityTypeId;
                 this.storeId = storeId;
             }
-
             public Pack build() {
                 return this;
             }

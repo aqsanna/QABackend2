@@ -1,49 +1,35 @@
 package responses.tags;
 
+import com.google.gson.annotations.SerializedName;
 import lombok.Getter;
 
 @Getter
 public class SuccessCreateTags {
-    private Integer code;
-    private String result;
-    private String error;
-    private Data data;
-
-    public SuccessCreateTags whitCode(Integer code) {
-        this.code = code;
-        return this;
-    }
-
-    public SuccessCreateTags whitResult(String result) {
-        this.result = result;
-        return this;
-    }
-
-    public SuccessCreateTags whitError(String error) {
-        this.error = error;
-        return this;
-    }
-
-    public SuccessCreateTags withData(Data data) {
-        this.data = data;
-        return this;
-    }
-
+    @SerializedName("message")
+    public String message;
+    @SerializedName("code")
+    public String code;
+    @SerializedName("data")
+    public Data data;
     @Getter
     public static class Data {
-        private String id;
-        private String title;
-
-
-        public Data withId(String id) {
-            this.id = id;
-            return this;
-        }
-
-        public Data withTitle(String title) {
-            this.title = title;
-            return this;
-        }
+        @SerializedName("partner_id")
+        public String partnerId;
+        @SerializedName("icon")
+        public String icon;
+        @SerializedName("status")
+        public Integer status;
+        @SerializedName("priority")
+        public String priority;
+        @SerializedName("visible")
+        public Integer visible;
+        @SerializedName("show_icon_on_product")
+        public Integer showIconOnProduct;
+        @SerializedName("id")
+        public String id;
+        @SerializedName("title")
+        public String title;
+        @SerializedName("products")
+        public Integer products;
     }
-
 }

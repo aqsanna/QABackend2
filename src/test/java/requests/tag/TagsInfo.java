@@ -5,8 +5,9 @@ import lombok.Getter;
 
 @Getter
 public class TagsInfo {
-    @SerializedName("id")
-    public String id;
-    @SerializedName("title")
-    public String title;
+    @SerializedName("filterType")
+    public String filterType;
+    public TagsInfo(String filterType){
+        this.filterType=filterType;
+    }
 }

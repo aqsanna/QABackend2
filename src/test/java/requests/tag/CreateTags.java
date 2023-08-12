@@ -1,34 +1,30 @@
 package requests.tag;
 
+import com.google.gson.annotations.SerializedName;
 import lombok.With;
 
-import java.io.Serializable;
-
 @With
-public class CreateTags implements Serializable {
-    public Params params;
-
-    public CreateTags(Params params) {
-        super();
-        this.params = params;
-    }
-
-    @With
-    public static class Params implements Serializable {
+public class CreateTags {
+        @SerializedName("title")
         public String title;
+        @SerializedName("icon")
         public String icon;
+        @SerializedName("priority")
         public String priority;
+        @SerializedName("status")
         public Integer status;
+        @SerializedName("visible")
         public Integer visible;
-        public Integer show_icon_on_product;
+        @SerializedName("show_icon_on_product")
+        public Integer showIconOnProduct;
 
-        public Params(String title, String icon, String priority, Integer status, Integer visible, Integer show_icon_on_product) {
-            super();
+        public CreateTags(String title, String icon, String priority, Integer status, Integer visible, Integer showIconOnProduct) {
             this.title = title;
             this.icon = icon;
             this.priority = priority;
+            this.visible=visible;
             this.status=status;
-            this.show_icon_on_product=show_icon_on_product;
+            this.showIconOnProduct=showIconOnProduct;
         }
-    }
 }
+

@@ -22,8 +22,8 @@ public enum ApiV1 {
     STORES_LIST("rest/v1/partner/stores"),
     TAX_CREATE("api"),
     TAXES_LIST("rest/v1/partner/taxes?limit=-1&offset=0"),
-    TAGS_LIST("rest/v1/partner/tags?limit=100&offset=0"),
-    TAGS("rest/v1/partner/tags"),
+    TAGS_LIST("rest/v2/tags?perPage=10000"),
+    TAGS("rest/v2/tags?contentLang=en-US"),
     DISCOUNT_LIST("rest/v1/partner/discounts?limit=-1&offset=0");
 
     private final String api;

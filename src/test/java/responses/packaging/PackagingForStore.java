@@ -24,6 +24,7 @@ public class PackagingForStore {
         public boolean pickupByDriver;
         @SerializedName("advancedCollectingFlow")
         public boolean advancedCollectingFlow;
+        @Getter
         public static class SpecialType{
             @SerializedName("id")
             public String id;
@@ -63,6 +64,7 @@ public class PackagingForStore {
             @SerializedName("storeId")
             public String storeId;
         }
+        @Getter
         public static class Pack{
             @SerializedName("id")
             public String id;
