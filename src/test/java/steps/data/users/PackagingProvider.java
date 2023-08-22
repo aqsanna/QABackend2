@@ -2,10 +2,7 @@ package steps.data.users;
 import com.google.gson.Gson;
 import io.restassured.http.ContentType;
 import io.restassured.http.Header;
-import requests.packaging.PackagingCreate;
-import requests.packaging.PackagingDelete;
-import requests.packaging.PackagingErrorMessages;
-import requests.packaging.PackagingUpdate;
+import requests.packaging.*;
 import responses.packaging.PackagingForStore;
 import storage.ApiV1;
 import storage.ApiV2;
@@ -94,6 +91,25 @@ public class PackagingProvider {
                 Boolean.parseBoolean(User.ADVENCEDCOLLECTINGFLOW.getUserData()));
     }
 
+    public static PackagingErrorMessagesForInvalidCredential checkErrorMessagesForInvalidCredential(User email) {
+        ArrayList<PackagingErrorMessagesForInvalidCredential.Box> boxesMessages = new ArrayList<>();
+        boxesMessages.add(new PackagingErrorMessagesForInvalidCredential.Box()
+                        .withLength(randomMinus())
+                        .withWidth(randomMinus())
+                        .withHeight(randomMinus())
+                        .withWeight(randomMinus())
+                        .withFreeVolumeReserve(randomMinus())
+                        .withSpecialEntityTypeId("-1")
+                        .build());
+        ArrayList<PackagingErrorMessagesForInvalidCredential.Pack> packsMessages = new ArrayList<>();
+        packsMessages.add(new PackagingErrorMessagesForInvalidCredential.Pack()
+                        .withFreeCount(randomMinus())
+                        .withPrice("-5")
+                        .withSpecialEntityTypeId("-2")
+                        .build());
+        return new PackagingErrorMessagesForInvalidCredential(boxesMessages, packsMessages, 3, 4);
+    }
+
 
     public static Integer random() {
         Random ran = new Random();
@@ -101,6 +117,11 @@ public class PackagingProvider {
         return x;
     }
 
+    public static Integer randomMinus() {
+        Random ran = new Random();
+        int x = ran.nextInt(9) + 1;
+        return -x;
+    }
     public static String getPackagingId(){
         Gson gson = new Gson();
         PackagingForStore  packingForStore = given()

@@ -3,6 +3,7 @@ package httpRequest;
 import com.google.gson.Gson;
 import io.restassured.http.ContentType;
 import io.restassured.http.Header;
+import requests.packaging.PackagingErrorMessagesForInvalidCredential;
 import responses.packaging.PackagingErrorMsg;
 import responses.packaging.PackagingForStore;
 import steps.data.users.PackagingProvider;
@@ -44,6 +45,17 @@ public class RequestPackaging {
                 .when()
                 .contentType(ContentType.JSON)
                 .body((PackagingProvider.checkErrorMessages(User.EMAIL_INFO)))
+                .put(path + url)
+                .then().log().all()
+                .extract().as(PackagingErrorMsg.class);
+    }
+    public PackagingErrorMsg requestPutErrorMsgForInvalidCredential(String path, String url) {
+
+        return given()
+                .header(new Header("Authorization", "Bearer " + UserInfoProvider.getToken()))
+                .when()
+                .contentType(ContentType.JSON)
+                .body((PackagingProvider.checkErrorMessagesForInvalidCredential(User.EMAIL_INFO)))
                 .put(path + url)
                 .then().log().all()
                 .extract().as(PackagingErrorMsg.class);

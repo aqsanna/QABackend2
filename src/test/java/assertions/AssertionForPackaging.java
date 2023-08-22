@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Assertions;
 import responses.packaging.PackagingErrorMsg;
 import responses.packaging.PackagingForStore;
 import storage.PackagingMessages;
+import storage.PackagingMessagesForInvalidCredential;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,6 +56,26 @@ public class AssertionForPackaging {
         Assertions.assertEquals(code, errorMsg.getCode());
 
         List<String> expectedList = PackagingMessages.getMessages();
+        List<String> actualList = new ArrayList<String>();
+
+        for (PackagingErrorMsg.Validation data : errorMsg.getValidation()) {
+            actualList.add(data.getField());
+            actualList.add(data.getMessage());
+        }
+        Assertions.assertTrue(actualList.containsAll(expectedList), "expected list isn't correct");
+        Assertions.assertEquals(actualList.size(), expectedList.size());
+    }
+
+    public void assertErrorMessagesInvalidCredential(PackagingErrorMsg errorMsg) {
+        String message ="Please fix the following errors: Box Name cannot be blank., Reserve (%) must be no less than 0., " +
+                "Length must be no less than 9.0E-5., Width must be no less than 9.0E-5., Height must be no less than 9.0E-5., " +
+                "Weight must be greater than or equal to \"0\"., Special Type must be no less than 0., Pack name cannot be blank., Price must be no less than 0., Free pack quantity must be no less than 0.";
+        String code ="UNPROCESSABLE_ENTITY";
+
+        Assertions.assertEquals(message, errorMsg.getMessage());
+        Assertions.assertEquals(code, errorMsg.getCode());
+
+        List<String> expectedList = PackagingMessagesForInvalidCredential.getMessages();
         List<String> actualList = new ArrayList<String>();
 
         for (PackagingErrorMsg.Validation data : errorMsg.getValidation()) {

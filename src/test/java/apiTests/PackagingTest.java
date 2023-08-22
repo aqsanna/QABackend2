@@ -49,6 +49,13 @@ public class PackagingTest {
         PackagingErrorMsg errorMsg = requestPackaging.requestPutErrorMsg(ApiV1.STAGE.getApi(), ApiV2.PACKAGING.getApi());
         assertionForPackaging.assertErrorMessages(errorMsg);
     }
+    @Test
+    @Order(4)
+    @SerializedName("Check invalid credential error messages Packing")
+    public void errorMessagesPackagingForInvalidCredential(){
+        PackagingErrorMsg errorMsg = requestPackaging.requestPutErrorMsgForInvalidCredential(ApiV1.STAGE.getApi(), ApiV2.PACKAGING.getApi());
+        assertionForPackaging.assertErrorMessagesInvalidCredential(errorMsg);
+    }
 
     @Test
     @SerializedName("Check delete Packing")
