@@ -6,17 +6,12 @@ import lombok.With;
 @With
 public class CreateTagsWithoutTitle {
 
-        @SerializedName("status")
-        public Integer status;
-        @SerializedName("visible")
-        public Integer visible;
-        @SerializedName("show_icon_on_product")
-        public Integer showIconOnProduct;
+        @SerializedName("title")
+        public String title;
 
-        public CreateTagsWithoutTitle(Integer status, Integer visible, Integer showIconOnProduct) {
+
+        public CreateTagsWithoutTitle(String title) {
             super();
-            this.status=status;
-            this.visible=visible;
-            this.showIconOnProduct=showIconOnProduct;
+            this.title=title;
         }
     }

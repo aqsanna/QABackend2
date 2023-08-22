@@ -4,14 +4,13 @@ import com.google.gson.Gson;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.http.Header;
-import requests.tag.CreateTags;
-import requests.tag.CreateTagsWithoutTitle;
-import requests.tag.EditTags;
-import requests.tag.TagsInfo;
+import requests.tag.*;
 import responses.tags.SuccessCreateTags;
 import storage.ApiV1;
 import storage.ApiV2;
 import storage.User;
+
+import java.util.Random;
 
 public class TagsInfoProvider {
     public static CreateTags getTags(User email) {
@@ -29,9 +28,18 @@ public class TagsInfoProvider {
     public static CreateTagsWithoutTitle errorMessageTags(User email) {
         return switch (email) {
             case EMAIL_INFO -> new CreateTagsWithoutTitle(
-                            0
-                            ,0
-                            ,1);
+                           "");
+            default -> null;
+        };
+    }
+
+    public static CreateTagsInvalidCredential errorMessageTagsInvalidCredential(User email) {
+        return switch (email) {
+            case EMAIL_INFO -> new CreateTagsInvalidCredential(
+                     3
+                   , ""
+                   , 4
+                   , 5);
             default -> null;
         };
     }
@@ -70,5 +78,11 @@ public class TagsInfoProvider {
                 .then().log().all()
                 .extract().as(SuccessCreateTags.class);
         return Integer.valueOf(successCreateTags.getData().id);
+    }
+
+    public static Integer random() {
+        Random ran = new Random();
+        int x = ran.nextInt(9) + 1;
+        return x;
     }
 }

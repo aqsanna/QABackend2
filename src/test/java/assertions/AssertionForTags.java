@@ -6,6 +6,7 @@ import responses.tags.TagsEdit;
 import responses.tags.TagsErrorMsg;
 import responses.tags.TagsList;
 import storage.TagMessages;
+import storage.TagMessagesInvalidCredential;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,6 +47,25 @@ public class AssertionForTags {
             actualList.add(data.getMessage());
         }
         Assertions.assertTrue(actualList.containsAll(expectedList), "expected list isn't correct");
+        Assertions.assertEquals(actualList.size(), expectedList.size());
+    }
+
+    public void assertResultsForInvalidErrorMsgTags(TagsErrorMsg errorMsg) {
+        String message ="Please fix the following errors: Title cannot be blank., Partner Id must be either \"1\" or \"0\".," +
+                " Status must be either \"1\" or \"0\"., Show Icon On Product must be either \"1\" or \"0\".";
+        String code ="UNPROCESSABLE_ENTITY";
+
+        Assertions.assertEquals(message, errorMsg.getMessage());
+        Assertions.assertEquals(code, errorMsg.getCode());
+
+        List<String> expectedList = TagMessagesInvalidCredential.getMessages();
+        List<String> actualList = new ArrayList<String>();
+
+        for (TagsErrorMsg.Validation data : errorMsg.getValidation()) {
+            actualList.add(data.getField());
+            actualList.add(data.getMessage());
+        }
+        Assertions.assertTrue(actualList.containsAll(expectedList), "expected list isn't correct2");
         Assertions.assertEquals(actualList.size(), expectedList.size());
     }
 

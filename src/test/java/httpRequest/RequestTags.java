@@ -45,6 +45,18 @@ public class RequestTags {
                 .extract().as(TagsErrorMsg.class);
     }
 
+    public TagsErrorMsg requestPutErrorMsgInvalidCredential(String path, String url) {
+
+        return given()
+                .header(new Header("Authorization", "Bearer " + UserInfoProvider.getToken()))
+                .when()
+                .contentType(ContentType.JSON)
+                .body(gson.toJson(TagsInfoProvider.errorMessageTagsInvalidCredential(User.EMAIL_INFO)))
+                .put(path + url)
+                .then()
+                .extract().as(TagsErrorMsg.class);
+    }
+
     public TagsEdit requestPut(String path, String url, Integer tagsInfoProvider) {
 
         return given()
