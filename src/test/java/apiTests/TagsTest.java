@@ -1,30 +1,26 @@
 package apiTests;
 
+import assertions.AssertionForMessages;
 import assertions.AssertionForTags;
-import com.google.gson.Gson;
 import httpRequest.RequestTags;
 import org.junit.jupiter.api.*;
-import responses.packaging.PackagingErrorMsg;
 import responses.tags.*;
 import steps.data.users.TagsInfoProvider;
 import storage.*;
-import java.util.ArrayList;
 
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class TagsTest {
-    Gson gson = new Gson();
-    private ArrayList<PackagingErrorMsg.Validation> validation;
     AssertionForTags assertionForTags = new AssertionForTags();
     RequestTags postRequest =  new RequestTags();
+    AssertionForMessages assertionForMessages = new AssertionForMessages();
 
     @Test
     @Order(1)
     @DisplayName("Check create tags")
     public void CreateTags() {
         SuccessCreateTags createTags = postRequest.requestPost(ApiV1.STAGE.getApi(), ApiV1.TAGS.getApi());
-        Assertions.assertEquals("Ok", createTags.getMessage());
-        Assertions.assertEquals("OK", createTags.getCode());
+        assertionForMessages.assertRequestMessageAndCode(createTags.getMessage(), createTags.getCode());
         assertionForTags.assertResultsForSuccessCreateTags(createTags);
     }
     @Test
@@ -46,9 +42,8 @@ public class TagsTest {
     @Order(4)
     @DisplayName("Check edit tags")
     public void EditTags() {
-        TagsEdit tagsEdit = postRequest.requestPut(ApiV1.STAGE.getApi(), ApiV2.TAGS_EDIT.getApi(), TagsInfoProvider.getTagsId());
-        Assertions.assertEquals("OK", tagsEdit.getCode());
-        Assertions.assertEquals("Ok", tagsEdit.getMessage());
+        TagsEdit tagsEdit = postRequest.requestPut(ApiV1.STAGE.getApi(), ApiV2.TAGS_EDIT.getApi(), TagsInfoProvider.assertResultsMaxId());
+        assertionForMessages.assertRequestMessageAndCode(tagsEdit.getMessage(), tagsEdit.getCode());
         assertionForTags.assertResultsForEditTags(tagsEdit);
     }
 
@@ -57,16 +52,14 @@ public class TagsTest {
     @DisplayName("Check tags list")
     public void getTagsListTest() {
         TagsList tagsList = postRequest.requestPostTagsList(ApiV1.STAGE.getApi(), ApiV1.TAGS_LIST.getApi());
-        Assertions.assertEquals("Ok", tagsList.getMessage());
-        Assertions.assertEquals("OK", tagsList.getCode());
+        assertionForMessages.assertRequestMessageAndCode(tagsList.getMessage(), tagsList.getCode());
         assertionForTags.assertResults(tagsList.getData().getResult());
     }
 
     @Test
     @DisplayName("Check delete tag")
     public void deleteTags() {
-        TagsDelete deleteTags = postRequest.requestDel(ApiV1.STAGE.getApi(), ApiV2.TAGS_DELETE.getApi(), TagsInfoProvider.getTagsId());
-        Assertions.assertEquals("Ok", deleteTags.getMessage());
-        Assertions.assertEquals("OK", deleteTags.getCode());
+        TagsDelete deleteTags = postRequest.requestDel(ApiV1.STAGE.getApi(), ApiV2.TAGS_DELETE.getApi(), TagsInfoProvider.assertResultsMaxId());
+        assertionForMessages.assertRequestMessageAndCode(deleteTags.getMessage(), deleteTags.getCode());
     }
 }

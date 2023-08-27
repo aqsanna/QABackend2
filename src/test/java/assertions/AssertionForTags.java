@@ -1,5 +1,6 @@
 package assertions;
 
+import Utils.ErrorMessages;
 import org.junit.jupiter.api.Assertions;
 import responses.tags.SuccessCreateTags;
 import responses.tags.TagsEdit;
@@ -10,7 +11,6 @@ import storage.TagMessagesInvalidCredential;
 
 import java.util.ArrayList;
 import java.util.List;
-
 public class AssertionForTags {
     public void assertResults(ArrayList<TagsList.Data.Result> list) {
         for (TagsList.Data.Result result : list) {
@@ -33,11 +33,8 @@ public class AssertionForTags {
         Assertions.assertFalse(createTags.getData().getTitle().isEmpty(), "title  is empty");
     }
     public void assertResultsForErrorMsgTags(TagsErrorMsg errorMsg) {
-        String message ="Please fix the following errors: Title cannot be blank.";
-        String code ="UNPROCESSABLE_ENTITY";
-
-        Assertions.assertEquals(message, errorMsg.getMessage());
-        Assertions.assertEquals(code, errorMsg.getCode());
+        Assertions.assertEquals(ErrorMessages.messageForTagsTitle, errorMsg.getMessage());
+        Assertions.assertEquals(ErrorMessages.codeUnprocessableEntity, errorMsg.getCode());
 
         List<String> expectedList = TagMessages.getMessages();
         List<String> actualList = new ArrayList<String>();
@@ -51,12 +48,8 @@ public class AssertionForTags {
     }
 
     public void assertResultsForInvalidErrorMsgTags(TagsErrorMsg errorMsg) {
-        String message ="Please fix the following errors: Title cannot be blank., Partner Id must be either \"1\" or \"0\".," +
-                " Status must be either \"1\" or \"0\"., Show Icon On Product must be either \"1\" or \"0\".";
-        String code ="UNPROCESSABLE_ENTITY";
-
-        Assertions.assertEquals(message, errorMsg.getMessage());
-        Assertions.assertEquals(code, errorMsg.getCode());
+        Assertions.assertEquals(ErrorMessages.messageForTags, errorMsg.getMessage());
+        Assertions.assertEquals(ErrorMessages.codeUnprocessableEntity, errorMsg.getCode());
 
         List<String> expectedList = TagMessagesInvalidCredential.getMessages();
         List<String> actualList = new ArrayList<String>();

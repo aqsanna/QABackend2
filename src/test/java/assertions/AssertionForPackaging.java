@@ -1,5 +1,6 @@
 package assertions;
 
+import Utils.ErrorMessages;
 import org.junit.jupiter.api.Assertions;
 import responses.packaging.PackagingErrorMsg;
 import responses.packaging.PackagingForStore;
@@ -48,12 +49,8 @@ public class AssertionForPackaging {
         }
     }
     public void assertErrorMessages(PackagingErrorMsg errorMsg) {
-        String message ="Please fix the following errors: Box Name cannot be blank., Length cannot be blank., Width cannot be blank., " +
-                "Height cannot be blank., Pack name cannot be blank., Price cannot be blank., Free pack quantity cannot be blank.";
-        String code ="UNPROCESSABLE_ENTITY";
-
-        Assertions.assertEquals(message, errorMsg.getMessage());
-        Assertions.assertEquals(code, errorMsg.getCode());
+        Assertions.assertEquals(ErrorMessages.messageForPack, errorMsg.getMessage());
+        Assertions.assertEquals(ErrorMessages.codeUnprocessableEntity, errorMsg.getCode());
 
         List<String> expectedList = PackagingMessages.getMessages();
         List<String> actualList = new ArrayList<String>();
@@ -67,13 +64,8 @@ public class AssertionForPackaging {
     }
 
     public void assertErrorMessagesInvalidCredential(PackagingErrorMsg errorMsg) {
-        String message ="Please fix the following errors: Box Name cannot be blank., Reserve (%) must be no less than 0., " +
-                "Length must be no less than 9.0E-5., Width must be no less than 9.0E-5., Height must be no less than 9.0E-5., " +
-                "Weight must be greater than or equal to \"0\"., Special Type must be no less than 0., Pack name cannot be blank., Price must be no less than 0., Free pack quantity must be no less than 0.";
-        String code ="UNPROCESSABLE_ENTITY";
-
-        Assertions.assertEquals(message, errorMsg.getMessage());
-        Assertions.assertEquals(code, errorMsg.getCode());
+        Assertions.assertEquals(ErrorMessages.messageForPackInvalidCred, errorMsg.getMessage());
+        Assertions.assertEquals(ErrorMessages.codeUnprocessableEntity, errorMsg.getCode());
 
         List<String> expectedList = PackagingMessagesForInvalidCredential.getMessages();
         List<String> actualList = new ArrayList<String>();

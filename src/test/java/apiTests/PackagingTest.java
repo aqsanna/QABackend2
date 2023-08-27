@@ -1,6 +1,6 @@
 package apiTests;
+import assertions.AssertionForMessages;
 import assertions.AssertionForPackaging;
-import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
 import httpRequest.RequestPackaging;
 import org.junit.jupiter.api.*;
@@ -12,17 +12,16 @@ import java.util.ArrayList;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class PackagingTest {
-    Gson gson = new Gson();
     AssertionForPackaging assertionForPackaging = new AssertionForPackaging();
     RequestPackaging requestPackaging = new RequestPackaging();
+    AssertionForMessages assertionForMessages = new AssertionForMessages();
     @Test
     @Order(1)
     @SerializedName("Check create Packing")
     public void addPackaging() {
 
         PackagingForStore createPacking = requestPackaging.requestCreate(ApiV1.STAGE.getApi(),  ApiV2.PACKAGING.getApi());
-        Assertions.assertEquals("Ok", createPacking.getMessage());
-        Assertions.assertEquals("OK", createPacking.getCode());
+        assertionForMessages.assertRequestMessageAndCode(createPacking.getMessage(), createPacking.getCode());
         Assertions.assertTrue(createPacking.getData().pickupByDriver);
         Assertions.assertTrue(createPacking.getData().advancedCollectingFlow);
         assertionForPackaging.assertSpecialTypes(createPacking.getData().getSpecialTypes());
@@ -34,8 +33,7 @@ public class PackagingTest {
     @SerializedName("Check update Packing")
     public void updatePackaging() {
         PackagingForStore updatePacking = requestPackaging.requestUpdate(ApiV1.STAGE.getApi(), ApiV2.PACKAGING.getApi());
-        Assertions.assertEquals("Ok", updatePacking.getMessage());
-        Assertions.assertEquals("OK", updatePacking.getCode());
+        assertionForMessages.assertRequestMessageAndCode(updatePacking.getMessage(), updatePacking.getCode());
         Assertions.assertFalse(updatePacking.getData().pickupByDriver);
         Assertions.assertFalse(updatePacking.getData().advancedCollectingFlow);
         assertionForPackaging.assertSpecialTypes(updatePacking.getData().getSpecialTypes());
@@ -61,8 +59,7 @@ public class PackagingTest {
     @SerializedName("Check delete Packing")
     public void deletePackaging(){
         PackagingForStore deletePacking =   requestPackaging.requestDel(ApiV1.STAGE.getApi(), ApiV2.PACKAGING.getApi());
-        Assertions.assertEquals("Ok", deletePacking.getMessage());
-        Assertions.assertEquals("OK", deletePacking.getCode());
+        assertionForMessages.assertRequestMessageAndCode(deletePacking.getMessage(), deletePacking.getCode());
         Assertions.assertFalse(deletePacking.getData().pickupByDriver);
         Assertions.assertFalse(deletePacking.getData().advancedCollectingFlow);
         assertionForPackaging.assertSpecialTypes(deletePacking.getData().getSpecialTypes());

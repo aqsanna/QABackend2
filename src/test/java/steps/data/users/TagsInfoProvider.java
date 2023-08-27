@@ -1,13 +1,14 @@
 package steps.data.users;
 
 import com.google.gson.Gson;
+import httpRequest.RequestTags;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.http.Header;
 import requests.tag.*;
 import responses.tags.SuccessCreateTags;
+import responses.tags.TagsList;
 import storage.ApiV1;
-import storage.ApiV2;
 import storage.User;
 
 import java.util.Random;
@@ -65,6 +66,20 @@ public class TagsInfoProvider {
                    );
             default -> null;
         };
+    }
+    public static Integer assertResultsMaxId() {
+        RequestTags postRequest =  new RequestTags();
+        TagsList tagsList = postRequest.requestPostTagsList(ApiV1.STAGE.getApi(), ApiV1.TAGS_LIST.getApi());
+
+        int maxId = Integer.MIN_VALUE;
+        for (TagsList.Data.Result result : tagsList.getData().getResult()) {
+            int id = Integer.parseInt(result.getId());
+            if (id > maxId) {
+                maxId = id;
+            }
+        }
+        System.out.println("Max id: " + maxId);
+        return maxId;
     }
 
     public static Integer getTagsId() {
