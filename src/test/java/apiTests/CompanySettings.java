@@ -3,37 +3,27 @@ package apiTests;
 import assertions.AssertionForMessages;
 import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
-import io.restassured.http.ContentType;
-import io.restassured.http.Header;
+import httpRequest.RequestCompanySettings;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import responses.companySettings.SettingCompanyEdit;
 import responses.companySettings.SettingsCompany;
-import steps.data.users.CompanySettingsProvider;
 import steps.data.users.UserInfoProvider;
 import storage.ApiV1;
 import storage.ApiV2;
 import storage.CompanySettingsEnum;
-import storage.User;
-
 import java.util.List;
 
-import static io.restassured.RestAssured.given;
-
 public class CompanySettings {
-    Gson gson = new Gson();
     AssertionForMessages assertionForMessages = new AssertionForMessages();
+    RequestCompanySettings requestCompanySettings = new RequestCompanySettings();
 
     @Test
     @DisplayName("Check company settings")
     public void checkCompanySettings() {
 
-        SettingsCompany settings = given()
-                .header(new Header("Authorization", "Bearer " + UserInfoProvider.getToken()))
-                .get(ApiV1.STAGE.getApi() + ApiV2.COMPANY_SETTINGS.getApi())
-                .then().log().all()
-                .extract().as(SettingsCompany.class);
+        SettingsCompany settings =requestCompanySettings.requestGetCheckCompanySettings(ApiV1.STAGE.getApi(),  ApiV2.COMPANY_SETTINGS.getApi());
         List<String> expectedList = CompanySettingsEnum.getType();
         assertionForMessages.assertRequestMessageAndCode(settings.getMessage(), settings.getCode());
         Assertions.assertFalse(settings.data.adminSettings.guestCheckoutMobile.isEmpty(), "guest_checkout_mobile is empty");
@@ -50,14 +40,7 @@ public class CompanySettings {
     @Test
     @SerializedName("Check edit company settings")
     public void editCompanySettings() {
-        SettingCompanyEdit companySettingsEdit = given()
-                .header(new Header("Authorization", "Bearer " + UserInfoProvider.getToken()))
-                .when()
-                .contentType(ContentType.JSON)
-                .body(gson.toJson(CompanySettingsProvider.editSettingCompany(User.EMAIL_INFO)))
-                .put(ApiV1.STAGE.getApi() + ApiV2.COMPANY_SETTINGS.getApi())
-                .then().log().all()
-                .extract().as(SettingCompanyEdit.class);
+        SettingCompanyEdit companySettingsEdit = requestCompanySettings.putRequestEditCompanySettings(ApiV1.STAGE.getApi(), ApiV2.COMPANY_SETTINGS.getApi());
         assertionForMessages.assertRequestMessageAndCode(companySettingsEdit.getMessage(), companySettingsEdit.getCode());
         Assertions.assertTrue(companySettingsEdit.data.isEmpty(), "data is not empty");
     }

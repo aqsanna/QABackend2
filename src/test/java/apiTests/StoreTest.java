@@ -1,40 +1,20 @@
 package apiTests;
 
-import io.restassured.http.Header;
-import org.junit.jupiter.api.Assertions;
+import assertions.AssertionForStore;
+import httpRequest.RequestStore;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import requests.StoreInfo;
 import responses.Store;
-import steps.data.users.UserInfoProvider;
 import storage.ApiV1;
 
-import java.util.ArrayList;
-
-import static io.restassured.RestAssured.given;
-
 public class StoreTest {
+    RequestStore requestStore = new RequestStore();
+    AssertionForStore assertionForStore = new AssertionForStore();
     @Test
     @DisplayName("Check success partner store list")
     public void StoreListTest() {
-        Store store = given()
-                .header(new Header("Authorization", "Bearer " + UserInfoProvider.getToken()))
-                .get(ApiV1.STAGE.getApi() + ApiV1.STORE.getApi())
-                .then().log().all()
-                .extract().as(Store.class);
-
-        Assertions.assertEquals("success", store.getResult());
-        Assertions.assertEquals("", store.getError());
-        Assertions.assertEquals(200, store.getCode());
-
-        ArrayList<StoreInfo> storeInfo = store.getData();
-        for (StoreInfo data : storeInfo) {
-            Assertions.assertFalse(data.title.isEmpty(), "title  is empty");
-            Assertions.assertNotNull(data.address.first_line, "address is not find " + data.id);
-            Assertions.assertFalse(data.address.location.lat.isEmpty(), "location lat is empty");
-            Assertions.assertFalse(data.address.location.lng.isEmpty(), "location lng is empty");
-            Assertions.assertNotNull(data.title, "title  is null");
-            Assertions.assertTrue(UserInfoProvider.isNumber((data.id)), "id  contains char");
-        }
+        Store store = requestStore.requestStoreList(ApiV1.STAGE.getApi() , ApiV1.STORE.getApi());
+        assertionForStore.assertStoreList(store);
+        assertionForStore.assertStoreInfoData(store.getData());
     }
 }

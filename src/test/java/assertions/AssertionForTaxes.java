@@ -1,8 +1,12 @@
 package assertions;
 
+import Utils.ErrorMessages;
 import org.junit.jupiter.api.Assertions;
+import requests.tax.TaxesInfo;
 import responses.Taxes.SuccessCreateTax;
+import responses.Taxes.Taxes;
 import storage.User;
+import java.util.ArrayList;
 
 public class AssertionForTaxes {
     public void assertTaxes(SuccessCreateTax successCreateTax) {
@@ -21,6 +25,16 @@ public class AssertionForTaxes {
         Assertions.assertFalse(successCreateTax.getData().getResult().title.isEmpty(), "Title is empty");
         Assertions.assertFalse(successCreateTax.getData().getResult().visibleTitle.isEmpty(), "Visible title is empty");
         Assertions.assertFalse(successCreateTax.getData().getResult().description.isEmpty(), "Description is empty");
-
+    }
+    public void assertTaxesList(Taxes taxes){
+        Assertions.assertEquals(ErrorMessages.successMsg, taxes.getResult());
+        Assertions.assertEquals(ErrorMessages.successCode, taxes.getCode());
+        Assertions.assertEquals("", taxes.getError());
+    }
+    public void assertTaxesInfo(ArrayList<TaxesInfo> taxesInfo){
+        for (TaxesInfo data : taxesInfo) {
+            Assertions.assertNotNull(data.getId(), "id is empty");
+            Assertions.assertNotNull(data.getTitle(), "title is empty");
+        }
     }
 }

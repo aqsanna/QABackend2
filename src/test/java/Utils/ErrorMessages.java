@@ -12,5 +12,6 @@ public class ErrorMessages {
     public static  String messageForPackInvalidCred = "Please fix the following errors: Box Name cannot be blank., Reserve (%) must be no less than 0., " +
             "Length must be no less than 9.0E-5., Width must be no less than 9.0E-5., Height must be no less than 9.0E-5., " +
             "Weight must be greater than or equal to \"0\"., Special Type must be no less than 0., Pack name cannot be blank., Price must be no less than 0., Free pack quantity must be no less than 0.";
-
+    public static String successMsg ="success";
+    public static Integer successCode =200;
 }

@@ -3,7 +3,6 @@ package httpRequest;
 import com.google.gson.Gson;
 import io.restassured.http.ContentType;
 import io.restassured.http.Header;
-import requests.packaging.PackagingErrorMessagesForInvalidCredential;
 import responses.packaging.PackagingErrorMsg;
 import responses.packaging.PackagingForStore;
 import steps.data.users.PackagingProvider;

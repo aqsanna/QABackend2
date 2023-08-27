@@ -1,6 +1,6 @@
 package apiTests;
 
-import io.restassured.http.Header;
+import httpRequest.RequestDiscount;
 import jdk.jfr.Description;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -14,21 +14,15 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-import static io.restassured.RestAssured.given;
-
 public class DiscountTest {
+    RequestDiscount requestDiscount = new RequestDiscount();
     @Test
     @Description("Check success partner discount list")
     public void CheckDiscountListTest() {
         String pattern = "yyyy-MM-dd HH:mm:ss";
         SimpleDateFormat format = new SimpleDateFormat(pattern);
 
-        Discount discount = given()
-                .header(new Header("Authorization", "Bearer " + UserInfoProvider.getToken()))
-                .get(ApiV1.STAGE.getApi() + ApiV1.DISCOUNT_LIST.getApi())
-                .then()
-                .extract().as(Discount.class);
-
+        Discount discount = requestDiscount.requestDiscountList(ApiV1.STAGE.getApi(),ApiV1.DISCOUNT_LIST.getApi());
         Assertions.assertEquals("success", discount.getResult());
         Assertions.assertEquals("", discount.getError());
         Assertions.assertEquals(200, discount.getCode());
