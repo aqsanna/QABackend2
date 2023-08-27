@@ -1,5 +1,6 @@
 package steps.data.users;
 
+import Utils.RandomGenerateMethods;
 import com.google.gson.Gson;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
@@ -10,15 +11,13 @@ import responses.product.SuccessCreateProduct;
 import storage.ApiV1;
 import storage.User;
 
-import java.util.Random;
-
 public class ProductInfoProvider {
     public static CreateProduct getProduct(User email) {
         return switch (email) {
             case EMAIL_INFO -> new CreateProduct(
                     new CreateProduct.Params(
                             User.NAME.getUserData()
-                            , random()
+                            , RandomGenerateMethods.random()
                             , User.CATEGORY_ID.getUserData()
                             , Double.parseDouble(User.PRICE.getUserData())
                             , User.PRICE_UNITS.getUserData()));
@@ -32,7 +31,7 @@ public class ProductInfoProvider {
             case EMAIL_INFO -> new UpdateProduct(
                     new UpdateProduct.Params(
                             User.NAME.getUserData()
-                            , random()
+                            , RandomGenerateMethods.random()
                             , User.CATEGORY_ID.getUserData()
                             , Double.parseDouble(User.PRICE.getUserData())
                             , User.PRICE_UNITS.getUserData()
@@ -62,11 +61,5 @@ public class ProductInfoProvider {
                 .then().log().all()
                 .extract().as(SuccessCreateProduct.class);
         return successCreateProduct.getData();
-    }
-
-    public static String random() {
-        Random ran = new Random();
-        int x = ran.nextInt(999999999);
-        return Integer.toString(x);
     }
 }

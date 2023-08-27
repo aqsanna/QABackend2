@@ -1,5 +1,6 @@
 package apiTests;
 
+import assertions.AssertionForMessages;
 import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
 import io.restassured.http.ContentType;
@@ -21,8 +22,8 @@ import java.util.List;
 import static io.restassured.RestAssured.given;
 
 public class CompanySettings {
-
     Gson gson = new Gson();
+    AssertionForMessages assertionForMessages = new AssertionForMessages();
 
     @Test
     @DisplayName("Check company settings")
@@ -34,9 +35,7 @@ public class CompanySettings {
                 .then().log().all()
                 .extract().as(SettingsCompany.class);
         List<String> expectedList = CompanySettingsEnum.getType();
-
-        Assertions.assertEquals("Ok", settings.getMessage());
-        Assertions.assertEquals("OK", settings.getCode());
+        assertionForMessages.assertRequestMessageAndCode(settings.getMessage(), settings.getCode());
         Assertions.assertFalse(settings.data.adminSettings.guestCheckoutMobile.isEmpty(), "guest_checkout_mobile is empty");
         Assertions.assertTrue(expectedList.contains(settings.data.adminSettings.guestCheckoutMobile), "text is not contains");
         Assertions.assertTrue(UserInfoProvider.generateRandomNumber(settings.data.adminSettings.collectingOutOfStockConfirmationsCount), "id contains char");
@@ -59,9 +58,7 @@ public class CompanySettings {
                 .put(ApiV1.STAGE.getApi() + ApiV2.COMPANY_SETTINGS.getApi())
                 .then().log().all()
                 .extract().as(SettingCompanyEdit.class);
-
-        Assertions.assertEquals("Ok", companySettingsEdit.getMessage());
-        Assertions.assertEquals("OK", companySettingsEdit.getCode());
+        assertionForMessages.assertRequestMessageAndCode(companySettingsEdit.getMessage(), companySettingsEdit.getCode());
         Assertions.assertTrue(companySettingsEdit.data.isEmpty(), "data is not empty");
     }
 

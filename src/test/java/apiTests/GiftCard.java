@@ -1,5 +1,6 @@
 package apiTests;
 
+import assertions.AssertionForMessages;
 import com.google.gson.Gson;
 import io.restassured.http.ContentType;
 import io.restassured.http.Header;
@@ -22,6 +23,7 @@ import static io.restassured.RestAssured.given;
 
 public class GiftCard {
     Gson gson = new Gson();
+    AssertionForMessages assertionForMessages = new AssertionForMessages();
 
     @Test
     @DisplayName("Check create gift-card")
@@ -35,9 +37,7 @@ public class GiftCard {
                 .put(ApiV1.STAGE.getApi() + ApiV2.GIFT_CARD_CREATE.getApi())
                 .then()
                 .extract().as(SuccessCreateGiftCard.class);
-
-        Assertions.assertEquals("Ok", successCreateGiftCard.getMessage());
-        Assertions.assertEquals("OK", successCreateGiftCard.getCode());
+        assertionForMessages.assertRequestMessageAndCode(successCreateGiftCard.getMessage(), successCreateGiftCard.getCode());
         Assertions.assertFalse(successCreateGiftCard.getData().isEmpty());
     }
 
@@ -53,8 +53,7 @@ public class GiftCard {
                 .post(ApiV1.STAGE.getApi() + ApiV2.GIFT_CARD_LIST.getApi())
                 .then()
                 .extract().as(GiftCardList.class);
-        Assertions.assertEquals("Ok", giftCardList.getMessage());
-        Assertions.assertEquals("OK", giftCardList.getCode());
+        assertionForMessages.assertRequestMessageAndCode(giftCardList.getMessage(), giftCardList.getCode());
 
         ArrayList<GiftCardList.Result> giftList = giftCardList.data.getResult();
         for (GiftCardList.Result result : giftList) {

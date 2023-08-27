@@ -1,5 +1,6 @@
 package steps.data.users;
 
+import Utils.RandomGenerateMethods;
 import com.google.gson.Gson;
 import httpRequest.RequestTags;
 import io.restassured.RestAssured;
@@ -17,7 +18,7 @@ public class TagsInfoProvider {
     public static CreateTags getTags(User email) {
         return switch (email) {
             case EMAIL_INFO -> new CreateTags(
-                            User.TITLE_TAG.getUserData() + ProductInfoProvider.random()
+                            User.TITLE_TAG.getUserData() + RandomGenerateMethods.random()
                                 , User.ICON.getUserData()
                                 , User.PRIORITY.getUserData()
                                 ,1
@@ -49,7 +50,7 @@ public class TagsInfoProvider {
         return switch (email) {
             case EMAIL_INFO -> new EditTags(
                     User.ICON.getUserData()
-                    , User.TITLE_TAG.getUserData() + ProductInfoProvider.random()
+                    , User.TITLE_TAG.getUserData() + RandomGenerateMethods.random()
                     , "1"
                     ,0
                     ,0
@@ -70,7 +71,6 @@ public class TagsInfoProvider {
     public static Integer assertResultsMaxId() {
         RequestTags postRequest =  new RequestTags();
         TagsList tagsList = postRequest.requestPostTagsList(ApiV1.STAGE.getApi(), ApiV1.TAGS_LIST.getApi());
-
         int maxId = Integer.MIN_VALUE;
         for (TagsList.Data.Result result : tagsList.getData().getResult()) {
             int id = Integer.parseInt(result.getId());
@@ -93,11 +93,5 @@ public class TagsInfoProvider {
                 .then().log().all()
                 .extract().as(SuccessCreateTags.class);
         return Integer.valueOf(successCreateTags.getData().id);
-    }
-
-    public static Integer random() {
-        Random ran = new Random();
-        int x = ran.nextInt(9) + 1;
-        return x;
     }
 }

@@ -1,9 +1,8 @@
 package steps.data.users;
 
+import Utils.RandomGenerateMethods;
 import requests.tax.TaxesCreateInfo;
 import storage.User;
-
-import static steps.data.users.ProductInfoProvider.random;
 
 public class TaxesInfoProvider {
     public static TaxesCreateInfo getTaxes(User email) {
@@ -14,8 +13,8 @@ public class TaxesInfoProvider {
                     User.ACTION.getUserData(),
                     new TaxesCreateInfo.Params()
                             .withIsActive(User.IS_ACTIVE.getUserData())
-                            .withTitle(User.TITLE.getUserData() + random())
-                            .withVisibleTitle(User.VISIBLE_TITLE.getUserData() + random())
+                            .withTitle(User.TITLE.getUserData() + RandomGenerateMethods.random())
+                            .withVisibleTitle(User.VISIBLE_TITLE.getUserData() + RandomGenerateMethods.random())
                             .withStoreId(User.STORE_ID.getUserData())
                             .withDescription(User.DESCRIPTION.getUserData())
                             .withPerUnit(User.PER_UNIT.getUserData())
