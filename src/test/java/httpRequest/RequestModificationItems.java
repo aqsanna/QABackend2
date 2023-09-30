@@ -25,4 +25,14 @@ public class RequestModificationItems {
                 .then()
                 .extract().as(SuccessCreateModificationItems.class);
     }
+    public SuccessCreateModificationItems requestPostText(String path, String url){
+        return given()
+                .header(new Header("Authorization", "Bearer " + UserInfoProvider.getToken()))
+                .when()
+                .contentType(ContentType.JSON)
+                .body(gson.toJson(ModificationItemsProvider.createModificationText(User.EMAIL_INFO)))
+                .put(path + url)
+                .then()
+                .extract().as(SuccessCreateModificationItems.class);
+    }
 }

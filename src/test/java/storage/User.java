@@ -55,6 +55,7 @@ public enum User {
     PICKUPBYDRIVER("true"),
     ADVENCEDCOLLECTINGFLOW("true"),
     REGULARTYPE("regular"),
+    TEXTTYPE("text"),
     MODIFICATIONIMAGE("https://cdn.stage.local.express/img/JyeicWbpavIiO2Ln1Wl2clRw9lbnLldWYEWMl1tETf1WtURRavADd2Zh1W5GcuU=0nIn.png"),
     TAXES("268"),
     COMMOND("POST");

@@ -21,9 +21,9 @@ public class PackagingForStore {
         @SerializedName("packs")
         public ArrayList<Pack> packs;
         @SerializedName("pickupByDriver")
-        public boolean pickupByDriver;
+        public Boolean pickupByDriver;
         @SerializedName("advancedCollectingFlow")
-        public boolean advancedCollectingFlow;
+        public Boolean advancedCollectingFlow;
         @Getter
         public static class SpecialType{
             @SerializedName("id")
@@ -44,21 +44,21 @@ public class PackagingForStore {
         @Getter
         public static class Box{
             @SerializedName("id")
-            public int id;
+            public Integer id;
             @SerializedName("store_id")
             public String store_id;
             @SerializedName("name")
             public String name;
             @SerializedName("length")
-            public int length;
+            public Integer length;
             @SerializedName("width")
-            public int width;
+            public Integer width;
             @SerializedName("height")
-            public int height;
+            public Integer height;
             @SerializedName("weight")
-            public int weight;
+            public Integer weight;
             @SerializedName("free_volume_reserve")
-            public int freeVolumeReserve;
+            public Integer freeVolumeReserve;
             @SerializedName("special_entity_type_id")
             public String specialEntityTypeId;
             @SerializedName("storeId")
@@ -73,7 +73,7 @@ public class PackagingForStore {
             @SerializedName("price")
             public String price;
             @SerializedName("free_count")
-            public int freeCount;
+            public Integer freeCount;
             @SerializedName("upc")
             public String upc;
             @SerializedName("special_entity_type_id")

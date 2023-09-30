@@ -2,8 +2,6 @@ package responses.modificationItems;
 
 import com.google.gson.annotations.SerializedName;
 import lombok.Getter;
-
-import java.util.ArrayList;
 @Getter
 public class SuccessCreateModificationItems {
     @SerializedName("message")
@@ -38,6 +36,7 @@ public class SuccessCreateModificationItems {
         @SerializedName("min_length")
         public String minLength;
         @SerializedName("max_length")
-        public String maxLength;
+        public Integer maxLength;
+
     }
 }

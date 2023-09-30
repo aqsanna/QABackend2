@@ -3,6 +3,7 @@ package apiTests;
 import assertions.AssertionForMessages;
 import assertions.AssertionForModificationItems;
 import httpRequest.RequestModificationItems;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import responses.modificationItems.SuccessCreateModificationItems;
@@ -21,6 +22,12 @@ public class ModificationItemsTest {
         assertionForMessages.assertRequestMessageAndCode(createModificationItems.getMessage(), createModificationItems.getCode());
         assertionForModificationItems.assertResultsForSuccessCreateModificationItem(createModificationItems);
 
-
+    }
+    @Test
+    @DisplayName("Check create modification item by text")
+    public void CreateModificationItemsText(){
+        SuccessCreateModificationItems createModificationItemsText = requestModificationItems.requestPostText(ApiV1.STAGE.getApi(), ApiV1.MODIFICATIONITEM.getApi());
+        assertionForMessages.assertRequestMessageAndCode(createModificationItemsText.getMessage(), createModificationItemsText.getCode());
+        assertionForModificationItems.assertResultsForSuccessCreateModificationItemText(createModificationItemsText);
     }
 }
