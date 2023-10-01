@@ -1,12 +1,12 @@
 package apiTests;
 
 import assertions.AssertionForTaxes;
-import httpRequest.RequestTaxes;
+import helpers.RequestTaxes;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import responses.Taxes.SuccessCreateTax;
-import responses.Taxes.Taxes;
-import storage.ApiV1;
+import models.responses.taxes.SuccessCreateTax;
+import models.responses.taxes.Taxes;
+import enums.ApiV1;
 
 public class TaxesTest {
     AssertionForTaxes assertionForTaxes = new AssertionForTaxes();

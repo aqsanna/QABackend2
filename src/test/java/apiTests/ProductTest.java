@@ -1,17 +1,16 @@
 package apiTests;
 
 import assertions.AssertionForProduct;
-import com.google.gson.Gson;
-import httpRequest.RequestProduct;
+import helpers.RequestProduct;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import responses.product.SuccessCreateProduct;
-import responses.product.SuccessDeleteProduct;
-import responses.product.SuccessUpdateProduct;
+import models.responses.product.SuccessCreateProduct;
+import models.responses.product.SuccessDeleteProduct;
+import models.responses.product.SuccessUpdateProduct;
 import specification.RequestSpec;
 import specification.ResponseSpec;
-import steps.data.users.ProductInfoProvider;
-import storage.ApiV1;
+import dataProviders.ProductInfoProvider;
+import enums.ApiV1;
 
 public class ProductTest {
     RequestProduct requestProduct = new RequestProduct();

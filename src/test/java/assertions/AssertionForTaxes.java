@@ -2,10 +2,10 @@ package assertions;
 
 import Utils.ErrorMessages;
 import org.junit.jupiter.api.Assertions;
-import requests.tax.TaxesInfo;
-import responses.Taxes.SuccessCreateTax;
-import responses.Taxes.Taxes;
-import storage.User;
+import models.requests.tax.TaxesInfo;
+import models.responses.taxes.SuccessCreateTax;
+import models.responses.taxes.Taxes;
+import enums.User;
 import java.util.ArrayList;
 
 public class AssertionForTaxes {

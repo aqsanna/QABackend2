@@ -2,10 +2,10 @@ package assertions;
 
 import Utils.ErrorMessages;
 import org.junit.jupiter.api.Assertions;
-import responses.packaging.PackagingErrorMsg;
-import responses.packaging.PackagingForStore;
-import storage.PackagingMessages;
-import storage.PackagingMessagesForInvalidCredential;
+import models.responses.packaging.PackagingErrorMsg;
+import models.responses.packaging.PackagingForStore;
+import enums.PackagingMessages;
+import enums.PackagingMessagesForInvalidCredential;
 
 import java.util.ArrayList;
 import java.util.List;

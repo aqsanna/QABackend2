@@ -2,12 +2,11 @@ package apiTests;
 
 import assertions.AssertionForMessages;
 import assertions.AssertionForModificationItems;
-import httpRequest.RequestModificationItems;
-import org.junit.jupiter.api.Assertions;
+import helpers.RequestModificationItems;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import responses.modificationItems.SuccessCreateModificationItems;
-import storage.ApiV1;
+import models.responses.modificationItems.SuccessCreateModificationItems;
+import enums.ApiV1;
 
 public class ModificationItemsTest {
 

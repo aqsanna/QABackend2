@@ -2,11 +2,11 @@ package apiTests;
 
 import assertions.AssertionForMessages;
 import assertions.AssertionForTags;
-import httpRequest.RequestTags;
+import helpers.RequestTags;
+import models.responses.tags.*;
 import org.junit.jupiter.api.*;
-import responses.tags.*;
-import steps.data.users.TagsInfoProvider;
-import storage.*;
+import dataProviders.TagsInfoProvider;
+import enums.*;
 
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)

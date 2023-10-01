@@ -2,9 +2,9 @@ package assertions;
 
 import Utils.ErrorMessages;
 import org.junit.jupiter.api.Assertions;
-import responses.product.SuccessCreateProduct;
-import responses.product.SuccessDeleteProduct;
-import responses.product.SuccessUpdateProduct;
+import models.responses.product.SuccessCreateProduct;
+import models.responses.product.SuccessDeleteProduct;
+import models.responses.product.SuccessUpdateProduct;
 
 public class AssertionForProduct {
     public void assertCreateProduct( SuccessCreateProduct successCreateProduct){

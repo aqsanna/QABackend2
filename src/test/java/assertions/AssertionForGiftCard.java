@@ -1,8 +1,8 @@
 package assertions;
 
 import org.junit.jupiter.api.Assertions;
-import responses.giftCard.GiftCardDetails;
-import responses.giftCard.GiftCardList;
+import models.responses.giftCard.GiftCardDetails;
+import models.responses.giftCard.GiftCardList;
 
 import java.util.ArrayList;
 

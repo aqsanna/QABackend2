@@ -4,12 +4,12 @@ import Utils.OrderUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import responses.partner.orders.Order;
-import responses.partner.orders.PartnerOrders;
-import steps.data.order.AddPacksToOrderProvider;
-import steps.data.order.CollectingOrderProvider;
-import storage.OrderStatus;
-import storage.User;
+import models.responses.partner.orders.Order;
+import models.responses.partner.orders.PartnerOrders;
+import dataProviders.orderProvider.AddPacksToOrderProvider;
+import dataProviders.orderProvider.CollectingOrderProvider;
+import enums.OrderStatus;
+import enums.User;
 
 import java.util.ArrayList;
 import java.util.stream.Collectors;

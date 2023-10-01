@@ -2,9 +2,9 @@ package assertions;
 
 import Utils.ErrorMessages;
 import org.junit.jupiter.api.Assertions;
-import requests.StoreInfo;
-import responses.Store;
-import steps.data.users.UserInfoProvider;
+import models.requests.store1.StoreInfo;
+import models.responses.store1.Store;
+import dataProviders.UserInfoProvider;
 
 import java.util.ArrayList;
 

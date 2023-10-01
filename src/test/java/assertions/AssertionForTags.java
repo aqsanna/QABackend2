@@ -2,12 +2,12 @@ package assertions;
 
 import Utils.ErrorMessages;
 import org.junit.jupiter.api.Assertions;
-import responses.tags.SuccessCreateTags;
-import responses.tags.TagsEdit;
-import responses.tags.TagsErrorMsg;
-import responses.tags.TagsList;
-import storage.TagMessages;
-import storage.TagMessagesInvalidCredential;
+import models.responses.tags.SuccessCreateTags;
+import models.responses.tags.TagsEdit;
+import models.responses.tags.TagsErrorMsg;
+import models.responses.tags.TagsList;
+import enums.TagMessages;
+import enums.TagMessagesInvalidCredential;
 
 import java.util.ArrayList;
 import java.util.List;

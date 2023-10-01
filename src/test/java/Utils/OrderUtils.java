@@ -4,15 +4,15 @@ import com.google.gson.Gson;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.http.Header;
+import models.requests.order.*;
+import models.responses.partner.orders.*;
 import org.junit.jupiter.api.Assertions;
-import requests.order.*;
-import responses.packaging.PackagingForStore;
-import responses.packaging.PacksToOrder;
-import responses.packaging.PackLocation;
-import responses.partner.orders.*;
-import steps.data.users.UserInfoProvider;
-import storage.ApiV2;
-import storage.ApiV1;
+import models.responses.packaging.PackagingForStore;
+import models.responses.packaging.PacksToOrder;
+import models.responses.packaging.PackLocation;
+import dataProviders.UserInfoProvider;
+import enums.ApiV2;
+import enums.ApiV1;
 
 import java.util.ArrayList;
 

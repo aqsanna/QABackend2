@@ -1,18 +1,17 @@
 package apiTests;
 
 import assertions.AssertionForMessages;
-import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
-import httpRequest.RequestCompanySettings;
+import helpers.RequestCompanySettings;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import responses.companySettings.SettingCompanyEdit;
-import responses.companySettings.SettingsCompany;
-import steps.data.users.UserInfoProvider;
-import storage.ApiV1;
-import storage.ApiV2;
-import storage.CompanySettingsEnum;
+import models.responses.companySettings.SettingCompanyEdit;
+import models.responses.companySettings.SettingsCompany;
+import dataProviders.UserInfoProvider;
+import enums.ApiV1;
+import enums.ApiV2;
+import enums.CompanySettingsEnum;
 import java.util.List;
 
 public class CompanySettings {

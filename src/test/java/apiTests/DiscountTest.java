@@ -1,13 +1,13 @@
 package apiTests;
 
-import httpRequest.RequestDiscount;
+import helpers.RequestDiscount;
 import jdk.jfr.Description;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import requests.DiscountInfo;
-import responses.Discount;
-import steps.data.users.UserInfoProvider;
-import storage.ApiV1;
+import models.requests.discount.DiscountInfo;
+import models.responses.discount.Discount;
+import dataProviders.UserInfoProvider;
+import enums.ApiV1;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

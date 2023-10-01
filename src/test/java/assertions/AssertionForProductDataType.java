@@ -1,14 +1,14 @@
 package assertions;
 
 import org.junit.jupiter.api.Assertions;
-import requests.ProductDataTypeInfo;
-import storage.ProductDataType;
+import models.requests.productDadaType.ProductDataTypeInfo;
+import enums.ProductDataType;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class AssertionForProductDataType {
-    public void assertProductDataType( responses.ProductDataType productDataType){
+    public void assertProductDataType( models.responses.productDataType.ProductDataType productDataType){
         Assertions.assertEquals("success", productDataType.getResult());
         Assertions.assertEquals("", productDataType.getError());
         Assertions.assertEquals(200, productDataType.getCode());

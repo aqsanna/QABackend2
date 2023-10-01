@@ -1,11 +1,11 @@
 package apiTests;
 
 import assertions.AssertionForStore;
-import httpRequest.RequestStore;
+import helpers.RequestStore;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import responses.Store;
-import storage.ApiV1;
+import models.responses.store1.Store;
+import enums.ApiV1;
 
 public class StoreTest {
     RequestStore requestStore = new RequestStore();

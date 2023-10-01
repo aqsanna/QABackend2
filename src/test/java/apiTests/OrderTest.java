@@ -4,9 +4,9 @@ import Utils.OrderUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import responses.partner.orders.PartnerOrders;
-import steps.data.users.UserInfoProvider;
-import storage.OrderStatus;
+import models.responses.partner.orders.PartnerOrders;
+import dataProviders.UserInfoProvider;
+import enums.OrderStatus;
 
 public class OrderTest {
     UserInfoProvider userInfoProvider = new UserInfoProvider();

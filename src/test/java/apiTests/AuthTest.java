@@ -5,12 +5,12 @@ import io.restassured.http.ContentType;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import responses.userLogin.SuccessLogin;
+import models.responses.userLogin.SuccessLogin;
 import specification.RequestSpec;
 import specification.ResponseSpec;
-import steps.data.users.UserInfoProvider;
-import storage.ApiV1;
-import storage.User;
+import dataProviders.UserInfoProvider;
+import enums.ApiV1;
+import enums.User;
 
 import static io.restassured.RestAssured.given;
 

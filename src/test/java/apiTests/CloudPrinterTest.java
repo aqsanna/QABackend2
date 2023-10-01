@@ -1,11 +1,11 @@
 package apiTests;
 
 import assertions.AssertionForMessages;
-import httpRequest.RequestCloudPrinter;
+import helpers.RequestCloudPrinter;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import responses.CloudPrinter;
+import models.responses.cloudPrinter.CloudPrinter;
 
 public class CloudPrinterTest {
     AssertionForMessages assertionForMessages = new AssertionForMessages();

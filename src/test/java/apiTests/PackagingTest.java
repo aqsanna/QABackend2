@@ -2,11 +2,11 @@ package apiTests;
 import assertions.AssertionForMessages;
 import assertions.AssertionForPackaging;
 import com.google.gson.annotations.SerializedName;
-import httpRequest.RequestPackaging;
+import helpers.RequestPackaging;
 import org.junit.jupiter.api.*;
-import responses.packaging.PackagingErrorMsg;
-import responses.packaging.PackagingForStore;
-import storage.*;
+import models.responses.packaging.PackagingErrorMsg;
+import models.responses.packaging.PackagingForStore;
+import enums.*;
 
 import java.util.ArrayList;
 

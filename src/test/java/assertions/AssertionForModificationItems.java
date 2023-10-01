@@ -1,7 +1,7 @@
 package assertions;
 
 import org.junit.jupiter.api.Assertions;
-import responses.modificationItems.SuccessCreateModificationItems;
+import models.responses.modificationItems.SuccessCreateModificationItems;
 
 
 public class AssertionForModificationItems {

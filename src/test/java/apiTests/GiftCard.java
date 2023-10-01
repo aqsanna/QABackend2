@@ -2,17 +2,18 @@ package apiTests;
 
 import assertions.AssertionForGiftCard;
 import assertions.AssertionForMessages;
-import httpRequest.RequestGiftCard;
+import helpers.RequestGiftCard;
+import org.junit.Ignore;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import responses.giftCard.GiftCardDetails;
-import responses.giftCard.GiftCardDisable;
-import responses.giftCard.GiftCardList;
-import responses.giftCard.SuccessCreateGiftCard;
-import steps.data.users.GiftCardInfoProvider;
-import storage.ApiV1;
-import storage.ApiV2;
+import models.responses.giftCard.GiftCardDetails;
+import models.responses.giftCard.GiftCardDisable;
+import models.responses.giftCard.GiftCardList;
+import models.responses.giftCard.SuccessCreateGiftCard;
+import dataProviders.GiftCardInfoProvider;
+import enums.ApiV1;
+import enums.ApiV2;
 
 public class GiftCard {
     AssertionForMessages assertionForMessages = new AssertionForMessages();
@@ -45,6 +46,7 @@ public class GiftCard {
         assertionForGiftCard.assertGiftCardDetails(giftCardDetails);
         assertionForGiftCard.assertGiftCardDetailsTransaction(giftCardDetails.data.getTransactions());
     }
+
 
     @Test
     @DisplayName("Check disable gift-card")
