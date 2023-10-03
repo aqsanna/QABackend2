@@ -17,7 +17,7 @@ public class PackagingTest {
     AssertionForMessages assertionForMessages = new AssertionForMessages();
     @Test
     @Order(1)
-    @SerializedName("Check create Packing")
+    @SerializedName("Check create Packing - LE-T658-3-4-5-6")
     public void addPackaging() {
 
         PackagingForStore createPacking = requestPackaging.requestCreate(ApiV1.STAGE.getApi(),  ApiV2.PACKAGING.getApi());
@@ -30,7 +30,7 @@ public class PackagingTest {
     }
     @Test
     @Order(2)
-    @SerializedName("Check update Packing")
+    @SerializedName("Check update Packing - LE-T658-9")
     public void updatePackaging() {
         PackagingForStore updatePacking = requestPackaging.requestUpdate(ApiV1.STAGE.getApi(), ApiV2.PACKAGING.getApi());
         assertionForMessages.assertRequestMessageAndCode(updatePacking.getMessage(), updatePacking.getCode());
@@ -42,7 +42,7 @@ public class PackagingTest {
     }
     @Test
     @Order(3)
-    @SerializedName("Check error messages Packing")
+    @SerializedName("Check error messages Packing - LE-T658-7")
     public void errorMessagesPackaging(){
         PackagingErrorMsg errorMsg = requestPackaging.requestPutErrorMsg(ApiV1.STAGE.getApi(), ApiV2.PACKAGING.getApi());
         assertionForPackaging.assertErrorMessages(errorMsg);
@@ -56,7 +56,7 @@ public class PackagingTest {
     }
 
     @Test
-    @SerializedName("Check delete Packing")
+    @SerializedName("Check delete Packing - LE-T658-8")
     public void deletePackaging(){
         PackagingForStore deletePacking =   requestPackaging.requestDel(ApiV1.STAGE.getApi(), ApiV2.PACKAGING.getApi());
         assertionForMessages.assertRequestMessageAndCode(deletePacking.getMessage(), deletePacking.getCode());
