@@ -72,4 +72,7 @@ public class AssertionForTags {
         Assertions.assertEquals(tagsEdit.getData().getStatus(), 0);
         Assertions.assertEquals(tagsEdit.getData().getShowIconOnProduct(), 0);
     }
+    public void assertResultsForChangeTagStatus(TagsEdit tagsEdit) {
+        Assertions.assertEquals(tagsEdit.getData().getStatus(), 0);
+    }
 }

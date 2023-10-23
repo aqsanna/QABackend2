@@ -46,6 +46,22 @@ public class TagsTest {
         assertionForMessages.assertRequestMessageAndCode(tagsEdit.getMessage(), tagsEdit.getCode());
         assertionForTags.assertResultsForEditTags(tagsEdit);
     }
+    @Test
+    @Order(4)
+    @DisplayName("Change status tag")
+    public void ChangeStatusTag() {
+        TagsEdit tagsEdit = postRequest.requestPutChangeStatus(ApiV1.STAGE.getApi(), ApiV2.TAGS_EDIT.getApi(), TagsInfoProvider.assertResultsMaxId());
+        assertionForMessages.assertRequestMessageAndCode(tagsEdit.getMessage(), tagsEdit.getCode());
+        assertionForTags.assertResultsForChangeTagStatus(tagsEdit);
+    }
+    @Test
+    @Order(4)
+    @DisplayName("Change status tag")
+    public void ChangeVisibleTag() {
+        TagsEdit tagsEdit = postRequest.requestPutChangeVisible(ApiV1.STAGE.getApi(), ApiV2.TAGS_EDIT.getApi(), TagsInfoProvider.assertResultsMaxId());
+        assertionForMessages.assertRequestMessageAndCode(tagsEdit.getMessage(), tagsEdit.getCode());
+        assertionForTags.assertResultsForChangeTagStatus(tagsEdit);
+    }
 
     @Test
     @Order(5)

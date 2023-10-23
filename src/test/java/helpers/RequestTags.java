@@ -44,6 +44,28 @@ public class RequestTags {
                 .then()
                 .extract().as(TagsErrorMsg.class);
     }
+    public TagsEdit requestPutChangeStatus(String path, String url, Integer tagsInfoProvider) {
+
+        return given()
+                .header(new Header("Authorization", "Bearer " + UserInfoProvider.getToken()))
+                .when()
+                .contentType(ContentType.JSON)
+                .body(gson.toJson(TagsInfoProvider.changeStatus(User.EMAIL_INFO)))
+                .put(path + url + tagsInfoProvider)
+                .then()
+                .extract().as(TagsEdit.class);
+    }
+    public TagsEdit requestPutChangeVisible(String path, String url, Integer tagsInfoProvider) {
+
+        return given()
+                .header(new Header("Authorization", "Bearer " + UserInfoProvider.getToken()))
+                .when()
+                .contentType(ContentType.JSON)
+                .body(gson.toJson(TagsInfoProvider.changeVisible(User.EMAIL_INFO)))
+                .put(path + url + tagsInfoProvider)
+                .then()
+                .extract().as(TagsEdit.class);
+    }
 
     public TagsErrorMsg requestPutErrorMsgInvalidCredential(String path, String url) {
 

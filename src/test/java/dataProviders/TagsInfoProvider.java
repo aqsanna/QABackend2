@@ -32,6 +32,23 @@ public class TagsInfoProvider {
             default -> null;
         };
     }
+    public static ChangeTagStatus changeStatus(User email) {
+        return switch (email) {
+            case EMAIL_INFO -> new ChangeTagStatus(
+                    0
+                    );
+            default -> null;
+        };
+    }
+
+    public static ChangeTagVisible changeVisible(User email) {
+        return switch (email) {
+            case EMAIL_INFO -> new ChangeTagVisible(
+                    0
+            );
+            default -> null;
+        };
+    }
 
     public static CreateTagsInvalidCredential errorMessageTagsInvalidCredential(User email) {
         return switch (email) {
