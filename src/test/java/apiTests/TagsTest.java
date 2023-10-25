@@ -47,7 +47,7 @@ public class TagsTest {
         assertionForTags.assertResultsForEditTags(tagsEdit);
     }
     @Test
-    @Order(4)
+    @Order(5)
     @DisplayName("Change status tag")
     public void ChangeStatusTag() {
         TagsEdit tagsEdit = postRequest.requestPutChangeStatus(ApiV1.STAGE.getApi(), ApiV2.TAGS_EDIT.getApi(), TagsInfoProvider.assertResultsMaxId());
@@ -55,16 +55,24 @@ public class TagsTest {
         assertionForTags.assertResultsForChangeTagStatus(tagsEdit);
     }
     @Test
-    @Order(4)
-    @DisplayName("Change status tag")
+    @Order(6)
+    @DisplayName("Change visible tag")
     public void ChangeVisibleTag() {
         TagsEdit tagsEdit = postRequest.requestPutChangeVisible(ApiV1.STAGE.getApi(), ApiV2.TAGS_EDIT.getApi(), TagsInfoProvider.assertResultsMaxId());
         assertionForMessages.assertRequestMessageAndCode(tagsEdit.getMessage(), tagsEdit.getCode());
         assertionForTags.assertResultsForChangeTagStatus(tagsEdit);
     }
+    @Test
+    @Order(7)
+    @DisplayName("Change show on product card tag")
+    public void ChangeShowOnProductCardTag() {
+        TagsEdit tagsEdit = postRequest.requestPutChangeShowOnProductCard(ApiV1.STAGE.getApi(), ApiV2.TAGS_EDIT.getApi(), TagsInfoProvider.assertResultsMaxId());
+        assertionForMessages.assertRequestMessageAndCode(tagsEdit.getMessage(), tagsEdit.getCode());
+        assertionForTags.assertResultsForChangeTagStatus(tagsEdit);
+    }
 
     @Test
-    @Order(5)
+    @Order(8)
     @DisplayName("Check tags list")
     public void getTagsListTest() {
         TagsList tagsList = postRequest.requestPostTagsList(ApiV1.STAGE.getApi(), ApiV1.TAGS_LIST.getApi());

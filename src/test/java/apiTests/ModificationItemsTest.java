@@ -3,7 +3,10 @@ package apiTests;
 import assertions.AssertionForMessages;
 import assertions.AssertionForModificationItems;
 import helpers.RequestModificationItems;
+import models.responses.modificationItems.ModificationItemErrorMsg;
+import models.responses.tags.TagsErrorMsg;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import models.responses.modificationItems.SuccessCreateModificationItems;
 import enums.ApiV1;
@@ -28,5 +31,13 @@ public class ModificationItemsTest {
         SuccessCreateModificationItems createModificationItemsText = requestModificationItems.requestPostText(ApiV1.STAGE.getApi(), ApiV1.MODIFICATIONITEM.getApi());
         assertionForMessages.assertRequestMessageAndCode(createModificationItemsText.getMessage(), createModificationItemsText.getCode());
         assertionForModificationItems.assertResultsForSuccessCreateModificationItemText(createModificationItemsText);
+    }
+
+    @Test
+    @Order(3)
+    @DisplayName("Check create tags with invalid credential")
+    public void CreateModificationItemInvalidCredential() {
+        ModificationItemErrorMsg errorMsg = requestModificationItems.requestPutErrorMsgInvalidCredential(ApiV1.STAGE.getApi(), ApiV1.MODIFICATIONITEM.getApi());
+        assertionForModificationItems.assertResultsForInvalidErrorMsgModificationItem(errorMsg);
     }
 }

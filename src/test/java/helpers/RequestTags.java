@@ -66,6 +66,17 @@ public class RequestTags {
                 .then()
                 .extract().as(TagsEdit.class);
     }
+    public TagsEdit requestPutChangeShowOnProductCard(String path, String url, Integer tagsInfoProvider) {
+
+        return given()
+                .header(new Header("Authorization", "Bearer " + UserInfoProvider.getToken()))
+                .when()
+                .contentType(ContentType.JSON)
+                .body(gson.toJson(TagsInfoProvider.changeShowOnProductCard(User.EMAIL_INFO)))
+                .put(path + url + tagsInfoProvider)
+                .then()
+                .extract().as(TagsEdit.class);
+    }
 
     public TagsErrorMsg requestPutErrorMsgInvalidCredential(String path, String url) {
 

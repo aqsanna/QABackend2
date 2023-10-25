@@ -49,6 +49,14 @@ public class TagsInfoProvider {
             default -> null;
         };
     }
+    public static ChangeTagShowOnProductCard changeShowOnProductCard(User email) {
+        return switch (email) {
+            case EMAIL_INFO -> new ChangeTagShowOnProductCard(
+                    0
+            );
+            default -> null;
+        };
+    }
 
     public static CreateTagsInvalidCredential errorMessageTagsInvalidCredential(User email) {
         return switch (email) {

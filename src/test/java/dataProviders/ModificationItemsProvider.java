@@ -1,9 +1,11 @@
 package dataProviders;
 
 import Utils.RandomGenerateMethods;
+import models.requests.modifications.CreateModificationItemInvalidCredential;
 import models.requests.modifications.CreateModificationItems;
 import models.requests.modifications.CreateModificationItemsText;
 import enums.User;
+import models.requests.tag.CreateTagsInvalidCredential;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -43,6 +45,18 @@ public class ModificationItemsProvider {
                     , RandomGenerateMethods.randomString(5)
                     , User.MODIFICATIONIMAGE.getUserData()
                     , User.STORE_ID.getUserData());
+            default -> null;
+        };
+    }
+
+    public static CreateModificationItemInvalidCredential errorMessageModificationItemInvalidCredential(User email) {
+        return switch (email) {
+            case EMAIL_INFO -> new CreateModificationItemInvalidCredential(
+                    2
+                    , User.REGULARTYPE.getUserData() + RandomGenerateMethods.randomString(5)
+                    , 3
+                    , null
+                    , RandomGenerateMethods.randomString(5));
             default -> null;
         };
     }
