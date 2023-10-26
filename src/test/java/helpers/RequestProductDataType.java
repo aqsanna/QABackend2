@@ -6,10 +6,9 @@ import dataProviders.UserInfoProvider;
 
 import static io.restassured.RestAssured.given;
 
-public class RequestProductDataType {
+public class RequestProductDataType extends AbstractRequest {
     public ProductDataType requestProductDataType(String path, String url){
-        return given()
-                .header(new Header("Authorization", "Bearer " + UserInfoProvider.getToken()))
+        return baseAuthorizedRequest()
                 .get(path + url)
                 .then().log().all()
                 .extract().as(ProductDataType.class);

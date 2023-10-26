@@ -11,12 +11,9 @@ import enums.User;
 
 import static io.restassured.RestAssured.given;
 
-public class RequestProduct {
+public class RequestProduct extends AbstractRequest {
     public SuccessCreateProduct requestCreateProduct(String path, String url){
-        return given()
-                .header(new Header("Authorization", "Bearer " + UserInfoProvider.getToken()))
-                .when()
-                .contentType(ContentType.JSON)
+        return baseAuthorizedRequest()
                 .body(ProductInfoProvider.getProduct(User.EMAIL_INFO))
                 .post(path + url)
                 .then().log().all()
@@ -24,17 +21,13 @@ public class RequestProduct {
     }
 
     public SuccessDeleteProduct requestDeleteProduct(String path, String url, String productId){
-        return given()
-                .header(new Header("Authorization", "Bearer " + UserInfoProvider.getToken()))
+        return  baseAuthorizedRequest()
                 .delete(path + url + productId)
                 .then().log().all()
                 .extract().as(SuccessDeleteProduct.class);
     }
     public SuccessUpdateProduct requestUpdateProduct(String path, String url, String productId){
-        return given()
-                .header(new Header("Authorization", "Bearer " + UserInfoProvider.getToken()))
-                .when()
-                .contentType(ContentType.JSON)
+        return  baseAuthorizedRequest()
                 .body(ProductInfoProvider.updProduct(User.EMAIL_INFO))
                 .put(path + url + productId)
                 .then().log().all()

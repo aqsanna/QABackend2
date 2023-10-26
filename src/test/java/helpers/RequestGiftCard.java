@@ -12,39 +12,29 @@ import enums.User;
 
 import static io.restassured.RestAssured.given;
 
-public class RequestGiftCard {
+public class RequestGiftCard extends AbstractRequest {
     public SuccessCreateGiftCard putRequestCreateGiftCard(String path, String url){
-        return given()
-                .header(new Header("Authorization", "Bearer " + UserInfoProvider.getToken()))
-                .when()
-                .contentType(ContentType.JSON)
+        return baseAuthorizedRequest()
                 .body(GiftCardInfoProvider.createGift(User.EMAIL_INFO))
                 .put(path + url)
                 .then()
                 .extract().as(SuccessCreateGiftCard.class);
     }
     public GiftCardList postRequestListGiftCard(String path, String url){
-        return  given()
-                .header(new Header("Authorization", "Bearer " + UserInfoProvider.getToken()))
-                .when()
-                .contentType(ContentType.JSON)
+        return  baseAuthorizedRequest()
                 .body((GiftCardInfoProvider.giftCardList(User.EMAIL_INFO)))
                 .post(path + url)
                 .then()
                 .extract().as(GiftCardList.class);
     }
     public GiftCardDetails requestGiftCardDetails(String path, String url, String giftCard){
-        return given()
-                .header(new Header("Authorization", "Bearer " + UserInfoProvider.getToken()))
+        return baseAuthorizedRequest()
                 .get(path + url + giftCard)
                 .then().log().all()
                 .extract().as(GiftCardDetails.class);
     }
     public GiftCardDisable requestGiftCardDisable(String path, String url, String giftCard){
-        return given()
-                .header(new Header("Authorization", "Bearer " + UserInfoProvider.getToken()))
-                .when()
-                .contentType(ContentType.JSON)
+        return baseAuthorizedRequest()
                 .body(GiftCardInfoProvider.disableGift(User.EMAIL_INFO))
                 .put(path + url + giftCard)
                 .then()

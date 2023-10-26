@@ -10,20 +10,16 @@ import enums.User;
 
 import static io.restassured.RestAssured.given;
 
-public class RequestCompanySettings {
+public class RequestCompanySettings extends AbstractRequest {
     public SettingsCompany requestGetCheckCompanySettings(String path, String url){
-        return given()
-                .header(new Header("Authorization", "Bearer " + UserInfoProvider.getToken()))
+        return baseAuthorizedRequest()
                 .get(path + url)
                 .then().log().all()
                 .extract().as(SettingsCompany.class);
     }
 
     public SettingCompanyEdit putRequestEditCompanySettings(String path, String url){
-        return given()
-                .header(new Header("Authorization", "Bearer " + UserInfoProvider.getToken()))
-                .when()
-                .contentType(ContentType.JSON)
+        return baseAuthorizedRequest()
                 .body(CompanySettingsProvider.editSettingCompany(User.EMAIL_INFO))
                 .put(path + url)
                 .then().log().all()

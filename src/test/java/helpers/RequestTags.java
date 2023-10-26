@@ -10,13 +10,12 @@ import enums.User;
 
 import static io.restassured.RestAssured.given;
 
-public class RequestTags {
+public class RequestTags extends AbstractRequest{
     Gson gson = new Gson();
 
     public TagsDelete requestDel(String path, String url, Integer tagsInfoProvider) {
 
-        return given()
-                .header(new Header("Authorization", "Bearer " + UserInfoProvider.getToken()))
+        return baseAuthorizedRequest()
                 .delete(path + url + tagsInfoProvider)
                 .then()
                 .extract().as(TagsDelete.class);
@@ -24,10 +23,7 @@ public class RequestTags {
 
     public SuccessCreateTags requestPost(String path, String url) {
 
-        return given()
-                .header(new Header("Authorization", "Bearer " + UserInfoProvider.getToken()))
-                .when()
-                .contentType(ContentType.JSON)
+        return baseAuthorizedRequest()
                 .body(gson.toJson(TagsInfoProvider.getTags(User.EMAIL_INFO)))
                 .put(path + url)
                 .then()
@@ -35,10 +31,7 @@ public class RequestTags {
     }
     public TagsErrorMsg requestPutErrorMsg(String path, String url) {
 
-        return given()
-                .header(new Header("Authorization", "Bearer " + UserInfoProvider.getToken()))
-                .when()
-                .contentType(ContentType.JSON)
+        return baseAuthorizedRequest()
                 .body(gson.toJson(TagsInfoProvider.errorMessageTags(User.EMAIL_INFO)))
                 .put(path + url)
                 .then()
@@ -46,10 +39,7 @@ public class RequestTags {
     }
     public TagsEdit requestPutChangeStatus(String path, String url, Integer tagsInfoProvider) {
 
-        return given()
-                .header(new Header("Authorization", "Bearer " + UserInfoProvider.getToken()))
-                .when()
-                .contentType(ContentType.JSON)
+        return baseAuthorizedRequest()
                 .body(gson.toJson(TagsInfoProvider.changeStatus(User.EMAIL_INFO)))
                 .put(path + url + tagsInfoProvider)
                 .then()
@@ -57,10 +47,7 @@ public class RequestTags {
     }
     public TagsEdit requestPutChangeVisible(String path, String url, Integer tagsInfoProvider) {
 
-        return given()
-                .header(new Header("Authorization", "Bearer " + UserInfoProvider.getToken()))
-                .when()
-                .contentType(ContentType.JSON)
+        return baseAuthorizedRequest()
                 .body(gson.toJson(TagsInfoProvider.changeVisible(User.EMAIL_INFO)))
                 .put(path + url + tagsInfoProvider)
                 .then()
@@ -68,10 +55,7 @@ public class RequestTags {
     }
     public TagsEdit requestPutChangeShowOnProductCard(String path, String url, Integer tagsInfoProvider) {
 
-        return given()
-                .header(new Header("Authorization", "Bearer " + UserInfoProvider.getToken()))
-                .when()
-                .contentType(ContentType.JSON)
+        return baseAuthorizedRequest()
                 .body(gson.toJson(TagsInfoProvider.changeShowOnProductCard(User.EMAIL_INFO)))
                 .put(path + url + tagsInfoProvider)
                 .then()
@@ -80,10 +64,7 @@ public class RequestTags {
 
     public TagsErrorMsg requestPutErrorMsgInvalidCredential(String path, String url) {
 
-        return given()
-                .header(new Header("Authorization", "Bearer " + UserInfoProvider.getToken()))
-                .when()
-                .contentType(ContentType.JSON)
+        return baseAuthorizedRequest()
                 .body(gson.toJson(TagsInfoProvider.errorMessageTagsInvalidCredential(User.EMAIL_INFO)))
                 .put(path + url)
                 .then()
@@ -92,10 +73,7 @@ public class RequestTags {
 
     public TagsEdit requestPut(String path, String url, Integer tagsInfoProvider) {
 
-        return given()
-                .header(new Header("Authorization", "Bearer " + UserInfoProvider.getToken()))
-                .when()
-                .contentType(ContentType.JSON)
+        return baseAuthorizedRequest()
                 .body((TagsInfoProvider.editTags(User.EMAIL_INFO)))
                 .put(path + url + tagsInfoProvider)
                 .then()
@@ -103,10 +81,7 @@ public class RequestTags {
     }
 
     public TagsList requestPostTagsList(String path, String url) {
-        return given()
-                .header(new Header("Authorization", "Bearer " + UserInfoProvider.getToken()))
-                .when()
-                .contentType(ContentType.JSON)
+        return baseAuthorizedRequest()
                 .body((TagsInfoProvider.listTags(User.EMAIL_INFO)))
                 .post(path + url)
                 .then()

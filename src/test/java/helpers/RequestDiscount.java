@@ -6,10 +6,9 @@ import dataProviders.UserInfoProvider;
 
 import static io.restassured.RestAssured.given;
 
-public class RequestDiscount {
+public class RequestDiscount extends AbstractRequest {
     public Discount requestDiscountList(String path, String url){
-        return  given()
-                .header(new Header("Authorization", "Bearer " + UserInfoProvider.getToken()))
+        return  baseAuthorizedRequest()
                 .get(path + url)
                 .then()
                 .extract().as(Discount.class);
