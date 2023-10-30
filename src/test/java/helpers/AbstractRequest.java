@@ -1,6 +1,7 @@
 package helpers;
 
 import com.google.gson.Gson;
+import config.ConfigProvider;
 import dataProviders.PackagingProvider;
 import dataProviders.UserInfoProvider;
 import enums.User;
@@ -16,6 +17,7 @@ public abstract class AbstractRequest {
 
     protected RequestSpecification baseAuthorizedRequest() {
         return given()
+                .baseUri(ConfigProvider.URL)
                 .header(new Header("Authorization", "Bearer " + UserInfoProvider.getToken()))
                 .when()
                 .contentType(ContentType.JSON);

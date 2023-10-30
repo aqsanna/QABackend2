@@ -19,7 +19,7 @@ public class TagsTest {
     @Order(1)
     @DisplayName("Check create tags")
     public void CreateTags() {
-        SuccessCreateTags createTags = postRequest.requestPost(ApiV1.STAGE.getApi(), ApiV1.TAGS.getApi());
+        SuccessCreateTags createTags = postRequest.requestPost(ApiV1.TAGS.getApi());
         assertionForMessages.assertRequestMessageAndCode(createTags.getMessage(), createTags.getCode());
         assertionForTags.assertResultsForSuccessCreateTags(createTags);
     }
@@ -27,14 +27,14 @@ public class TagsTest {
     @Order(2)
     @DisplayName("Check create tags without title")
     public void CreateTagsWithoutTitle() {
-        TagsErrorMsg errorMsg = postRequest.requestPutErrorMsg(ApiV1.STAGE.getApi(), ApiV1.TAGS.getApi());
+        TagsErrorMsg errorMsg = postRequest.requestPutErrorMsg(ApiV1.TAGS.getApi());
        assertionForTags.assertResultsForErrorMsgTags(errorMsg);
     }
     @Test
     @Order(3)
     @DisplayName("Check create tags with invalid credential")
     public void CreateTagsInvalidCredential() {
-        TagsErrorMsg errorMsg = postRequest.requestPutErrorMsgInvalidCredential(ApiV1.STAGE.getApi(), ApiV1.TAGS.getApi());
+        TagsErrorMsg errorMsg = postRequest.requestPutErrorMsgInvalidCredential(ApiV1.TAGS.getApi());
         assertionForTags.assertResultsForInvalidErrorMsgTags(errorMsg);
     }
 
@@ -42,7 +42,7 @@ public class TagsTest {
     @Order(4)
     @DisplayName("Check edit tags")
     public void EditTags() {
-        TagsEdit tagsEdit = postRequest.requestPut(ApiV1.STAGE.getApi(), ApiV2.TAGS_EDIT.getApi(), TagsInfoProvider.assertResultsMaxId());
+        TagsEdit tagsEdit = postRequest.requestPut(ApiV2.TAGS_EDIT.getApi(), TagsInfoProvider.assertResultsMaxId());
         assertionForMessages.assertRequestMessageAndCode(tagsEdit.getMessage(), tagsEdit.getCode());
         assertionForTags.assertResultsForEditTags(tagsEdit);
     }
@@ -50,7 +50,7 @@ public class TagsTest {
     @Order(5)
     @DisplayName("Change status tag")
     public void ChangeStatusTag() {
-        TagsEdit tagsEdit = postRequest.requestPutChangeStatus(ApiV1.STAGE.getApi(), ApiV2.TAGS_EDIT.getApi(), TagsInfoProvider.assertResultsMaxId());
+        TagsEdit tagsEdit = postRequest.requestPutChangeStatus(ApiV2.TAGS_EDIT.getApi(), TagsInfoProvider.assertResultsMaxId());
         assertionForMessages.assertRequestMessageAndCode(tagsEdit.getMessage(), tagsEdit.getCode());
         assertionForTags.assertResultsForChangeTagStatus(tagsEdit);
     }
@@ -58,7 +58,7 @@ public class TagsTest {
     @Order(6)
     @DisplayName("Change visible tag")
     public void ChangeVisibleTag() {
-        TagsEdit tagsEdit = postRequest.requestPutChangeVisible(ApiV1.STAGE.getApi(), ApiV2.TAGS_EDIT.getApi(), TagsInfoProvider.assertResultsMaxId());
+        TagsEdit tagsEdit = postRequest.requestPutChangeVisible(ApiV2.TAGS_EDIT.getApi(), TagsInfoProvider.assertResultsMaxId());
         assertionForMessages.assertRequestMessageAndCode(tagsEdit.getMessage(), tagsEdit.getCode());
         assertionForTags.assertResultsForChangeTagStatus(tagsEdit);
     }
@@ -66,7 +66,7 @@ public class TagsTest {
     @Order(7)
     @DisplayName("Change show on product card tag")
     public void ChangeShowOnProductCardTag() {
-        TagsEdit tagsEdit = postRequest.requestPutChangeShowOnProductCard(ApiV1.STAGE.getApi(), ApiV2.TAGS_EDIT.getApi(), TagsInfoProvider.assertResultsMaxId());
+        TagsEdit tagsEdit = postRequest.requestPutChangeShowOnProductCard(ApiV2.TAGS_EDIT.getApi(), TagsInfoProvider.assertResultsMaxId());
         assertionForMessages.assertRequestMessageAndCode(tagsEdit.getMessage(), tagsEdit.getCode());
         assertionForTags.assertResultsForChangeTagStatus(tagsEdit);
     }
@@ -83,7 +83,7 @@ public class TagsTest {
     @Test
     @DisplayName("Check delete tag")
     public void deleteTags() {
-        TagsDelete deleteTags = postRequest.requestDel(ApiV1.STAGE.getApi(), ApiV2.TAGS_DELETE.getApi(), TagsInfoProvider.assertResultsMaxId());
+        TagsDelete deleteTags = postRequest.requestDel(ApiV2.TAGS_DELETE.getApi(), TagsInfoProvider.assertResultsMaxId());
         assertionForMessages.assertRequestMessageAndCode(deleteTags.getMessage(), deleteTags.getCode());
     }
 }

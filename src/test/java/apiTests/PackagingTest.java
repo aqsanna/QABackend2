@@ -8,19 +8,20 @@ import models.responses.packaging.PackagingErrorMsg;
 import models.responses.packaging.PackagingForStore;
 import enums.*;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-public class PackagingTest {
+public class PackagingTest  {
     AssertionForPackaging assertionForPackaging = new AssertionForPackaging();
     RequestPackaging requestPackaging = new RequestPackaging();
     AssertionForMessages assertionForMessages = new AssertionForMessages();
     @Test
     @Order(1)
     @SerializedName("Check create Packing - LE-T658-3-4-5-6")
-    public void addPackaging() {
+    public void addPackaging() throws IOException {
 
-        PackagingForStore createPacking = requestPackaging.requestCreate(ApiV1.STAGE.getApi(),  ApiV2.PACKAGING.getApi());
+        PackagingForStore createPacking = requestPackaging.requestCreate(ApiV2.PACKAGING.getApi());
         assertionForMessages.assertRequestMessageAndCode(createPacking.getMessage(), createPacking.getCode());
         Assertions.assertTrue(createPacking.getData().pickupByDriver);
         Assertions.assertTrue(createPacking.getData().advancedCollectingFlow);
@@ -32,7 +33,7 @@ public class PackagingTest {
     @Order(2)
     @SerializedName("Check update Packing - LE-T658-9")
     public void updatePackaging() {
-        PackagingForStore updatePacking = requestPackaging.requestUpdate(ApiV1.STAGE.getApi(), ApiV2.PACKAGING.getApi());
+        PackagingForStore updatePacking = requestPackaging.requestUpdate(ApiV2.PACKAGING.getApi());
         assertionForMessages.assertRequestMessageAndCode(updatePacking.getMessage(), updatePacking.getCode());
         Assertions.assertFalse(updatePacking.getData().pickupByDriver);
         Assertions.assertFalse(updatePacking.getData().advancedCollectingFlow);
@@ -44,21 +45,21 @@ public class PackagingTest {
     @Order(3)
     @SerializedName("Check error messages Packing - LE-T658-7")
     public void errorMessagesPackaging(){
-        PackagingErrorMsg errorMsg = requestPackaging.requestPutErrorMsg(ApiV1.STAGE.getApi(), ApiV2.PACKAGING.getApi());
+        PackagingErrorMsg errorMsg = requestPackaging.requestPutErrorMsg(ApiV2.PACKAGING.getApi());
         assertionForPackaging.assertErrorMessages(errorMsg);
     }
     @Test
     @Order(4)
     @SerializedName("Check invalid credential error messages Packing")
     public void errorMessagesPackagingForInvalidCredential(){
-        PackagingErrorMsg errorMsg = requestPackaging.requestPutErrorMsgForInvalidCredential(ApiV1.STAGE.getApi(), ApiV2.PACKAGING.getApi());
+        PackagingErrorMsg errorMsg = requestPackaging.requestPutErrorMsgForInvalidCredential(ApiV2.PACKAGING.getApi());
         assertionForPackaging.assertErrorMessagesInvalidCredential(errorMsg);
     }
 
     @Test
     @SerializedName("Check delete Packing - LE-T658-8")
     public void deletePackaging(){
-        PackagingForStore deletePacking =   requestPackaging.requestDel(ApiV1.STAGE.getApi(), ApiV2.PACKAGING.getApi());
+        PackagingForStore deletePacking =   requestPackaging.requestDel(ApiV2.PACKAGING.getApi());
         assertionForMessages.assertRequestMessageAndCode(deletePacking.getMessage(), deletePacking.getCode());
         Assertions.assertFalse(deletePacking.getData().pickupByDriver);
         Assertions.assertFalse(deletePacking.getData().advancedCollectingFlow);

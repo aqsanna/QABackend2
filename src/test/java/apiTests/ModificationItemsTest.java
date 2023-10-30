@@ -20,7 +20,7 @@ public class ModificationItemsTest {
     @Test
     @DisplayName("Check create modification item")
     public void CreateModificationItemsRegular(){
-        SuccessCreateModificationItems createModificationItems = requestModificationItems.requestPost(ApiV1.STAGE.getApi(), ApiV1.MODIFICATIONITEM.getApi());
+        SuccessCreateModificationItems createModificationItems = requestModificationItems.requestPost(ApiV1.MODIFICATIONITEM.getApi());
         assertionForMessages.assertRequestMessageAndCode(createModificationItems.getMessage(), createModificationItems.getCode());
         assertionForModificationItems.assertResultsForSuccessCreateModificationItem(createModificationItems);
 
@@ -28,7 +28,7 @@ public class ModificationItemsTest {
     @Test
     @DisplayName("Check create modification item by text")
     public void CreateModificationItemsText(){
-        SuccessCreateModificationItems createModificationItemsText = requestModificationItems.requestPostText(ApiV1.STAGE.getApi(), ApiV1.MODIFICATIONITEM.getApi());
+        SuccessCreateModificationItems createModificationItemsText = requestModificationItems.requestPostText(ApiV1.MODIFICATIONITEM.getApi());
         assertionForMessages.assertRequestMessageAndCode(createModificationItemsText.getMessage(), createModificationItemsText.getCode());
         assertionForModificationItems.assertResultsForSuccessCreateModificationItemText(createModificationItemsText);
     }
@@ -37,7 +37,7 @@ public class ModificationItemsTest {
     @Order(3)
     @DisplayName("Check create tags with invalid credential")
     public void CreateModificationItemInvalidCredential() {
-        ModificationItemErrorMsg errorMsg = requestModificationItems.requestPutErrorMsgInvalidCredential(ApiV1.STAGE.getApi(), ApiV1.MODIFICATIONITEM.getApi());
+        ModificationItemErrorMsg errorMsg = requestModificationItems.requestPutErrorMsgInvalidCredential(ApiV1.MODIFICATIONITEM.getApi());
         assertionForModificationItems.assertResultsForInvalidErrorMsgModificationItem(errorMsg);
     }
 }

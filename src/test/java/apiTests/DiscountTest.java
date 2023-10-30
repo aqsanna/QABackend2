@@ -22,7 +22,7 @@ public class DiscountTest {
         String pattern = "yyyy-MM-dd HH:mm:ss";
         SimpleDateFormat format = new SimpleDateFormat(pattern);
 
-        Discount discount = requestDiscount.requestDiscountList(ApiV1.STAGE.getApi(),ApiV1.DISCOUNT_LIST.getApi());
+        Discount discount = requestDiscount.requestDiscountList(ApiV1.DISCOUNT_LIST.getApi());
         Assertions.assertEquals("success", discount.getResult());
         Assertions.assertEquals("", discount.getError());
         Assertions.assertEquals(200, discount.getCode());

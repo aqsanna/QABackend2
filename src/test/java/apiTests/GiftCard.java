@@ -24,7 +24,7 @@ public class GiftCard {
     @DisplayName("Check create gift-card")
     public void CreateGiftCard() {
 
-        SuccessCreateGiftCard successCreateGiftCard = requestGiftCard.putRequestCreateGiftCard(ApiV1.STAGE.getApi(), ApiV2.GIFT_CARD_CREATE.getApi());
+        SuccessCreateGiftCard successCreateGiftCard = requestGiftCard.putRequestCreateGiftCard(ApiV2.GIFT_CARD_CREATE.getApi());
         assertionForMessages.assertRequestMessageAndCode(successCreateGiftCard.getMessage(), successCreateGiftCard.getCode());
         Assertions.assertFalse(successCreateGiftCard.getData().isEmpty());
     }
@@ -32,7 +32,7 @@ public class GiftCard {
     @DisplayName("Check list gift-card")
     public void GiftCardList() {
 
-        GiftCardList giftCardList = requestGiftCard.postRequestListGiftCard(ApiV1.STAGE.getApi() , ApiV2.GIFT_CARD_LIST.getApi());
+        GiftCardList giftCardList = requestGiftCard.postRequestListGiftCard( ApiV2.GIFT_CARD_LIST.getApi());
         assertionForMessages.assertRequestMessageAndCode(giftCardList.getMessage(), giftCardList.getCode());
         assertionForGiftCard.assertCheckGiftCardList(giftCardList.data.getResult());
     }
@@ -41,7 +41,7 @@ public class GiftCard {
     @DisplayName("Check details gift-card")
     public void GiftCardDetails() {
 
-        GiftCardDetails giftCardDetails = requestGiftCard.requestGiftCardDetails(ApiV1.STAGE.getApi(), ApiV2.GIFT_CARD.getApi(), GiftCardInfoProvider.getGiftCard());
+        GiftCardDetails giftCardDetails = requestGiftCard.requestGiftCardDetails(ApiV2.GIFT_CARD.getApi(), GiftCardInfoProvider.getGiftCard());
         assertionForMessages.assertRequestMessageAndCode(giftCardDetails.getMessage(), giftCardDetails.getCode());
         assertionForGiftCard.assertGiftCardDetails(giftCardDetails);
         assertionForGiftCard.assertGiftCardDetailsTransaction(giftCardDetails.data.getTransactions());
@@ -51,7 +51,7 @@ public class GiftCard {
     @Test
     @DisplayName("Check disable gift-card")
     public void GiftCardDisable() {
-        GiftCardDisable giftCardDisable = requestGiftCard.requestGiftCardDisable(ApiV1.STAGE.getApi(), ApiV2.GIFT_CARD.getApi() ,GiftCardInfoProvider.getGiftCard());
+        GiftCardDisable giftCardDisable = requestGiftCard.requestGiftCardDisable(ApiV2.GIFT_CARD.getApi() ,GiftCardInfoProvider.getGiftCard());
         assertionForMessages.assertRequestMessageAndCode(giftCardDisable.getMessage(), giftCardDisable.getCode());
         Assertions.assertTrue(giftCardDisable.isData());
     }

@@ -22,7 +22,7 @@ public class CompanySettings {
     @DisplayName("Check company settings")
     public void checkCompanySettings() {
 
-        SettingsCompany settings =requestCompanySettings.requestGetCheckCompanySettings(ApiV1.STAGE.getApi(),  ApiV2.COMPANY_SETTINGS.getApi());
+        SettingsCompany settings =requestCompanySettings.requestGetCheckCompanySettings(ApiV2.COMPANY_SETTINGS.getApi());
         List<String> expectedList = CompanySettingsEnum.getType();
         assertionForMessages.assertRequestMessageAndCode(settings.getMessage(), settings.getCode());
         Assertions.assertFalse(settings.data.adminSettings.guestCheckoutMobile.isEmpty(), "guest_checkout_mobile is empty");
@@ -39,7 +39,7 @@ public class CompanySettings {
     @Test
     @SerializedName("Check edit company settings")
     public void editCompanySettings() {
-        SettingCompanyEdit companySettingsEdit = requestCompanySettings.putRequestEditCompanySettings(ApiV1.STAGE.getApi(), ApiV2.COMPANY_SETTINGS.getApi());
+        SettingCompanyEdit companySettingsEdit = requestCompanySettings.putRequestEditCompanySettings(ApiV2.COMPANY_SETTINGS.getApi());
         assertionForMessages.assertRequestMessageAndCode(companySettingsEdit.getMessage(), companySettingsEdit.getCode());
         Assertions.assertTrue(companySettingsEdit.data.isEmpty(), "data is not empty");
     }

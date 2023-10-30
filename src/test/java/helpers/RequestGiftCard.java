@@ -13,30 +13,30 @@ import enums.User;
 import static io.restassured.RestAssured.given;
 
 public class RequestGiftCard extends AbstractRequest {
-    public SuccessCreateGiftCard putRequestCreateGiftCard(String path, String url){
+    public SuccessCreateGiftCard putRequestCreateGiftCard(String url){
         return baseAuthorizedRequest()
                 .body(GiftCardInfoProvider.createGift(User.EMAIL_INFO))
-                .put(path + url)
+                .put(url)
                 .then()
                 .extract().as(SuccessCreateGiftCard.class);
     }
-    public GiftCardList postRequestListGiftCard(String path, String url){
+    public GiftCardList postRequestListGiftCard(String url){
         return  baseAuthorizedRequest()
                 .body((GiftCardInfoProvider.giftCardList(User.EMAIL_INFO)))
-                .post(path + url)
+                .post(url)
                 .then()
                 .extract().as(GiftCardList.class);
     }
-    public GiftCardDetails requestGiftCardDetails(String path, String url, String giftCard){
+    public GiftCardDetails requestGiftCardDetails(String url, String giftCard){
         return baseAuthorizedRequest()
-                .get(path + url + giftCard)
+                .get(url + giftCard)
                 .then().log().all()
                 .extract().as(GiftCardDetails.class);
     }
-    public GiftCardDisable requestGiftCardDisable(String path, String url, String giftCard){
+    public GiftCardDisable requestGiftCardDisable(String url, String giftCard){
         return baseAuthorizedRequest()
                 .body(GiftCardInfoProvider.disableGift(User.EMAIL_INFO))
-                .put(path + url + giftCard)
+                .put(url + giftCard)
                 .then()
                 .extract().as(GiftCardDisable.class);
     }

@@ -14,7 +14,7 @@ public class ProductDataTypeTest {
     @DisplayName("Check product data type")
     public void successProductDataTypeTest() {
 
-        ProductDataType productDataType = requestProductDataType.requestProductDataType(ApiV1.STAGE.getApi(), ApiV1.PRODUCT_DATA_TYPE.getApi());
+        ProductDataType productDataType = requestProductDataType.requestProductDataType(ApiV1.PRODUCT_DATA_TYPE.getApi());
         assertionForProductDataType.assertProductDataType(productDataType);
     }
 }

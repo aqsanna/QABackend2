@@ -13,7 +13,7 @@ public class StoreTest {
     @Test
     @DisplayName("Check success partner store list")
     public void StoreListTest() {
-        Store store = requestStore.requestStoreList(ApiV1.STAGE.getApi() , ApiV1.STORE.getApi());
+        Store store = requestStore.requestStoreList(ApiV1.STORE.getApi());
         assertionForStore.assertStoreList(store);
         assertionForStore.assertStoreInfoData(store.getData());
     }

@@ -12,24 +12,24 @@ public class RequestModificationItems extends AbstractRequest {
 
     Gson gson = new Gson();
 
-    public SuccessCreateModificationItems requestPost(String path, String url){
+    public SuccessCreateModificationItems requestPost(String url){
         return baseAuthorizedRequest()
                 .body(gson.toJson(ModificationItemsProvider.createModification(User.EMAIL_INFO)))
-                .put(path + url)
+                .put(url)
                 .then()
                 .extract().as(SuccessCreateModificationItems.class);
     }
-    public SuccessCreateModificationItems requestPostText(String path, String url){
+    public SuccessCreateModificationItems requestPostText(String url){
         return baseAuthorizedRequest()
                 .body(gson.toJson(ModificationItemsProvider.createModificationText(User.EMAIL_INFO)))
-                .put(path + url)
+                .put(url)
                 .then()
                 .extract().as(SuccessCreateModificationItems.class);
     }
-    public ModificationItemErrorMsg requestPutErrorMsgInvalidCredential(String path, String url){
+    public ModificationItemErrorMsg requestPutErrorMsgInvalidCredential(String url){
         return baseAuthorizedRequest()
                 .body(gson.toJson(ModificationItemsProvider.errorMessageModificationItemInvalidCredential(User.EMAIL_INFO)))
-                .put(path + url)
+                .put(url)
                 .then()
                 .extract().as(ModificationItemErrorMsg.class);
     }

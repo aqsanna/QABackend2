@@ -12,24 +12,24 @@ import enums.User;
 import static io.restassured.RestAssured.given;
 
 public class RequestProduct extends AbstractRequest {
-    public SuccessCreateProduct requestCreateProduct(String path, String url){
+    public SuccessCreateProduct requestCreateProduct(String url){
         return baseAuthorizedRequest()
                 .body(ProductInfoProvider.getProduct(User.EMAIL_INFO))
-                .post(path + url)
+                .post(url)
                 .then().log().all()
                 .extract().as(SuccessCreateProduct.class);
     }
 
-    public SuccessDeleteProduct requestDeleteProduct(String path, String url, String productId){
+    public SuccessDeleteProduct requestDeleteProduct(String url, String productId){
         return  baseAuthorizedRequest()
-                .delete(path + url + productId)
+                .delete(url + productId)
                 .then().log().all()
                 .extract().as(SuccessDeleteProduct.class);
     }
-    public SuccessUpdateProduct requestUpdateProduct(String path, String url, String productId){
+    public SuccessUpdateProduct requestUpdateProduct(String url, String productId){
         return  baseAuthorizedRequest()
                 .body(ProductInfoProvider.updProduct(User.EMAIL_INFO))
-                .put(path + url + productId)
+                .put(url + productId)
                 .then().log().all()
                 .extract().as(SuccessUpdateProduct.class);
     }

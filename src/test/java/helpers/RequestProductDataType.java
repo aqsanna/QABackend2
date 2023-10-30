@@ -7,9 +7,9 @@ import dataProviders.UserInfoProvider;
 import static io.restassured.RestAssured.given;
 
 public class RequestProductDataType extends AbstractRequest {
-    public ProductDataType requestProductDataType(String path, String url){
+    public ProductDataType requestProductDataType(String url){
         return baseAuthorizedRequest()
-                .get(path + url)
+                .get(url)
                 .then().log().all()
                 .extract().as(ProductDataType.class);
     }
