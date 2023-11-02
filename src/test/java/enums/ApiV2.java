@@ -11,7 +11,7 @@ public enum ApiV2 {
     PACK_LOCATION_PRINT("/pack-locations/print"),
     CHANGE_STATUS("/change-status"),
     ORDER_DETAILS("/details"),
-    PACKAGING("rest/v2/store/518/packaging"),
+    PACKAGING("rest/v2/store/87/packaging"),
     TAGS_EDIT("rest/v2/tags/"),
     TAGS_DELETE("rest/v2/tags/"),
     GIFT_CARD_CREATE("rest/v2/gift-card/create"),

@@ -1,6 +1,8 @@
 package apiTests;
 
 import com.google.gson.Gson;
+import helpers.AbstractRequest;
+import helpers.RequestAuthorization;
 import io.restassured.http.ContentType;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -14,22 +16,16 @@ import enums.User;
 
 import static io.restassured.RestAssured.given;
 
-public class AuthTest {
+public class AuthTest extends AbstractRequest {
     Gson gson = new Gson();
+    RequestAuthorization requestAuthorization = new RequestAuthorization();
 
     @Test
     @DisplayName("Check success user login")
     public void successLoginTest() {
         RequestSpec.installSpecification(RequestSpec.requestSpec(ApiV1.LOGIN.getApi()), ResponseSpec.responseOK200());
 
-        SuccessLogin successLogin = given()
-                .when()
-                .contentType(ContentType.JSON)
-                .body(gson.toJson(UserInfoProvider.getUser(User.EMAIL_INFO)))
-                .post(ApiV1.STAGE.getApi() + ApiV1.REGISTER.getApi())
-                .then().log().all()
-                .extract().as(SuccessLogin.class);
-
+        SuccessLogin successLogin = requestAuthorization.requestPostAuth(ApiV1.REGISTER.getApi());
         Assertions.assertEquals("success", successLogin.getResult());
         Assertions.assertEquals("info@local.express", successLogin.getData().getUserEmail());
         Assertions.assertEquals("13546", successLogin.getData().getUserId());

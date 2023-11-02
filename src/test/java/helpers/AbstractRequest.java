@@ -1,23 +1,20 @@
 package helpers;
 
 import com.google.gson.Gson;
-import config.ConfigProvider;
-import dataProviders.PackagingProvider;
+import config.Configurations;
 import dataProviders.UserInfoProvider;
-import enums.User;
 import io.restassured.http.ContentType;
 import io.restassured.http.Header;
 import io.restassured.specification.RequestSpecification;
-import models.responses.packaging.PackagingForStore;
 
 import static io.restassured.RestAssured.given;
 
 public abstract class AbstractRequest {
     Gson gson = new Gson();
 
-    protected RequestSpecification baseAuthorizedRequest() {
+    protected static RequestSpecification baseAuthorizedRequest() {
         return given()
-                .baseUri(ConfigProvider.URL)
+                .baseUri(Configurations.DEV_URL)
                 .header(new Header("Authorization", "Bearer " + UserInfoProvider.getToken()))
                 .when()
                 .contentType(ContentType.JSON);

@@ -2,6 +2,7 @@ package dataProviders;
 
 import Utils.RandomGenerateMethods;
 import com.google.gson.Gson;
+import config.Configurations;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.http.Header;
@@ -57,7 +58,7 @@ public class ProductInfoProvider {
                 .when()
                 .contentType(ContentType.JSON)
                 .body(gson.toJson(getProduct(User.EMAIL_INFO)))
-                .post(ApiV1.STAGE.getApi() + ApiV1.CREATE_PRODUCT.getApi())
+                .post(Configurations.DEV_URL + ApiV1.CREATE_PRODUCT.getApi())
                 .then().log().all()
                 .extract().as(SuccessCreateProduct.class);
         return successCreateProduct.getData();

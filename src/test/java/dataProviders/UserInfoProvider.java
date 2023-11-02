@@ -1,6 +1,8 @@
 package dataProviders;
 
 import com.google.gson.Gson;
+import config.Configurations;
+import helpers.RequestAuthorization;
 import io.restassured.http.ContentType;
 import models.requests.login.AuthInfo;
 import models.responses.userLogin.SuccessLogin;
@@ -54,12 +56,11 @@ public class UserInfoProvider {
     public static String getToken() {
         Gson gson = new Gson();
         AuthInfo authInfo = UserInfoProvider.getUser(User.EMAIL_INFO);
-
         SuccessLogin login = given()
                 .when()
                 .contentType(ContentType.JSON)
                 .body(gson.toJson(authInfo))
-                .post(ApiV1.STAGE.getApi() + ApiV1.REGISTER.getApi())
+                .post(Configurations.DEV_URL + ApiV1.REGISTER.getApi())
                 .then()
                 .extract().as(SuccessLogin.class);
         return login.getData().getToken();

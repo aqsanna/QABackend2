@@ -34,7 +34,6 @@ public class ModificationItemsTest {
     }
 
     @Test
-    @Order(3)
     @DisplayName("Check create tags with invalid credential")
     public void CreateModificationItemInvalidCredential() {
         ModificationItemErrorMsg errorMsg = requestModificationItems.requestPutErrorMsgInvalidCredential(ApiV1.MODIFICATIONITEM.getApi());

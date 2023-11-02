@@ -75,7 +75,7 @@ public class TagsTest {
     @Order(8)
     @DisplayName("Check tags list")
     public void getTagsListTest() {
-        TagsList tagsList = postRequest.requestPostTagsList(ApiV1.STAGE.getApi(), ApiV1.TAGS_LIST.getApi());
+        TagsList tagsList = postRequest.requestPostTagsList(ApiV1.TAGS_LIST.getApi());
         assertionForMessages.assertRequestMessageAndCode(tagsList.getMessage(), tagsList.getCode());
         assertionForTags.assertResults(tagsList.getData().getResult());
     }

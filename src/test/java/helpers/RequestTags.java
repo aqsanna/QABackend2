@@ -1,6 +1,7 @@
 package helpers;
 
 import com.google.gson.Gson;
+import config.Configurations;
 import io.restassured.http.ContentType;
 import io.restassured.http.Header;
 import models.responses.tags.*;
@@ -80,10 +81,10 @@ public class RequestTags extends AbstractRequest{
                 .extract().as(TagsEdit.class);
     }
 
-    public TagsList requestPostTagsList(String path, String url) {
+    public TagsList requestPostTagsList(String url) {
         return baseAuthorizedRequest()
                 .body((TagsInfoProvider.listTags(User.EMAIL_INFO)))
-                .post(path + url)
+                .post(Configurations.DEV_URL + url)
                 .then()
                 .extract().as(TagsList.class);
     }

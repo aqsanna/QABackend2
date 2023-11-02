@@ -2,6 +2,7 @@ package dataProviders;
 
 import Utils.RandomGenerateMethods;
 import com.google.gson.Gson;
+import config.Configurations;
 import helpers.RequestTags;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
@@ -93,7 +94,7 @@ public class TagsInfoProvider {
     }
     public static Integer assertResultsMaxId() {
         RequestTags postRequest =  new RequestTags();
-        TagsList tagsList = postRequest.requestPostTagsList(ApiV1.STAGE.getApi(), ApiV1.TAGS_LIST.getApi());
+        TagsList tagsList = postRequest.requestPostTagsList(ApiV1.TAGS_LIST.getApi());
         int maxId = Integer.MIN_VALUE;
         for (TagsList.Data.Result result : tagsList.getData().getResult()) {
             int id = Integer.parseInt(result.getId());
@@ -112,7 +113,7 @@ public class TagsInfoProvider {
                 .when()
                 .contentType(ContentType.JSON)
                 .body((getTags(User.EMAIL_INFO)))
-                .put(ApiV1.STAGE.getApi() + ApiV1.TAGS.getApi())
+                .put(Configurations.DEV_URL + ApiV1.TAGS.getApi())
                 .then().log().all()
                 .extract().as(SuccessCreateTags.class);
         return Integer.valueOf(successCreateTags.getData().id);
