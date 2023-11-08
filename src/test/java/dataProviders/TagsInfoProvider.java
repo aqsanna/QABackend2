@@ -105,17 +105,4 @@ public class TagsInfoProvider {
         System.out.println("Max id: " + maxId);
         return maxId;
     }
-
-    public static Integer getTagsId() {
-        Gson gson = new Gson();
-        SuccessCreateTags successCreateTags = RestAssured.given()
-                .header(new Header("Authorization", "Bearer " + UserInfoProvider.getToken()))
-                .when()
-                .contentType(ContentType.JSON)
-                .body((getTags(User.EMAIL_INFO)))
-                .put(Configurations.DEV_URL + ApiV1.TAGS.getApi())
-                .then().log().all()
-                .extract().as(SuccessCreateTags.class);
-        return Integer.valueOf(successCreateTags.getData().id);
-    }
 }

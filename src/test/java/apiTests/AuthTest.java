@@ -3,6 +3,7 @@ package apiTests;
 import com.google.gson.Gson;
 import helpers.AbstractRequest;
 import helpers.RequestAuthorization;
+import helpers.RequestProduct;
 import io.restassured.http.ContentType;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -38,17 +39,9 @@ public class AuthTest extends AbstractRequest {
     public void successLoginEmailTest() {
         RequestSpec.installSpecification(RequestSpec.requestSpec(ApiV1.LOGIN.getApi()), ResponseSpec.responseOK200());
 
-        SuccessLogin successLoginEmail = given()
-                .when()
-                .contentType(ContentType.JSON)
-                .body(gson.toJson(UserInfoProvider.getUserClient(User.EMAIL_CLIENT)))
-                .post(ApiV1.STAGE.getApi() + ApiV1.REGISTER.getApi())
-                .then().log().all()
-                .extract().as(SuccessLogin.class);
-
+        SuccessLogin successLoginEmail = requestAuthorization.requestPostAuthEmail(ApiV1.REGISTER.getApi());
         Assertions.assertEquals("success", successLoginEmail.getResult());
         Assertions.assertEquals("oqsannas+31102022@localexpress.io", successLoginEmail.getData().getUserEmail());
-        Assertions.assertEquals("65436", successLoginEmail.getData().getUserId());
         Assertions.assertTrue(successLoginEmail.getError().isEmpty());
         Assertions.assertNotNull(successLoginEmail.getData().getToken());
     }

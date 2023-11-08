@@ -1,22 +1,16 @@
 package dataProviders;
 import Utils.RandomGenerateMethods;
-import com.google.gson.Gson;
-import io.restassured.http.ContentType;
-import io.restassured.http.Header;
+import helpers.RequestPackaging;
 import models.requests.packaging.*;
-import models.responses.packaging.PackagingForStore;
-import enums.ApiV1;
-import enums.ApiV2;
 import enums.User;
 import java.util.ArrayList;
 
-import static io.restassured.RestAssured.given;
 
 public class PackagingProvider {
     public static PackagingCreate createPack(User email) {
         ArrayList<PackagingCreate.Box> boxes = new ArrayList<>();
         boxes.add(new PackagingCreate.Box()
-                .withStore_id(User.STORE.getUserData())
+                .withStore_id(User.STORE_ID.getUserData())
                 .withName(User.BOXNAME.getUserData() + RandomGenerateMethods.randomString(5))
                 .withLength(RandomGenerateMethods.randomIntegerOneToNine())
                 .withWidth(RandomGenerateMethods.randomIntegerOneToNine())
@@ -24,7 +18,7 @@ public class PackagingProvider {
                 .withWeight(RandomGenerateMethods.randomIntegerOneToNine())
                 .withFreeVolumeReserve(RandomGenerateMethods.randomIntegerOneToNine())
                 .withSpecialEntityTypeId("1")
-                .withStoreId(User.STORE.getUserData())
+                .withStoreId(User.STORE_ID.getUserData())
                 .build());
         ArrayList<PackagingCreate.Pack> packs = new ArrayList<>();
         packs.add(new PackagingCreate.Pack()
@@ -33,7 +27,7 @@ public class PackagingProvider {
                 .withFreeCount(RandomGenerateMethods.randomIntegerOneToNine())
                 .withUpc(RandomGenerateMethods.randomString(5))
                 .withSpecialEntityTypeId("2")
-                .withStoreId(User.STORE.getUserData())
+                .withStoreId(User.STORE_ID.getUserData())
                 .build());
         return new PackagingCreate(boxes, packs, Boolean.parseBoolean(User.PICKUPBYDRIVER.getUserData()),
                 Boolean.parseBoolean(User.ADVENCEDCOLLECTINGFLOW.getUserData()));
@@ -42,8 +36,8 @@ public class PackagingProvider {
     public static PackagingUpdate updatePacking(User email){
         ArrayList<PackagingUpdate.Box> boxesUpdate = new ArrayList<>();
         boxesUpdate.add(new PackagingUpdate.Box()
-                .withId(Integer.parseInt(getPackagingId()))
-                .withStore_id(User.STORE.getUserData())
+                .withId((RequestPackaging.getPackagingBoxId()))
+                .withStore_id(User.STORE_ID.getUserData())
                 .withName(User.BOXNAME.getUserData()+ RandomGenerateMethods.randomString(6))
                 .withLength(RandomGenerateMethods.randomIntegerOneToNine())
                 .withWidth(RandomGenerateMethods.randomIntegerOneToNine())
@@ -51,17 +45,17 @@ public class PackagingProvider {
                 .withWeight(RandomGenerateMethods.randomIntegerOneToNine())
                 .withFreeVolumeReserve(RandomGenerateMethods.randomIntegerOneToNine())
                 .withSpecialEntityTypeId("2")
-                .withStoreId(User.STORE.getUserData())
+                .withStoreId(User.STORE_ID.getUserData())
                 .build());
         ArrayList<PackagingUpdate.Pack> packingUpdate = new ArrayList<>();
         packingUpdate.add(new PackagingUpdate.Pack()
-                .withId(Integer.parseInt(getPackagingId()))
+                .withId(RequestPackaging.getPackagingBoxId())
                 .withName(User.PACKNAME.getUserData() + RandomGenerateMethods.randomString(6))
                 .withPrice(User.VALUE.getUserData())
                 .withFreeCount(RandomGenerateMethods.randomIntegerOneToNine())
                 .withUpc(RandomGenerateMethods.randomString(3))
                 .withSpecialEntityTypeId("3")
-                .withStoreId(User.STORE.getUserData())
+                .withStoreId(User.STORE_ID.getUserData())
                 .build());
         return new PackagingUpdate(boxesUpdate, packingUpdate, false, false);
 
@@ -103,18 +97,5 @@ public class PackagingProvider {
                         .withSpecialEntityTypeId("-2")
                         .build());
         return new PackagingErrorMessagesForInvalidCredential(boxesMessages, packsMessages, 3, 4);
-    }
-    public static String getPackagingId(){
-        Gson gson = new Gson();
-        PackagingForStore  packingForStore = given()
-                .header(new Header("Authorization",  "Bearer " + UserInfoProvider.getToken()))
-                .when()
-                .contentType(ContentType.JSON)
-                .body(PackagingProvider.createPack(User.EMAIL_INFO))
-                .put(ApiV1.STAGE.getApi() + ApiV2.PACKAGING.getApi())
-                .then().log().all()
-                .extract().as(PackagingForStore.class);
-        ArrayList<PackagingForStore.Data.Pack> packId = packingForStore.data.getPacks();
-        return  packId.get(0).id;
     }
 }

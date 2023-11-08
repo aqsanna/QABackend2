@@ -1,10 +1,8 @@
 package helpers;
-import config.Configurations;
 import dataProviders.UserInfoProvider;
-import enums.ApiV1;
 import enums.User;
-import models.requests.login.AuthInfo;
 import models.responses.userLogin.SuccessLogin;
+
 
 public class RequestAuthorization extends AbstractRequest{
     public SuccessLogin requestPostAuth(String url){
@@ -14,4 +12,11 @@ public class RequestAuthorization extends AbstractRequest{
                 .then().log().all()
                 .extract().as(SuccessLogin.class);
     }
-}
+    public SuccessLogin requestPostAuthEmail(String url){
+        return baseAuthorizedRequest()
+                .body(gson.toJson(UserInfoProvider.getUserClient(User.EMAIL_CLIENT)))
+                .post(url)
+                .then().log().all()
+                .extract().as(SuccessLogin.class);
+    }
+  }

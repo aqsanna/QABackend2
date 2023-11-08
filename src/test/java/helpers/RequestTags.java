@@ -2,6 +2,8 @@ package helpers;
 
 import com.google.gson.Gson;
 import config.Configurations;
+import enums.ApiV1;
+import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.http.Header;
 import models.responses.tags.*;
@@ -87,6 +89,15 @@ public class RequestTags extends AbstractRequest{
                 .post(Configurations.DEV_URL + url)
                 .then()
                 .extract().as(TagsList.class);
+    }
+    public static Integer getTagsId() {
+        Gson gson = new Gson();
+        SuccessCreateTags successCreateTags = baseAuthorizedRequest()
+                .body((TagsInfoProvider.getTags(User.EMAIL_INFO)))
+                .put(ApiV1.TAGS.getApi())
+                .then().log().all()
+                .extract().as(SuccessCreateTags.class);
+        return Integer.valueOf(successCreateTags.getData().id);
     }
 
 }

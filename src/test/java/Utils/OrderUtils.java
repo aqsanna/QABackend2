@@ -1,6 +1,8 @@
 package Utils;
 
 import com.google.gson.Gson;
+import helpers.AbstractRequest;
+import helpers.RequestProduct;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.http.Header;
@@ -21,7 +23,7 @@ public class OrderUtils {
 
     public PartnerOrders getOrderList(String orderStatus, int limit, int offset) {
         PartnerOrders orderList = RestAssured.given()
-                .header(new Header("Authorization", "Bearer " + UserInfoProvider.getToken()))
+                .header(new Header("Authorization", "Bearer " + AbstractRequest.getToken()))
                 .queryParam("filter[status]", orderStatus)
                 .queryParam("limit", limit)
                 .queryParam("offset", offset)
@@ -37,7 +39,7 @@ public class OrderUtils {
 
     public Order getOrder(String orderId) {
         Order order = RestAssured.given()
-                .header(new Header("Authorization", "Bearer " + UserInfoProvider.getToken()))
+                .header(new Header("Authorization", "Bearer " +  AbstractRequest.getToken()))
                 .when()
                 .get(ApiV1.STAGE.getApi() + ApiV1.ORDERS.getApi() + "/" + orderId)
                 .then()
@@ -50,7 +52,7 @@ public class OrderUtils {
 
     public Order postConfirmOrder(String orderId, OrderConfirm data) {
         Order confirmedOrder = RestAssured.given()
-                .header(new Header("Authorization", "Bearer " + UserInfoProvider.getToken()))
+                .header(new Header("Authorization", "Bearer " +  AbstractRequest.getToken()))
                 .when()
                 .contentType(ContentType.JSON)
                 .body(gson.toJson(data))
@@ -65,7 +67,7 @@ public class OrderUtils {
 
     public Order postStartOrder(String orderId, OrderStart data) {
         Order startOrder = RestAssured.given()
-                .header(new Header("Authorization", "Bearer " + UserInfoProvider.getToken()))
+                .header(new Header("Authorization", "Bearer " +  AbstractRequest.getToken()))
                 .when()
                 .contentType(ContentType.JSON)
                 .body(gson.toJson(data))
@@ -80,7 +82,7 @@ public class OrderUtils {
 
     public Order postCollectOrderProduct(String orderProductId, CollectOrderProduct data) {
         Order order = RestAssured.given()
-                .header(new Header("Authorization", "Bearer " + UserInfoProvider.getToken()))
+                .header(new Header("Authorization", "Bearer " +  AbstractRequest.getToken()))
                 .when()
                 .contentType(ContentType.JSON)
                 .body(gson.toJson(data))
@@ -94,7 +96,7 @@ public class OrderUtils {
 
     public PacksToOrder postAddPacksToOrder(String orderId, ArrayList<AddPack> data) {
         PacksToOrder order = RestAssured.given()
-                .header(new Header("Authorization", "Bearer " + UserInfoProvider.getToken()))
+                .header(new Header("Authorization", "Bearer " +  AbstractRequest.getToken()))
                 .when()
                 .contentType(ContentType.JSON)
                 .body(gson.toJson(data))
@@ -107,7 +109,7 @@ public class OrderUtils {
 
     public Order postFinishOrder(String orderId, OrderConfirm data){
         Order finishOrder = RestAssured.given()
-                .header(new Header("Authorization", "Bearer " + UserInfoProvider.getToken()))
+                .header(new Header("Authorization", "Bearer " +  AbstractRequest.getToken()))
                 .when()
                 .contentType(ContentType.JSON)
                 .body(gson.toJson(data))
@@ -123,7 +125,7 @@ public class OrderUtils {
 
     public PackLocation postAddPackLocation(String orderId, ArrayList<AddPackLocation> data){
         PackLocation location = RestAssured.given()
-                .header(new Header("Authorization", "Bearer " + UserInfoProvider.getToken()))
+                .header(new Header("Authorization", "Bearer " +  AbstractRequest.getToken()))
                 .when()
                 .contentType(ContentType.JSON)
                 .body(gson.toJson(data))
@@ -136,7 +138,7 @@ public class OrderUtils {
 
     public PackLocation postPrintPackLocation(String orderId, PrintPackLocation data){
         PackLocation printPackLocation = RestAssured.given()
-                .header(new Header("Authorization", "Bearer " + UserInfoProvider.getToken()))
+                .header(new Header("Authorization", "Bearer " +  AbstractRequest.getToken()))
                 .when()
                 .contentType(ContentType.JSON)
                 .body(gson.toJson(data))
@@ -149,7 +151,7 @@ public class OrderUtils {
 
     public FilteredListOfOrders postFilterOrders(FilterOrders data){
         FilteredListOfOrders filteredListOfOrders = RestAssured.given()
-                .header(new Header("Authorization", "Bearer " + UserInfoProvider.getToken()))
+                .header(new Header("Authorization", "Bearer " +  AbstractRequest.getToken()))
                 .when()
                 .contentType(ContentType.JSON)
                 .body(gson.toJson(data))
@@ -161,7 +163,7 @@ public class OrderUtils {
     }
     public OrderV2 getOrderDetails(String orderId, String expandParams){
         OrderV2 order = RestAssured.given()
-                .header(new Header("Authorization", "Bearer " + UserInfoProvider.getToken()))
+                .header(new Header("Authorization", "Bearer " +  AbstractRequest.getToken()))
                 .queryParam("expand", expandParams)
                 .when()
                 .get(ApiV1.STAGE.getApi() + ApiV2.STORE_ORDER.getApi() + "/" + orderId + ApiV2.ORDER_DETAILS.getApi())
@@ -174,7 +176,7 @@ public class OrderUtils {
 
     public OrderV2 postChangeOrderStatus(String orderId, ChangeOrderStatus data, String expandParams){
         OrderV2 order = RestAssured.given()
-                .header(new Header("Authorization", "Bearer " + UserInfoProvider.getToken()))
+                .header(new Header("Authorization", "Bearer " +  AbstractRequest.getToken()))
                 .queryParam("expand", expandParams)
                 .when()
                 .contentType(ContentType.JSON)
@@ -188,7 +190,7 @@ public class OrderUtils {
     }
     public PackagingForStore getStorePackaging(){
         PackagingForStore packaging = RestAssured.given()
-                .header(new Header("Authorization", "Bearer " + UserInfoProvider.getToken()))
+                .header(new Header("Authorization", "Bearer " +  AbstractRequest.getToken()))
                 .when()
                 .get(ApiV1.STAGE.getApi() + ApiV2.PACKAGING.getApi())
                 .then()
@@ -199,7 +201,7 @@ public class OrderUtils {
 
     public OrderV2 postProductAddToBox(String orderId, ProductAddBox data, String expandParams){
         OrderV2 order = RestAssured.given()
-                .header(new Header("Authorization", "Bearer " + UserInfoProvider.getToken()))
+                .header(new Header("Authorization", "Bearer " +  AbstractRequest.getToken()))
                 .queryParam("expand", expandParams)
                 .when()
                 .contentType(ContentType.JSON)
@@ -213,7 +215,7 @@ public class OrderUtils {
     }
     public ShippingRates shippingRates(String orderId){
         ShippingRates shippingRates = RestAssured.given()
-                .header(new Header("Authorization", "Bearer " + UserInfoProvider.getToken()))
+                .header(new Header("Authorization", "Bearer " +  AbstractRequest.getToken()))
                 .when()
                 .contentType(ContentType.JSON)
                 .get(ApiV1.STAGE.getApi() + ApiV2.STORE_ORDER.getApi() + "/" + orderId + ApiV2.SHIPPING_RATES.getApi())

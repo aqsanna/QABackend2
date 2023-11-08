@@ -50,17 +50,4 @@ public class ProductInfoProvider {
             default -> null;
         };
     }
-
-    public static String getProductId() {
-        Gson gson = new Gson();
-        SuccessCreateProduct successCreateProduct = RestAssured.given()
-                .header(new Header("Authorization", "Bearer " + UserInfoProvider.getToken()))
-                .when()
-                .contentType(ContentType.JSON)
-                .body(gson.toJson(getProduct(User.EMAIL_INFO)))
-                .post(Configurations.DEV_URL + ApiV1.CREATE_PRODUCT.getApi())
-                .then().log().all()
-                .extract().as(SuccessCreateProduct.class);
-        return successCreateProduct.getData();
-    }
 }

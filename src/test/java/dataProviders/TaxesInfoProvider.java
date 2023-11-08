@@ -1,6 +1,8 @@
 package dataProviders;
 
 import Utils.RandomGenerateMethods;
+import helpers.AbstractRequest;
+import helpers.RequestProduct;
 import models.requests.tax.TaxesCreateInfo;
 import enums.User;
 
@@ -22,7 +24,7 @@ public class TaxesInfoProvider {
                             .withValue(User.VALUE.getUserData())
                             .withType(User.TYPE.getUserData())
                             .withApplyToAllProducts(User.APPLY_TO_ALL_PRODUCTS.getUserData())
-                            .withToken(UserInfoProvider.getToken())
+                            .withToken(AbstractRequest.getToken())
                             .withLanguage(User.LANGUAGES.getUserData())
                             .withContentLang(User.CONTENTLANG.getUserData()),
                     User.COMMOND.getUserData());
