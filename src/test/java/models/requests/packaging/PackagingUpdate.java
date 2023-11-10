@@ -69,7 +69,7 @@ public class PackagingUpdate {
         @With
         public static class Pack implements Serializable {
             @SerializedName("id")
-            public Integer id;
+            public String id;
             @SerializedName("name")
             public String name;
             @SerializedName("price")
@@ -84,7 +84,7 @@ public class PackagingUpdate {
             public String storeId;
             public Pack(){
             }
-            public Pack(Integer id, String name, String price, Integer freeCount, String upc, String specialEntityTypeId, String storeId) {
+            public Pack(String id, String name, String price, Integer freeCount, String upc, String specialEntityTypeId, String storeId) {
                 super();
                 this.id= id;
                 this.name = name;

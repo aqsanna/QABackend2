@@ -10,7 +10,7 @@ public class PackagingProvider {
     public static PackagingCreate createPack(User email) {
         ArrayList<PackagingCreate.Box> boxes = new ArrayList<>();
         boxes.add(new PackagingCreate.Box()
-                .withStore_id(User.STORE_ID.getUserData())
+                .withStore_id(User.STORE.getUserData())
                 .withName(User.BOXNAME.getUserData() + RandomGenerateMethods.randomString(5))
                 .withLength(RandomGenerateMethods.randomIntegerOneToNine())
                 .withWidth(RandomGenerateMethods.randomIntegerOneToNine())
@@ -18,7 +18,7 @@ public class PackagingProvider {
                 .withWeight(RandomGenerateMethods.randomIntegerOneToNine())
                 .withFreeVolumeReserve(RandomGenerateMethods.randomIntegerOneToNine())
                 .withSpecialEntityTypeId("1")
-                .withStoreId(User.STORE_ID.getUserData())
+                .withStoreId(User.STORE.getUserData())
                 .build());
         ArrayList<PackagingCreate.Pack> packs = new ArrayList<>();
         packs.add(new PackagingCreate.Pack()
@@ -27,7 +27,7 @@ public class PackagingProvider {
                 .withFreeCount(RandomGenerateMethods.randomIntegerOneToNine())
                 .withUpc(RandomGenerateMethods.randomString(5))
                 .withSpecialEntityTypeId("2")
-                .withStoreId(User.STORE_ID.getUserData())
+                .withStoreId(User.STORE.getUserData())
                 .build());
         return new PackagingCreate(boxes, packs, Boolean.parseBoolean(User.PICKUPBYDRIVER.getUserData()),
                 Boolean.parseBoolean(User.ADVENCEDCOLLECTINGFLOW.getUserData()));
@@ -37,7 +37,7 @@ public class PackagingProvider {
         ArrayList<PackagingUpdate.Box> boxesUpdate = new ArrayList<>();
         boxesUpdate.add(new PackagingUpdate.Box()
                 .withId((RequestPackaging.getPackagingBoxId()))
-                .withStore_id(User.STORE_ID.getUserData())
+                .withStore_id(User.STORE.getUserData())
                 .withName(User.BOXNAME.getUserData()+ RandomGenerateMethods.randomString(6))
                 .withLength(RandomGenerateMethods.randomIntegerOneToNine())
                 .withWidth(RandomGenerateMethods.randomIntegerOneToNine())
@@ -45,17 +45,17 @@ public class PackagingProvider {
                 .withWeight(RandomGenerateMethods.randomIntegerOneToNine())
                 .withFreeVolumeReserve(RandomGenerateMethods.randomIntegerOneToNine())
                 .withSpecialEntityTypeId("2")
-                .withStoreId(User.STORE_ID.getUserData())
+                .withStoreId(User.STORE.getUserData())
                 .build());
         ArrayList<PackagingUpdate.Pack> packingUpdate = new ArrayList<>();
         packingUpdate.add(new PackagingUpdate.Pack()
-                .withId(RequestPackaging.getPackagingBoxId())
+                .withId(RequestPackaging.getPackagingId())
                 .withName(User.PACKNAME.getUserData() + RandomGenerateMethods.randomString(6))
                 .withPrice(User.VALUE.getUserData())
                 .withFreeCount(RandomGenerateMethods.randomIntegerOneToNine())
                 .withUpc(RandomGenerateMethods.randomString(3))
-                .withSpecialEntityTypeId("3")
-                .withStoreId(User.STORE_ID.getUserData())
+                .withSpecialEntityTypeId("8")
+                .withStoreId(User.STORE.getUserData())
                 .build());
         return new PackagingUpdate(boxesUpdate, packingUpdate, false, false);
 
