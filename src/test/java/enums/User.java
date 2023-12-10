@@ -40,7 +40,7 @@ public enum User {
     STORE_ID("87"),
     PER_UNIT("1"),
     IS_CRV("0"),
-    VALUE("2"),
+    VALUE("2.00"),
     TYPE("fixed"),
     APPLY_TO_ALL_PRODUCTS("0"),
     LANGUAGES("en-US"),

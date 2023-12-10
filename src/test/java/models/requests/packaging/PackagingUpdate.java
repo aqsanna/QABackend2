@@ -1,22 +1,24 @@
 package models.requests.packaging;
 
 import com.google.gson.annotations.SerializedName;
+import lombok.Getter;
 import lombok.With;
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.List;
 
 @With
+@Getter
 public class PackagingUpdate {
         @SerializedName("boxes")
-        public ArrayList<Box> boxes;
+        public List<Box> boxes;
         @SerializedName("packs")
-        public ArrayList<Pack> packs;
+        public List<Pack> packs;
         @SerializedName("pickupByDriver")
         public Boolean pickupByDriver;
         @SerializedName("advancedCollectingFlow")
         public Boolean advancedCollectingFlow;
 
-        public PackagingUpdate(ArrayList<Box> boxes, ArrayList<Pack> packs, Boolean pickupByDriver, Boolean advancedCollectingFlow) {
+        public PackagingUpdate(List<Box> boxes, List<Pack> packs, Boolean pickupByDriver, Boolean advancedCollectingFlow) {
             super();
             this.boxes = boxes;
             this.packs = packs;
@@ -25,6 +27,7 @@ public class PackagingUpdate {
         }
 
         @With
+        @Getter
         public static class Box implements Serializable {
             @SerializedName("id")
             public Integer id;
@@ -46,9 +49,6 @@ public class PackagingUpdate {
             public String specialEntityTypeId;
             @SerializedName("storeId")
             public String storeId;
-
-            public Box() {
-            }
             public Box(Integer id, String store_id, String name, Integer length, Integer width, Integer height,
                        Integer weight, Integer freeVolumeReserve, String specialEntityTypeId, String storeId) {
                 this.id = id;
@@ -62,11 +62,9 @@ public class PackagingUpdate {
                 this.specialEntityTypeId = specialEntityTypeId;
                 this.storeId = storeId;
             }
-            public Box build() {
-                return this;
-            }
         }
         @With
+        @Getter
         public static class Pack implements Serializable {
             @SerializedName("id")
             public String id;
@@ -93,9 +91,6 @@ public class PackagingUpdate {
                 this.upc = upc;
                 this.specialEntityTypeId = specialEntityTypeId;
                 this.storeId = storeId;
-            }
-            public Pack build() {
-                return this;
             }
         }
 }

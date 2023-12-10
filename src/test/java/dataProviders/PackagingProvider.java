@@ -1,64 +1,60 @@
 package dataProviders;
 import Utils.RandomGenerateMethods;
 import helpers.RequestPackaging;
+import lombok.Getter;
 import models.requests.packaging.*;
 import enums.User;
+
 import java.util.ArrayList;
+import java.util.List;
 
-
+@Getter
 public class PackagingProvider {
-    public static PackagingCreate createPack(User email) {
-        ArrayList<PackagingCreate.Box> boxes = new ArrayList<>();
-        boxes.add(new PackagingCreate.Box()
-                .withStore_id(User.STORE.getUserData())
-                .withName(User.BOXNAME.getUserData() + RandomGenerateMethods.randomString(5))
-                .withLength(RandomGenerateMethods.randomIntegerOneToNine())
-                .withWidth(RandomGenerateMethods.randomIntegerOneToNine())
-                .withHeight(RandomGenerateMethods.randomIntegerOneToNine())
-                .withWeight(RandomGenerateMethods.randomIntegerOneToNine())
-                .withFreeVolumeReserve(RandomGenerateMethods.randomIntegerOneToNine())
-                .withSpecialEntityTypeId("1")
-                .withStoreId(User.STORE.getUserData())
-                .build());
-        ArrayList<PackagingCreate.Pack> packs = new ArrayList<>();
-        packs.add(new PackagingCreate.Pack()
-                .withName(User.PACKNAME.getUserData() + RandomGenerateMethods.randomString(5))
-                .withPrice(User.VALUE.getUserData())
-                .withFreeCount(RandomGenerateMethods.randomIntegerOneToNine())
-                .withUpc(RandomGenerateMethods.randomString(5))
-                .withSpecialEntityTypeId("2")
-                .withStoreId(User.STORE.getUserData())
-                .build());
-        return new PackagingCreate(boxes, packs, Boolean.parseBoolean(User.PICKUPBYDRIVER.getUserData()),
+
+    public static PackagingCreate createPack(User email, String boxName, String packName, Integer number, String upc) {
+        PackagingCreate.Box box = new PackagingCreate.Box(
+                User.STORE.getUserData(),
+                boxName,
+                number,
+                number,
+                number,
+                number,
+                number,
+               "1",
+                User.STORE.getUserData());
+        PackagingCreate.Pack pack = new PackagingCreate.Pack(
+                packName,
+                User.VALUE.getUserData(),
+                number,
+                upc,
+                "2",
+                User.STORE.getUserData());
+        return new PackagingCreate(List.of(box), List.of(pack), Boolean.parseBoolean(User.PICKUPBYDRIVER.getUserData()),
                 Boolean.parseBoolean(User.ADVENCEDCOLLECTINGFLOW.getUserData()));
     }
 
-    public static PackagingUpdate updatePacking(User email){
-        ArrayList<PackagingUpdate.Box> boxesUpdate = new ArrayList<>();
-        boxesUpdate.add(new PackagingUpdate.Box()
-                .withId((RequestPackaging.getPackagingBoxId()))
-                .withStore_id(User.STORE.getUserData())
-                .withName(User.BOXNAME.getUserData()+ RandomGenerateMethods.randomString(6))
-                .withLength(RandomGenerateMethods.randomIntegerOneToNine())
-                .withWidth(RandomGenerateMethods.randomIntegerOneToNine())
-                .withHeight(RandomGenerateMethods.randomIntegerOneToNine())
-                .withWeight(RandomGenerateMethods.randomIntegerOneToNine())
-                .withFreeVolumeReserve(RandomGenerateMethods.randomIntegerOneToNine())
-                .withSpecialEntityTypeId("2")
-                .withStoreId(User.STORE.getUserData())
-                .build());
-        ArrayList<PackagingUpdate.Pack> packingUpdate = new ArrayList<>();
-        packingUpdate.add(new PackagingUpdate.Pack()
-                .withId(RequestPackaging.getPackagingId())
-                .withName(User.PACKNAME.getUserData() + RandomGenerateMethods.randomString(6))
-                .withPrice(User.VALUE.getUserData())
-                .withFreeCount(RandomGenerateMethods.randomIntegerOneToNine())
-                .withUpc(RandomGenerateMethods.randomString(3))
-                .withSpecialEntityTypeId("8")
-                .withStoreId(User.STORE.getUserData())
-                .build());
-        return new PackagingUpdate(boxesUpdate, packingUpdate, false, false);
+    public static PackagingUpdate updatePacking(User email,String boxName, String packName, Integer number, String upc){
 
+        PackagingUpdate.Box boxUpdate = new PackagingUpdate.Box(
+                RequestPackaging.getPackagingBoxId(),
+                User.STORE.getUserData(),
+                boxName,
+                number,
+                number,
+                number,
+                number,
+                number,
+               "2",
+                User.STORE.getUserData());
+        PackagingUpdate.Pack packUpdate = new PackagingUpdate.Pack(
+                RequestPackaging.getPackagingId(),
+                packName,
+                User.VALUE.getUserData(),
+                number,
+                upc,
+                 "8",
+                User.STORE.getUserData());
+        return new PackagingUpdate(List.of(boxUpdate), List.of(packUpdate), false, false);
     }
 
     public static PackagingDelete deletePacking(User email){

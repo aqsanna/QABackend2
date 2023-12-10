@@ -6,34 +6,48 @@ import helpers.RequestPackaging;
 import org.junit.jupiter.api.*;
 import models.responses.packaging.PackagingErrorMsg;
 import models.responses.packaging.PackagingForStore;
+import models.requests.packaging.PackagingCreate;
+import dataProviders.PackagingProvider;
 import enums.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
+
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class PackagingTest  {
     AssertionForPackaging assertionForPackaging = new AssertionForPackaging();
     RequestPackaging requestPackaging = new RequestPackaging();
     AssertionForMessages assertionForMessages = new AssertionForMessages();
+
+    private PackagingForStore createPackaging() {
+        return requestPackaging.requestCreate(ApiV2.PACKAGING.getApi());
+    }
+    public PackagingForStore UpdPackaging() {
+        return requestPackaging.requestUpdate(ApiV2.PACKAGING.getApi());
+    }
     @Test
     @Order(1)
     @SerializedName("Check create Packing - LE-T658-3-4-5-6")
     public void addPackaging() throws IOException {
 
-        PackagingForStore createPacking = requestPackaging.requestCreate(ApiV2.PACKAGING.getApi());
+        PackagingForStore createPacking = createPackaging();
         assertionForMessages.assertRequestMessageAndCode(createPacking.getMessage(), createPacking.getCode());
         Assertions.assertTrue(createPacking.getData().pickupByDriver);
         Assertions.assertTrue(createPacking.getData().advancedCollectingFlow);
         assertionForPackaging.assertSpecialTypes(createPacking.getData().getSpecialTypes());
         assertionForPackaging.assertPacks(createPacking.getData().getPacks());
         assertionForPackaging.assertBoxes(createPacking.getData().getBoxes());
+        assertionForPackaging.assertGeneratedBox(createPacking);
+        assertionForPackaging.assertGeneratedPack(createPacking);
     }
+
     @Test
     @Order(2)
     @SerializedName("Check update Packing - LE-T658-9")
-    public void updatePackaging() {
-        PackagingForStore updatePacking = requestPackaging.requestUpdate(ApiV2.PACKAGING.getApi());
+    public void updatePackaging() throws IOException {
+        PackagingForStore updatePacking = UpdPackaging();
         assertionForMessages.assertRequestMessageAndCode(updatePacking.getMessage(), updatePacking.getCode());
         Assertions.assertFalse(updatePacking.getData().pickupByDriver);
         Assertions.assertFalse(updatePacking.getData().advancedCollectingFlow);
@@ -64,9 +78,9 @@ public class PackagingTest  {
         Assertions.assertFalse(deletePacking.getData().pickupByDriver);
         Assertions.assertFalse(deletePacking.getData().advancedCollectingFlow);
         assertionForPackaging.assertSpecialTypes(deletePacking.getData().getSpecialTypes());
-        ArrayList<PackagingForStore.Data.Box> deleteBoxList = deletePacking.getData().getBoxes();
+        List<PackagingForStore.Data.Box> deleteBoxList = deletePacking.getData().getBoxes();
         Assertions.assertTrue(deleteBoxList.isEmpty());
-        ArrayList<PackagingForStore.Data.Box> deletePackList = deletePacking.getData().getBoxes();
+        List<PackagingForStore.Data.Box> deletePackList = deletePacking.getData().getBoxes();
         Assertions.assertTrue(deletePackList.isEmpty());
     }
 }

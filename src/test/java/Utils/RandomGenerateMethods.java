@@ -42,4 +42,7 @@ public class RandomGenerateMethods {
 
         return sb.toString();
     }
+    public static String randomGenerateName(String baseName) {
+        return baseName + RandomGenerateMethods.randomString(5);
+    }
 }

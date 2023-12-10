@@ -1,22 +1,25 @@
 package models.requests.packaging;
 
 import com.google.gson.annotations.SerializedName;
+import lombok.Getter;
 import lombok.With;
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.List;
+
 @With
+@Getter
 public class PackagingCreate {
         @SerializedName("boxes")
-        public ArrayList<Box> boxes;
+        public List<Box> boxes;
         @SerializedName("packs")
-        public ArrayList<Pack> packs;
+        public List<Pack> packs;
         @SerializedName("pickupByDriver")
         public Boolean pickupByDriver;
         @SerializedName("advancedCollectingFlow")
         public Boolean advancedCollectingFlow;
 
 
-        public PackagingCreate(ArrayList<Box> boxes, ArrayList<Pack> packs, Boolean pickupByDriver, Boolean advancedCollectingFlow) {
+        public PackagingCreate(List<Box> boxes, List<Pack> packs, Boolean pickupByDriver, Boolean advancedCollectingFlow) {
             super();
             this.boxes = boxes;
             this.packs = packs;
@@ -25,6 +28,7 @@ public class PackagingCreate {
         }
 
         @With
+        @Getter
         public static class Box implements Serializable {
             @SerializedName("store_id")
             public String store_id;
@@ -45,9 +49,6 @@ public class PackagingCreate {
             @SerializedName("storeId")
             public String storeId;
 
-            public Box() {
-            }
-
             public Box(String store_id, String name, Integer length, Integer width, Integer height,
                        Integer weight, Integer freeVolumeReserve, String specialEntityTypeId, String storeId) {
                 this.store_id = store_id;
@@ -59,15 +60,11 @@ public class PackagingCreate {
                 this.freeVolumeReserve = freeVolumeReserve;
                 this.specialEntityTypeId = specialEntityTypeId;
                 this.storeId = storeId;
-
-            }
-
-            public Box build() {
-                return this;
             }
         }
 
         @With
+        @Getter
         public static class Pack implements Serializable {
             @SerializedName("name")
             public String name;
@@ -82,9 +79,6 @@ public class PackagingCreate {
             @SerializedName("storeId")
             public String storeId;
 
-            public Pack(){
-
-            }
             public Pack(String name, String price, Integer freeCount, String upc, String specialEntityTypeId, String storeId) {
                 super();
                 this.name = name;
@@ -93,10 +87,6 @@ public class PackagingCreate {
                 this.upc = upc;
                 this.specialEntityTypeId = specialEntityTypeId;
                 this.storeId = storeId;
-            }
-
-            public Pack build() {
-                return this;
             }
         }
 }

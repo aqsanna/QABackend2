@@ -2,8 +2,8 @@ package models.responses.packaging;
 
 import com.google.gson.annotations.SerializedName;
 import lombok.Getter;
+import java.util.List;
 
-import java.util.ArrayList;
 @Getter
 public class PackagingForStore {
     @SerializedName("message")
@@ -15,11 +15,11 @@ public class PackagingForStore {
     @Getter
     public static class Data{
         @SerializedName("specialTypes")
-        public ArrayList<SpecialType> specialTypes;
+        public List<SpecialType> specialTypes;
         @SerializedName("boxes")
-        public ArrayList<Box> boxes;
+        public List<Box> boxes;
         @SerializedName("packs")
-        public ArrayList<Pack> packs;
+        public List<Pack> packs;
         @SerializedName("pickupByDriver")
         public Boolean pickupByDriver;
         @SerializedName("advancedCollectingFlow")
