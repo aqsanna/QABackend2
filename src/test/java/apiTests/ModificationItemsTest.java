@@ -59,7 +59,7 @@ public class ModificationItemsTest {
 
     @Test
     @Order(4)
-    @DisplayName("Check update modification item by image")
+    @DisplayName("Check update modification item")
     public void UpdateModificationItemsImage(){
         SuccessCreateModificationItems updateModificationItemsImage = requestModificationItems.updateItems(ApiV2.MODIFICATIONITEM.getApi());
         assertionForMessages.assertRequestMessageAndCode(updateModificationItemsImage.getMessage(), updateModificationItemsImage.getCode());
