@@ -9,6 +9,11 @@ public class RandomGenerateMethods {
         int x = ran.nextInt(9) + 1;
         return x;
     }
+    public static Double randomDoubleOneToNine() {
+        Random ran = new Random();
+        double x = ran.nextDouble(9) + 1;
+        return x;
+    }
     public static Integer randomInteger() {
         Random ran = new Random();
         int x = ran.nextInt(99999) + 1;

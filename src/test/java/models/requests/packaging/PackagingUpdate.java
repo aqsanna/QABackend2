@@ -36,21 +36,21 @@ public class PackagingUpdate {
             @SerializedName("name")
             public String name;
             @SerializedName("length")
-            public Integer length;
+            public String length;
             @SerializedName("width")
-            public Integer width;
+            public String width;
             @SerializedName("height")
-            public Integer height;
+            public String height;
             @SerializedName("weight")
-            public Integer weight;
+            public String weight;
             @SerializedName("free_volume_reserve")
-            public Integer freeVolumeReserve;
+            public String freeVolumeReserve;
             @SerializedName("special_entity_type_id")
             public String specialEntityTypeId;
             @SerializedName("storeId")
             public String storeId;
-            public Box(Integer id, String store_id, String name, Integer length, Integer width, Integer height,
-                       Integer weight, Integer freeVolumeReserve, String specialEntityTypeId, String storeId) {
+            public Box(Integer id, String store_id, String name, String length, String width, String height,
+                       String weight, String freeVolumeReserve, String specialEntityTypeId, String storeId) {
                 this.id = id;
                 this.store_id = store_id;
                 this.name = name;
@@ -71,7 +71,7 @@ public class PackagingUpdate {
             @SerializedName("name")
             public String name;
             @SerializedName("price")
-            public String price;
+            public Double price;
             @SerializedName("free_count")
             public Integer freeCount;
             @SerializedName("upc")
@@ -82,7 +82,7 @@ public class PackagingUpdate {
             public String storeId;
             public Pack(){
             }
-            public Pack(String id, String name, String price, Integer freeCount, String upc, String specialEntityTypeId, String storeId) {
+            public Pack(String id, String name, Double price, Integer freeCount, String upc, String specialEntityTypeId, String storeId) {
                 super();
                 this.id= id;
                 this.name = name;

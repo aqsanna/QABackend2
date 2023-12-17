@@ -6,12 +6,9 @@ import helpers.RequestPackaging;
 import org.junit.jupiter.api.*;
 import models.responses.packaging.PackagingErrorMsg;
 import models.responses.packaging.PackagingForStore;
-import models.requests.packaging.PackagingCreate;
-import dataProviders.PackagingProvider;
 import enums.*;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -54,6 +51,8 @@ public class PackagingTest  {
         assertionForPackaging.assertSpecialTypes(updatePacking.getData().getSpecialTypes());
         assertionForPackaging.assertPacks(updatePacking.getData().getPacks());
         assertionForPackaging.assertBoxes(updatePacking.getData().getBoxes());
+        assertionForPackaging.assertGeneratedPackUpd(updatePacking);
+        assertionForPackaging.assertGeneratedBoxUpd(updatePacking);
     }
     @Test
     @Order(3)

@@ -30,63 +30,55 @@ public class PackagingCreate {
         @With
         @Getter
         public static class Box implements Serializable {
-            @SerializedName("store_id")
-            public String store_id;
+            @SerializedName("special_entity_type_id")
+            public String specialEntityTypeId;
+            @SerializedName("free_volume_reserve")
+            public Integer freeVolumeReserve;
+            @SerializedName("weight")
+            public String weight;
             @SerializedName("name")
             public String name;
             @SerializedName("length")
-            public Integer length;
+            public String length;
             @SerializedName("width")
-            public Integer width;
+            public String width;
             @SerializedName("height")
-            public Integer height;
-            @SerializedName("weight")
-            public Integer weight;
-            @SerializedName("free_volume_reserve")
-            public Integer freeVolumeReserve;
-            @SerializedName("special_entity_type_id")
-            public String specialEntityTypeId;
-            @SerializedName("storeId")
-            public String storeId;
+            public String height;
 
-            public Box(String store_id, String name, Integer length, Integer width, Integer height,
-                       Integer weight, Integer freeVolumeReserve, String specialEntityTypeId, String storeId) {
-                this.store_id = store_id;
+
+            public Box(String specialEntityTypeId, Integer freeVolumeReserve, String weight, String name, String length, String width, String height) {
+                super();
+                this.specialEntityTypeId = specialEntityTypeId;
+                this.freeVolumeReserve = freeVolumeReserve;
+                this.weight = weight;
                 this.name = name;
                 this.length = length;
                 this.width = width;
                 this.height = height;
-                this.weight = weight;
-                this.freeVolumeReserve = freeVolumeReserve;
-                this.specialEntityTypeId = specialEntityTypeId;
-                this.storeId = storeId;
             }
         }
 
         @With
         @Getter
         public static class Pack implements Serializable {
+            @SerializedName("special_entity_type_id")
+            public String specialEntityTypeId;
             @SerializedName("name")
             public String name;
             @SerializedName("price")
-            public String price;
+            public Double price;
             @SerializedName("free_count")
             public Integer freeCount;
             @SerializedName("upc")
             public String upc;
-            @SerializedName("special_entity_type_id")
-            public String specialEntityTypeId;
-            @SerializedName("storeId")
-            public String storeId;
 
-            public Pack(String name, String price, Integer freeCount, String upc, String specialEntityTypeId, String storeId) {
+            public Pack(String specialEntityTypeId, String name, Double price, Integer freeCount, String upc) {
                 super();
+                this.specialEntityTypeId = specialEntityTypeId;
                 this.name = name;
                 this.price = price;
                 this.freeCount = freeCount;
                 this.upc = upc;
-                this.specialEntityTypeId = specialEntityTypeId;
-                this.storeId = storeId;
             }
         }
 }

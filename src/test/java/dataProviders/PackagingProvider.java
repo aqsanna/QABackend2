@@ -11,45 +11,42 @@ import java.util.List;
 @Getter
 public class PackagingProvider {
 
-    public static PackagingCreate createPack(User email, String boxName, String packName, Integer number, String upc) {
+    public static PackagingCreate createPack(User email, String boxName, String packName, Integer number, Double price, String weight, String upc) {
         PackagingCreate.Box box = new PackagingCreate.Box(
-                User.STORE.getUserData(),
-                boxName,
-                number,
-                number,
-                number,
-                number,
-                number,
                "1",
-                User.STORE.getUserData());
-        PackagingCreate.Pack pack = new PackagingCreate.Pack(
-                packName,
-                User.VALUE.getUserData(),
                 number,
-                upc,
+                weight,
+                boxName,
+                weight,
+                weight,
+                weight);
+        PackagingCreate.Pack pack = new PackagingCreate.Pack(
                 "2",
-                User.STORE.getUserData());
+                packName,
+                price,
+                number,
+                upc);
         return new PackagingCreate(List.of(box), List.of(pack), Boolean.parseBoolean(User.PICKUPBYDRIVER.getUserData()),
                 Boolean.parseBoolean(User.ADVENCEDCOLLECTINGFLOW.getUserData()));
     }
 
-    public static PackagingUpdate updatePacking(User email,String boxName, String packName, Integer number, String upc){
+    public static PackagingUpdate updatePacking(User email,String boxName, String packName,  String weight, Double price, Integer number, String upc){
 
         PackagingUpdate.Box boxUpdate = new PackagingUpdate.Box(
                 RequestPackaging.getPackagingBoxId(),
                 User.STORE.getUserData(),
                 boxName,
-                number,
-                number,
-                number,
-                number,
-                number,
+                weight,
+                weight,
+                weight,
+                weight,
+                weight,
                "2",
                 User.STORE.getUserData());
         PackagingUpdate.Pack packUpdate = new PackagingUpdate.Pack(
                 RequestPackaging.getPackagingId(),
                 packName,
-                User.VALUE.getUserData(),
+                price,
                 number,
                 upc,
                  "8",

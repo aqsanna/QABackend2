@@ -3,6 +3,7 @@ package assertions;
 import Utils.ErrorMessages;
 import dataProviders.PackagingProvider;
 import enums.User;
+import groovy.transform.ToString;
 import helpers.RequestPackaging;
 import models.requests.packaging.PackagingCreate;
 import models.requests.packaging.PackagingUpdate;
@@ -43,41 +44,41 @@ public class AssertionForPackaging {
     }
     public void assertGeneratedBox(PackagingForStore createPacking) {
         PackagingCreate.Box generatedBox = PackagingProvider.createPack(User.EMAIL_INFO, RequestPackaging.randomBoxName, RequestPackaging.randomPackName,
-                RequestPackaging.randomNumber, RequestPackaging.randomUpc).getBoxes().get(0);
+                RequestPackaging.randomNumber, RequestPackaging.randomPrice, RequestPackaging.randomIntToString,  RequestPackaging.randomUpc).getBoxes().get(0);
         PackagingForStore.Data.Box responseBox = createPacking.getData().getBoxes().get(0);
         Assertions.assertEquals(generatedBox.getName(), responseBox.getName(), "Box name does not match the expected value");
-        Assertions.assertEquals(generatedBox.getLength(), responseBox.getLength(), "Length does not match the expected value");
-        Assertions.assertEquals(generatedBox.getWidth(), responseBox.getWidth(), "Width does not match the expected value");
-        Assertions.assertEquals(generatedBox.getHeight(), responseBox.getHeight(), "Height does not match the expected value");
-        Assertions.assertEquals(generatedBox.getWeight(), responseBox.getWeight(), "Weight does not match the expected value");
+        Assertions.assertEquals(Integer.parseInt(generatedBox.getLength()), responseBox.getLength(), "Length does not match the expected value");
+        Assertions.assertEquals(Integer.parseInt(generatedBox.getWidth()), responseBox.getWidth(), "Width does not match the expected value");
+        Assertions.assertEquals(Integer.parseInt(generatedBox.getHeight()), responseBox.getHeight(), "Height does not match the expected value");
+        Assertions.assertEquals(Integer.parseInt(generatedBox.getWeight()), responseBox.getWeight(), "Weight does not match the expected value");
         Assertions.assertEquals(generatedBox.getFreeVolumeReserve(), responseBox.getFreeVolumeReserve(), "FreeVolumeReserve does not match the expected value");
     }
     public void assertGeneratedBoxUpd(PackagingForStore createPacking) {
         PackagingUpdate.Box generatedBox = PackagingProvider.updatePacking(User.EMAIL_INFO, RequestPackaging.randomBoxNameUpd, RequestPackaging.randomPackNameUpd,
-                RequestPackaging.randomNumberUpd, RequestPackaging.randomUpcUpd).getBoxes().get(0);
+               RequestPackaging.randomIntToString, RequestPackaging.randomPrice, RequestPackaging.randomNumberUpd, RequestPackaging.randomUpcUpd).getBoxes().get(0);
         PackagingForStore.Data.Box responseBox = createPacking.getData().getBoxes().get(0);
         Assertions.assertEquals(generatedBox.getName(), responseBox.getName(), "Box name does not match the expected value");
-        Assertions.assertEquals(generatedBox.getLength(), responseBox.getLength(), "Length does not match the expected value");
-        Assertions.assertEquals(generatedBox.getWidth(), responseBox.getWidth(), "Width does not match the expected value");
-        Assertions.assertEquals(generatedBox.getHeight(), responseBox.getHeight(), "Height does not match the expected value");
-        Assertions.assertEquals(generatedBox.getWeight(), responseBox.getWeight(), "Weight does not match the expected value");
-        Assertions.assertEquals(generatedBox.getFreeVolumeReserve(), responseBox.getFreeVolumeReserve(), "FreeVolumeReserve does not match the expected value");
+        Assertions.assertEquals(Integer.parseInt(generatedBox.getLength()), responseBox.getLength(), "Length does not match the expected value");
+        Assertions.assertEquals(Integer.parseInt(generatedBox.getWidth()), responseBox.getWidth(), "Width does not match the expected value");
+        Assertions.assertEquals(Integer.parseInt(generatedBox.getHeight()), responseBox.getHeight(), "Height does not match the expected value");
+        Assertions.assertEquals(Integer.parseInt(generatedBox.getWeight()), responseBox.getWeight(), "Weight does not match the expected value");
+        Assertions.assertEquals(Integer.parseInt(generatedBox.getFreeVolumeReserve()), responseBox.getFreeVolumeReserve(), "FreeVolumeReserve does not match the expected value");
     }
-    public void assertGeneratedPackUpd(PackagingForStore createPacking) {
+    public void assertGeneratedPackUpd(PackagingForStore updatePacking) {
         PackagingUpdate.Pack generatedPack = PackagingProvider.updatePacking(User.EMAIL_INFO, RequestPackaging.randomBoxNameUpd, RequestPackaging.randomPackNameUpd,
-                RequestPackaging.randomNumberUpd, RequestPackaging.randomUpcUpd).getPacks().get(0);
-        PackagingForStore.Data.Box responsePack = createPacking.getData().getBoxes().get(0);
+                RequestPackaging.randomIntToString, RequestPackaging.randomPrice,  RequestPackaging.randomNumberUpd, RequestPackaging.randomUpcUpd).getPacks().get(0);
+        PackagingForStore.Data.Pack responsePack = updatePacking.getData().getPacks().get(0);
         Assertions.assertEquals(generatedPack.getName(), responsePack.getName(), "Box name does not match the expected value");
-//        Assertions.assertEquals(generatedPack.getPrice(), responsePack.getPrice(), "Price does not match the expected value");
-//        Assertions.assertEquals(generatedPack.getFreeCount(), responsePack.getFreeCount(), "FreeCount does not match the expected value");
-//        Assertions.assertEquals(generatedPack.getUpc(), responsePack.getUpc(), "Upc does not match the expected value");
-    }
+        Assertions.assertEquals( Math.round(generatedPack.getPrice()), Math.round(Double.parseDouble(responsePack.getPrice())), "Price does not match the expected value");
+        Assertions.assertEquals(generatedPack.getFreeCount(), responsePack.getFreeCount(), "FreeCount does not match the expected value");
+        Assertions.assertEquals(generatedPack.getUpc(), responsePack.getUpc(), "Upc does not match the expected value");
+  }
     public void assertGeneratedPack(PackagingForStore createPacking) {
         PackagingCreate.Pack generatedPack = PackagingProvider.createPack(User.EMAIL_INFO, RequestPackaging.randomBoxName, RequestPackaging.randomPackName,
-                RequestPackaging.randomNumber, RequestPackaging.randomUpc).getPacks().get(0);
+                RequestPackaging.randomNumber, RequestPackaging.randomPrice, RequestPackaging.randomIntToString, RequestPackaging.randomUpc).getPacks().get(0);
         PackagingForStore.Data.Pack responseBox = createPacking.getData().getPacks().get(0);
         Assertions.assertEquals(generatedPack.getName(), responseBox.getName(), "Pack name does not match the expected value");
-        Assertions.assertEquals(generatedPack.getPrice(), responseBox.getPrice(), "Price does not match the expected value");
+        Assertions.assertEquals(Math.round(generatedPack.getPrice()), Math.round(Double.parseDouble(responseBox.getPrice())), "Price does not match the expected value");
         Assertions.assertEquals(generatedPack.getFreeCount(), responseBox.getFreeCount(), "FreeCount does not match the expected value");
         Assertions.assertEquals(generatedPack.getUpc(), responseBox.getUpc(), "Upc does not match the expected value");
     }
