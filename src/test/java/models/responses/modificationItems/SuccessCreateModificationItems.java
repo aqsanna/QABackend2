@@ -30,9 +30,9 @@ public class SuccessCreateModificationItems {
         @SerializedName("description")
         public String description;
         @SerializedName("is_instock")
-        public Integer isInstock;
+        public Boolean isInstock;
         @SerializedName("is_multiline")
-        public Integer isMultiline;
+        public Boolean isMultiline;
         @SerializedName("min_length")
         public String minLength;
         @SerializedName("max_length")

@@ -20,6 +20,7 @@ public enum ApiV2 {
     SHIPPING_PACKAGING_BOX("/shipping-packaging-box"),
     SHIPPING_RATES("/shipping-rates"),
     SHIPPING_LABEL("/shipping-label"),
+    MODIFICATIONITEM("rest/v2/stores/518/modification-items"),
     COMPANY_SETTINGS("rest/v2/partner/settings");
 
     private final String api;

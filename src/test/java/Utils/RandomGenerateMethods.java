@@ -50,4 +50,8 @@ public class RandomGenerateMethods {
     public static String randomGenerateName(String baseName) {
         return baseName + RandomGenerateMethods.randomString(5);
     }
+    public static Boolean generateRandomBoolean() {
+        Random random = new Random();
+        return random.nextBoolean();
+    }
 }

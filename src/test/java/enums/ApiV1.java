@@ -24,7 +24,6 @@ public enum ApiV1 {
     TAXES_LIST("rest/v1/partner/taxes?limit=-1&offset=0"),
     TAGS_LIST("rest/v2/tags?perPage=10000"),
     TAGS("rest/v2/tags?contentLang=en-US"),
-    MODIFICATIONITEM("rest/v2/stores/87/modification-items?contentLang=en-US&expand=taxes"),
     DISCOUNT_LIST("rest/v1/partner/discounts?limit=-1&offset=0");
 
     private final String api;

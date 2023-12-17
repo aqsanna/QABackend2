@@ -56,7 +56,8 @@ public enum User {
     ADVENCEDCOLLECTINGFLOW("true"),
     REGULARTYPE("regular"),
     TEXTTYPE("text"),
-    MODIFICATIONIMAGE("https://cdn.stage.local.express/img/JyeicWbpavIiO2Ln1Wl2clRw9lbnLldWYEWMl1tETf1WtURRavADd2Zh1W5GcuU=0nIn.png"),
+    IMAGETYPE("image"),
+    MODIFICATIONIMAGE("https://cdn.dev.local.express/img/JyeicWbpavIiO2Ln1Wl2clRw9lbnLldWY2b1I3NVS5kfZTY4av4Ue2Zh1W5GcuU=0nIn.png"),
     TAXES("268"),
     COMMOND("POST");
 
