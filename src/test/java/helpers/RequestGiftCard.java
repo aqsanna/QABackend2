@@ -1,14 +1,12 @@
 package helpers;
 
+import Utils.RandomGenerateMethods;
 import config.Configurations;
 import dataProviders.UserInfoProvider;
 import enums.ApiV2;
 import io.restassured.http.ContentType;
 import io.restassured.http.Header;
-import models.responses.giftCard.GiftCardDetails;
-import models.responses.giftCard.GiftCardDisable;
-import models.responses.giftCard.GiftCardList;
-import models.responses.giftCard.SuccessCreateGiftCard;
+import models.responses.giftCard.*;
 import dataProviders.GiftCardInfoProvider;
 import enums.User;
 
@@ -17,12 +15,23 @@ import java.util.ArrayList;
 import static io.restassured.RestAssured.given;
 
 public class RequestGiftCard extends AbstractRequest {
+
+    public static Integer randomNumber = RandomGenerateMethods.randomIntegerOneToNine();
+    public static String randomHolder = RandomGenerateMethods.randomString(5);
     public SuccessCreateGiftCard putRequestCreateGiftCard(String url){
         return baseAuthorizedRequest()
-                .body(GiftCardInfoProvider.createGift(User.EMAIL_INFO))
+                .body(GiftCardInfoProvider.createGift(User.EMAIL_INFO, randomNumber, randomHolder))
                 .put(url)
                 .then()
                 .extract().as(SuccessCreateGiftCard.class);
+    }
+
+    public GiftCardErrorMsg  putRequestCreateGiftCardMsg (String url){
+        return baseAuthorizedRequest()
+                .body(GiftCardInfoProvider.giftCardMsg(User.EMAIL_INFO))
+                .put(url)
+                .then()
+                .extract().as(GiftCardErrorMsg.class);
     }
     public GiftCardList postRequestListGiftCard(String url){
         return  baseAuthorizedRequest()

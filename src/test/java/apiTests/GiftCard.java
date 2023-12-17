@@ -3,12 +3,8 @@ package apiTests;
 import assertions.AssertionForGiftCard;
 import assertions.AssertionForMessages;
 import helpers.RequestGiftCard;
+import models.responses.giftCard.*;
 import org.junit.jupiter.api.*;
-import models.responses.giftCard.GiftCardDetails;
-import models.responses.giftCard.GiftCardDisable;
-import models.responses.giftCard.GiftCardList;
-import models.responses.giftCard.SuccessCreateGiftCard;
-import dataProviders.GiftCardInfoProvider;
 import enums.ApiV2;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
@@ -23,11 +19,23 @@ public class GiftCard {
     public void CreateGiftCard() {
 
         SuccessCreateGiftCard successCreateGiftCard = requestGiftCard.putRequestCreateGiftCard(ApiV2.GIFT_CARD_CREATE.getApi());
+        GiftCardList giftCardList = requestGiftCard.postRequestListGiftCard(ApiV2.GIFT_CARD_LIST.getApi());
+        Integer count = giftCardList.getData().getMeta().totalCount;
         assertionForMessages.assertRequestMessageAndCode(successCreateGiftCard.getMessage(), successCreateGiftCard.getCode());
         Assertions.assertFalse(successCreateGiftCard.getData().isEmpty());
+        Assertions.assertEquals(giftCardList.getData().getMeta().totalCount, count);
     }
+
     @Test
     @Order(2)
+    @DisplayName("Check the error msg for gift-card")
+    public void ErrorMsgGiftCard() {
+
+        GiftCardErrorMsg errorMgs = requestGiftCard.putRequestCreateGiftCardMsg(ApiV2.GIFT_CARD_CREATE.getApi());
+        assertionForGiftCard.assertionGiftCardErrorMsg(errorMgs);
+    }
+    @Test
+    @Order(3)
     @DisplayName("Check list gift-card")
     public void GiftCardList() {
 
@@ -37,7 +45,7 @@ public class GiftCard {
     }
 
     @Test
-    @Order(3)
+    @Order(4)
     @DisplayName("Check details gift-card")
     public void GiftCardDetails() {
 
@@ -49,7 +57,7 @@ public class GiftCard {
 
 
     @Test
-    @Order(4)
+    @Order(5)
     @DisplayName("Check disable gift-card")
     public void GiftCardDisable() {
         GiftCardDisable giftCardDisable = requestGiftCard.requestGiftCardDisable(ApiV2.GIFT_CARD.getApi(), RequestGiftCard.requestGiftCard());

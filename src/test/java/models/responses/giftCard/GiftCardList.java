@@ -3,6 +3,7 @@ package models.responses.giftCard;
 
 import com.google.gson.annotations.SerializedName;
 import lombok.Getter;
+import lombok.With;
 
 import java.util.ArrayList;
 

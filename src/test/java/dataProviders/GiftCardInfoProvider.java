@@ -3,20 +3,32 @@ package dataProviders;
 import Utils.RandomGenerateMethods;
 import models.requests.giftCards.GiftCardCreate;
 import models.requests.giftCards.GiftCardDisable;
+import models.requests.giftCards.GiftCardMsg;
 import models.responses.giftCard.GiftCardList;
 import enums.User;
 
 public class GiftCardInfoProvider {
 
-public static GiftCardCreate createGift(User email){
+public static GiftCardCreate createGift(User email, Integer number, String holder){
     return switch (email){
         case EMAIL_INFO -> new GiftCardCreate(
                  User.CURRENCY.getUserData()
                 ,User.EXPIRATIONDATE.getUserData()
-                ,RandomGenerateMethods.randomIntegerOneToNine()
-                ,RandomGenerateMethods.randomString(5)
+                ,number
+                ,holder
                 ,User.EMAIL_CLIENT.getUserData()
-                ,User.PHONE.getUserData());
+                ,User.PHONE.getUserData()
+                ,true);
+        default -> null;
+    };
+}
+
+public static GiftCardMsg giftCardMsg(User email){
+    return switch (email){
+        case EMAIL_INFO -> new GiftCardMsg(
+                User.CURRENCY.getUserData()
+                ,User.EXPIRATIONDATE.getUserData()
+                , false);
         default -> null;
     };
 }

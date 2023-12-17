@@ -2,7 +2,7 @@ package enums;
 
 public enum User {
     EMAIL_INFO("info@local.express"),
-    EMAIL_CLIENT("oqsannas+31102022@localexpress.io"),
+    EMAIL_CLIENT("oqsannas@localexpress.io"),
     BAD_EMAIL("sydney@fife"),
     BUNDLE_ID("com.worldappsystem.LEPartners"),
     APP_VERSION("5.7.2"),
