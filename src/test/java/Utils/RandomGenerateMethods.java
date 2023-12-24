@@ -16,7 +16,7 @@ public class RandomGenerateMethods {
     }
     public static Integer randomInteger() {
         Random ran = new Random();
-        int x = ran.nextInt(99999) + 1;
+        int x = ran.nextInt(99999) + 2;
         return x;
     }
     public static String randomOneToNine() {

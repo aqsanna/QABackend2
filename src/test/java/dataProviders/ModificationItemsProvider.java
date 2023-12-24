@@ -1,11 +1,15 @@
 package dataProviders;
 
 import Utils.RandomGenerateMethods;
+import enums.ApiV1;
+import enums.ApiV2;
 import helpers.RequestModificationItems;
+import helpers.RequestTags;
 import models.requests.modifications.*;
 import enums.User;
 import models.requests.tag.CreateTagsInvalidCredential;
 import models.responses.modificationItems.ModificationItemsList;
+import models.responses.tags.TagsList;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -28,8 +32,7 @@ public class ModificationItemsProvider {
     }
 
     public static CreateModificationItemsText createModificationText(User email, Boolean text, String name, String description,
-                                                                     String minLength, Integer number, String upc) {
-//        ArrayList<String> taxesListForTax = new ArrayList<>(Arrays.asList("268", "11", "10"));
+                                                                     String minLength,Integer maxLength, Integer number, String upc) {
          return switch (email) {
             case EMAIL_INFO -> new CreateModificationItemsText(
                       text
@@ -38,7 +41,7 @@ public class ModificationItemsProvider {
                     , name
                     , description
                     , minLength
-                    , number
+                    , maxLength
                     , number
                     , upc
                     , User.MODIFICATIONIMAGE.getUserData()
@@ -65,7 +68,7 @@ public class ModificationItemsProvider {
         };
     }
     public static UpdateModificationItems updateModification(User email, Boolean text, String name, String description,
-                                                             String minLength, Integer number, String upc) {
+                                                             String minLength, Integer maxLength,Integer number, String upc) {
         return switch (email) {
             case EMAIL_INFO -> new UpdateModificationItems(
                      RequestModificationItems.modificationItemId()
@@ -79,7 +82,7 @@ public class ModificationItemsProvider {
                     , text
                     , text
                     , minLength
-                    , number);
+                    , maxLength);
             default -> null;
         };
     }
@@ -95,11 +98,26 @@ public class ModificationItemsProvider {
         };
     }
 
-    public static ModificationItemsList listModificationItems(User email) {
+    public static ModificationInfo listModificationItems(User email) {
         return switch (email) {
-            case EMAIL_INFO -> new ModificationItemsList(
+            case EMAIL_INFO -> new ModificationInfo(
+                    "basic"
                   );
             default -> null;
         };
+    }
+
+    public static Integer assertResultsMaxId() {
+        RequestModificationItems postRequest =  new RequestModificationItems();
+        ModificationItemsList ModList = postRequest.requestPostModList(ApiV2.MODIFICATIONITEM.getApi());
+        int maxId = Integer.MIN_VALUE;
+        for (ModificationItemsList.Data.Result result : ModList.getData().getResult()) {
+            int id = Integer.parseInt(result.getId());
+            if (id > maxId) {
+                maxId = id;
+            }
+        }
+        System.out.println("Max id: " + maxId);
+        return maxId;
     }
 }

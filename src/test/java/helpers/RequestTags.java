@@ -86,7 +86,7 @@ public class RequestTags extends AbstractRequest{
     public TagsList requestPostTagsList(String url) {
         return baseAuthorizedRequest()
                 .body((TagsInfoProvider.listTags(User.EMAIL_INFO)))
-                .post(Configurations.DEV_URL + url)
+                .post(url)
                 .then()
                 .extract().as(TagsList.class);
     }

@@ -60,7 +60,7 @@ public class AssertionForModificationItems {
 
     public void successCreateModificationTextItem(SuccessCreateModificationItems createModificationItem) {
         CreateModificationItemsText generateInfo = ModificationItemsProvider.createModificationText(User.EMAIL_INFO, RequestModificationItems.randomBool,
-                RequestModificationItems.randomText, RequestModificationItems.randomDescription, RequestModificationItems.randomMinLength,
+                RequestModificationItems.randomText, RequestModificationItems.randomDescription, RequestModificationItems.randomMinLength, RequestModificationItems.randomMaxLength,
                 RequestModificationItems.randomPrice,  RequestModificationItems.randomUpc);
         Assertions.assertEquals(generateInfo.getPriceChange(),createModificationItem.getData().getPriceChange());
         Assertions.assertEquals(generateInfo.getUpc(), createModificationItem.getData().getUpc());
@@ -111,7 +111,7 @@ public class AssertionForModificationItems {
 
     public void successUpdateModificationItem(SuccessCreateModificationItems updateModificationItem) {
         UpdateModificationItems generateInfo = ModificationItemsProvider.updateModification(User.EMAIL_INFO, RequestModificationItems.randomBool,
-                RequestModificationItems.randomText, RequestModificationItems.randomDescription,RequestModificationItems.randomMinLength,
+                RequestModificationItems.randomText, RequestModificationItems.randomDescription,RequestModificationItems.randomMinLength,RequestModificationItems.randomMaxLength,
                 RequestModificationItems.randomPrice,  RequestModificationItems.randomUpc);
         Assertions.assertEquals(generateInfo.getPriceChange(),updateModificationItem.getData().getPriceChange());
         Assertions.assertEquals(generateInfo.getUpc(), updateModificationItem.getData().getUpc());

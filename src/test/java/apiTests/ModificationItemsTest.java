@@ -2,9 +2,11 @@ package apiTests;
 
 import assertions.AssertionForMessages;
 import assertions.AssertionForModificationItems;
+import dataProviders.ModificationItemsProvider;
 import enums.ApiV2;
 import helpers.RequestModificationItems;
 import models.requests.modifications.UpdateModificationItems;
+import models.responses.modificationItems.ModificationDelete;
 import models.responses.modificationItems.ModificationItemErrorMsg;
 import models.responses.modificationItems.ModificationItemsList;
 import models.responses.tags.TagsErrorMsg;
@@ -69,9 +71,19 @@ public class ModificationItemsTest {
     }
     @Test
     @Order(5)
-    @DisplayName("Check create tags with invalid credential")
+    @DisplayName("Check create modification with invalid credential")
     public void CreateModificationItemInvalidCredential() {
         ModificationItemErrorMsg errorMsg = requestModificationItems.requestPutErrorMsgInvalidCredential(ApiV2.MODIFICATIONITEM.getApi());
         assertionForModificationItems.assertResultsForInvalidErrorMsgModificationItem(errorMsg);
+    }
+
+    @Test
+    @Order(6)
+    @DisplayName("Check the modification item is deleted")
+    public void DeleteModification(){
+        while (ModificationItemsProvider.assertResultsMaxId() > 0) {
+            ModificationDelete delete = requestModificationItems.delete(ApiV2.MODIFICATION_ITEM_DELETE.getApi(), ModificationItemsProvider.assertResultsMaxId());
+            assertionForMessages.assertRequestMessageAndCode(delete.getMessage(), delete.getCode());
+        }
     }
 }
