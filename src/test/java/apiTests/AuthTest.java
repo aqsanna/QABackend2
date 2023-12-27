@@ -3,19 +3,13 @@ package apiTests;
 import com.google.gson.Gson;
 import helpers.AbstractRequest;
 import helpers.RequestAuthorization;
-import helpers.RequestProduct;
-import io.restassured.http.ContentType;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import models.responses.userLogin.SuccessLogin;
 import specification.RequestSpec;
 import specification.ResponseSpec;
-import dataProviders.UserInfoProvider;
 import enums.ApiV1;
-import enums.User;
-
-import static io.restassured.RestAssured.given;
 
 public class AuthTest extends AbstractRequest {
     Gson gson = new Gson();

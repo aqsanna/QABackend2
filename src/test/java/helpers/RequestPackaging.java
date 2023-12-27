@@ -24,7 +24,6 @@ public class RequestPackaging extends AbstractRequest {
     public static Integer randomNumberUpd = RandomGenerateMethods.randomIntegerOneToNine();
     public static String randomUpcUpd = RandomGenerateMethods.randomString(6);
     public PackagingForStore requestCreate( String url) {
-
         return baseAuthorizedRequest()
                 .body((PackagingProvider.createPack(User.EMAIL_INFO,randomBoxName, randomPackName, randomNumber, randomPrice, randomIntToString, randomUpc)))
                 .put(url)

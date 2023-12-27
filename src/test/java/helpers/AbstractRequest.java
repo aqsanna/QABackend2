@@ -14,12 +14,18 @@ import models.responses.userLogin.SuccessLogin;
 import static io.restassured.RestAssured.given;
 
 public abstract class AbstractRequest {
-    Gson gson = new Gson();
-
-    protected static RequestSpecification baseAuthorizedRequest() {
+    public Gson gson = new Gson();
+        protected static RequestSpecification baseAuthorizedRequest() {
         return given()
                 .baseUri(Configurations.DEV_URL)
                 .header(new Header("Authorization", "Bearer " + getToken()))
+                .when()
+                .contentType(ContentType.JSON);
+    }
+    public static RequestSpecification baseAuthorizedRequestWL() {
+        return given()
+                .baseUri(Configurations.WL)
+                .header(new Header("X-Requested-With", "XMLHttpRequest"))
                 .when()
                 .contentType(ContentType.JSON);
     }

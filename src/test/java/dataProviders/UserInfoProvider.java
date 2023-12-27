@@ -2,7 +2,6 @@ package dataProviders;
 
 import com.google.gson.Gson;
 import config.Configurations;
-import helpers.RequestAuthorization;
 import io.restassured.http.ContentType;
 import models.requests.login.AuthInfo;
 import models.responses.userLogin.SuccessLogin;

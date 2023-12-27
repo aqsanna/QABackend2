@@ -8,11 +8,13 @@ import java.util.Properties;
 public class Configurations {
     public static final String STAGE_URL;
     public static final String DEV_URL;
+    public static final String WL;
 
 
     static {
         STAGE_URL = getPropValues("stage");
         DEV_URL = getPropValues("dev");
+        WL = getPropValues("wl");
     }
 
     static InputStream inputStream;

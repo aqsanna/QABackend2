@@ -6,6 +6,7 @@ import models.responses.userLogin.SuccessLogin;
 
 public class RequestAuthorization extends AbstractRequest{
     public SuccessLogin requestPostAuth(String url){
+
         return baseAuthorizedRequest()
                 .body(gson.toJson(UserInfoProvider.getUser(User.EMAIL_INFO)))
                 .post(url)
@@ -19,4 +20,4 @@ public class RequestAuthorization extends AbstractRequest{
                 .then().log().all()
                 .extract().as(SuccessLogin.class);
     }
-  }
+}
