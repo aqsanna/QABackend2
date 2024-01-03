@@ -11,20 +11,18 @@ public enum PackagingMessagesForInvalidCredential {
     FIELD3("boxes_0_width"),
     FIELD4("boxes_0_height"),
     FIELD5("boxes_0_weight"),
-    FIELD6("boxes_0_special_entity_type_id"),
-    FIELD7("packs_0_name"),
-    FIELD8("packs_0_price"),
-    FIELD9("packs_0_free_count"),
+    FIELD6("packs_0_name"),
+    FIELD7("packs_0_price"),
+    FIELD8("packs_0_free_count"),
     MESSAGE("Box Name cannot be blank."),
     MESSAGE1("Reserve (%) must be no less than 0."),
     MESSAGE2("Length must be no less than 9.0E-5."),
     MESSAGE3("Width must be no less than 9.0E-5."),
     MESSAGE4("Height must be no less than 9.0E-5."),
     MESSAGE5("Weight must be greater than or equal to \"0\"."),
-    MESSAGE6("Special Type must be no less than 0."),
-    MESSAGE7("Pack name cannot be blank."),
-    MESSAGE8("Price must be no less than 0."),
-    MESSAGE9("Free pack quantity must be no less than 0.");
+    MESSAGE6("Pack name cannot be blank."),
+    MESSAGE7("Price must be no less than 0."),
+    MESSAGE8("Free pack quantity must be no less than 0.");
     private final String validationErrorInvalidCredential;
     PackagingMessagesForInvalidCredential(String validationErrorInvalidCredential) {
         this.validationErrorInvalidCredential=validationErrorInvalidCredential;
